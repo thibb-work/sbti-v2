@@ -457,7 +457,18 @@ a:hover { text-decoration: underline; }
 @media (min-width: 1024px) {
   .site-footer { padding-left: calc(var(--rail-w) + var(--gutter)); }
 }
-.site-footer a { color: var(--teal); }
+.site-footer { color: var(--muted); }
+.site-footer a { color: var(--teal); text-decoration: underline; text-underline-offset: 3px; }
+
+/* Hero entrance — pure CSS so the headline paints (and is LCP) before any JS/CDN module arrives */
+.hero-enter { animation: heroRise .7s var(--ease, ease-out) both; animation-delay: calc(var(--he, 0) * 90ms); }
+@keyframes heroRise {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-enter { animation: none; }
+}
 
 /* =========================================================================
    REVEAL UTILITIES — driven by [data-reveal]; JS adds .is-in
@@ -529,6 +540,12 @@ a:hover { text-decoration: underline; }
   background: var(--gray-soft);
   color: var(--gray-ink);
   white-space: nowrap;
+  max-width: 100%;
+}
+/* long dual-state badges must wrap inside narrow viewports */
+@media (max-width: 480px) {
+  .req-badge { white-space: normal; border-radius: var(--radius-sm); line-height: 1.5; }
+  .req-badge .rb-text { white-space: normal; }
 }
 /* CSS-only fallback (no-JS): show the Category A side as a sensible default */
 .req-badge::before { content: attr(data-req-a); }
@@ -1644,13 +1661,13 @@ a:hover { text-decoration: underline; }
   border-color: color-mix(in srgb, var(--teal) 35%, var(--line));
   color: var(--teal-ink);
 }
-.rung-claim.claim-company .claim-tag { background: var(--teal); color: #fff; }
+.rung-claim.claim-company .claim-tag { background: var(--teal-ink); color: var(--surface); }
 .rung-claim.claim-system {
   background: color-mix(in srgb, var(--amber-soft) 40%, var(--surface));
   border-color: color-mix(in srgb, var(--amber) 35%, var(--line));
   color: var(--amber-ink);
 }
-.rung-claim.claim-system .claim-tag { background: var(--amber); color: #fff; }
+.rung-claim.claim-system .claim-tag { background: var(--amber-ink); color: var(--surface); }
 
 /* static-mode focus accent (reduced-motion brightens centred rung) */
 .ladder-pin.is-static .rung.is-focus .rung-mark { border-color: var(--teal); }
