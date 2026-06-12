@@ -214,6 +214,13 @@ export async function initHero3D({ gsap, ScrollTrigger }) {
 
     // whole field tilts almost imperceptibly while chaotic
     group.rotation.z = wob * 0.05 * Math.sin(drift * 0.5);
+
+    // ambient life after the resolve: the whole field breathes very slowly
+    group.position.y = Math.sin(drift * 0.35) * 0.18 * s;
+
+    // linger past the hero: ease the field aside and fade it out slowly
+    group.position.x = linger * 6.5;
+    wrap.style.opacity = Math.pow(1 - linger, 1.35).toFixed(3);
   }
 
   // ---- scroll → progress over the hero ------------------------------------
@@ -225,13 +232,36 @@ export async function initHero3D({ gsap, ScrollTrigger }) {
     onUpdate: (self) => { progress = self.progress; }
   });
 
-  // dispose fully once the hero is comfortably out of view
-  ScrollTrigger.create({
-    trigger: hero,
-    start: 'bottom top',
-    onEnter: () => dispose(),
-    onLeaveBack: () => { /* still above; keep alive */ }
-  });
+  // ---- ambient persistence ------------------------------------------------
+  // The field lingers as a quiet backdrop for ~2.5 screens past the hero,
+  // drifting aside and fading slowly, then pauses (RAF stopped, canvas
+  // hidden) rather than disposing — so scrolling back up always works.
+  // Low-power devices and phones skip the linger: the scene pauses right at
+  // the hero's edge. Cinematic where it's cheap, frugal where it isn't.
+  let linger = 0;      // 0 at hero bottom → 1 fully faded out
+  let paused = false;
+  function pauseScene() { if (paused || disposed) return; paused = true; wrap.style.visibility = 'hidden'; }
+  function resumeScene() { if (!paused || disposed) return; paused = false; wrap.style.visibility = ''; loop(); }
+
+  const PERSIST = !lowPower && window.innerWidth >= 768;
+  if (PERSIST) {
+    ScrollTrigger.create({
+      trigger: hero,
+      start: 'bottom top',
+      end: '+=250%',
+      scrub: 0.8,
+      onUpdate: (self) => { linger = self.progress; },
+      onLeave: () => pauseScene(),
+      onEnterBack: () => resumeScene()
+    });
+  } else {
+    ScrollTrigger.create({
+      trigger: hero,
+      start: 'bottom top',
+      onEnter: () => pauseScene(),
+      onLeaveBack: () => resumeScene()
+    });
+  }
 
   // ---- render loop (pause when tab hidden) ---------------------------------
   let running = true;
@@ -239,7 +269,7 @@ export async function initHero3D({ gsap, ScrollTrigger }) {
   document.addEventListener('visibilitychange', onVisibility);
 
   function loop() {
-    if (disposed || !running) return;
+    if (disposed || !running || paused) return;
     drift += 0.012;
     smoothP += (progress - smoothP) * 0.075;
     if (Math.abs(progress - smoothP) < 0.0004) smoothP = progress;

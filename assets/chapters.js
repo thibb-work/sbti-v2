@@ -353,8 +353,36 @@ function initHorizonTimeline() {
       <h3 class="horizon-title">${entry.title}</h3>
       <p class="horizon-text">${entry.text}</p>
     `;
+    if (entry.a || entry.b) {
+      const you = document.createElement('p');
+      you.className = 'horizon-you';
+      you.dataset.a = entry.a || '';
+      you.dataset.b = entry.b || '';
+      item.appendChild(you);
+    }
     line.appendChild(item);
   });
+
+  // "For you" lines follow the category set in chapter 01 — both sides
+  // shown until the visitor picks, then their side only.
+  function updateYou(cat) {
+    document.querySelectorAll('.horizon-you').forEach((el) => {
+      if (cat === 'A' || cat === 'B') {
+        const note = cat === 'A' ? el.dataset.a : el.dataset.b;
+        el.innerHTML = note
+          ? '<span class="hy-tag">For you · Category ' + cat + '</span> ' + note
+          : '';
+        el.hidden = !note;
+      } else {
+        el.innerHTML =
+          (el.dataset.a ? '<span class="hy-tag">Cat A</span> ' + el.dataset.a + '<br>' : '') +
+          (el.dataset.b ? '<span class="hy-tag">Cat B</span> ' + el.dataset.b : '');
+        el.hidden = !(el.dataset.a || el.dataset.b);
+      }
+    });
+  }
+  updateYou(window.NZ && window.NZ.category);
+  NZ.on('category:change', ({ category }) => updateYou(category));
 
   NZ.refresh();
 }
