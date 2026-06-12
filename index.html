@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SBTi Corporate Net-Zero Standard V2.0 — explorer</title>
+<meta name="description" content="An interactive walk-through of the SBTi Corporate Net-Zero Standard V2.0: the implementation timeline and what changed across Scope 1, Scope 2 and Scope 3.">
+<style>
+  :root {
+    --bg: #FBFAF7;
+    --surface: #FFFFFF;
+    --ink: #1E2B26;
+    --muted: #5C6B64;
+    --hint: #8C988F;
+    --line: #E3E1D8;
+    --teal: #0F6E56;
+    --teal-soft: #E1F5EE;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #141917;
+      --surface: #1C2421;
+      --ink: #E8EDE9;
+      --muted: #A7B3AC;
+      --hint: #75817A;
+      --line: #2E3833;
+      --teal: #5DCAA5;
+      --teal-soft: #0B3D31;
+    }
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ---- header ---- */
+  header.top {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 26px 20px 0;
+  }
+  .brandrow {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .brandrow .logo { color: var(--ink); display: flex; align-items: center; }
+  .brandrow .logo svg { height: 26px; width: auto; display: block; }
+  .brandrow .divider { width: 1px; height: 22px; background: var(--line); }
+  .brandrow .ctx {
+    font-family: "Courier New", monospace;
+    font-size: 11.5px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--hint);
+  }
+  header.top h1 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(22px, 4.2vw, 30px);
+    font-weight: 500;
+    letter-spacing: -.01em;
+    line-height: 1.15;
+    margin: 20px 0 6px;
+  }
+  header.top p.sub {
+    color: var(--muted);
+    max-width: 64ch;
+    margin: 0 0 18px;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* ---- sticky nav ---- */
+  nav.tabs {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: saturate(140%) blur(8px);
+    -webkit-backdrop-filter: saturate(140%) blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .tabs-inner {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 0 12px;
+    display: flex;
+    gap: 2px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .tabs-inner::-webkit-scrollbar { display: none; }
+  .tab {
+    appearance: none;
+    border: none;
+    background: none;
+    font-family: inherit;
+    font-size: 14px;
+    color: var(--muted);
+    padding: 14px 14px 12px;
+    cursor: pointer;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: color .12s, border-color .12s;
+  }
+  .tab:hover { color: var(--ink); }
+  .tab.active { color: var(--teal); border-bottom-color: var(--teal); font-weight: 500; }
+  .tab .n {
+    font-family: "Courier New", monospace;
+    font-size: 11px;
+    color: var(--hint);
+    margin-right: 6px;
+  }
+  .tab.active .n { color: var(--teal); }
+
+  /* ---- frame area ---- */
+  main {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 0 4px;
+  }
+  .frame {
+    width: 100%;
+    border: none;
+    display: none;
+    background: var(--bg);
+    min-height: 70vh;
+  }
+  .frame.active { display: block; }
+
+  footer {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 28px 20px 48px;
+    border-top: 1px solid var(--line);
+    font-size: 12.5px;
+    color: var(--hint);
+    line-height: 1.6;
+  }
+  footer a { color: var(--teal); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="brandrow">
+    <span class="logo" aria-label="Arcadia">
+      <svg fill="currentColor" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 196.74" aria-label="Arcadia logo" role="img"><path d="M271.06 75.54a.92.92 0 0 1-1.1.89 56.69 56.69 0 0 0-10.77-.87c-20.51 0-37 16.2-37 41v76.26a.92.92 0 0 1-.92.92h-22.43a.92.92 0 0 1-.91-.92V53.54a.92.92 0 0 1 .91-.92h22.45a.92.92 0 0 1 .92.92v19.18a.91.91 0 0 0 1.71.44c6.83-12.54 19.86-21.61 37.43-21.61 3.37 0 6.54.21 8.9.45a.91.91 0 0 1 .81.92ZM346.35 175.42c19 0 30.56-11.91 34.83-28.88a.91.91 0 0 1 1.26-.62l19.85 9.19a.93.93 0 0 1 .5 1.12c-7 23.09-27.35 40.51-56.44 40.51-39.4 0-66.66-30-66.66-73.41 0-43.72 27.26-73.4 66.66-73.4 29.1 0 49 16.63 55.91 39.72a.94.94 0 0 1-.48 1.11l-19.33 9.67a.92.92 0 0 1-1.29-.6C376.89 83.12 365.37 71 346.35 71 321.25 71 304 91 304 123.33c0 32.12 17.25 52.09 42.35 52.09ZM417.59 155.72c0-28.07 21.86-39.67 53.43-46.15l33.54-6.87a.92.92 0 0 0 .74-.9v-5.19c0-16.19-8.91-25.36-27.8-25.36-17.48 0-27.95 8.06-32.41 23.16a.91.91 0 0 1-1.09.64l-21.15-5.48a.94.94 0 0 1-.66-1.18c7-22.45 27.64-38.46 56.12-38.46 31.58 0 51 15.38 51 45.61v68.81c0 8.81 5.22 11.9 14 10.22a.92.92 0 0 1 1.11.89v17.48a1 1 0 0 1-.84.93c-20.14 2.35-32.11-2.26-35.69-14.3a.9.9 0 0 0-1.56-.36c-8.83 10.3-24 17-42.33 17-25.63-.01-46.41-15.13-46.41-40.49Zm87.71-34.28-27.53 5.94c-21.59 4.32-36.16 10.26-36.16 27.26 0 13.76 10 21.86 25.37 21.86 20.78 0 38.32-12.69 38.32-30.77ZM558.18 123.33c0-40.21 22.4-73.4 61.53-73.4 18.47 0 33.38 8.3 42.07 20.67a.91.91 0 0 0 1.65-.55V.92a.92.92 0 0 1 .92-.92h22.45a.92.92 0 0 1 .92.92v191.93a.92.92 0 0 1-.92.92h-22.45a.92.92 0 0 1-.92-.92v-16.46a.91.91 0 0 0-1.65-.55c-8.69 12.6-23.6 20.9-42.07 20.9-39.13 0-61.53-33.47-61.53-73.41ZM624 71.25c-26.44 0-41.29 21.59-41.29 52.08 0 30.23 14.85 52.09 41.29 52.09 20 0 39.94-14.58 39.94-47v-10C664 85.55 644 71.25 624 71.25Z"></path><rect x="722.16" y="56.29" width="24.29" height="137.47" rx="0.92"></rect><path d="M773.16 155.72c0-28.07 21.86-39.67 53.43-46.15l33.54-6.87a.92.92 0 0 0 .74-.9v-5.19c0-16.19-8.91-25.36-27.8-25.36-17.48 0-28 8.06-32.41 23.16a.91.91 0 0 1-1.09.64l-21.15-5.48a.94.94 0 0 1-.66-1.18c7-22.45 27.64-38.46 56.12-38.46 31.58 0 51 15.38 51 45.61v68.81c0 8.81 5.22 11.9 14 10.22a.92.92 0 0 1 1.11.89v17.48a1 1 0 0 1-.84.93c-20.14 2.35-32.11-2.26-35.69-14.3a.9.9 0 0 0-1.56-.36c-8.83 10.3-24 17-42.33 17-25.63-.01-46.41-15.13-46.41-40.49Zm87.71-34.28-27.53 5.94c-21.59 4.32-36.16 10.26-36.16 27.26 0 13.76 10 21.86 25.37 21.86 20.78 0 38.32-12.69 38.32-30.77ZM750.36 29.52a12.36 12.36 0 0 1-3.61-8.72v-5.19a12.36 12.36 0 0 1 3.61-8.72l1.51-1.51a1.46 1.46 0 0 0 0-2.08L749.21.64a1.46 1.46 0 0 0-2.08 0l-1.51 1.51a12.36 12.36 0 0 1-8.72 3.61h-5.19A12.34 12.34 0 0 1 723 2.15L721.48.64a1.46 1.46 0 0 0-2.08 0l-2.67 2.66a1.48 1.48 0 0 0 0 2.08l1.52 1.51a12.36 12.36 0 0 1 3.61 8.72v5.19a12.36 12.36 0 0 1-3.61 8.72L716.73 31a1.48 1.48 0 0 0 0 2.08l2.67 2.67a1.48 1.48 0 0 0 2.08 0l1.52-1.49a12.34 12.34 0 0 1 8.72-3.61h5.19a12.31 12.31 0 0 1 8.71 3.61l1.52 1.52a1.48 1.48 0 0 0 2.08 0l2.66-2.67a1.46 1.46 0 0 0 0-2.08ZM102.31 0H75a.9.9 0 0 0-.85.59L.06 192.52a.92.92 0 0 0 .86 1.25h23.93a.92.92 0 0 0 .86-.59l19.21-50.42 8.63-22.67 33.69-88.7a.92.92 0 0 1 1.72 0l34.22 88.7 8.64 22.67 19.47 50.42a.92.92 0 0 0 .86.59h24.2a.92.92 0 0 0 .86-1.25L103.17.59a.92.92 0 0 0-.86-.59Z"></path><path d="M104.69 140.16a12.31 12.31 0 0 1-3.61-8.71v-5.19a12.34 12.34 0 0 1 3.61-8.72l1.52-1.51a1.48 1.48 0 0 0 0-2.08l-2.67-2.67a1.48 1.48 0 0 0-2.08 0L100 112.8a12.34 12.34 0 0 1-8.72 3.61H86a12.31 12.31 0 0 1-8.71-3.61l-1.52-1.52a1.48 1.48 0 0 0-2.08 0L71.07 114a1.46 1.46 0 0 0 0 2.08l1.51 1.51a12.34 12.34 0 0 1 3.61 8.72v5.19a12.31 12.31 0 0 1-3.61 8.71l-1.51 1.52a1.46 1.46 0 0 0 0 2.08l2.66 2.66a1.46 1.46 0 0 0 2.08 0l1.52-1.51A12.31 12.31 0 0 1 86 141.3h5.19a12.34 12.34 0 0 1 8.72 3.61l1.51 1.51a1.46 1.46 0 0 0 2.08 0l2.67-2.66a1.48 1.48 0 0 0 0-2.08Z"></path></svg>
+    </span>
+    <span class="divider" aria-hidden="true"></span>
+    <span class="ctx">Net-Zero Standard Explorer</span>
+  </div>
+  <h1>SBTi Corporate Net-Zero Standard V2.0</h1>
+  <p class="sub">What changed in the move from V1 to V2.0 — start with the implementation timeline, then work through the new requirements for each scope.</p>
+</header>
+
+<nav class="tabs">
+  <div class="tabs-inner" role="tablist">
+    <button class="tab active" role="tab" data-frame="timeline" onclick="show('timeline')"><span class="n">00</span>Timeline</button>
+    <button class="tab" role="tab" data-frame="scope-1" onclick="show('scope-1')"><span class="n">01</span>Scope 1</button>
+    <button class="tab" role="tab" data-frame="scope-2" onclick="show('scope-2')"><span class="n">02</span>Scope 2</button>
+    <button class="tab" role="tab" data-frame="scope-3" onclick="show('scope-3')"><span class="n">03</span>Scope 3</button>
+  </div>
+</nav>
+
+<main>
+  <iframe class="frame active" id="f-timeline" src="timeline.html" title="Implementation timeline" loading="eager"></iframe>
+  <iframe class="frame" id="f-scope-1" src="scope-1.html" title="Scope 1 changes" loading="eager"></iframe>
+  <iframe class="frame" id="f-scope-2" src="scope-2.html" title="Scope 2 changes" loading="eager"></iframe>
+  <iframe class="frame" id="f-scope-3" src="scope-3.html" title="Scope 3 decision system" loading="eager"></iframe>
+</main>
+
+<footer>
+  Prepared as a consultant reference from the SBTi Corporate Net-Zero Standard V2.0 (June 2026). Verify against the
+  <a href="https://sciencebasedtargets.org/" target="_blank" rel="noopener">published Standard</a> before client use.
+</footer>
+
+<script>
+  var frameHeights = {};
+
+  function show(name) {
+    document.querySelectorAll('.tab').forEach(function (t) {
+      t.classList.toggle('active', t.dataset.frame === name);
+    });
+    document.querySelectorAll('.frame').forEach(function (f) {
+      f.classList.remove('active');
+    });
+    var active = document.getElementById('f-' + name);
+    active.classList.add('active');
+    if (frameHeights[name]) active.style.height = frameHeights[name] + 'px';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (history.replaceState) history.replaceState(null, '', '#' + name);
+  }
+
+  window.addEventListener('message', function (e) {
+    if (!e.data || e.data.type !== 'sbti-h') return;
+    document.querySelectorAll('.frame').forEach(function (f) {
+      if (f.contentWindow === e.source) {
+        var name = f.id.replace('f-', '');
+        frameHeights[name] = e.data.h;
+        f.style.height = e.data.h + 'px';
+      }
+    });
+  });
+
+  // open the section named in the URL hash, if any
+  var initial = (location.hash || '').replace('#', '');
+  if (['timeline', 'scope-1', 'scope-2', 'scope-3'].indexOf(initial) !== -1 && initial !== 'timeline') {
+    show(initial);
+  }
+</script>
+</body>
+</html>
