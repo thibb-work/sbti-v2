@@ -75,7 +75,7 @@ function initPinnedLadder() {
     end: '+=150%',                 // modest — corporate users skim
     pin: stage,
     pinSpacing: true,
-    scrub: true,
+    scrub: 0.75,
     anticipatePin: 1,
     onUpdate: (self) => {
       // map 0..1 progress -> 0,1,2 with even thirds, slight bias to dwell

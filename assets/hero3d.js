@@ -110,12 +110,13 @@ export async function initHero3D({ gsap, ScrollTrigger }) {
   scene.add(particles);
 
   // ---- progress state ----------------------------------------------------
-  let progress = 0;   // 0 = chaos, 1 = fully resolved trajectory
+  let progress = 0;   // scroll target: 0 = chaos, 1 = fully resolved trajectory
+  let smoothP = 0;    // lerped follower — keeps particle motion silky under scroll jitter
   let drift = 0;      // ambient time for chaos shimmer
 
   function applyProgress() {
     const pos = geo.attributes.position.array;
-    const p = progress;
+    const p = smoothP;
     // smootherstep for an organic settle
     const s = p * p * p * (p * (p * 6 - 15) + 10);
     for (let i = 0; i < COUNT; i++) {
@@ -138,7 +139,7 @@ export async function initHero3D({ gsap, ScrollTrigger }) {
     trigger: hero,
     start: 'top top',
     end: 'bottom top',
-    scrub: 0.4,
+    scrub: 0.9,
     onUpdate: (self) => { progress = self.progress; }
   });
 
@@ -158,9 +159,11 @@ export async function initHero3D({ gsap, ScrollTrigger }) {
   function loop() {
     if (disposed || !running) return;
     drift += 0.012;
+    smoothP += (progress - smoothP) * 0.075;
+    if (Math.abs(progress - smoothP) < 0.0004) smoothP = progress;
     applyProgress();
     // gentle parallax rotation on the cloud only (subtle)
-    particles.rotation.z = (1 - progress) * 0.04 * Math.sin(drift * 0.5);
+    particles.rotation.z = (1 - smoothP) * 0.04 * Math.sin(drift * 0.5);
     renderer.render(scene, camera);
     rafId = requestAnimationFrame(loop);
   }
