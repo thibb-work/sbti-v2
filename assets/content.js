@@ -42,13 +42,22 @@ export const SCOPE3_OPTION_LABELS = [
    Horizon — 2026→2050 timeline (#horizon), ported from timeline.html.
    tone: 'teal' | 'gray' | 'amber' drives the dot/marker colour via CSS class.
    ------------------------------------------------------------------------- */
+/* Entries may carry per-category notes (a / b): rendered as a "for you" line
+   that live-updates once the visitor sets their category in chapter 01.
+   Only included where the Standard's A/B split is unambiguous. */
 export const HORIZON_TIMELINE = [
   { date: "11 Jun 2026", tone: "teal", title: "V2.0 published", text: "Final standard released after two public consultations." },
-  { date: "1 Feb 2027", tone: "teal", title: "V2.0 effective date", text: "Pre-existing power contracts grandfathered from this date." },
+  { date: "1 Feb 2027", tone: "teal", title: "V2.0 effective date", text: "Pre-existing power contracts grandfathered from this date.",
+    a: "Transition plan due at Target Validation, with up to 15 months’ flexibility to disclose.",
+    b: "Same target routes, lighter burden — disclosing a transition plan is recommended, not required." },
   { date: "End 2027", tone: "gray", title: "V1 closes to new targets", text: "Last window to submit new targets under Version 1." },
-  { date: "From 2028", tone: "teal", title: "Next-cycle target setting begins", text: "2030–2035 targets set under V2.0 as the first cohort renews." },
-  { date: "2030", tone: "amber", title: "Hourly matching step-up", text: "Scope 2 hourly-matching recognition threshold rises from 50% to 75%." },
-  { date: "2035", tone: "amber", title: "OER becomes mandatory", text: "Category A companies support eligible carbon removals; hourly-matching threshold reaches 90%." },
+  { date: "From 2028", tone: "teal", title: "Next-cycle target setting begins", text: "2030–2035 targets set under V2.0 as the first cohort renews.",
+    a: "Scope 1, scope 2 and scope 3 near-term targets, with limited assurance of your base-year inventory.",
+    b: "Scope 1 and scope 2 near-term targets; scope 3 targets and base-year assurance are recommended, not required." },
+  { date: "2030", tone: "amber", title: "Hourly matching step-up", text: "Scope 2 hourly-matching recognition threshold rises from 50% to 75%.",
+    a: "Reporting the hourly-matched share is mandatory in any activity pool consuming 10 GWh+ a year.",
+    b: "Hourly-matching reporting stays optional — the recognition programme is open if you opt in." },
+  { date: "2035", tone: "amber", title: "Ongoing responsibility phases in", text: "From 2035, companies support eligible carbon removals from 1% of ongoing emissions, rising to 100% by their net-zero year (C45); hourly-matching threshold reaches 90%." },
   { date: "By 2050", tone: "amber", title: "Net-zero deadline", text: "Emissions at residual levels (~10% or less); neutralize 100% of residuals with eligible removals." }
 ];
 
