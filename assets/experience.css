@@ -12,13 +12,15 @@
   --surface-2: #F1EFE8;
   --ink: #1E2B26;
   --muted: #5C6B64;
-  --hint: #6E7B74;
+  --hint: #606D66;
   --line: #E3E1D8;
   --line-strong: #C9C6BA;
   --teal: #0F6E56;
+  --on-teal: #FFFFFF;
   --teal-ink: #085041;
   --teal-soft: #E1F5EE;
   --amber: #BA7517;
+  --amber-text: #98590C;
   --amber-ink: #633806;
   --amber-soft: #FAEEDA;
   --gray-soft: #F1EFE8;
@@ -55,9 +57,11 @@
     --line: #2E3833;
     --line-strong: #3A453F;
     --teal: #5DCAA5;
+    --on-teal: #141917;
     --teal-ink: #9FE1CB;
     --teal-soft: #0B3D31;
     --amber: #E2A04A;
+    --amber-text: #FAC775;
     --amber-ink: #FAC775;
     --amber-soft: #4A3514;
     --gray-soft: #2A332E;
@@ -114,7 +118,7 @@ a:hover { text-decoration: underline; }
   top: 8px;
   z-index: 200;
   background: var(--teal);
-  color: #fff;
+  color: var(--on-teal);
   padding: 10px 16px;
   border-radius: var(--radius-md);
   font-weight: 600;
@@ -154,10 +158,10 @@ a:hover { text-decoration: underline; }
   display: none;
   gap: 18px;
 }
-@media (min-width: 1100px) { .hd-nav { display: flex; } }
+@media (min-width: 1180px) { .hd-nav { display: flex; } }
 .hd-nav a {
   font-family: var(--font-mono);
-  font-size: 11.5px;
+  font-size: 12.5px;
   letter-spacing: .1em;
   text-transform: uppercase;
   color: var(--muted);
@@ -179,7 +183,7 @@ a:hover { text-decoration: underline; }
   background: var(--surface);
   color: var(--ink);
   font-family: var(--font-mono);
-  font-size: 11.5px;
+  font-size: 12.5px;
   letter-spacing: .12em;
   text-transform: uppercase;
   padding: 7px 14px;
@@ -188,7 +192,7 @@ a:hover { text-decoration: underline; }
   transition: border-color var(--dur) var(--ease), background var(--dur) var(--ease);
 }
 .menu-btn:hover { border-color: var(--teal); }
-@media (min-width: 1100px) { .menu-btn { display: none; } }
+@media (min-width: 1180px) { .menu-btn { display: none; } }
 
 .menu-overlay {
   position: fixed;
@@ -236,7 +240,7 @@ a:hover { text-decoration: underline; }
 .menu-list a:hover, .menu-list a.is-current { color: var(--teal); }
 .menu-num {
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 12.5px;
   letter-spacing: .1em;
   color: var(--hint);
 }
@@ -250,7 +254,7 @@ a:hover { text-decoration: underline; }
 .site-header .divider { width: 1px; height: 18px; background: var(--line-strong); }
 .site-header .ctx {
   font-family: var(--font-mono);
-  font-size: 11.5px;
+  font-size: 12.5px;
   letter-spacing: .12em;
   text-transform: uppercase;
   color: var(--hint);
@@ -338,7 +342,7 @@ a:hover { text-decoration: underline; }
     transform: translateY(-50%);
     white-space: nowrap;
     font-family: var(--font-mono);
-    font-size: 11.5px;
+    font-size: 12.5px;
     letter-spacing: .1em;
     text-transform: uppercase;
     color: var(--ink);
@@ -382,7 +386,7 @@ a:hover { text-decoration: underline; }
 
 .kicker {
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 12.5px;
   letter-spacing: .14em;
   text-transform: uppercase;
   color: var(--teal);
@@ -416,13 +420,13 @@ a:hover { text-decoration: underline; }
 }
 .placeholder code {
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 12.5px;
   color: var(--teal);
 }
 
 .chapter-num {
   font-family: var(--font-mono);
-  font-size: 11.5px;
+  font-size: 12.5px;
   color: var(--hint);
   letter-spacing: .1em;
 }
@@ -513,7 +517,7 @@ a:hover { text-decoration: underline; }
   align-items: center;
   gap: 8px;
 }
-.btn-primary { background: var(--teal); color: #fff; }
+.btn-primary { background: var(--teal); color: var(--on-teal); }
 .btn-primary:hover { transform: translateY(-2px); text-decoration: none; }
 .btn-ghost { background: transparent; color: var(--ink); border-color: var(--line-strong); }
 .btn-ghost:hover { border-color: var(--teal); color: var(--teal); transform: translateY(-2px); text-decoration: none; }
@@ -526,7 +530,7 @@ a:hover { text-decoration: underline; }
   transform: translateX(-50%);
   z-index: 2;
   font-family: var(--font-mono);
-  font-size: 11.5px;
+  font-size: 12.5px;
   letter-spacing: .18em;
   text-transform: uppercase;
   color: var(--hint);
@@ -636,7 +640,7 @@ a:hover { text-decoration: underline; }
   display: inline-flex;
   align-items: center;
   font-family: var(--font-mono);
-  font-size: 11.5px;
+  font-size: 12.5px;
   letter-spacing: .08em;
   text-transform: uppercase;
   padding: 3px 10px;
@@ -757,7 +761,7 @@ a:hover { text-decoration: underline; }
   display: block;
   margin-top: 8px;
   font-family: var(--font-mono);
-  font-size: 11.5px;
+  font-size: 12.5px;
   font-style: normal;
   letter-spacing: .1em;
   text-transform: uppercase;
@@ -803,7 +807,7 @@ a:hover { text-decoration: underline; }
 .flip-face-back { transform: rotateY(180deg); background: var(--teal-soft); border-color: var(--teal); }
 .flip-face .ficon {
   font-family: var(--font-mono);
-  font-size: 11.5px;
+  font-size: 12.5px;
   letter-spacing: .12em;
   text-transform: uppercase;
   color: var(--teal);
@@ -821,7 +825,7 @@ a:hover { text-decoration: underline; }
 .flip-hint {
   margin-top: auto;
   font-family: var(--font-mono);
-  font-size: 11.5px;
+  font-size: 12.5px;
   letter-spacing: .1em;
   text-transform: uppercase;
   color: var(--hint);
@@ -875,7 +879,7 @@ a:hover { text-decoration: underline; }
   text-align: right;
   clip-path: inset(0 0 0 var(--bs-pos, 50%));
 }
-.bs-v1 small, .bs-v2 small { display: block; font-weight: 400; opacity: .8; font-size: 11.5px; margin-top: 2px; }
+.bs-v1 small, .bs-v2 small { display: block; font-weight: 400; opacity: .8; font-size: 12.5px; margin-top: 2px; }
 .bs-handle {
   position: absolute;
   top: -8px; bottom: -8px;
@@ -895,7 +899,7 @@ a:hover { text-decoration: underline; }
   width: 30px; height: 30px;
   border-radius: 50%;
   background: var(--teal);
-  color: #fff;
+  color: var(--on-teal);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -942,7 +946,7 @@ a:hover { text-decoration: underline; }
 }
 .tab-btn {
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 12.5px;
   letter-spacing: .1em;
   text-transform: uppercase;
   padding: 10px 16px;
@@ -1004,7 +1008,7 @@ a:hover { text-decoration: underline; }
 }
 .route-card-head .ricon {
   font-family: var(--font-mono);
-  font-size: 11.5px;
+  font-size: 12.5px;
   letter-spacing: .12em;
   text-transform: uppercase;
   color: var(--teal);
@@ -1062,7 +1066,7 @@ a:hover { text-decoration: underline; }
   transition: background var(--dur) var(--ease), color var(--dur) var(--ease), border-color var(--dur) var(--ease);
 }
 .toggle-btn:hover { border-color: var(--teal); color: var(--ink); }
-.toggle-btn.is-active { background: var(--teal); border-color: var(--teal); color: #fff; }
+.toggle-btn.is-active { background: var(--teal); border-color: var(--teal); color: var(--on-teal); }
 
 .target-panel {
   display: none;
@@ -1094,7 +1098,7 @@ a:hover { text-decoration: underline; }
 }
 .boundary-controls label {
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 12.5px;
   letter-spacing: .08em;
   text-transform: uppercase;
   color: var(--hint);
@@ -1159,7 +1163,7 @@ a:hover { text-decoration: underline; }
 .cat-explorer { margin-top: 8px; }
 .cat-group-label {
   font-family: var(--font-mono);
-  font-size: 11.5px;
+  font-size: 12.5px;
   letter-spacing: .12em;
   text-transform: uppercase;
   color: var(--hint);
@@ -1178,7 +1182,7 @@ a:hover { text-decoration: underline; }
   transition: border-color var(--dur) var(--ease), color var(--dur) var(--ease), background var(--dur) var(--ease);
 }
 .cat-btn:hover { border-color: var(--teal); color: var(--ink); }
-.cat-btn.is-active { background: var(--teal); border-color: var(--teal); color: #fff; }
+.cat-btn.is-active { background: var(--teal); border-color: var(--teal); color: var(--on-teal); }
 .cat-panel {
   margin-top: 16px;
   border: 1px solid var(--line);
@@ -1197,7 +1201,7 @@ a:hover { text-decoration: underline; }
 .cat-panel-head .cname { font-family: var(--font-display); font-size: 15px; font-weight: 500; }
 .cat-panel-head .cgroup {
   font-family: var(--font-mono);
-  font-size: 11.5px;
+  font-size: 12.5px;
   letter-spacing: .08em;
   text-transform: uppercase;
   padding: 3px 10px;
@@ -1234,7 +1238,7 @@ a:hover { text-decoration: underline; }
 }
 .matrix-table th {
   font-family: var(--font-mono);
-  font-size: 11.5px;
+  font-size: 12.5px;
   letter-spacing: .08em;
   text-transform: uppercase;
   color: var(--hint);
@@ -1267,7 +1271,7 @@ a:hover { text-decoration: underline; }
 }
 .claim-card .ckicker {
   font-family: var(--font-mono);
-  font-size: 11.5px;
+  font-size: 12.5px;
   letter-spacing: .1em;
   text-transform: uppercase;
   color: var(--teal);
@@ -1286,7 +1290,7 @@ a:hover { text-decoration: underline; }
 .claim-sample .slabel {
   display: block;
   font-family: var(--font-mono);
-  font-size: 11.5px;
+  font-size: 12.5px;
   font-style: normal;
   letter-spacing: .1em;
   text-transform: uppercase;
@@ -1321,7 +1325,7 @@ a:hover { text-decoration: underline; }
   justify-content: center;
   gap: 2px;
   font-family: var(--font-mono);
-  font-size: 11.5px;
+  font-size: 12.5px;
   letter-spacing: .14em;
   text-transform: uppercase;
   color: var(--hint);
@@ -1352,7 +1356,7 @@ a:hover { text-decoration: underline; }
 }
 .hy-tag {
   font-family: var(--font-mono);
-  font-size: 11.5px;
+  font-size: 12.5px;
   letter-spacing: .1em;
   text-transform: uppercase;
   color: var(--teal);
@@ -1394,7 +1398,7 @@ a:hover { text-decoration: underline; }
 .tier-card .tcoverage-detail { font-size: 12.5px; color: var(--muted); margin: 0 0 12px; line-height: 1.5; }
 .tier-card .tprice {
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 12.5px;
   letter-spacing: .08em;
   text-transform: uppercase;
   padding: 4px 10px;
@@ -1408,7 +1412,7 @@ a:hover { text-decoration: underline; }
 .tier-card .tapproach { font-size: 13px; color: var(--muted); line-height: 1.6; margin: 0; }
 .tier-card .tnote {
   margin-top: 12px;
-  font-size: 12px;
+  font-size: 12.5px;
   color: var(--hint);
   border-top: 1px solid var(--line);
   padding-top: 10px;
@@ -1441,7 +1445,7 @@ a:hover { text-decoration: underline; }
 }
 .calc-result .rlbl { font-size: 12.5px; color: var(--muted); margin-top: 2px; line-height: 1.45; }
 .calc-result .rcell.is-highlight .rnum { color: var(--teal); }
-.calc-result .rcell.is-leadership .rnum { color: var(--amber); }
+.calc-result .rcell.is-leadership .rnum { color: var(--amber-text); }
 
 /* =========================================================================
    #horizon — 2026→2050 scroll-revealed timeline
@@ -1471,13 +1475,13 @@ a:hover { text-decoration: underline; }
 .horizon-item.tone-gray::before { background: var(--hint); }
 .horizon-date {
   font-family: var(--font-mono);
-  font-size: 11.5px;
+  font-size: 12.5px;
   letter-spacing: .1em;
   text-transform: uppercase;
   color: var(--teal);
   margin: 0 0 4px;
 }
-.horizon-item.tone-amber .horizon-date { color: var(--amber); }
+.horizon-item.tone-amber .horizon-date { color: var(--amber-text); }
 .horizon-item.tone-gray .horizon-date { color: var(--hint); }
 .horizon-title {
   font-family: var(--font-display);
@@ -1502,7 +1506,7 @@ a:hover { text-decoration: underline; }
 }
 .about-card .alabel {
   font-family: var(--font-mono);
-  font-size: 11.5px;
+  font-size: 12.5px;
   letter-spacing: .12em;
   text-transform: uppercase;
   color: var(--teal);
@@ -1572,7 +1576,7 @@ a:hover { text-decoration: underline; }
 .cat-field { border: 0; margin: 0; padding: 0; }
 .cat-field legend {
   font-family: var(--font-mono);
-  font-size: 11.5px;
+  font-size: 12.5px;
   letter-spacing: .12em;
   text-transform: uppercase;
   color: var(--hint);
@@ -1642,7 +1646,7 @@ a:hover { text-decoration: underline; }
 }
 .cv-cat {
   font-family: var(--font-mono);
-  font-size: 9.5px;
+  font-size: 12.5px;
   letter-spacing: .18em;
   color: var(--hint);
   margin-bottom: -2px;
@@ -1671,7 +1675,7 @@ a:hover { text-decoration: underline; }
 .cv-reset {
   margin-top: 12px;
   font-family: var(--font-mono);
-  font-size: 11.5px;
+  font-size: 12.5px;
   letter-spacing: .08em;
   text-transform: uppercase;
   color: var(--hint);
@@ -1781,19 +1785,19 @@ a:hover { text-decoration: underline; }
 }
 .rung-num {
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 12.5px;
   font-weight: 700;
   color: var(--hint);
   transition: color var(--dur) var(--ease);
 }
 .rung.is-active .rung-mark { border-color: var(--teal); background: var(--teal); transform: scale(1.08); }
-.rung.is-active .rung-num { color: #fff; }
+.rung.is-active .rung-num { color: var(--on-teal); }
 .rung.is-past .rung-mark { border-color: var(--teal); }
 .rung.is-past .rung-num { color: var(--teal); }
 
 .rung-tier {
   font-family: var(--font-mono);
-  font-size: 11.5px;
+  font-size: 12.5px;
   letter-spacing: .1em;
   text-transform: uppercase;
   color: var(--teal);
@@ -1819,7 +1823,7 @@ a:hover { text-decoration: underline; }
 }
 .claim-tag {
   font-family: var(--font-mono);
-  font-size: 11.5px;
+  font-size: 12.5px;
   letter-spacing: .1em;
   text-transform: uppercase;
   padding: 2px 8px;
@@ -1879,11 +1883,11 @@ a:hover { text-decoration: underline; }
   transition: height 720ms var(--ease);
 }
 .hb:nth-child(2) .hb-fill { background: color-mix(in srgb, var(--amber-soft) 60%, var(--amber) 40%); transition-delay: 90ms; }
-.hb.is-peak .hb-fill { background: var(--amber); transition-delay: 180ms; }
+.hb.is-peak .hb-fill { background: var(--amber-text); transition-delay: 180ms; }
 .hourly.is-grown .hb-fill { height: var(--pct); }
 .hb-num { font-family: var(--font-display); font-size: 17px; font-weight: 600; color: var(--amber-ink); }
-.hb.is-peak .hb-num { color: var(--amber-soft); }
-.hb-label { font-size: 11.5px; color: var(--muted); margin-top: 8px; }
+.hb.is-peak .hb-num { color: var(--surface); }
+.hb-label { font-size: 12.5px; color: var(--muted); margin-top: 8px; }
 .hourly-note { font-size: 13px; color: var(--muted); line-height: 1.55; margin: 0; }
 .hourly-note strong { color: var(--ink); }
 
