@@ -218,9 +218,14 @@ export async function initHero3D({ gsap, ScrollTrigger }) {
     // ambient life after the resolve: the whole field breathes very slowly
     group.position.y = Math.sin(drift * 0.35) * 0.18 * s;
 
-    // linger past the hero: ease the field aside and fade it out slowly
-    group.position.x = linger * 6.5;
-    wrap.style.opacity = Math.pow(1 - linger, 1.35).toFixed(3);
+    // Linger as atmosphere, but clear the reading column quickly once the
+    // hero ends. The long tail remains visible at the page edges.
+    const heroExitFade = Math.max(0, Math.min(1, (s - 0.82) / 0.18));
+    group.position.x = Math.pow(linger, 0.55) * 10;
+    wrap.style.opacity = Math.min(
+      1 - heroExitFade * 0.72,
+      Math.pow(1 - linger, 1.35)
+    ).toFixed(3);
   }
 
   // ---- scroll → progress over the hero ------------------------------------
@@ -240,10 +245,17 @@ export async function initHero3D({ gsap, ScrollTrigger }) {
   // the hero's edge. Cinematic where it's cheap, frugal where it isn't.
   let linger = 0;      // 0 at hero bottom → 1 fully faded out
   let paused = false;
+  let running = true;
   function pauseScene() { if (paused || disposed) return; paused = true; wrap.style.visibility = 'hidden'; }
   function resumeScene() { if (!paused || disposed) return; paused = false; wrap.style.visibility = ''; loop(); }
 
   const PERSIST = !lowPower && window.innerWidth >= 768;
+  const CONTENT_TOP = 72;
+  function syncStaticVisibility() {
+    if (PERSIST) return;
+    if (hero.getBoundingClientRect().bottom <= CONTENT_TOP) pauseScene();
+    else resumeScene();
+  }
   if (PERSIST) {
     ScrollTrigger.create({
       trigger: hero,
@@ -257,14 +269,16 @@ export async function initHero3D({ gsap, ScrollTrigger }) {
   } else {
     ScrollTrigger.create({
       trigger: hero,
-      start: 'bottom top',
+      start: `bottom ${CONTENT_TOP}px`,
       onEnter: () => pauseScene(),
-      onLeaveBack: () => resumeScene()
+      onLeaveBack: () => resumeScene(),
+      onRefresh: syncStaticVisibility
     });
+    requestAnimationFrame(syncStaticVisibility);
+    window.addEventListener('load', syncStaticVisibility, { once: true });
   }
 
   // ---- render loop (pause when tab hidden) ---------------------------------
-  let running = true;
   onVisibility = () => { running = !document.hidden; if (running) loop(); };
   document.addEventListener('visibilitychange', onVisibility);
 
