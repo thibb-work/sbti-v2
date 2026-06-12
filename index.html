@@ -129,11 +129,10 @@
     border: none;
     display: none;
     background: var(--bg);
-    min-height: 70vh;
+    /* height is driven by each frame's postMessage; no floor, so frames hug their content */
+    min-height: 0;
   }
   .frame.active { display: block; }
-  /* about is short — let it hug its content instead of the 70vh floor */
-  #f-about { min-height: 0; }
 
   footer {
     max-width: 920px;
