@@ -132,6 +132,8 @@
     min-height: 70vh;
   }
   .frame.active { display: block; }
+  /* about is short — let it hug its content instead of the 70vh floor */
+  #f-about { min-height: 0; }
 
   footer {
     max-width: 920px;
@@ -178,8 +180,7 @@
 </main>
 
 <footer>
-  Prepared as a consultant reference from the SBTi Corporate Net-Zero Standard V2.0 (June 2026). Verify against the
-  <a href="https://sciencebasedtargets.org/" target="_blank" rel="noopener">published Standard</a> before client use.
+  Created by Thibault Guenat, Senior Carbon &amp; Energy Manager @Arcadia &mdash; <a href="#about" onclick="return gotoContact();">get in touch</a>
 </footer>
 
 <script>
@@ -199,8 +200,23 @@
     if (history.replaceState) history.replaceState(null, '', '#' + name);
   }
 
+  function gotoContact() {
+    show('about');
+    var f = document.getElementById('f-about');
+    setTimeout(function () {
+      try { f.contentWindow.postMessage({ type: 'sbti-scrollreq' }, '*'); } catch (e) {}
+    }, 80);
+    return false;
+  }
+
   window.addEventListener('message', function (e) {
-    if (!e.data || e.data.type !== 'sbti-h') return;
+    if (!e.data) return;
+    if (e.data.type === 'sbti-scrollto') {
+      var fa = document.getElementById('f-about');
+      window.scrollTo({ top: fa.offsetTop + e.data.y - 16, behavior: 'smooth' });
+      return;
+    }
+    if (e.data.type !== 'sbti-h') return;
     document.querySelectorAll('.frame').forEach(function (f) {
       if (f.contentWindow === e.source) {
         var name = f.id.replace('f-', '');

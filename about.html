@@ -77,6 +77,9 @@ h1 { font-family: Georgia, "Times New Roman", serif; font-size: clamp(26px, 5vw,
   margin-top: 16px;
 }
 .fact strong { color: var(--teal); }
+.bio-link { display: inline-flex; align-items: center; gap: 7px; margin-top: 4px; color: var(--teal); text-decoration: none; font-size: 14px; font-weight: 500; }
+.bio-link:hover { text-decoration: underline; }
+.bio-link i { font-size: 18px; }
 
 /* contact */
 .contact { display: flex; flex-wrap: wrap; gap: 16px 28px; margin-top: 14px; }
@@ -103,7 +106,7 @@ h1 { font-family: Georgia, "Times New Roman", serif; font-size: clamp(26px, 5vw,
       <p>I measure the emissions of Fortune 500 companies at Arcadia, turning carbonosaurus-rex spreadsheets into roadmaps that boards want to fund. The goal isn't perfection — it's insights companies can act on quickly.</p>
       <p>I've been hooked on AI since GPT-3, and kept hitting the ceiling of what I could do as a non-technical user — so I'm becoming a technical one. I'm teaching myself full-stack development and building AI-powered apps, at work and on the side, to solve real problems instead of describing them on another slide. I work with LLMs daily: prompt engineering, agentic workflows, and getting AI to actually land inside enterprise teams. A decade of consulting taught me to sit between users and the people who build for them — now I can build too.</p>
       <p>Before Arcadia I built a reduction-measure database (<em>“500 Ways to Lower Your Carbon”</em>) for mid-market companies and co-created a supplier-engagement platform that helps buyers screen supplier maturity and nudges everyone to their next decarbonisation step. Earlier, three years at Minor Figures guiding the oat-milk brand from good intentions to Carbon Neutral and B Corp certified — mapping 59% of the way to Net Zero from a footprint already 80% lower than dairy. I write about sustainability, and I'm always up for trading ideas on carbon, biodiversity and AI.</p>
-      <div class="fact"><strong>Fun fact:</strong> humans have 5 senses; plants have 25. Plants can sense when you walk past them, and even recognise which nearby plants are their kin and support them. We still know so little about our world. Stay curious.</div>
+      <a class="bio-link" href="https://uk.linkedin.com/in/thibaultguenat" target="_blank" rel="noopener"><i class="ti ti-brand-linkedin" aria-hidden="true"></i>Connect on LinkedIn</a>
     </div>
   </div>
 
@@ -115,7 +118,7 @@ h1 { font-family: Georgia, "Times New Roman", serif; font-size: clamp(26px, 5vw,
     </div>
   </div>
 
-  <div class="sec" style="margin-bottom:0;">
+  <div class="sec" id="contact" style="margin-bottom:0;">
     <div class="lbl"><i class="ti ti-mail" aria-hidden="true"></i>Get in touch</div>
     <div class="card">
       <p class="cname">Arthur Beattie</p>
@@ -133,6 +136,13 @@ function postH(){try{parent.postMessage({type:'sbti-h',h:document.documentElemen
 window.addEventListener('load',postH);window.addEventListener('resize',postH);
 if(window.ResizeObserver){new ResizeObserver(postH).observe(document.body);}
 setTimeout(postH,300);
+window.addEventListener('message',function(e){
+  if(e.data&&e.data.type==='sbti-scrollreq'){
+    var el=document.getElementById('contact');
+    var y=el?el.getBoundingClientRect().top:0;
+    try{parent.postMessage({type:'sbti-scrollto',y:y},'*');}catch(err){}
+  }
+});
 </script>
 </body>
 </html>
