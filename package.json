@@ -1,0 +1,24 @@
+{
+  "name": "sbti-v2",
+  "version": "1.0.0",
+  "description": "An interactive explorer for the **SBTi Corporate Net-Zero Standard V2.0** (June 2026). A single static page with sticky tab navigation across four sections:",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/imadeitmyself/sbti-v2.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/imadeitmyself/sbti-v2/issues"
+  },
+  "homepage": "https://github.com/imadeitmyself/sbti-v2#readme",
+  "dependencies": {
+    "@vercel/speed-insights": "^2.0.0"
+  }
+}
