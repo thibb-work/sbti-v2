@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scope 3 under CNZS V2.0 - the decision system</title>
+<style>
+:root {
+  --bg: #FBFAF7;
+  --surface: #FFFFFF;
+  --ink: #1E2B26;
+  --muted: #5C6B64;
+  --hint: #8C988F;
+  --line: #E3E1D8;
+  --teal: #0F6E56;
+  --teal-mid: #1D9E75;
+  --teal-soft: #E1F5EE;
+  --teal-deep: #04342C;
+  --amber: #BA7517;
+  --amber-soft: #FAEEDA;
+  --amber-deep: #633806;
+  --red: #A32D2D;
+  --red-soft: #FCEBEB;
+  --red-deep: #791F1F;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #141917;
+    --surface: #1C2421;
+    --ink: #E8EDE9;
+    --muted: #A7B3AC;
+    --hint: #75817A;
+    --line: #2E3833;
+    --teal-soft: #0B3D31;
+    --teal: #5DCAA5;
+    --teal-deep: #C9F0E1;
+    --amber-soft: #4A2B06;
+    --amber: #FAC775;
+    --amber-deep: #FBE3B4;
+    --red-soft: #471414;
+    --red: #F09595;
+    --red-deep: #F7C1C1;
+  }
+}
+* { box-sizing: border-box; margin: 0; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  padding: 48px 20px 64px;
+}
+.wrap { max-width: 760px; margin: 0 auto; }
+.kicker {
+  font-family: "Courier New", monospace;
+  font-size: 12px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 10px;
+}
+h1 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(28px, 5vw, 38px);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  margin-bottom: 10px;
+}
+.lede { color: var(--muted); max-width: 56ch; margin-bottom: 44px; }
+.stage { display: grid; grid-template-columns: 40px minmax(0,1fr); gap: 0 18px; }
+.rail { display: flex; flex-direction: column; align-items: center; }
+.rnum {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: var(--teal-soft); color: var(--teal);
+  font-family: "Courier New", monospace; font-size: 14px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.rline { width: 1px; flex: 1; background: var(--line); margin: 8px 0; }
+.sbody { padding: 3px 0 40px; min-width: 0; }
+h2 { font-family: Georgia, serif; font-size: 21px; font-weight: 500; margin-bottom: 4px; }
+.ssub { font-size: 14px; color: var(--muted); margin-bottom: 16px; max-width: 60ch; }
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 16px 18px;
+}
+.grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+.ptitle { font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 7px; }
+.ptext { font-size: 13.5px; color: var(--muted); margin-top: 5px; }
+.chip {
+  display: inline-block; font-size: 12.5px; padding: 4px 11px;
+  border-radius: 20px; margin: 0 6px 7px 0;
+}
+.c-on { background: var(--teal-soft); color: var(--teal-deep); }
+.c-on::before { content: "✓ "; color: var(--teal); }
+.c-off { background: transparent; border: 1px dashed var(--line); color: var(--hint); }
+.c-warn { background: var(--amber-soft); color: var(--amber-deep); }
+.c-ban { background: var(--red-soft); color: var(--red-deep); }
+.c-ban::before { content: "✕ "; }
+.gsub {
+  font-family: "Courier New", monospace; font-size: 11px;
+  letter-spacing: .12em; text-transform: uppercase;
+  color: var(--hint); margin: 14px 0 8px;
+}
+.catrow { display: flex; flex-wrap: wrap; gap: 7px; }
+.catbtn {
+  font-family: inherit; font-size: 13px; padding: 6px 13px;
+  border-radius: 20px; border: 1px solid var(--line);
+  background: var(--surface); color: var(--muted);
+  cursor: pointer; transition: border-color .12s, color .12s, background .12s, transform .08s;
+}
+.catbtn:hover { border-color: var(--teal-mid); color: var(--ink); }
+.catbtn:active { transform: scale(.97); }
+.catbtn:focus-visible { outline: 2px solid var(--teal-mid); outline-offset: 2px; }
+.catbtn.sel { background: var(--teal); border-color: var(--teal); color: var(--teal-soft); }
+@media (prefers-color-scheme: dark) { .catbtn.sel { color: var(--teal-deep); background: #156048; border-color: #156048; } }
+#catpanel { margin-top: 14px; transition: opacity .15s; }
+.cathead { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.cname { font-size: 15px; font-weight: 600; }
+.gbadge {
+  font-family: "Courier New", monospace; font-size: 11.5px;
+  letter-spacing: .08em; padding: 3px 10px; border-radius: 4px;
+  background: var(--teal-soft); color: var(--teal-deep); white-space: nowrap;
+}
+.copts { margin: 12px 0 6px; }
+.cnote { font-size: 13.5px; color: var(--muted); }
+.rung {
+  border: 1px solid var(--line); border-left-width: 4px;
+  border-radius: 0 10px 10px 0;
+  background: var(--surface);
+  padding: 12px 16px; margin-bottom: 8px;
+  display: flex; gap: 14px; align-items: baseline;
+}
+.rname { font-size: 13.5px; font-weight: 600; min-width: 104px; flex-shrink: 0; }
+.rtext { font-size: 13.5px; color: var(--muted); }
+.foot { font-size: 12.5px; color: var(--hint); margin-top: 8px; }
+.src { margin-top: 40px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 12px; color: var(--hint); }
+@media (prefers-reduced-motion: no-preference) {
+  .stage { animation: rise .5s ease both; }
+  .stage:nth-of-type(2) { animation-delay: .07s; }
+  .stage:nth-of-type(3) { animation-delay: .14s; }
+  .stage:nth-of-type(4) { animation-delay: .21s; }
+  @keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+}
+@media (max-width: 520px) { .stage { grid-template-columns: 30px minmax(0,1fr); gap: 0 12px; } .rnum { width: 26px; height: 26px; font-size: 12px; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="kicker">SBTi Corporate Net-Zero Standard V2.0 · June 2026</div>
+  <h1>Scope 3 is no longer a coverage rule.<br>It's a decision system.</h1>
+  <p class="lede">V1 asked one question: have you covered two-thirds of your value chain emissions? V2.0 asks four, in sequence. Work through them stage by stage - and tap any category in stage 2 to see its eligible target levers from Table 3.</p>
+
+  <div class="stage">
+    <div class="rail"><div class="rnum">1</div><div class="rline"></div></div>
+    <div class="sbody">
+      <h2>Build the boundary</h2>
+      <p class="ssub">The 5% test decides what's in. Everything left out needs receipts - condition cited, tonnes quantified, mitigation intent described.</p>
+      <div class="grid2">
+        <div class="panel" style="border-color: var(--teal-mid);">
+          <div class="ptitle">In boundary</div>
+          <div class="ptext">Every scope 3 category that individually represents 5% or more of scope 3 emissions (categories 1–14), measured on the physical GHG inventory.</div>
+        </div>
+        <div class="panel">
+          <div class="ptitle">Out, with justification</div>
+          <div class="ptext" style="margin-bottom: 10px;">Seven codified exclusion routes:</div>
+          <span class="chip c-warn">Second-hand goods (cat 1, 2)</span><span class="chip c-warn">Cat 3 if cut via S1/2 targets</span><span class="chip c-warn">Cat 7 commuting, entirely</span><span class="chip c-warn">No-control leases (cat 8)</span><span class="chip c-warn">No-influence transport (cat 9)</span><span class="chip c-warn">Unknown processing (cat 10)</span><span class="chip c-warn">Independent franchisees (cat 14)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stage">
+    <div class="rail"><div class="rnum">2</div><div class="rline"></div></div>
+    <div class="sbody">
+      <h2>Choose the target architecture</h2>
+      <p class="ssub">Either one overarching target - an absolute cut, or tier 1 supplier/customer alignment - or go category by category with tailored levers. This explorer is Table 3 of the Standard, made tappable.</p>
+      <div class="gsub">Upstream</div>
+      <div class="catrow">
+        <button class="catbtn" data-c="c1p">1 · pathways</button>
+        <button class="catbtn" data-c="c1">1 · all other</button>
+        <button class="catbtn sel" data-c="c2p">2 · pathways</button>
+        <button class="catbtn" data-c="c2">2 · all other</button>
+        <button class="catbtn" data-c="c3">3</button>
+        <button class="catbtn" data-c="c4">4</button>
+        <button class="catbtn" data-c="c5">5</button>
+        <button class="catbtn" data-c="c6">6</button>
+        <button class="catbtn" data-c="c7">7</button>
+        <button class="catbtn" data-c="c8">8</button>
+      </div>
+      <div class="gsub">Downstream</div>
+      <div class="catrow">
+        <button class="catbtn" data-c="c9">9</button>
+        <button class="catbtn" data-c="c10">10</button>
+        <button class="catbtn" data-c="c11">11</button>
+        <button class="catbtn" data-c="c12">12</button>
+        <button class="catbtn" data-c="c13">13</button>
+        <button class="catbtn" data-c="c14">14</button>
+      </div>
+      <div class="panel" id="catpanel" aria-live="polite">
+        <div class="cathead">
+          <div class="cname" id="cname"></div>
+          <span class="gbadge" id="cgroup"></span>
+        </div>
+        <div class="copts" id="copts"></div>
+        <div class="cnote" id="cnote"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stage">
+    <div class="rail"><div class="rnum">3</div><div class="rline"></div></div>
+    <div class="sbody">
+      <h2>Deliver through the hierarchy</h2>
+      <p class="ssub">Implementation is now ranked. Each step down the ladder needs a demonstrated reason - structural constraints, never preference or cost alone.</p>
+      <div class="rung" style="border-left-color: var(--teal);">
+        <span class="rname">Activity level</span>
+        <span class="rtext">Cut at source: efficiency, input switching, direct supplier and customer engagement.</span>
+      </div>
+      <div class="rung" style="border-left-color: var(--teal-mid);">
+        <span class="rname">Activity pools</span>
+        <span class="rtext">Act inside shared systems - supply sheds, grids, logistics networks - supported by instruments for biomethane, steel or cement via mass balance or book-and-claim.</span>
+      </div>
+      <div class="rung" style="border-left-color: var(--amber);">
+        <span class="rname">Sector level</span>
+        <span class="rtext">Only while constraints persist: same activity type, relevant geography, plus measures to unlock direct action.</span>
+      </div>
+      <p class="foot">In-inventory reductions earn company-level claims. Pool and sector actions earn system contribution claims - reported separately, never blended.</p>
+    </div>
+  </div>
+
+  <div class="stage">
+    <div class="rail"><div class="rnum">4</div></div>
+    <div class="sbody" style="padding-bottom: 0;">
+      <h2>Pass the integrity gates</h2>
+      <p class="ssub">Checked at End-of-cycle Assessment, not at validation - so a procurement strategy signed today is judged in roughly five years.</p>
+      <div class="panel">
+        <span class="chip c-on">Activity matching</span><span class="chip c-on">System association</span><span class="chip c-on">Conservative quantification</span><span class="chip c-on">Auditable documentation</span><span class="chip c-on">12-month temporal alignment</span><span class="chip c-on">Unique attribution</span><span class="chip c-on">No double counting</span>
+        <div class="gsub">Never eligible</div>
+        <span class="chip c-ban">Hypothetical baselines</span><span class="chip c-ban">Credits sold or transferred</span><span class="chip c-ban">Ex-ante, unrealized reductions</span><span class="chip c-ban">Anything already claimed under OER</span>
+      </div>
+    </div>
+  </div>
+
+  <p class="src">Source: SBTi Corporate Net-Zero Standard V2.0 (June 2026), sections 3.4 (CNZS-C14 to C16, Table 3) and chapter 4 (CNZS-C25, C26). Category eligibility transcribed from Table 3, page 40. Prepared as a consultant reference - verify against the published Standard before client use.</p>
+</div>
+
+<script>
+const D = {
+  c1p: { n: "Cat 1 - Purchased goods and services (commodities with pathways)", g: "Group A", o: [1,1,1,0,0], t: "Pathway commodities - steel, cement, chemicals - can take sector-trajectory intensity targets or volume-alignment targets for lower-carbon purchasing." },
+  c1:  { n: "Cat 1 - Purchased goods and services (all other)", g: "Group B", o: [1,0,1,0,0], t: "Non-pathway purchases take an absolute reduction or tier 1 supplier alignment measured by emissions or spend." },
+  c2p: { n: "Cat 2 - Capital goods (commodities with pathways)", g: "Group A", o: [1,1,1,0,0], t: "CapEx commodities like steel and cement can follow sector intensity pathways or volume-alignment targets - which requires knowing exactly what your capital spend contains, line item by line item." },
+  c2:  { n: "Cat 2 - Capital goods (all other)", g: "Group B", o: [1,0,1,0,0], t: "Capital goods without sector pathways fall back to absolute reduction or supplier alignment." },
+  c3:  { n: "Cat 3 - Fuel- and energy-related activities", g: "Group B", o: [1,0,0,0,0], t: "Emissions reduction only - and the whole category is excludable where it is mitigated through scope 1 and 2 energy targets." },
+  c4:  { n: "Cat 4 - Upstream transportation and distribution", g: "Group A", o: [1,1,1,0,0], t: "Transport has sector pathways: intensity targets, lower-carbon volume shares, or carrier alignment all qualify." },
+  c5:  { n: "Cat 5 - Waste generated in operations", g: "Group B", o: [1,0,0,0,0], t: "Emissions reduction is the only route - no alignment options for waste." },
+  c6:  { n: "Cat 6 - Business travel", g: "Group A", o: [1,1,0,0,0], t: "Reduce emissions or grow the share of lower-carbon travel - notably, no supplier alignment option here." },
+  c7:  { n: "Cat 7 - Employee commuting", g: "Group B", o: [1,0,0,0,0], t: "Emissions reduction only - though the entire category can be excluded with justification." },
+  c8:  { n: "Cat 8 - Upstream leased assets", g: "Group B", o: [1,0,1,0,0], t: "Reduce emissions or align lessors; excludable where the company has no operational control or practical influence over energy use." },
+  c9:  { n: "Cat 9 - Downstream transportation and distribution", g: "Group A methods", o: [1,1,1,0,0], t: "Listed downstream but uses upstream transport methods - the same pathways as category 4. Excludable without contractual influence over fuel, route, or mode." },
+  c10: { n: "Cat 10 - Processing of sold products", g: "Group C", o: [1,0,1,0,0], t: "Reduce emissions or align tier 1 customers; excludable where processing steps are unknown or there is no contractual relationship." },
+  c11: { n: "Cat 11 - Use of sold products", g: "Group C", o: [1,0,1,1,0], t: "The big one for product companies: emissions cuts, customer alignment, or product use alignment. If none reasonably apply, the escape hatch allows swapping equivalent emissions to another category, or an SBTi-approved exception with a long-term target, a day-one plan, and annual reporting." },
+  c12: { n: "Cat 12 - End-of-life treatment of sold products", g: "Group C", o: [1,0,0,0,1], t: "Reduce emissions or grow the share of products designed with circular end-of-life solutions - the only category where the circularity lever applies." },
+  c13: { n: "Cat 13 - Downstream leased assets", g: "Group C", o: [1,0,1,1,0], t: "Emissions reduction, lessee alignment, or product use alignment for the assets you lease out." },
+  c14: { n: "Cat 14 - Franchises", g: "Group C", o: [1,0,1,0,0], t: "Reduce emissions or align franchisees; excludable where franchisees operate independently or control their own energy use." }
+};
+const L = ["Emissions reduction", "Volume alignment", "Supplier/customer alignment", "Product use alignment", "End-of-life alignment"];
+function pick(k) {
+  const d = D[k];
+  document.querySelectorAll(".catbtn").forEach(b => b.classList.toggle("sel", b.dataset.c === k));
+  document.getElementById("cname").textContent = d.n;
+  document.getElementById("cgroup").textContent = d.g;
+  document.getElementById("copts").innerHTML = d.o.map((on, i) =>
+    on ? '<span class="chip c-on">' + L[i] + "</span>" : '<span class="chip c-off">' + L[i] + "</span>"
+  ).join("");
+  document.getElementById("cnote").textContent = d.t;
+}
+document.querySelectorAll(".catbtn").forEach(b => b.addEventListener("click", () => pick(b.dataset.c)));
+pick("c2p");
+</script>
+</body>
+</html>
