@@ -71,7 +71,7 @@ function initBaselineSlider() {
 
   const CAPTIONS = {
     left: 'V1 — your base year is fixed at registration and drifts further from your current operations every cycle.',
-    mid: 'Drag — or use ← / → — to compare V1’s fixed base year with V2.0’s rolling base year.',
+    mid: 'Drag the handle \u2014 or press \u2190 / \u2192 \u2014 to compare the two approaches.',
     right: 'V2.0 — at the start of every cycle you reset to the most recent year with comprehensive data, so your starting point stays representative (CNZS-C4).'
   };
 

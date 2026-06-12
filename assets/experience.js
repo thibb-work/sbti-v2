@@ -192,6 +192,88 @@ function initHeader() {
 }
 
 /* =========================================================================
+   3b · JUMP MENU — desktop: inline chapter links in the header;
+   mobile/tablet: "Menu" button opening a full-screen overlay.
+   Both are built from the CHAPTERS manifest and track 'rail:change'.
+   ========================================================================= */
+function initMenu() {
+  const header = document.getElementById('siteHeader');
+  if (!header) return;
+  const items = CHAPTERS.filter(c => c.id !== 'top');
+
+  // --- desktop inline nav ---
+  const nav = document.createElement('nav');
+  nav.className = 'hd-nav';
+  nav.setAttribute('aria-label', 'Jump to chapter');
+  items.forEach(c => {
+    const a = document.createElement('a');
+    a.href = '#' + c.id;
+    a.dataset.chapter = c.id;
+    a.textContent = c.label;
+    nav.appendChild(a);
+  });
+  header.appendChild(nav);
+
+  // --- mobile menu button + overlay ---
+  const btn = document.createElement('button');
+  btn.type = 'button';
+  btn.className = 'menu-btn';
+  btn.setAttribute('aria-haspopup', 'dialog');
+  btn.setAttribute('aria-expanded', 'false');
+  btn.innerHTML = '<span class="menu-btn-label">Menu</span>';
+  header.appendChild(btn);
+
+  const overlay = document.createElement('div');
+  overlay.className = 'menu-overlay';
+  overlay.setAttribute('role', 'dialog');
+  overlay.setAttribute('aria-modal', 'true');
+  overlay.setAttribute('aria-label', 'Chapters');
+  overlay.hidden = true;
+  overlay.innerHTML =
+    '<button type="button" class="menu-close" aria-label="Close menu">×</button>' +
+    '<nav class="menu-list" aria-label="Chapters">' +
+    items.map((c, i) =>
+      `<a href="#${c.id}" data-chapter="${c.id}" style="--mi:${i}">` +
+      `<span class="menu-num">${String(i + 1).padStart(2, '0')}</span>${c.label}</a>`
+    ).join('') +
+    '</nav>';
+  document.body.appendChild(overlay);
+
+  let lastFocus = null;
+  function openMenu() {
+    lastFocus = document.activeElement;
+    overlay.hidden = false;
+    requestAnimationFrame(() => overlay.classList.add('is-open'));
+    btn.setAttribute('aria-expanded', 'true');
+    document.documentElement.style.overflow = 'hidden';
+    overlay.querySelector('.menu-list a')?.focus();
+  }
+  function closeMenu() {
+    overlay.classList.remove('is-open');
+    btn.setAttribute('aria-expanded', 'false');
+    document.documentElement.style.overflow = '';
+    const done = () => { overlay.hidden = true; };
+    REDUCED ? done() : setTimeout(done, 280);
+    (lastFocus || btn).focus?.();
+  }
+  btn.addEventListener('click', openMenu);
+  overlay.querySelector('.menu-close').addEventListener('click', closeMenu);
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) closeMenu();
+    if (e.target.closest('a')) closeMenu();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !overlay.hidden) closeMenu();
+  });
+
+  // --- active chapter tracking (shared with the rail) ---
+  NZ.on('rail:change', ({ id }) => {
+    document.querySelectorAll('.hd-nav a, .menu-list a').forEach(a =>
+      a.classList.toggle('is-current', a.dataset.chapter === id));
+  });
+}
+
+/* =========================================================================
    4 · HASH handling — redirect old anchors, smooth-scroll to target on load
    (head script already rewrote the hash before paint; here we honour it
    and intercept in-page redirect-target clicks for safety.)
@@ -259,6 +341,7 @@ function boot() {
   initReveals();
   initRail();
   initHeader();
+  initMenu();
   initHash();
   initHero();
   // re-measure once everything (incl. late content) is in

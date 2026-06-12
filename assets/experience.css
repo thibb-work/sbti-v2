@@ -40,7 +40,7 @@
   --rail-w: 84px;
 
   /* motion */
-  --ease: cubic-bezier(.22, .61, .36, 1);
+  --ease: cubic-bezier(.16, 1, .3, 1); /* expo-out: fast start, long silky settle */
   --dur: 220ms;
 }
 
@@ -147,6 +147,104 @@ a:hover { text-decoration: underline; }
   transition: border-color var(--dur) var(--ease), background var(--dur) var(--ease);
 }
 .site-header.is-scrolled { border-bottom-color: var(--line); }
+
+/* ---- jump menu: desktop inline nav ---- */
+.hd-nav {
+  margin-left: auto;
+  display: none;
+  gap: 18px;
+}
+@media (min-width: 1100px) { .hd-nav { display: flex; } }
+.hd-nav a {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  padding: 4px 0;
+  border-bottom: 1px solid transparent;
+  transition: color var(--dur) var(--ease), border-color var(--dur) var(--ease);
+}
+.hd-nav a:visited { color: var(--muted); }
+.hd-nav a:hover { color: var(--ink); }
+.hd-nav a.is-current, .hd-nav a.is-current:visited { color: var(--teal); border-bottom-color: var(--teal); }
+.menu-list a:visited { color: var(--ink); }
+
+/* ---- jump menu: mobile button + overlay ---- */
+.menu-btn {
+  margin-left: auto;
+  appearance: none;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  padding: 7px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: border-color var(--dur) var(--ease), background var(--dur) var(--ease);
+}
+.menu-btn:hover { border-color: var(--teal); }
+@media (min-width: 1100px) { .menu-btn { display: none; } }
+
+.menu-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  background: color-mix(in srgb, var(--bg) 96%, transparent);
+  backdrop-filter: saturate(140%) blur(14px);
+  -webkit-backdrop-filter: saturate(140%) blur(14px);
+  padding: 92px var(--gutter) 40px;
+  overflow-y: auto;
+  opacity: 0;
+  transition: opacity 280ms var(--ease);
+}
+.menu-overlay.is-open { opacity: 1; }
+.menu-close {
+  position: absolute;
+  top: 18px; right: var(--gutter);
+  appearance: none;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+}
+.menu-list { display: flex; flex-direction: column; max-width: var(--measure); margin: 0 auto; }
+.menu-list a {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  font-family: var(--font-display);
+  font-size: clamp(24px, 5.2vw, 32px);
+  color: var(--ink);
+  text-decoration: none;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--line);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 420ms var(--ease), transform 420ms var(--ease), color var(--dur) var(--ease);
+  transition-delay: calc(var(--mi, 0) * 40ms);
+}
+.menu-overlay.is-open .menu-list a { opacity: 1; transform: none; }
+.menu-list a:hover, .menu-list a.is-current { color: var(--teal); }
+.menu-num {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: .1em;
+  color: var(--hint);
+}
+@media (prefers-reduced-motion: reduce) {
+  .menu-overlay, .menu-list a { transition: none; opacity: 1; transform: none; }
+  .menu-overlay { opacity: 1; }
+  .menu-overlay[hidden] { display: none; }
+}
 .site-header .logo { color: var(--ink); display: flex; align-items: center; }
 .site-header .logo svg { height: 22px; width: auto; }
 .site-header .divider { width: 1px; height: 18px; background: var(--line-strong); }
@@ -275,6 +373,9 @@ a:hover { text-decoration: underline; }
   max-width: var(--measure);
   margin: 0 auto;
 }
+.chapter-inner > :last-child { margin-bottom: 0; }
+.headline, .hero-headline { text-wrap: balance; }
+.lede { text-wrap: pretty; }
 
 /* alternating tone to break the scroll */
 .chapter:nth-of-type(even of .chapter) { background: color-mix(in srgb, var(--surface-2) 45%, var(--bg)); }
@@ -475,8 +576,8 @@ a:hover { text-decoration: underline; }
    ========================================================================= */
 [data-reveal] {
   opacity: 0;
-  transform: translateY(22px);
-  transition: opacity 600ms var(--ease), transform 600ms var(--ease);
+  transform: translateY(18px);
+  transition: opacity 850ms var(--ease), transform 850ms var(--ease);
   will-change: opacity, transform;
 }
 [data-reveal].is-in {
@@ -491,9 +592,9 @@ a:hover { text-decoration: underline; }
 /* stagger children: set --i on each child */
 [data-reveal-group] > * {
   opacity: 0;
-  transform: translateY(18px);
-  transition: opacity 540ms var(--ease), transform 540ms var(--ease);
-  transition-delay: calc(var(--i, 0) * 70ms);
+  transform: translateY(16px);
+  transition: opacity 750ms var(--ease), transform 750ms var(--ease);
+  transition-delay: calc(var(--i, 0) * 90ms);
   will-change: opacity, transform;
 }
 [data-reveal-group].is-in > * {
@@ -803,7 +904,7 @@ a:hover { text-decoration: underline; }
   margin-top: 14px;
   font-size: 13.5px;
   color: var(--muted);
-  min-height: 44px;
+  min-height: 21px; /* one line — caption swaps text on drag without layout shift */
 }
 .bs-caption strong { color: var(--ink); }
 
@@ -875,7 +976,18 @@ a:hover { text-decoration: underline; }
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
   background: var(--surface);
+  transition: border-color var(--dur) var(--ease), transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
 }
+.route-card:hover {
+  border-color: color-mix(in srgb, var(--teal) 40%, var(--line));
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px -18px color-mix(in srgb, var(--ink) 35%, transparent);
+}
+/* pin the chip row to the card base so the three routes read as one line */
+.route-card { display: flex; flex-direction: column; }
+.route-card-head { flex: 1; display: flex; flex-direction: column; align-items: flex-start; }
+.route-card-head .chip { margin-top: auto; }
+@media (prefers-reduced-motion: reduce) { .route-card:hover { transform: none; } }
 .route-card-head {
   width: 100%;
   text-align: left;
@@ -1589,7 +1701,7 @@ a:hover { text-decoration: underline; }
   padding: 14px 0 28px;
   opacity: .42;
   transform: translateY(6px);
-  transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease);
+  transition: opacity 520ms var(--ease), transform 520ms var(--ease);
 }
 .rung:last-child { padding-bottom: 0; }
 .rung.is-active, .rung.is-past { opacity: 1; transform: none; }

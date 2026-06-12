@@ -193,8 +193,8 @@ function setVerdictCard(cat) {
     explain.innerHTML = 'A lighter path — several requirements drop to recommended or optional. The badges below now show what is required of you specifically.';
   } else {
     letter.textContent = 'A/B';
-    headline.textContent = 'Set your three details to see your category.';
-    explain.innerHTML = 'Until then, every badge below shows both sides — Category&nbsp;A and Category&nbsp;B.';
+    headline.textContent = 'Answer the three questions and we\u2019ll stamp your category.';
+    explain.innerHTML = 'Until then, every badge shows both sides \u2014 Category&nbsp;A and Category&nbsp;B.';
   }
   if (reset) reset.hidden = !cat && !(state.rev || state.fte || state.geo);
 }
