@@ -1,3 +1,4 @@
 *.pdf
 source/
 .git
+node_modules/
