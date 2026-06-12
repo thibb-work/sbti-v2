@@ -88,11 +88,61 @@
         Before anything else, V2.0 sorts companies into Category&nbsp;A or Category&nbsp;B.
         Set your situation once and every requirement below re-labels itself to you.
       </p>
-      <!-- SONNET: chapter content — A/B selector (revenue band, FTE band, HQ income group),
-           verdict card with aria-live, sets the global category state read by M4. -->
-      <div class="placeholder" data-reveal>
-        Placeholder · <code>#category</code> — A/B company-category selector + verdict card.
-        Hook into the global state API documented in <code>experience.js</code> (window.NZ).
+      <!-- M4 · Personalization engine — segmented controls drive window.NZ.category,
+           which flips every .req-badge on the page. Built in assets/personalize.js. -->
+      <div class="cat-engine" data-reveal>
+        <form class="cat-controls" id="catControls" aria-describedby="cat-controls-note">
+          <fieldset class="cat-field">
+            <legend>Net annual turnover</legend>
+            <div class="seg" role="radiogroup" aria-label="Net annual turnover band">
+              <button type="button" class="seg-btn" role="radio" aria-checked="false" data-dim="rev" data-val="lo">&lt; €50M</button>
+              <button type="button" class="seg-btn" role="radio" aria-checked="false" data-dim="rev" data-val="mid">€50–450M</button>
+              <button type="button" class="seg-btn" role="radio" aria-checked="false" data-dim="rev" data-val="hi">≥ €450M</button>
+            </div>
+          </fieldset>
+
+          <fieldset class="cat-field">
+            <legend>Employees (FTE)</legend>
+            <div class="seg" role="radiogroup" aria-label="Full-time-equivalent headcount band">
+              <button type="button" class="seg-btn" role="radio" aria-checked="false" data-dim="fte" data-val="lo">&lt; 250</button>
+              <button type="button" class="seg-btn" role="radio" aria-checked="false" data-dim="fte" data-val="mid">250–999</button>
+              <button type="button" class="seg-btn" role="radio" aria-checked="false" data-dim="fte" data-val="hi">≥ 1,000</button>
+            </div>
+          </fieldset>
+
+          <fieldset class="cat-field">
+            <legend>HQ income group</legend>
+            <div class="seg" role="radiogroup" aria-label="Income group of the country where your ultimate parent is incorporated">
+              <button type="button" class="seg-btn" role="radio" aria-checked="false" data-dim="geo" data-val="high">High-income country</button>
+              <button type="button" class="seg-btn" role="radio" aria-checked="false" data-dim="geo" data-val="lower">Lower-income country</button>
+            </div>
+          </fieldset>
+        </form>
+
+        <div class="cat-verdict" id="catVerdict" aria-live="polite" data-cat="none">
+          <div class="cv-stamp" aria-hidden="true">
+            <span class="cv-cat">CATEGORY</span>
+            <span class="cv-letter" id="catLetter">A/B</span>
+          </div>
+          <div class="cv-body">
+            <p class="cv-headline" id="catHeadline">Set your three details to see your category.</p>
+            <p class="cv-explain" id="catExplain">Until then, every badge below shows both sides — Category&nbsp;A and Category&nbsp;B.</p>
+            <button type="button" class="cv-reset" id="catReset" hidden>Reset</button>
+          </div>
+        </div>
+
+        <p class="cat-note" id="cat-controls-note">
+          Approximates Table&nbsp;2 (p.19). A medium company in a <strong>high-income country</strong> is also
+          Category&nbsp;A if its scope&nbsp;1+2 emissions are ≥&nbsp;10,000&nbsp;tCO₂e, or it meets at least two of:
+          balance sheet ≥&nbsp;€25M, turnover ≥&nbsp;€50M, FTE ≥&nbsp;250.
+          <label class="cat-emtest">
+            <input type="checkbox" id="catEmTest"> My medium company in a high-income country clears that emissions test
+          </label>
+        </p>
+      </div>
+
+      <div class="chapter-source" data-reveal>
+        Definitive requirements: <a href="https://sciencebasedtargets.org/net-zero" target="_blank" rel="noopener">the published Standard</a>, Section B.3, Table 2 (p.19).
       </div>
     </div>
   </section>
@@ -453,16 +503,97 @@
   <!-- ============ 5 · IMPLEMENT ============ -->
   <section class="chapter" id="implement" aria-labelledby="implement-headline">
     <div class="chapter-inner">
-      <p class="kicker" data-reveal="fade"><span class="chapter-num">05 / 09</span> &nbsp; CNZS-CH.4 · IMPLEMENT</p>
-      <h2 class="headline" id="implement-headline" data-reveal>A hierarchy for what counts.</h2>
+      <p class="kicker" data-reveal="fade"><span class="chapter-num">05 / 09</span> &nbsp; CNZS-C23–C26 · TARGET IMPLEMENTATION</p>
+      <h2 class="headline" id="implement-headline" data-reveal>Delivery is now a hierarchy.</h2>
       <p class="lede" data-reveal>
-        Activity, activity pool, then sector — with electricity rules and hourly matching
-        that decide what you can actually claim.
+        V2.0 grades <em>how</em> you decarbonize, not just whether you do. Cut at source first.
+        Every step down the ladder has to be earned by a demonstrated structural constraint —
+        never preference, procurement choice, or cost alone.
       </p>
-      <!-- SONNET: leave structural room here — M5 (Opus) adds the pinned 3-rung ladder
-           set-piece. Keep your reveals out of the pin target until M5 lands. -->
-      <div class="placeholder" data-reveal>
-        Placeholder · <code>#implement</code> — pinned implementation hierarchy (Opus M5). Do not pin in M3.
+    </div>
+
+    <!-- ===== M5 · pinned 3-rung ladder ===== -->
+    <div class="ladder-pin" id="ladderPin">
+      <div class="ladder-stage" id="ladderStage">
+        <div class="ladder-progress" aria-hidden="true">
+          <span class="lp-track"></span>
+          <span class="lp-fill" id="ladderFill"></span>
+        </div>
+
+        <ol class="ladder" id="ladder" aria-label="Implementation hierarchy, top to bottom">
+          <li class="rung is-active" data-rung="0">
+            <div class="rung-mark"><span class="rung-num">1</span></div>
+            <div class="rung-body">
+              <p class="rung-tier">Activity level · CNZS-C21.1</p>
+              <h3 class="rung-title">Cut at source.</h3>
+              <p class="rung-text">Reduce emissions inside your own operations and value chain — efficiency, fuel switching, behind-the-meter generation, and engaging suppliers and customers to cut theirs.</p>
+              <div class="rung-actions">
+                <span class="chip chip-teal">Efficiency</span>
+                <span class="chip chip-teal">Fuel switching</span>
+                <span class="chip chip-teal">Behind-the-meter generation</span>
+                <span class="chip chip-teal">Supplier &amp; customer engagement</span>
+              </div>
+              <p class="rung-claim claim-company"><span class="claim-tag">Earns</span> Company-level claim — the reduction lands in your physical inventory.</p>
+            </div>
+          </li>
+
+          <li class="rung" data-rung="1">
+            <div class="rung-mark"><span class="rung-num">2</span></div>
+            <div class="rung-body">
+              <p class="rung-tier">Activity pools · CNZS-C21.2 · C22</p>
+              <h3 class="rung-title">Act within shared systems.</h3>
+              <p class="rung-text">Where emissions sit in systems you share — grids, supply sheds, logistics networks — act within them, at the smallest reasonable boundary. Market instruments may convey the low-carbon attribute: PPAs and EACs, biomethane, mass-balance and book-and-claim for materials.</p>
+              <div class="rung-actions">
+                <span class="chip chip-teal">Grid &amp; supply-shed action</span>
+                <span class="chip chip-teal">PPAs &amp; EACs</span>
+                <span class="chip chip-teal">Mass balance</span>
+                <span class="chip chip-teal">Book &amp; claim</span>
+              </div>
+              <p class="rung-claim claim-system"><span class="claim-tag">Earns</span> System-contribution claim — separate from your inventory reduction (C24, C37.10.c).</p>
+            </div>
+          </li>
+
+          <li class="rung" data-rung="2">
+            <div class="rung-mark"><span class="rung-num">3</span></div>
+            <div class="rung-body">
+              <p class="rung-tier">Sector level · CNZS-C23</p>
+              <h3 class="rung-title">Act at sector level — only while constrained.</h3>
+              <p class="rung-text">Reach here only by demonstrating a <strong>structural constraint</strong> — region- or site-specific infrastructure, regulatory, market-structure or supply limits that block action higher up within the target timeframe. Sector action must be the <em>same type of activity</em> in a relevant geographic or system context.</p>
+              <div class="rung-actions">
+                <span class="chip chip-amber">Documented structural constraint</span>
+                <span class="chip chip-teal">Same activity type</span>
+                <span class="chip chip-teal">Relevant geography</span>
+              </div>
+              <p class="rung-claim claim-system"><span class="claim-tag">Earns</span> System-contribution claim — never a substitute for activity-level cuts.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="chapter-inner">
+      <p class="lede" data-reveal style="margin-top:12px;">
+        Whatever rung you act on, instruments and projects must clear the integrity criteria —
+        additionality, unique attribution, temporal alignment, no double counting (CNZS-C25–C26).
+      </p>
+
+      <!-- ===== hourly matching (non-pinned, normal flow) ===== -->
+      <p class="kicker" style="margin-top:8px;">CNZS-C34.1 · SCOPE 2 HOURLY MATCHING</p>
+      <p class="lede" style="margin-bottom:18px;" data-reveal>
+        Optional recognition on the SBTi Dashboard rises over time — the bar for what counts as
+        hourly-matched low-carbon electricity climbs from 50% to 90%.
+      </p>
+      <div class="hourly" data-reveal id="hourly">
+        <div class="hourly-bars" role="img" aria-label="Hourly-matching recognition thresholds: at least 50 percent until 2030, 75 percent until 2035, and 90 percent from 2035.">
+          <div class="hb" data-pct="50"><span class="hb-fill" style="--pct:50%"><span class="hb-num">50%</span></span><span class="hb-label">until 2030</span></div>
+          <div class="hb" data-pct="75"><span class="hb-fill" style="--pct:75%"><span class="hb-num">75%</span></span><span class="hb-label">until 2035</span></div>
+          <div class="hb is-peak" data-pct="90"><span class="hb-fill" style="--pct:90%"><span class="hb-num">90%</span></span><span class="hb-label">from 2035</span></div>
+        </div>
+        <p class="hourly-note">Reporting the hourly-matching percentage is mandatory for Category&nbsp;A companies in any activity pool consuming <strong>10&nbsp;GWh or more</strong> a year, with third-party assurance (C32.1, C34.3).</p>
+      </div>
+
+      <div class="chapter-source" data-reveal>
+        Definitive requirements: <a href="https://sciencebasedtargets.org/net-zero" target="_blank" rel="noopener">the published Standard</a>, Chapter 4 (CNZS-C21–C34).
       </div>
     </div>
   </section>
@@ -669,6 +800,8 @@
 <!-- ============================ SCRIPTS ============================ -->
 <script type="module" src="assets/experience.js"></script>
 <script type="module" src="assets/chapters.js"></script>
+<script type="module" src="assets/personalize.js"></script>
+<script type="module" src="assets/implement.js"></script>
 
 <!-- Vercel Speed Insights (static-site integration) -->
 <script>
