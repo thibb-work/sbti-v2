@@ -275,7 +275,7 @@ function initMenu() {
 
 /* =========================================================================
    4 · HASH handling — redirect old anchors, smooth-scroll to target on load
-   (head script already rewrote the hash before paint; here we honour it
+   (assets/boot.js already rewrote the hash before paint; here we honour it
    and intercept in-page redirect-target clicks for safety.)
    ========================================================================= */
 function initHash() {
