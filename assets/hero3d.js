@@ -11,7 +11,7 @@
    Three.js pinned via import map below (r160). No build step.
    ========================================================================= */
 
-const THREE_URL = 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js';
+const THREE_URL = 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.min.js';
 
 let disposed = false;
 let scene, camera, renderer, particles, trajectory, scrollTrigger, rafId, ro;

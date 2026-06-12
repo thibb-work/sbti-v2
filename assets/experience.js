@@ -11,8 +11,8 @@
    No Club GSAP plugins. Transforms/opacity only. No pinned sections in M1.
    ========================================================================= */
 
-import { gsap } from 'https://cdn.jsdelivr.net/npm/gsap@3.12.5/index.js';
-import { ScrollTrigger } from 'https://cdn.jsdelivr.net/npm/gsap@3.12.5/ScrollTrigger.js';
+import { gsap } from 'https://cdn.jsdelivr.net/npm/gsap@3.12.5/+esm';
+import { ScrollTrigger } from 'https://cdn.jsdelivr.net/npm/gsap@3.12.5/ScrollTrigger.js/+esm';
 
 gsap.registerPlugin(ScrollTrigger);
 
