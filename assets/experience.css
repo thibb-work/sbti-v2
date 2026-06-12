@@ -12,7 +12,7 @@
   --surface-2: #F1EFE8;
   --ink: #1E2B26;
   --muted: #5C6B64;
-  --hint: #8C988F;
+  --hint: #6E7B74;
   --line: #E3E1D8;
   --line-strong: #C9C6BA;
   --teal: #0F6E56;
@@ -51,7 +51,7 @@
     --surface-2: #222B27;
     --ink: #E8EDE9;
     --muted: #A7B3AC;
-    --hint: #75817A;
+    --hint: #8FA098;
     --line: #2E3833;
     --line-strong: #3A453F;
     --teal: #5DCAA5;
@@ -157,7 +157,7 @@ a:hover { text-decoration: underline; }
 @media (min-width: 1100px) { .hd-nav { display: flex; } }
 .hd-nav a {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 11.5px;
   letter-spacing: .1em;
   text-transform: uppercase;
   color: var(--muted);
@@ -179,7 +179,7 @@ a:hover { text-decoration: underline; }
   background: var(--surface);
   color: var(--ink);
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 11.5px;
   letter-spacing: .12em;
   text-transform: uppercase;
   padding: 7px 14px;
@@ -250,7 +250,7 @@ a:hover { text-decoration: underline; }
 .site-header .divider { width: 1px; height: 18px; background: var(--line-strong); }
 .site-header .ctx {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 11.5px;
   letter-spacing: .12em;
   text-transform: uppercase;
   color: var(--hint);
@@ -338,7 +338,7 @@ a:hover { text-decoration: underline; }
     transform: translateY(-50%);
     white-space: nowrap;
     font-family: var(--font-mono);
-    font-size: 10px;
+    font-size: 11.5px;
     letter-spacing: .1em;
     text-transform: uppercase;
     color: var(--ink);
@@ -366,7 +366,7 @@ a:hover { text-decoration: underline; }
 
 .chapter {
   position: relative;
-  padding: clamp(72px, 12vh, 140px) var(--gutter);
+  padding: clamp(52px, 8vh, 96px) var(--gutter);
   scroll-margin-top: 70px;
 }
 .chapter-inner {
@@ -422,7 +422,7 @@ a:hover { text-decoration: underline; }
 
 .chapter-num {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 11.5px;
   color: var(--hint);
   letter-spacing: .1em;
 }
@@ -440,10 +440,13 @@ a:hover { text-decoration: underline; }
   scroll-margin-top: 0;
 }
 .hero-canvas-wrap {
-  position: absolute;
+  /* fixed so the field can linger as an ambient backdrop a few screens
+     past the hero; hero3d.js drives opacity and disposes when it fades out */
+  position: fixed;
   inset: 0;
-  z-index: 0;
+  z-index: -1;
   pointer-events: none;
+  will-change: opacity;
 }
 .hero-canvas-wrap canvas { width: 100%; height: 100%; display: block; }
 
@@ -523,7 +526,7 @@ a:hover { text-decoration: underline; }
   transform: translateX(-50%);
   z-index: 2;
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 11.5px;
   letter-spacing: .18em;
   text-transform: uppercase;
   color: var(--hint);
@@ -633,7 +636,7 @@ a:hover { text-decoration: underline; }
   display: inline-flex;
   align-items: center;
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 11.5px;
   letter-spacing: .08em;
   text-transform: uppercase;
   padding: 3px 10px;
@@ -754,7 +757,7 @@ a:hover { text-decoration: underline; }
   display: block;
   margin-top: 8px;
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 11.5px;
   font-style: normal;
   letter-spacing: .1em;
   text-transform: uppercase;
@@ -800,7 +803,7 @@ a:hover { text-decoration: underline; }
 .flip-face-back { transform: rotateY(180deg); background: var(--teal-soft); border-color: var(--teal); }
 .flip-face .ficon {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 11.5px;
   letter-spacing: .12em;
   text-transform: uppercase;
   color: var(--teal);
@@ -818,7 +821,7 @@ a:hover { text-decoration: underline; }
 .flip-hint {
   margin-top: auto;
   font-family: var(--font-mono);
-  font-size: 10.5px;
+  font-size: 11.5px;
   letter-spacing: .1em;
   text-transform: uppercase;
   color: var(--hint);
@@ -1001,7 +1004,7 @@ a:hover { text-decoration: underline; }
 }
 .route-card-head .ricon {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 11.5px;
   letter-spacing: .12em;
   text-transform: uppercase;
   color: var(--teal);
@@ -1052,13 +1055,14 @@ a:hover { text-decoration: underline; }
   font-weight: 600;
   padding: 8px 18px;
   border-radius: 999px;
-  border: none;
-  background: none;
+  border: 1px solid var(--line-strong);
+  background: var(--surface);
   color: var(--muted);
   cursor: pointer;
-  transition: background var(--dur) var(--ease), color var(--dur) var(--ease);
+  transition: background var(--dur) var(--ease), color var(--dur) var(--ease), border-color var(--dur) var(--ease);
 }
-.toggle-btn.is-active { background: var(--teal); color: #fff; }
+.toggle-btn:hover { border-color: var(--teal); color: var(--ink); }
+.toggle-btn.is-active { background: var(--teal); border-color: var(--teal); color: #fff; }
 
 .target-panel {
   display: none;
@@ -1070,7 +1074,7 @@ a:hover { text-decoration: underline; }
 }
 .target-panel.is-active { display: block; }
 .ptitle { font-family: var(--font-display); font-size: 16px; font-weight: 500; margin: 0 0 8px; }
-.ptext { font-size: 13.5px; color: var(--muted); line-height: 1.6; margin: 0 0 12px; }
+.ptext { font-size: 14.5px; color: var(--muted); line-height: 1.65; margin: 0 0 12px; }
 .ptext code, .cat-note code, .fineprint-body code { font-family: var(--font-mono); font-size: 12.5px; color: var(--teal); }
 
 /* S3 — 5% boundary mini-interactive */
@@ -1155,7 +1159,7 @@ a:hover { text-decoration: underline; }
 .cat-explorer { margin-top: 8px; }
 .cat-group-label {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 11.5px;
   letter-spacing: .12em;
   text-transform: uppercase;
   color: var(--hint);
@@ -1193,7 +1197,7 @@ a:hover { text-decoration: underline; }
 .cat-panel-head .cname { font-family: var(--font-display); font-size: 15px; font-weight: 500; }
 .cat-panel-head .cgroup {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 11.5px;
   letter-spacing: .08em;
   text-transform: uppercase;
   padding: 3px 10px;
@@ -1230,7 +1234,7 @@ a:hover { text-decoration: underline; }
 }
 .matrix-table th {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 11.5px;
   letter-spacing: .08em;
   text-transform: uppercase;
   color: var(--hint);
@@ -1263,7 +1267,7 @@ a:hover { text-decoration: underline; }
 }
 .claim-card .ckicker {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 11.5px;
   letter-spacing: .1em;
   text-transform: uppercase;
   color: var(--teal);
@@ -1282,7 +1286,7 @@ a:hover { text-decoration: underline; }
 .claim-sample .slabel {
   display: block;
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 11.5px;
   font-style: normal;
   letter-spacing: .1em;
   text-transform: uppercase;
@@ -1317,7 +1321,11 @@ a:hover { text-decoration: underline; }
   justify-content: center;
   gap: 2px;
   font-family: var(--font-mono);
+<<<<<<< HEAD
+  font-size: 11.5px;
+=======
   font-size: 10px;
+>>>>>>> origin/main
   letter-spacing: .14em;
   text-transform: uppercase;
   color: var(--hint);
@@ -1335,6 +1343,25 @@ a:hover { text-decoration: underline; }
 .cycle-legend .lg-annual { background: var(--teal); }
 .cycle-legend .lg-eoc { background: var(--amber); }
 .cycle-legend strong { color: var(--ink); }
+
+.horizon-you {
+  margin: 8px 0 0;
+  padding: 9px 12px;
+  border-left: 2px solid var(--teal);
+  background: color-mix(in srgb, var(--teal-soft) 40%, transparent);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--muted);
+}
+.hy-tag {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-right: 4px;
+}
 
 /* =========================================================================
    #oer — tier cards + preset calculator
@@ -1416,7 +1443,7 @@ a:hover { text-decoration: underline; }
   font-weight: 500;
   color: var(--ink);
 }
-.calc-result .rlbl { font-size: 11.5px; color: var(--muted); margin-top: 2px; line-height: 1.4; }
+.calc-result .rlbl { font-size: 12.5px; color: var(--muted); margin-top: 2px; line-height: 1.45; }
 .calc-result .rcell.is-highlight .rnum { color: var(--teal); }
 .calc-result .rcell.is-leadership .rnum { color: var(--amber); }
 
@@ -1448,7 +1475,7 @@ a:hover { text-decoration: underline; }
 .horizon-item.tone-gray::before { background: var(--hint); }
 .horizon-date {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 11.5px;
   letter-spacing: .1em;
   text-transform: uppercase;
   color: var(--teal);
@@ -1479,7 +1506,7 @@ a:hover { text-decoration: underline; }
 }
 .about-card .alabel {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 11.5px;
   letter-spacing: .12em;
   text-transform: uppercase;
   color: var(--teal);
@@ -1487,7 +1514,7 @@ a:hover { text-decoration: underline; }
 }
 .about-card .awho { font-size: 17px; font-weight: 600; margin: 0 0 2px; }
 .about-card .arole { font-size: 13px; color: var(--teal); font-weight: 500; margin: 0 0 12px; }
-.about-card p { margin: 0 0 12px; font-size: 14px; color: var(--muted); line-height: 1.6; }
+.about-card p { margin: 0 0 12px; font-size: 14.5px; color: var(--muted); line-height: 1.65; }
 .about-card p:last-child { margin-bottom: 0; }
 .about-link {
   display: inline-flex;
@@ -1508,8 +1535,13 @@ a:hover { text-decoration: underline; }
 }
 .contact-card .alabel { color: var(--teal); }
 .contact-pitch {
+<<<<<<< HEAD
+  font-size: 14.5px;
+  line-height: 1.65;
+=======
   font-size: 15px;
   line-height: 1.7;
+>>>>>>> origin/main
   color: var(--muted);
   max-width: 56ch;
   margin: 6px 0 20px;
@@ -1648,7 +1680,7 @@ a:hover { text-decoration: underline; }
 .cv-reset {
   margin-top: 12px;
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 11.5px;
   letter-spacing: .08em;
   text-transform: uppercase;
   color: var(--hint);
@@ -1770,7 +1802,7 @@ a:hover { text-decoration: underline; }
 
 .rung-tier {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 11.5px;
   letter-spacing: .1em;
   text-transform: uppercase;
   color: var(--teal);
@@ -1796,7 +1828,7 @@ a:hover { text-decoration: underline; }
 }
 .claim-tag {
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 11.5px;
   letter-spacing: .1em;
   text-transform: uppercase;
   padding: 2px 8px;

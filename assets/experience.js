@@ -24,13 +24,13 @@ const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const CHAPTERS = [
   { id: 'top',       label: 'Hero' },
   { id: 'category',  label: 'A or B?' },
+  { id: 'horizon',   label: 'Horizon' },
   { id: 'govern',    label: 'Govern' },
   { id: 'baseline',  label: 'Baseline' },
   { id: 'targets',   label: 'Targets' },
   { id: 'implement', label: 'Implement' },
   { id: 'prove',     label: 'Prove' },
   { id: 'oer',       label: 'Responsibility' },
-  { id: 'horizon',   label: 'Horizon' },
   { id: 'about',     label: 'About' }
 ];
 
