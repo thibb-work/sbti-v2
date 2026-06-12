@@ -6,6 +6,8 @@
    ========================================================================= */
 
 :root {
+  color-scheme: light;
+
   /* palette — light */
   --bg: #FBFAF7;
   --surface: #FFFFFF;
@@ -46,27 +48,30 @@
   --dur: 220ms;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #141917;
-    --surface: #1C2421;
-    --surface-2: #222B27;
-    --ink: #E8EDE9;
-    --muted: #A7B3AC;
-    --hint: #8FA098;
-    --line: #2E3833;
-    --line-strong: #3A453F;
-    --teal: #5DCAA5;
-    --on-teal: #141917;
-    --teal-ink: #9FE1CB;
-    --teal-soft: #0B3D31;
-    --amber: #E2A04A;
-    --amber-text: #FAC775;
-    --amber-ink: #FAC775;
-    --amber-soft: #4A3514;
-    --gray-soft: #2A332E;
-    --gray-ink: #D3D1C7;
-  }
+/* palette — dark. assets/boot.js resolves the OS preference (or the stored
+   header-toggle choice) into <html data-theme="dark"> before first paint,
+   so this single block serves both "system dark" and "toggled dark". */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --bg: #141917;
+  --surface: #1C2421;
+  --surface-2: #222B27;
+  --ink: #E8EDE9;
+  --muted: #A7B3AC;
+  --hint: #8FA098;
+  --line: #2E3833;
+  --line-strong: #3A453F;
+  --teal: #5DCAA5;
+  --on-teal: #141917;
+  --teal-ink: #9FE1CB;
+  --teal-soft: #0B3D31;
+  --amber: #E2A04A;
+  --amber-text: #FAC775;
+  --amber-ink: #FAC775;
+  --amber-soft: #4A3514;
+  --gray-soft: #2A332E;
+  --gray-ink: #D3D1C7;
 }
 
 /* ---- reset ---- */
@@ -194,6 +199,30 @@ a:hover { text-decoration: underline; }
 .menu-btn:hover { border-color: var(--teal); }
 @media (min-width: 1180px) { .menu-btn { display: none; } }
 
+/* ---- theme toggle (sun/moon) — static in index.html; flex `order` keeps it
+   to the right of the JS-injected nav / menu button ---- */
+.theme-btn {
+  order: 1;
+  flex: none;
+  appearance: none;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--muted);
+  cursor: pointer;
+  transition: border-color var(--dur) var(--ease), color var(--dur) var(--ease);
+}
+.theme-btn:hover { border-color: var(--teal); color: var(--ink); }
+.theme-btn svg { width: 16px; height: 16px; }
+.theme-btn .icon-sun { display: none; }
+:root[data-theme="dark"] .theme-btn .icon-sun { display: block; }
+:root[data-theme="dark"] .theme-btn .icon-moon { display: none; }
+
 .menu-overlay {
   position: fixed;
   inset: 0;
@@ -258,6 +287,10 @@ a:hover { text-decoration: underline; }
   letter-spacing: .12em;
   text-transform: uppercase;
   color: var(--hint);
+}
+/* phones: the logo carries the brand — drop the wrapping context label */
+@media (max-width: 599px) {
+  .site-header .ctx, .site-header .divider { display: none; }
 }
 
 /* =========================================================================
@@ -568,8 +601,12 @@ a:hover { text-decoration: underline; }
 .site-footer { color: var(--muted); }
 .site-footer a { color: var(--teal); text-decoration: underline; text-underline-offset: 3px; }
 
-/* Hero entrance — pure CSS so the headline paints (and is LCP) before any JS/CDN module arrives */
+/* Hero entrance — pure CSS so the headline paints (and is LCP) before any JS/CDN module arrives.
+   Stagger order comes from document order (kicker → headline → sub → CTAs). */
 .hero-enter { animation: heroRise .7s var(--ease, ease-out) both; animation-delay: calc(var(--he, 0) * 90ms); }
+.hero-inner > .hero-enter:nth-child(2) { --he: 1; }
+.hero-inner > .hero-enter:nth-child(3) { --he: 2; }
+.hero-inner > .hero-enter:nth-child(4) { --he: 3; }
 @keyframes heroRise {
   from { opacity: 0; transform: translateY(14px); }
   to   { opacity: 1; transform: none; }
@@ -1425,7 +1462,9 @@ a:hover { text-decoration: underline; }
   background: var(--surface);
   padding: 20px 22px;
 }
+.calc-box .ptitle { margin: 0 0 10px; }
 .calc-presets { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+.calc-result-label { grid-column: 1 / -1; font-size: 13px; color: var(--muted); margin: 0 0 4px; }
 .calc-result {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
@@ -1884,7 +1923,14 @@ a:hover { text-decoration: underline; }
 }
 .hb:nth-child(2) .hb-fill { background: color-mix(in srgb, var(--amber-soft) 60%, var(--amber) 40%); transition-delay: 90ms; }
 .hb.is-peak .hb-fill { background: var(--amber-text); transition-delay: 180ms; }
+/* bar heights keyed off data-pct (markup carries no inline styles) */
+.hb[data-pct="50"] { --pct: 50%; }
+.hb[data-pct="75"] { --pct: 75%; }
+.hb[data-pct="90"] { --pct: 90%; }
 .hourly.is-grown .hb-fill { height: var(--pct); }
+/* compact, always-grown variant for the scope-2 fine print */
+.hourly-bars.hourly-mini { height: 120px; gap: 10px; margin: 4px 0 12px; }
+.hourly-mini .hb-fill { height: var(--pct); transition: none; }
 .hb-num { font-family: var(--font-display); font-size: 17px; font-weight: 600; color: var(--amber-ink); }
 .hb.is-peak .hb-num { color: var(--surface); }
 .hb-label { font-size: 12.5px; color: var(--muted); margin-top: 8px; }
@@ -1903,3 +1949,23 @@ a:hover { text-decoration: underline; }
   .hb-fill { transition: none; }
   .req-badge .rb-text { transition: none; }
 }
+
+/* =========================================================================
+   SHARED TEXT STYLES & SPACING UTILITIES
+   Extracted from former inline style="" attributes in index.html.
+   Defined last so they win same-specificity ties against component rules.
+   ========================================================================= */
+.sub-h3     { font-family: var(--font-display); font-size: 17px; font-weight: 500; margin: 28px 0 8px; }
+.muted-note { font-size: 13.5px; color: var(--muted); margin: 0; }
+.micro-note { font-size: 12.5px; color: var(--hint); margin: 8px 0 0; }
+
+.u-mt0  { margin-top: 0; }
+.u-mt8  { margin-top: 8px; }
+.u-mt12 { margin-top: 12px; }
+.u-mt24 { margin-top: 24px; }
+.u-mt28 { margin-top: 28px; }
+.u-mb0  { margin-bottom: 0; }
+.u-mb4  { margin-bottom: 4px; }
+.u-mb12 { margin-bottom: 12px; }
+.u-mb14 { margin-bottom: 14px; }
+.u-mb18 { margin-bottom: 18px; }
