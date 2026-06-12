@@ -6,22 +6,9 @@
 <title>The Net-Zero Loop — SBTi Corporate Net-Zero Standard V2.0</title>
 <meta name="description" content="From ambition to action: an interactive walk through the SBTi Corporate Net-Zero Standard V2.0 — govern, baseline, set targets, implement, prove, and stay responsible, on a single five-year loop to 2050.">
 
-<!-- Early hash-redirect: old tab/page anchors land on the right chapter before paint -->
-<script>
-(function () {
-  var map = {
-    '#timeline': '#horizon',
-    '#scope-1': '#targets',
-    '#scope-2': '#targets',
-    '#scope-3': '#targets'
-  };
-  var h = location.hash;
-  if (map[h]) {
-    // rewrite hash without adding a history entry; experience.js scrolls on load
-    history.replaceState(null, '', location.pathname + location.search + map[h]);
-  }
-})();
-</script>
+<!-- Pre-paint boot: hash redirects + theme stamp + Speed Insights shim.
+     Deliberately blocking so old anchors and the dark theme apply before first paint. -->
+<script src="assets/boot.js"></script>
 
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="assets/experience.css">
@@ -36,6 +23,18 @@
   </span>
   <span class="divider" aria-hidden="true"></span>
   <span class="ctx">Net-Zero Standard Explorer</span>
+  <button class="theme-btn" id="themeToggle" type="button" aria-label="Switch theme">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="5"/>
+      <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+      <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+  </button>
 </header>
 
 <!-- mobile progress bar -->
@@ -61,13 +60,13 @@
     <div class="hero-poster" id="heroPoster" aria-hidden="true"></div>
 
     <div class="hero-inner">
-      <p class="kicker hero-enter" style="--he:0">SBTi Corporate Net-Zero Standard V2.0 · June 2026</p>
-      <h1 class="hero-headline hero-enter" id="hero-headline" style="--he:1">From ambition to action.</h1>
-      <p class="hero-sub hero-enter" style="--he:2">
+      <p class="kicker hero-enter">SBTi Corporate Net-Zero Standard V2.0 · June 2026</p>
+      <h1 class="hero-headline hero-enter" id="hero-headline">From ambition to action.</h1>
+      <p class="hero-sub hero-enter">
         Across a decade, more than <strong>11,000 companies</strong> set validated targets.
         V2.0 is built on what came next: <strong>commitment is not the hardest part&nbsp;— delivery is.</strong>
       </p>
-      <div class="cta-row hero-enter" style="--he:3">
+      <div class="cta-row hero-enter">
         <a class="btn btn-primary" href="#category" data-cta>Walk the cycle</a>
         <a class="btn btn-ghost" href="#category" data-cta>What applies to you?</a>
       </div>
@@ -221,7 +220,7 @@
       </div>
 
       <div class="assurance-row" data-reveal>
-        <span style="font-size:13.5px; color:var(--muted);">Publishing your transition plan:</span>
+        <span class="muted-note">Publishing your transition plan:</span>
         <span class="req-badge" data-req-a="At validation · up to 15 months’ flexibility" data-req-b="Recommended" data-state="recommended"></span>
       </div>
 
@@ -249,7 +248,7 @@
         <p class="bs-caption" id="baselineCaption">Drag the handle — or press ← / → — to compare the two approaches.</p>
       </div>
 
-      <p class="lede" style="margin-top:0;" data-reveal>
+      <p class="lede u-mt0" data-reveal>
         <strong>CNZS-C4</strong> · At the start of every five-year cycle, you select the most recent year with
         comprehensive data as your target base year — for near-term targets and for every subsequent cycle.
         It's a continuation of your decarbonization journey, not a reset: you still have to show progress
@@ -257,7 +256,7 @@
       </p>
 
       <div class="assurance-row" data-reveal>
-        <span style="font-size:13.5px; color:var(--muted);">CNZS-C7 · Assuring your base-year inventory:</span>
+        <span class="muted-note">CNZS-C7 · Assuring your base-year inventory:</span>
         <span class="req-badge" data-req-a="Required · limited assurance" data-req-b="Recommended" data-state="required"></span>
       </div>
 
@@ -303,7 +302,7 @@
       <!-- ===== SCOPE 1 ===== -->
       <div class="tab-panel is-active" id="panel-s1" role="tabpanel" aria-labelledby="tab-s1" data-reveal>
         <p class="kicker">CNZS-C10 · SCOPE 1</p>
-        <p class="lede" style="margin-bottom:18px;">Near-term scope&nbsp;1 targets must cover 100% of your direct emissions. Pick one or more of three routes — open any card for the detail.</p>
+        <p class="lede u-mb18">Near-term scope&nbsp;1 targets must cover 100% of your direct emissions. Pick one or more of three routes — open any card for the detail.</p>
 
         <div class="route-grid" data-reveal-group>
           <div class="route-card">
@@ -344,7 +343,7 @@
           </div>
         </div>
 
-        <p style="font-size:12.5px; color:var(--hint); margin: 4px 0 0;">Routes can be mixed; if you set more than one, they aggregate into a single consolidated scope&nbsp;1 figure for communication only (C10.4).</p>
+        <p class="micro-note">Routes can be mixed; if you set more than one, they aggregate into a single consolidated scope&nbsp;1 figure for communication only (C10.4).</p>
 
         <div class="fineprint">
           <button class="fineprint-toggle" type="button" aria-expanded="false">
@@ -362,7 +361,7 @@
       <!-- ===== SCOPE 2 ===== -->
       <div class="tab-panel" id="panel-s2" role="tabpanel" aria-labelledby="tab-s2" data-reveal hidden>
         <p class="kicker">CNZS-C12 · SCOPE 2</p>
-        <p class="lede" style="margin-bottom:18px;">Near-term scope&nbsp;2 targets must cover 100% of your purchased electricity, heat, steam and cooling. Choose how you express the ambition.</p>
+        <p class="lede u-mb18">Near-term scope&nbsp;2 targets must cover 100% of your purchased electricity, heat, steam and cooling. Choose how you express the ambition.</p>
 
         <div class="toggle-row" role="tablist" aria-label="Scope 2 target option">
           <button class="toggle-btn is-active" type="button" role="tab" aria-selected="true" data-s2="lce">LCE-share alignment</button>
@@ -372,16 +371,16 @@
         <div class="target-panel is-active" data-s2-panel="lce">
           <p class="ptitle">Low-carbon electricity (LCE) alignment target — <code>C12.2a</code></p>
           <p class="ptext">Grow the share of low-carbon electricity you use, contract, or match on a linear path toward an eligible net-zero pathway. LCE now covers more than renewables: <strong>renewables, nuclear, and CCS-fitted generation</strong> all count. The long-term version of this target reaches <strong>100% LCE</strong> (C13.2a).</p>
-          <p class="ptext" style="margin-bottom:0;">Category A companies also submit projected electricity consumption at validation — and if projected demand growth exceeds <strong>20%</strong> a year over the cycle, an emissions target becomes mandatory alongside (or instead of) the LCE target (C12.4).</p>
+          <p class="ptext u-mb0">Category A companies also submit projected electricity consumption at validation — and if projected demand growth exceeds <strong>20%</strong> a year over the cycle, an emissions target becomes mandatory alongside (or instead of) the LCE target (C12.4).</p>
         </div>
         <div class="target-panel" data-s2-panel="abs">
           <p class="ptitle">Absolute emissions reduction target — <code>C12.2b</code></p>
           <p class="ptext">Cut scope&nbsp;2 absolute emissions on a linear trajectory to a defined residual level, consistent with an eligible net-zero pathway. The long-term version lands at residual levels by 2050 (C13.2b). Long-term targets stay optional on this route — but Category A still files electricity demand projections at validation.</p>
         </div>
 
-        <p class="kicker" style="margin-top:24px;">CNZS-C29–C31 · IMPLEMENTATION HIERARCHY FOR ELECTRICITY</p>
-        <p class="ptext" style="color:var(--muted); font-size:13.5px; margin: 0 0 12px;">Activity-level actions come first: cut consumption, then add behind-the-meter generation, then contract for low-carbon electricity inside your <strong>deliverability region</strong>.</p>
-        <div class="tag-row" style="margin-bottom:14px;">
+        <p class="kicker u-mt24">CNZS-C29–C31 · IMPLEMENTATION HIERARCHY FOR ELECTRICITY</p>
+        <p class="muted-note u-mb12">Activity-level actions come first: cut consumption, then add behind-the-meter generation, then contract for low-carbon electricity inside your <strong>deliverability region</strong>.</p>
+        <div class="tag-row u-mb14">
           <span class="chip chip-teal">Physical PPAs</span>
           <span class="chip chip-teal">Virtual PPAs</span>
           <span class="chip chip-teal">Supplier LCE contracts</span>
@@ -407,19 +406,11 @@
             <span class="chev" aria-hidden="true">⌄</span>
           </button>
           <div class="fineprint-body">
-            <div style="display:flex; align-items:flex-end; gap:10px; height:120px; margin: 4px 0 12px;">
-              <div style="flex:1; display:flex; flex-direction:column; justify-content:flex-end; height:100%;">
-                <div style="background:var(--amber-soft); border-radius:6px 6px 0 0; height:50%; display:flex; align-items:flex-start; justify-content:center; padding-top:6px;"><span style="font-size:13px; font-weight:600; color:var(--amber-ink);">50%</span></div>
-                <div style="font-size:11.5px; color:var(--muted); text-align:center; margin-top:6px;">until 2030</div>
-              </div>
-              <div style="flex:1; display:flex; flex-direction:column; justify-content:flex-end; height:100%;">
-                <div style="background:var(--amber-soft); border-radius:6px 6px 0 0; height:72%; display:flex; align-items:flex-start; justify-content:center; padding-top:6px; filter:saturate(1.3);"><span style="font-size:13px; font-weight:600; color:var(--amber-ink);">75%</span></div>
-                <div style="font-size:11.5px; color:var(--muted); text-align:center; margin-top:6px;">until 2035</div>
-              </div>
-              <div style="flex:1; display:flex; flex-direction:column; justify-content:flex-end; height:100%;">
-                <div style="background:var(--amber); border-radius:6px 6px 0 0; height:90%; display:flex; align-items:flex-start; justify-content:center; padding-top:6px;"><span style="font-size:13px; font-weight:600; color:var(--amber-soft);">90%</span></div>
-                <div style="font-size:11.5px; color:var(--muted); text-align:center; margin-top:6px;">from 2035</div>
-              </div>
+            <!-- compact, always-grown variant of the .hourly-bars component used in #implement -->
+            <div class="hourly-bars hourly-mini" role="img" aria-label="Hourly-matching recognition thresholds: at least 50 percent until 2030, 75 percent until 2035, and 90 percent from 2035.">
+              <div class="hb" data-pct="50"><span class="hb-fill"><span class="hb-num">50%</span></span><span class="hb-label">until 2030</span></div>
+              <div class="hb" data-pct="75"><span class="hb-fill"><span class="hb-num">75%</span></span><span class="hb-label">until 2035</span></div>
+              <div class="hb is-peak" data-pct="90"><span class="hb-fill"><span class="hb-num">90%</span></span><span class="hb-label">from 2035</span></div>
             </div>
             <p>Recognition thresholds for hourly-matched low-carbon electricity rise from <strong>50%</strong> (until 2030) to <strong>75%</strong> (until 2035) to <strong>90%</strong> (from 2035) — meeting them earns optional recognition on the SBTi Dashboard.</p>
             <p>Reporting the hourly-matching percentage is <strong>mandatory for Category A</strong> companies in any activity pool with annual electricity consumption of <strong>10 GWh or more</strong> (C32.1), with third-party assurance.</p>
@@ -430,10 +421,10 @@
       <!-- ===== SCOPE 3 ===== -->
       <div class="tab-panel" id="panel-s3" role="tabpanel" aria-labelledby="tab-s3" data-reveal hidden>
         <p class="kicker">CNZS-C14–C16 · SCOPE 3</p>
-        <p class="lede" style="margin-bottom:18px;">V1 asked one question — did you cover two-thirds of your value chain? V2.0 asks two: which categories clear the 5% boundary, and what target option fits each one.</p>
+        <p class="lede u-mb18">V1 asked one question — did you cover two-thirds of your value chain? V2.0 asks two: which categories clear the 5% boundary, and what target option fits each one.</p>
 
-        <h3 style="font-family:var(--font-display); font-size:17px; font-weight:500; margin: 0 0 6px;">1 · The 5% boundary, live</h3>
-        <p class="ptext" style="margin: 0 0 14px;">Every scope&nbsp;3 category that represents <strong>5% or more</strong> of your categories 1–14 emissions is in your near-term target boundary (C14.1). Drag the threshold and watch categories cross the line — these are illustrative shares for a representative company.</p>
+        <h3 class="sub-h3 u-mt0">1 · The 5% boundary, live</h3>
+        <p class="ptext u-mb14">Every scope&nbsp;3 category that represents <strong>5% or more</strong> of your categories 1–14 emissions is in your near-term target boundary (C14.1). Drag the threshold and watch categories cross the line — these are illustrative shares for a representative company.</p>
 
         <div class="boundary-tool">
           <div class="boundary-controls">
@@ -460,8 +451,8 @@
           </div>
         </div>
 
-        <h3 style="font-family:var(--font-display); font-size:17px; font-weight:500; margin: 28px 0 6px;">2 · Pick the lever per category — Table 3</h3>
-        <p class="ptext" style="margin: 0 0 4px;">Pick a category to see which target-setting options apply to it (CNZS-C15, Table 3, p.40).</p>
+        <h3 class="sub-h3">2 · Pick the lever per category — Table 3</h3>
+        <p class="ptext u-mb4">Pick a category to see which target-setting options apply to it (CNZS-C15, Table 3, p.40).</p>
 
         <div class="cat-explorer">
           <p class="cat-group-label">Upstream</p>
@@ -488,7 +479,7 @@
           </div>
         </div>
 
-        <h3 style="font-family:var(--font-display); font-size:17px; font-weight:500; margin: 28px 0 10px;">Table 1 · Target types at a glance</h3>
+        <h3 class="sub-h3">Table 1 · Target types at a glance</h3>
         <table class="matrix-table" data-reveal="fade">
           <thead>
             <tr><th>Target type</th><th>Scope 1</th><th>Scope 2</th><th>Scope 3</th></tr>
@@ -508,7 +499,7 @@
             </tr>
           </tbody>
         </table>
-        <p style="font-size:12.5px; color:var(--hint); margin: 0;">Net-zero targets combine near- and long-term targets across all three scopes with neutralization of residuals at the target year — optional for everyone (C17).</p>
+        <p class="micro-note u-mt0">Net-zero targets combine near- and long-term targets across all three scopes with neutralization of residuals at the target year — optional for everyone (C17).</p>
       </div>
 
       <div class="chapter-source" data-reveal>
@@ -589,22 +580,22 @@
     </div>
 
     <div class="chapter-inner">
-      <p class="lede" data-reveal style="margin-top:12px;">
+      <p class="lede u-mt12" data-reveal>
         Whatever rung you act on, instruments and projects must clear the integrity criteria —
         additionality, unique attribution, temporal alignment, no double counting (CNZS-C25–C26).
       </p>
 
       <!-- ===== hourly matching (non-pinned, normal flow) ===== -->
-      <p class="kicker" style="margin-top:8px;">CNZS-C34.1 · SCOPE 2 HOURLY MATCHING</p>
-      <p class="lede" style="margin-bottom:18px;" data-reveal>
+      <p class="kicker u-mt8">CNZS-C34.1 · SCOPE 2 HOURLY MATCHING</p>
+      <p class="lede u-mb18" data-reveal>
         Optional recognition on the SBTi Dashboard rises over time — the bar for what counts as
         hourly-matched low-carbon electricity climbs from 50% to 90%.
       </p>
       <div class="hourly" data-reveal id="hourly">
         <div class="hourly-bars" role="img" aria-label="Hourly-matching recognition thresholds: at least 50 percent until 2030, 75 percent until 2035, and 90 percent from 2035.">
-          <div class="hb" data-pct="50"><span class="hb-fill" style="--pct:50%"><span class="hb-num">50%</span></span><span class="hb-label">until 2030</span></div>
-          <div class="hb" data-pct="75"><span class="hb-fill" style="--pct:75%"><span class="hb-num">75%</span></span><span class="hb-label">until 2035</span></div>
-          <div class="hb is-peak" data-pct="90"><span class="hb-fill" style="--pct:90%"><span class="hb-num">90%</span></span><span class="hb-label">from 2035</span></div>
+          <div class="hb" data-pct="50"><span class="hb-fill"><span class="hb-num">50%</span></span><span class="hb-label">until 2030</span></div>
+          <div class="hb" data-pct="75"><span class="hb-fill"><span class="hb-num">75%</span></span><span class="hb-label">until 2035</span></div>
+          <div class="hb is-peak" data-pct="90"><span class="hb-fill"><span class="hb-num">90%</span></span><span class="hb-label">from 2035</span></div>
         </div>
         <p class="hourly-note">Reporting the hourly-matching percentage is mandatory for Category&nbsp;A companies in any activity pool consuming <strong>10&nbsp;GWh or more</strong> a year, with third-party assurance (C32.1, C34.3).</p>
       </div>
@@ -642,8 +633,8 @@
         </div>
       </div>
 
-      <p class="kicker" style="margin-top:28px;">CNZS-C37.10 · THREE CLAIM TYPES</p>
-      <p class="lede" style="margin-bottom:18px;">What you can say publicly depends on what your End-of-Cycle Assessment actually shows. Three claim types, each with its own evidence bar.</p>
+      <p class="kicker u-mt28">CNZS-C37.10 · THREE CLAIM TYPES</p>
+      <p class="lede u-mb18">What you can say publicly depends on what your End-of-Cycle Assessment actually shows. Three claim types, each with its own evidence bar.</p>
 
       <div class="claim-grid" data-reveal-group>
         <div class="claim-card">
@@ -701,7 +692,7 @@
         Three voluntary tiers — Engaged, Advanced, Leadership — recognize companies that take responsibility for the emissions they haven’t eliminated yet. From 2035, it stops being optional.
       </p>
       <p class="kicker">CNZS-C40 · TABLE 4</p>
-      <p class="lede" style="margin-bottom:18px;">Ongoing Emissions Responsibility (OER) asks you to take responsibility — financially or through removals — for the emissions you haven't eliminated yet, in proportion to your ambition.</p>
+      <p class="lede u-mb18">Ongoing Emissions Responsibility (OER) asks you to take responsibility — financially or through removals — for the emissions you haven't eliminated yet, in proportion to your ambition.</p>
 
       <div class="tier-grid" data-reveal-group>
         <div class="tier-card">
@@ -728,19 +719,19 @@
       </div>
 
       <div class="calc-box" data-reveal>
-        <p class="ptitle" style="margin: 0 0 10px;">Illustrative calculator — pick a company size</p>
+        <p class="ptitle">Illustrative calculator — pick a company size</p>
         <div class="calc-presets" role="group" aria-label="Choose a company profile">
           <button class="toggle-btn" type="button" data-preset="mid-manufacturer">Mid-size manufacturer</button>
           <button class="toggle-btn" type="button" data-preset="regional-retailer">Regional retail group</button>
           <button class="toggle-btn" type="button" data-preset="global-industrial">Global industrial group</button>
         </div>
         <div class="calc-result" id="oerResult" aria-live="polite">
-          <p style="color:var(--muted); font-size:13.5px; margin:0;">Choose a profile to see what each OER tier could mean in tCO₂e and indicative annual contribution budget.</p>
+          <p class="muted-note">Choose a profile to see what each OER tier could mean in tCO₂e and indicative annual contribution budget.</p>
         </div>
-        <p style="font-size:12px; color:var(--hint); margin: 10px 0 0;">Figures are illustrative only — based on a 5-year average of "ongoing" emissions (the share not yet eliminated). They are not a quote and do not reflect your actual inventory.</p>
+        <p class="micro-note">Figures are illustrative only — based on a 5-year average of "ongoing" emissions (the share not yet eliminated). They are not a quote and do not reflect your actual inventory.</p>
       </div>
 
-      <p class="kicker" style="margin-top:28px;">CNZS-C45–C46 · 2035 AND BEYOND</p>
+      <p class="kicker u-mt28">CNZS-C45–C46 · 2035 AND BEYOND</p>
       <div class="pull-quote" data-reveal>
         From 2035, this stops being voluntary: companies <strong>support eligible carbon removals covering at least 1% of ongoing emissions, rising linearly to 100% by their net-zero year</strong> — with a growing share of long-lived removals (C45).
         <cite>CNZS-C45</cite>
@@ -774,7 +765,7 @@
         <div class="about-card">
           <p class="alabel">About Arcadia</p>
           <p class="ptext">Arcadia is a climate-technology company that pairs energy and emissions data infrastructure with hands-on decarbonization consulting — bringing together the data platform with the advisory expertise of ENGIE Impact, now part of Arcadia.</p>
-          <p class="ptext" style="margin-bottom:0;">That combination helps the world's largest companies move from measurement to action: connecting utility, energy and emissions data at scale, then translating it into transition plans and targets that stand up to standards like the SBTi Corporate Net-Zero Standard. In short — the data to know where emissions are, and the consulting to actually reduce them.</p>
+          <p class="ptext u-mb0">That combination helps the world's largest companies move from measurement to action: connecting utility, energy and emissions data at scale, then translating it into transition plans and targets that stand up to standards like the SBTi Corporate Net-Zero Standard. In short — the data to know where emissions are, and the consulting to actually reduce them.</p>
         </div>
       </div>
 
@@ -807,14 +798,12 @@
 
 <!-- ============================ SCRIPTS ============================ -->
 <script type="module" src="assets/experience.js"></script>
+<script type="module" src="assets/theme.js"></script>
 <script type="module" src="assets/chapters.js"></script>
 <script type="module" src="assets/personalize.js"></script>
 <script type="module" src="assets/implement.js"></script>
 
-<!-- Vercel Speed Insights (static-site integration) -->
-<script>
-  window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
-</script>
+<!-- Vercel Speed Insights (queue shim lives in assets/boot.js) -->
 <script defer src="/_vercel/speed-insights/script.js"></script>
 </body>
 </html>

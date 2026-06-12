@@ -30,7 +30,9 @@ export async function initHero3D({ gsap, ScrollTrigger }) {
   const cores = navigator.hardwareConcurrency || 4;
   const lowPower = cores <= 4 || dpr < 1.5;
   const COUNT = lowPower ? 1800 : (cores >= 8 ? 4200 : 3000);
-  const dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  // boot.js stamps <html data-theme>; theme.js keeps it current and emits
+  // 'theme:change', which re-tints this scene below (mutable on purpose)
+  let dark = document.documentElement.dataset.theme === 'dark';
 
   let w = wrap.clientWidth || window.innerWidth;
   let h = wrap.clientHeight || window.innerHeight;
@@ -79,9 +81,9 @@ export async function initHero3D({ gsap, ScrollTrigger }) {
   // ---- three depth layers: many small, some medium, few large -------------
   // Size variance is what makes them read as bubbles, not pixels.
   const LAYERS = [
-    { share: 0.62, size: lowPower ? 0.16 : 0.14, opacity: dark ? 0.95 : 0.9  },
-    { share: 0.28, size: lowPower ? 0.30 : 0.27, opacity: dark ? 0.6  : 0.55 },
-    { share: 0.10, size: lowPower ? 0.55 : 0.5,  opacity: dark ? 0.4  : 0.3  }
+    { share: 0.62, size: lowPower ? 0.16 : 0.14, opacityLight: 0.9,  opacityDark: 0.95 },
+    { share: 0.28, size: lowPower ? 0.30 : 0.27, opacityLight: 0.55, opacityDark: 0.6  },
+    { share: 0.10, size: lowPower ? 0.55 : 0.5,  opacityLight: 0.3,  opacityDark: 0.4  }
   ];
 
   const SPAN_X = 22;   // 2026 (left) → 2050 (right)
@@ -159,6 +161,36 @@ export async function initHero3D({ gsap, ScrollTrigger }) {
   const trajectory = new THREE.Line(lineGeo, lineMat);
   group.add(trajectory);
 
+  // ---- theme reactivity — re-tint everything when the header toggle flips --
+  function applyTheme() {
+    if (disposed) return;
+    dark = document.documentElement.dataset.theme === 'dark';
+    const vars = getComputedStyle(document.documentElement);
+    tealColor.set(vars.getPropertyValue('--teal').trim() || '#0F6E56');
+    amberColor.set(vars.getPropertyValue('--amber').trim() || '#BA7517');
+    bgColor.set(vars.getPropertyValue('--bg').trim() || (dark ? '#141917' : '#FBFAF7'));
+    scene.fog.color.copy(bgColor);
+
+    layers.forEach((L) => {
+      const cols = L.geo.attributes.color.array;
+      for (let i = 0; i < L.n; i++) {
+        const t = i / Math.max(1, L.n - 1);
+        const c = tealColor.clone().lerp(amberColor, Math.pow(t, 1.6) * 0.85);
+        cols[i * 3] = c.r; cols[i * 3 + 1] = c.g; cols[i * 3 + 2] = c.b;
+      }
+      L.geo.attributes.color.needsUpdate = true;
+      L.mat.blending = dark ? THREE.AdditiveBlending : THREE.NormalBlending;
+      L.mat.needsUpdate = true;
+    });
+    for (let i = 0; i < LINE_PTS; i++) {
+      const t = i / (LINE_PTS - 1);
+      const c = tealColor.clone().lerp(amberColor, Math.pow(t, 1.6) * 0.85);
+      lineCol[i * 3] = c.r; lineCol[i * 3 + 1] = c.g; lineCol[i * 3 + 2] = c.b;
+    }
+    lineGeo.attributes.color.needsUpdate = true;
+  }
+  window.NZ?.on('theme:change', applyTheme);
+
   // ---- progress + cinematic state -----------------------------------------
   let progress = 0;   // scroll target: 0 = chaos, 1 = resolved trajectory
   let smoothP = 0;    // lerped follower — silky under scroll jitter
@@ -197,7 +229,7 @@ export async function initHero3D({ gsap, ScrollTrigger }) {
       // breathing: bubbles gently swell and shrink while in chaos
       const breathe = 1 + Math.sin(drift * 0.9 + L.phase) * 0.06 * wob;
       L.mat.size = L.cfg.size * (1 - s * 0.3) * breathe;
-      L.mat.opacity = L.cfg.opacity * intro.t;
+      L.mat.opacity = (dark ? L.cfg.opacityDark : L.cfg.opacityLight) * intro.t;
     });
 
     // trajectory line fades in over the back half of the resolve
@@ -218,9 +250,14 @@ export async function initHero3D({ gsap, ScrollTrigger }) {
     // ambient life after the resolve: the whole field breathes very slowly
     group.position.y = Math.sin(drift * 0.35) * 0.18 * s;
 
-    // linger past the hero: ease the field aside and fade it out slowly
-    group.position.x = linger * 6.5;
-    wrap.style.opacity = Math.pow(1 - linger, 1.35).toFixed(3);
+    // Linger as atmosphere, but clear the reading column quickly once the
+    // hero ends. The long tail remains visible at the page edges.
+    const heroExitFade = Math.max(0, Math.min(1, (s - 0.82) / 0.18));
+    group.position.x = Math.pow(linger, 0.55) * 10;
+    wrap.style.opacity = Math.min(
+      1 - heroExitFade * 0.72,
+      Math.pow(1 - linger, 1.35)
+    ).toFixed(3);
   }
 
   // ---- scroll → progress over the hero ------------------------------------
@@ -240,10 +277,17 @@ export async function initHero3D({ gsap, ScrollTrigger }) {
   // the hero's edge. Cinematic where it's cheap, frugal where it isn't.
   let linger = 0;      // 0 at hero bottom → 1 fully faded out
   let paused = false;
+  let running = true;
   function pauseScene() { if (paused || disposed) return; paused = true; wrap.style.visibility = 'hidden'; }
   function resumeScene() { if (!paused || disposed) return; paused = false; wrap.style.visibility = ''; loop(); }
 
   const PERSIST = !lowPower && window.innerWidth >= 768;
+  const CONTENT_TOP = 72;
+  function syncStaticVisibility() {
+    if (PERSIST) return;
+    if (hero.getBoundingClientRect().bottom <= CONTENT_TOP) pauseScene();
+    else resumeScene();
+  }
   if (PERSIST) {
     ScrollTrigger.create({
       trigger: hero,
@@ -257,14 +301,16 @@ export async function initHero3D({ gsap, ScrollTrigger }) {
   } else {
     ScrollTrigger.create({
       trigger: hero,
-      start: 'bottom top',
+      start: `bottom ${CONTENT_TOP}px`,
       onEnter: () => pauseScene(),
-      onLeaveBack: () => resumeScene()
+      onLeaveBack: () => resumeScene(),
+      onRefresh: syncStaticVisibility
     });
+    requestAnimationFrame(syncStaticVisibility);
+    window.addEventListener('load', syncStaticVisibility, { once: true });
   }
 
   // ---- render loop (pause when tab hidden) ---------------------------------
-  let running = true;
   onVisibility = () => { running = !document.hidden; if (running) loop(); };
   document.addEventListener('visibilitychange', onVisibility);
 

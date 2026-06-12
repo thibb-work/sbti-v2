@@ -24,14 +24,16 @@ Legacy hashes (`#timeline`, `#scope-1/2/3`) redirect to the matching chapters.
 ## Structure
 
 ```
-index.html             # the whole experience (chapters + shell)
-assets/experience.css  # design tokens, chassis, chapter styles (dark mode via prefers-color-scheme)
+index.html             # the whole experience (chapters + shell) — markup only, no inline CSS/JS
+assets/boot.js         # blocking pre-paint script: hash redirects + theme stamp + Speed Insights shim
+assets/experience.css  # design tokens, chassis, chapter styles (dark tokens on html[data-theme="dark"])
 assets/experience.js   # GSAP/ScrollTrigger chassis, reveals, progress rail, NZ event bus
-assets/hero3d.js       # Three.js hero (lazy init, full dispose, poster fallback)
+assets/theme.js        # header sun/moon toggle — persists to localStorage, follows the OS until overridden
+assets/hero3d.js       # Three.js hero (lazy init, full dispose, poster fallback, theme-reactive tint)
 assets/chapters.js     # chapter interactives (tabs, sliders, Table 3 explorer, OER presets)
 assets/content.js      # data: Table 3, OER tiers, timeline entries
 assets/personalize.js  # Category A/B engine + req-badge flip system
-assets/implement.js    # pinned hierarchy sequence + hourly bars
+assets/implement.js    # implementation-hierarchy ladder + hourly bars
 source/                # source artifacts incl. extracted Standard text (not deployed)
 ```
 
