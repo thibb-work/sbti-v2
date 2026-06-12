@@ -316,7 +316,7 @@ function initOerCalculator() {
       const leadership = preset.ongoing * 1.0;
 
       resultEl.innerHTML = `
-        <p class="calc-result-label" style="grid-column: 1 / -1; font-size:13px; color:var(--muted); margin:0 0 4px;">
+        <p class="calc-result-label">
           ${preset.label} — ${preset.detail}
         </p>
         <div class="rcell">
