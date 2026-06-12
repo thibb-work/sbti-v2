@@ -106,10 +106,60 @@
         Governance, a transition plan at validation, and carbon woven into commercial
         strategy — the three commitments that anchor the cycle.
       </p>
-      <!-- SONNET: chapter content — three flip-cards for the governance commitments,
-           A/B-reactive disclosure badge. -->
-      <div class="placeholder" data-reveal>
-        Placeholder · <code>#govern</code> — flip-cards for the 3 governance commitments.
+      <div class="flip-grid" data-reveal-group>
+        <div class="flip-card" tabindex="0" role="button" aria-pressed="false" aria-label="Board sign-off — flip for detail">
+          <div class="flip-card-inner">
+            <div class="flip-face flip-face-front">
+              <p class="ficon">CNZS-C1 · GOVERNANCE</p>
+              <h3 class="ftitle">Board sign-off, not just sustainability sign-off</h3>
+              <p class="ftext">Your highest governing body — the Board or equivalent — has to formally take accountability for your SBTi targets, not just note them.</p>
+              <span class="flip-hint">Tap for detail →</span>
+            </div>
+            <div class="flip-face flip-face-back">
+              <p class="ficon">What it means for you</p>
+              <p class="ftext">The Board agrees to set, submit, and oversee implementation of your targets. You'll also describe your governance structure and set up a documented process for reviewing and adjusting targets over time.</p>
+              <span class="flip-hint">← Flip back</span>
+            </div>
+          </div>
+        </div>
+        <div class="flip-card" tabindex="0" role="button" aria-pressed="false" aria-label="Transition plan — flip for detail">
+          <div class="flip-card-inner">
+            <div class="flip-face flip-face-front">
+              <p class="ficon">CNZS-C2 · TRANSITION PLAN</p>
+              <h3 class="ftitle">A transition plan, due at validation</h3>
+              <p class="ftext">Every company now needs a Board-approved transition plan describing how it will deliver its targets — actions, timeframes, assumptions, dependencies.</p>
+              <span class="flip-hint">Tap for detail →</span>
+            </div>
+            <div class="flip-face flip-face-back">
+              <p class="ficon">15-month flexibility</p>
+              <p class="ftext">Category A companies must publish the plan within 15 months of Target Validation (sooner if local regulation requires it). If you're setting near-term scope&nbsp;1 intensity or asset-transition targets, that grace period disappears — the plan publishes at validation.</p>
+              <span class="flip-hint">← Flip back</span>
+            </div>
+          </div>
+        </div>
+        <div class="flip-card" tabindex="0" role="button" aria-pressed="false" aria-label="Carbon meets commercial strategy — flip for detail">
+          <div class="flip-card-inner">
+            <div class="flip-face flip-face-front">
+              <p class="ficon">CNZS-C2.3 · STRATEGY</p>
+              <h3 class="ftitle">Carbon strategy and commercial strategy, joined up</h3>
+              <p class="ftext">Your transition plan can't sit in a sustainability drawer — it has to be aligned with, or built into, your corporate strategy.</p>
+              <span class="flip-hint">Tap for detail →</span>
+            </div>
+            <div class="flip-face flip-face-back">
+              <p class="ftext">If your plans depend on unabated fossil fuels, your transition plan needs a commitment to phase out that revenue in line with net-zero pathways. Reviewed at least every five years, so it stays current as your strategy evolves.</p>
+              <span class="flip-hint">← Flip back</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="assurance-row" data-reveal>
+        <span class="req-badge" data-req-a="Disclose within 15 months" data-req-b="Recommended at validation" data-state="recommended"></span>
+        <span style="font-size:13.5px; color:var(--muted);">Publishing your transition plan — Category A vs Category B</span>
+      </div>
+
+      <div class="chapter-source" data-reveal>
+        Definitive requirements: <a href="https://sciencebasedtargets.org/net-zero" target="_blank" rel="noopener">the published Standard</a>, Chapter 1 (CNZS-C1–C2).
       </div>
     </div>
   </section>
@@ -123,10 +173,47 @@
         V2.0 moves the base year to your latest data, asks for limited assurance, and
         makes you name the emissions that actually move the needle.
       </p>
-      <!-- SONNET: chapter content — before/after drag-slider (V1 historical ⟷ V2 latest year),
-           assurance chip that reacts to category. -->
-      <div class="placeholder" data-reveal>
-        Placeholder · <code>#baseline</code> — V1↔V2 base-year drag-slider + assurance chip.
+      <div class="baseline-slider" data-reveal>
+        <div class="bs-track" id="baselineTrack">
+          <div class="bs-side bs-v1">V1 · Historical base year<small>Fixed at registration — drifts further from reality each cycle</small></div>
+          <div class="bs-side bs-v2">V2.0 · Latest-data base year<small>The most recent year with comprehensive data</small></div>
+          <div class="bs-handle" id="baselineHandle" role="slider" tabindex="0" aria-label="Compare V1 historical base year with V2.0 latest-data base year" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" aria-valuetext="Balanced view"></div>
+        </div>
+        <p class="bs-caption" id="baselineCaption">Drag — or use ← / → — to see why V2.0 resets the base year every cycle.</p>
+      </div>
+
+      <p class="lede" style="margin-top:0;" data-reveal>
+        <strong>CNZS-C4</strong> · At the start of every five-year cycle, you select the most recent year with
+        comprehensive data as your target base year — for near-term targets and for every subsequent cycle.
+        It's a continuation of your decarbonization journey, not a reset: you still have to show progress
+        cycle over cycle, and you can keep communicating against an earlier reference year if you want to.
+      </p>
+
+      <div class="assurance-row" data-reveal>
+        <span class="req-badge" data-req-a="Required · limited assurance" data-req-b="Recommended" data-state="required"></span>
+        <span style="font-size:13.5px; color:var(--muted);">CNZS-C7 · Third-party assurance of your base-year inventory and metrics</span>
+      </div>
+
+      <div class="fineprint" data-reveal>
+        <button class="fineprint-toggle" type="button" aria-expanded="false">
+          <span>Emissions-intensive activities (EIAs) — the line items that move the needle</span>
+          <span class="chev" aria-hidden="true">⌄</span>
+        </button>
+        <div class="fineprint-body">
+          <p><code>CNZS-C6</code> — Alongside your inventory, you identify and quantify <strong>emissions-intensive
+          activities (EIAs)</strong> across your value chain — using the SBTi's reference list. An EIA is
+          considered <strong>significant</strong> if it represents 5% or more of your scope&nbsp;3 emissions
+          (categories 1–14), and you report both its absolute emissions and its share of the total.
+          You can't assume an EIA is absent without doing the analysis — and where significant EIAs exist,
+          your transition plan needs a plan to decarbonize them.</p>
+          <p><code>CNZS-C8</code> — If your structure, boundaries, or activities change materially during a
+          cycle (mergers, divestments, a 5% shift in any scope's emissions), you recalculate your base year
+          inventory and update the metrics that depend on it.</p>
+        </div>
+      </div>
+
+      <div class="chapter-source" data-reveal>
+        Definitive requirements: <a href="https://sciencebasedtargets.org/net-zero" target="_blank" rel="noopener">the published Standard</a>, Chapter 2 (CNZS-C4, C6–C8).
       </div>
     </div>
   </section>
@@ -140,10 +227,225 @@
         Three routes for Scope&nbsp;1, two options for Scope&nbsp;2, and a 5% boundary test
         that turns Scope&nbsp;3 from a checkbox into a set of choices.
       </p>
-      <!-- SONNET: chapter content — sub-tabbed triptych (S1 route cards, S2 LCE toggle,
-           S3 5% boundary mini-game + Table 3 explorer; port data object D from scope-3.html). -->
-      <div class="placeholder" data-reveal>
-        Placeholder · <code>#targets</code> — S1/S2/S3 triptych. Lands old <code>#scope-1/2/3</code> hashes.
+      <div class="tabs" role="tablist" aria-label="Target-setting by scope" data-reveal>
+        <button class="tab-btn is-active" type="button" role="tab" aria-selected="true" aria-controls="panel-s1" id="tab-s1" data-tab="s1">Scope 1</button>
+        <button class="tab-btn" type="button" role="tab" aria-selected="false" aria-controls="panel-s2" id="tab-s2" data-tab="s2">Scope 2</button>
+        <button class="tab-btn" type="button" role="tab" aria-selected="false" aria-controls="panel-s3" id="tab-s3" data-tab="s3">Scope 3</button>
+      </div>
+
+      <!-- ===== SCOPE 1 ===== -->
+      <div class="tab-panel is-active" id="panel-s1" role="tabpanel" aria-labelledby="tab-s1" data-reveal>
+        <p class="kicker">CNZS-C10 · SCOPE 1</p>
+        <p class="lede" style="margin-bottom:18px;">Near-term scope&nbsp;1 targets must cover 100% of your direct emissions. Pick one or more of three routes — tap any card for the detail.</p>
+
+        <div class="route-grid" data-reveal-group>
+          <div class="route-card">
+            <button class="route-card-head" type="button" aria-expanded="false">
+              <p class="ricon">Route A · C10.2a</p>
+              <h3 class="rtitle">Absolute reduction</h3>
+              <p class="rsub">A straight line from your base year to residual emissions by 2050.</p>
+              <span class="chip chip-teal">Long-term target optional</span>
+              <span class="chev" aria-hidden="true">⌄</span>
+            </button>
+            <div class="route-detail"><div class="route-detail-inner">
+              <p><code>C10.2a</code> — A straight-line absolute emissions cut from your base year to residual levels by 2050. This is the only route where a long-term target stays optional: set the near-term target and you're compliant. Best suited to companies without an applicable sector pathway.</p>
+            </div></div>
+          </div>
+          <div class="route-card">
+            <button class="route-card-head" type="button" aria-expanded="false">
+              <p class="ricon">Route B · C10.2b</p>
+              <h3 class="rtitle">Sector intensity</h3>
+              <p class="rsub">Follow a published sector pathway — steel, cement, chemicals.</p>
+              <span class="chip chip-amber">Long-term target required</span>
+              <span class="chev" aria-hidden="true">⌄</span>
+            </button>
+            <div class="route-detail"><div class="route-detail-inner">
+              <p><code>C10.2b</code> — Align scope&nbsp;1 to a published sector decarbonization pathway, measured as emissions per unit of physical output. A long-term target is mandatory, and your transition plan is due at Target Validation — no grace period.</p>
+            </div></div>
+          </div>
+          <div class="route-card">
+            <button class="route-card-head" type="button" aria-expanded="false">
+              <p class="ricon">Route C · C10.2c · New</p>
+              <h3 class="rtitle">Asset transition</h3>
+              <p class="rsub">A dated schedule to abate, retire or replace assets via an Asset Decarbonization Plan.</p>
+              <span class="chip chip-amber">Long-term target required</span>
+              <span class="chev" aria-hidden="true">⌄</span>
+            </button>
+            <div class="route-detail"><div class="route-detail-inner">
+              <p><code>C10.2c</code> — New in V2.0. Instead of an emissions curve, you commit to a dated schedule to abate, retire or decommission specific emitting assets, set out in an Asset Decarbonization Plan with milestones and/or a carbon budget. Long-term target mandatory — designed for asset-heavy operators.</p>
+            </div></div>
+          </div>
+        </div>
+
+        <p style="font-size:12.5px; color:var(--hint); margin: 4px 0 0;">Routes can be mixed; if you set more than one, they aggregate into a single consolidated scope&nbsp;1 figure for communication only (C10.4).</p>
+
+        <div class="fineprint">
+          <button class="fineprint-toggle" type="button" aria-expanded="false">
+            <span>The fine print that bites</span>
+            <span class="chev" aria-hidden="true">⌄</span>
+          </button>
+          <div class="fineprint-body">
+            <p>Routes B and C lose the 15-month grace period — the transition plan publishes at Target Validation, not afterwards.</p>
+            <p>Where relevant, transition plans must commit to phasing out revenue from unabated fossil fuels, in line with net-zero pathways.</p>
+            <p>Bioenergy emissions are reported separately from removals — no netting — following GHG Protocol Land Sector &amp; Removals guidance (LSRS), alongside FLAG and removals accounting (C5.5).</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== SCOPE 2 ===== -->
+      <div class="tab-panel" id="panel-s2" role="tabpanel" aria-labelledby="tab-s2" data-reveal hidden>
+        <p class="kicker">CNZS-C12 · SCOPE 2</p>
+        <p class="lede" style="margin-bottom:18px;">Near-term scope&nbsp;2 targets must cover 100% of your purchased electricity, heat, steam and cooling. Choose how you express the ambition.</p>
+
+        <div class="toggle-row" role="tablist" aria-label="Scope 2 target option">
+          <button class="toggle-btn is-active" type="button" role="tab" aria-selected="true" data-s2="lce">LCE-share alignment</button>
+          <button class="toggle-btn" type="button" role="tab" aria-selected="false" data-s2="abs">Absolute reduction</button>
+        </div>
+
+        <div class="target-panel is-active" data-s2-panel="lce">
+          <p class="ptitle">Low-carbon electricity (LCE) alignment target — <code>C12.2a</code></p>
+          <p class="ptext">Grow the share of low-carbon electricity you use, contract, or match on a linear path toward an eligible net-zero pathway. LCE now covers more than renewables: <strong>renewables, nuclear, and CCS-fitted generation</strong> all count. The long-term version of this target reaches <strong>100% LCE</strong> (C13.2a).</p>
+          <p class="ptext" style="margin-bottom:0;">Category A companies also submit projected electricity consumption at validation — and if projected demand growth exceeds <strong>20%</strong> a year over the cycle, an emissions target becomes mandatory alongside (or instead of) the LCE target (C12.4).</p>
+        </div>
+        <div class="target-panel" data-s2-panel="abs">
+          <p class="ptitle">Absolute emissions reduction target — <code>C12.2b</code></p>
+          <p class="ptext">Cut scope&nbsp;2 absolute emissions on a linear trajectory to a defined residual level, consistent with an eligible net-zero pathway. The long-term version lands at residual levels by 2050 (C13.2b). Long-term targets stay optional on this route — but Category A still files electricity demand projections at validation.</p>
+        </div>
+
+        <p class="kicker" style="margin-top:24px;">CNZS-C29–C31 · IMPLEMENTATION HIERARCHY FOR ELECTRICITY</p>
+        <p class="ptext" style="color:var(--muted); font-size:13.5px; margin: 0 0 12px;">Activity-level actions come first: cut consumption, then add behind-the-meter generation, then contract for low-carbon electricity inside your <strong>deliverability region</strong>.</p>
+        <div class="tag-row" style="margin-bottom:14px;">
+          <span class="chip chip-teal">Physical PPAs</span>
+          <span class="chip chip-teal">Virtual PPAs</span>
+          <span class="chip chip-teal">Supplier LCE contracts</span>
+          <span class="chip chip-teal">Unbundled EACs</span>
+          <span class="chip chip-teal">Default-delivered LCE</span>
+        </div>
+
+        <div class="fineprint">
+          <button class="fineprint-toggle" type="button" aria-expanded="false">
+            <span>Instrument fine print — age cap, PPA flex, grandfathering</span>
+            <span class="chev" aria-hidden="true">⌄</span>
+          </button>
+          <div class="fineprint-body">
+            <p><code>C31.3</code> — <strong>15-year generator age cap</strong>: market instruments are limited to LCE generators commissioned or re-powered within the 15 years before the consumption period they're applied to.</p>
+            <p><code>C30.3.b</code> — <strong>36-month PPA flexibility</strong>: if your operations sit across two or more interconnected activity pools on the same synchronous grid, a PPA with an LCE project in any of those pools can cover the aggregate load — provided offtake begins within 36 months of the project's commissioning.</p>
+            <p><code>C30.5</code> — <strong>Grandfathering</strong>: market instruments from long-term contracts signed before V2.0's effective date (1 Feb 2027) keep the deliverability of the activity pools they were applied to before that date, allocated on a load-weighted basis. Renewing the contract does not extend this.</p>
+          </div>
+        </div>
+
+        <div class="fineprint">
+          <button class="fineprint-toggle" type="button" aria-expanded="false">
+            <span>Hourly matching — the new transparency layer (C32–C34)</span>
+            <span class="chev" aria-hidden="true">⌄</span>
+          </button>
+          <div class="fineprint-body">
+            <div style="display:flex; align-items:flex-end; gap:10px; height:120px; margin: 4px 0 12px;">
+              <div style="flex:1; display:flex; flex-direction:column; justify-content:flex-end; height:100%;">
+                <div style="background:var(--amber-soft); border-radius:6px 6px 0 0; height:50%; display:flex; align-items:flex-start; justify-content:center; padding-top:6px;"><span style="font-size:13px; font-weight:600; color:var(--amber-ink);">50%</span></div>
+                <div style="font-size:11.5px; color:var(--muted); text-align:center; margin-top:6px;">until 2030</div>
+              </div>
+              <div style="flex:1; display:flex; flex-direction:column; justify-content:flex-end; height:100%;">
+                <div style="background:var(--amber-soft); border-radius:6px 6px 0 0; height:72%; display:flex; align-items:flex-start; justify-content:center; padding-top:6px; filter:saturate(1.3);"><span style="font-size:13px; font-weight:600; color:var(--amber-ink);">75%</span></div>
+                <div style="font-size:11.5px; color:var(--muted); text-align:center; margin-top:6px;">until 2035</div>
+              </div>
+              <div style="flex:1; display:flex; flex-direction:column; justify-content:flex-end; height:100%;">
+                <div style="background:var(--amber); border-radius:6px 6px 0 0; height:90%; display:flex; align-items:flex-start; justify-content:center; padding-top:6px;"><span style="font-size:13px; font-weight:600; color:var(--amber-soft);">90%</span></div>
+                <div style="font-size:11.5px; color:var(--muted); text-align:center; margin-top:6px;">from 2035</div>
+              </div>
+            </div>
+            <p>Recognition thresholds for hourly-matched low-carbon electricity rise from <strong>50%</strong> (until 2030) to <strong>75%</strong> (until 2035) to <strong>90%</strong> (from 2035) — meeting them earns optional recognition on the SBTi Dashboard.</p>
+            <p>Reporting the hourly-matching percentage is <strong>mandatory for Category A</strong> companies in any activity pool with annual electricity consumption of <strong>10 GWh or more</strong> (C32.1), with third-party assurance.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== SCOPE 3 ===== -->
+      <div class="tab-panel" id="panel-s3" role="tabpanel" aria-labelledby="tab-s3" data-reveal hidden>
+        <p class="kicker">CNZS-C14–C16 · SCOPE 3</p>
+        <p class="lede" style="margin-bottom:18px;">V1 asked one question — did you cover two-thirds of your value chain? V2.0 asks two: which categories clear the 5% boundary, and what target option fits each one.</p>
+
+        <h3 style="font-family:var(--font-display); font-size:17px; font-weight:500; margin: 0 0 6px;">1 · The 5% boundary, live</h3>
+        <p class="ptext" style="margin: 0 0 14px;">Every scope&nbsp;3 category that represents <strong>5% or more</strong> of your categories 1–14 emissions is in your near-term target boundary (C14.1). Drag the threshold and watch categories cross the line — these are illustrative shares for a representative company.</p>
+
+        <div class="boundary-tool">
+          <div class="boundary-controls">
+            <label for="boundarySlider">Boundary threshold</label>
+            <input type="range" id="boundarySlider" min="1" max="25" step="0.5" value="5" aria-describedby="boundaryReadout">
+            <span class="bval" id="boundaryVal">5.0%</span>
+          </div>
+          <div class="boundary-bars" id="boundaryBars" aria-hidden="true"></div>
+          <div class="boundary-legend">
+            <span><span class="swatch swatch-in" aria-hidden="true"></span>In boundary — needs a target</span>
+            <span><span class="swatch swatch-out" aria-hidden="true"></span>Below threshold — exclude with justification</span>
+          </div>
+          <p class="boundary-readout" id="boundaryReadout" aria-live="polite"></p>
+        </div>
+
+        <div class="fineprint">
+          <button class="fineprint-toggle" type="button" aria-expanded="false">
+            <span>Seven codified exclusion routes (C14.2)</span>
+            <span class="chev" aria-hidden="true">⌄</span>
+          </button>
+          <div class="fineprint-body">
+            <p>Even inside the boundary, you may exclude: cradle-to-gate emissions of <strong>second-hand goods</strong> (cats 1–2); <strong>category&nbsp;3</strong> where mitigated through scope&nbsp;1/2 targets; <strong>category&nbsp;7 commuting</strong> entirely; <strong>category&nbsp;8</strong> leased assets you can't influence; <strong>category&nbsp;9</strong> transport you can't influence; <strong>category&nbsp;10</strong> processing with unknown steps or no contractual relationship; <strong>category&nbsp;14</strong> independent franchisees.</p>
+            <p>For each exclusion you report: the condition that applies, the emissions excluded (absolute and as a % of scope&nbsp;3), and what you intend to do to mitigate them (C14.3).</p>
+          </div>
+        </div>
+
+        <h3 style="font-family:var(--font-display); font-size:17px; font-weight:500; margin: 28px 0 6px;">2 · Pick the lever per category — Table 3</h3>
+        <p class="ptext" style="margin: 0 0 4px;">Tap a category to see which target-setting options apply to it (CNZS-C15, Table 3, p.40).</p>
+
+        <div class="cat-explorer">
+          <p class="cat-group-label">Upstream</p>
+          <div class="cat-row" id="catrowUp"></div>
+          <p class="cat-group-label">Downstream</p>
+          <div class="cat-row" id="catrowDown"></div>
+          <div class="cat-panel" id="catPanel" aria-live="polite">
+            <div class="cat-panel-head">
+              <span class="cname" id="catName"></span>
+              <span class="cgroup" id="catGroup"></span>
+            </div>
+            <div class="cat-opts" id="catOpts"></div>
+            <p class="cat-note" id="catNote"></p>
+          </div>
+        </div>
+
+        <div class="fineprint">
+          <button class="fineprint-toggle" type="button" aria-expanded="false">
+            <span>Category 11 — when none of the options fit</span>
+            <span class="chev" aria-hidden="true">⌄</span>
+          </button>
+          <div class="fineprint-body">
+            <p><code>C15.4</code> — If you can demonstrate that none of the downstream options reasonably apply to category&nbsp;11 (use of sold products), you may either address an equivalent volume of emissions through another category's eligible options, or apply for an exception. The exception requires a long-term category&nbsp;11 target to residual levels by 2050, a transition-plan-embedded plan with milestones (published at validation — no grace period), and annual reporting of progress.</p>
+          </div>
+        </div>
+
+        <h3 style="font-family:var(--font-display); font-size:17px; font-weight:500; margin: 28px 0 10px;">Table 1 · Target types at a glance</h3>
+        <table class="matrix-table" data-reveal="fade">
+          <thead>
+            <tr><th>Target type</th><th>Scope 1</th><th>Scope 2</th><th>Scope 3</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Near-term (5-yr)</td>
+              <td>Required, all companies</td>
+              <td>Required, all companies</td>
+              <td><span class="req-badge" data-req-a="Required" data-req-b="Optional" data-state="required"></span></td>
+            </tr>
+            <tr>
+              <td>Long-term (to 2050)</td>
+              <td>Depends on route chosen</td>
+              <td>Optional, all companies</td>
+              <td>Optional, all companies</td>
+            </tr>
+          </tbody>
+        </table>
+        <p style="font-size:12.5px; color:var(--hint); margin: 0;">Net-zero targets combine near- and long-term targets across all three scopes with neutralization of residuals at the target year — optional for everyone (C17).</p>
+      </div>
+
+      <div class="chapter-source" data-reveal>
+        Definitive requirements: <a href="https://sciencebasedtargets.org/net-zero" target="_blank" rel="noopener">the published Standard</a>, Chapter 3 (CNZS-C9–C20) and Sections 4.3–4.4 (CNZS-C29–C34).
       </div>
     </div>
   </section>
@@ -174,10 +476,70 @@
         Annual tracking, an end-of-cycle assessment, and three claim types that draw a
         clear line between reduction, alignment, and system contribution.
       </p>
-      <!-- SONNET: chapter content — claim-type cards with sample "what you can say" claims,
-           cycle dial (annual reports → EoC assessment). -->
-      <div class="placeholder" data-reveal>
-        Placeholder · <code>#prove</code> — claim-type cards + cycle dial.
+      <div class="cycle-dial-wrap" data-reveal="scale">
+        <div class="cycle-dial" aria-hidden="true">
+          <svg viewBox="0 0 200 200" role="img" aria-label="A five-year cycle: four years of annual progress reports, then an End-of-Cycle Assessment in year five">
+            <circle class="ring" cx="100" cy="100" r="86" fill="none" stroke-width="16"/>
+            <circle class="seg seg-annual" cx="100" cy="100" r="86" fill="none" stroke-width="16" stroke-dasharray="432.3 540.4" stroke-dashoffset="0" transform="rotate(-90 100 100)"/>
+            <circle class="seg seg-eoc" cx="100" cy="100" r="86" fill="none" stroke-width="16" stroke-dasharray="108.1 540.4" stroke-dashoffset="-432.3" transform="rotate(-90 100 100)"/>
+          </svg>
+          <div class="center-label">
+            <span class="center-num">5</span>
+            <span>year cycle</span>
+          </div>
+        </div>
+        <div class="cycle-legend">
+          <div class="lg-item"><span class="lg-dot lg-annual" aria-hidden="true"></span><span><strong>Years 1–4 · Annual progress reports</strong> — emissions inventory, progress against targets, and any changes to your transition plan (C36).</span></div>
+          <div class="lg-item"><span class="lg-dot lg-eoc" aria-hidden="true"></span><span><strong>Year 5 · End-of-Cycle Assessment</strong> — SBTi reviews five years of reported data against your targets and reissues a validation status (C37).</span></div>
+        </div>
+      </div>
+
+      <p class="kicker" style="margin-top:28px;">CNZS-C37.10 · THREE CLAIM TYPES</p>
+      <p class="lede" style="margin-bottom:18px;">What you can say publicly depends on what your End-of-Cycle Assessment actually shows. Three claim types, each with its own evidence bar.</p>
+
+      <div class="claim-grid" data-reveal-group>
+        <div class="claim-card">
+          <p class="ckicker">C37.10.a · Performance claim</p>
+          <h3 class="ctitle">Emissions reduction</h3>
+          <p class="ctext">Your reported emissions actually fell against your base year, on the trajectory your target implies.</p>
+          <div class="claim-sample">
+            <p class="slabel">What you can say</p>
+            <p>"We reduced our scope 1 and 2 emissions by 14% against our 2023 base year, in line with our SBTi-validated target."</p>
+          </div>
+        </div>
+        <div class="claim-card">
+          <p class="ckicker">C37.10.b · Trajectory claim</p>
+          <h3 class="ctitle">Target alignment</h3>
+          <p class="ctext">You're tracking your validated trajectory — even if absolute emissions haven't fallen as far yet, your pace is on plan.</p>
+          <div class="claim-sample">
+            <p class="slabel">What you can say</p>
+            <p>"Our progress to date is in line with our SBTi-validated 1.5°C-aligned near-term target."</p>
+          </div>
+        </div>
+        <div class="claim-card">
+          <p class="ckicker">C37.10.c · Contribution claim</p>
+          <h3 class="ctitle">System contribution</h3>
+          <p class="ctext">Beyond your own footprint, you can point to OER contributions and removals that support the wider transition.</p>
+          <div class="claim-sample">
+            <p class="slabel">What you can say</p>
+            <p>"In addition to cutting our own emissions, we contributed to climate mitigation beyond our value chain through our Ongoing Emissions Responsibility programme."</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="fineprint" data-reveal>
+        <button class="fineprint-toggle" type="button" aria-expanded="false">
+          <span>When you fall short — "best efforts" isn't a free pass</span>
+          <span class="chev" aria-hidden="true">⌄</span>
+        </button>
+        <div class="fineprint-body">
+          <p><code>C36.6</code> — If you miss an annual milestone, your progress report explains why, and what you're changing in your transition plan to get back on track. A single miss doesn't void your validation.</p>
+          <p><code>C37.8</code> — At the End-of-Cycle Assessment, SBTi weighs genuine best-efforts shortfalls (documented barriers, market constraints, force majeure) differently from inaction — but persistent, unexplained underperformance can lead to a status downgrade or removal from the target dashboard.</p>
+        </div>
+      </div>
+
+      <div class="chapter-source" data-reveal>
+        Definitive requirements: <a href="https://sciencebasedtargets.org/net-zero" target="_blank" rel="noopener">the published Standard</a>, Chapter 5 (CNZS-C36–C37).
       </div>
     </div>
   </section>
@@ -191,10 +553,55 @@
         Three voluntary tiers — Engaged, Advanced, Leadership — let you take responsibility
         for emissions while you still have them, mandatory from 2035.
       </p>
-      <!-- SONNET: chapter content — tier pricing cards + illustrative "your emissions × tier"
-           calculator (3 preset company sizes, no free input). -->
-      <div class="placeholder" data-reveal>
-        Placeholder · <code>#oer</code> — OER tier cards + preset calculator.
+      <p class="kicker">CNZS-C40 · TABLE 4</p>
+      <p class="lede" style="margin-bottom:18px;">Ongoing Emissions Responsibility (OER) asks you to take responsibility — financially or through removals — for the emissions you haven't eliminated yet, in proportion to your ambition.</p>
+
+      <div class="tier-grid" data-reveal-group>
+        <div class="tier-card">
+          <p class="tname">Engaged</p>
+          <p class="tcoverage">1%</p>
+          <p class="tcoverage-detail">of total ongoing scope 1, 2 &amp; 3 emissions</p>
+          <p class="tprice">No mandated price</p>
+          <p class="tapproach">Verified mitigation outcomes equal in volume (tCO₂e) to covered emissions — or a contribution budget at a price you choose.</p>
+        </div>
+        <div class="tier-card">
+          <p class="tname">Advanced</p>
+          <p class="tcoverage">10%</p>
+          <p class="tcoverage-detail">of total ongoing emissions, including 100% of scope 1 + 2</p>
+          <p class="tprice">$20 / tCO₂e</p>
+          <p class="tapproach">Contribution budget of covered emissions × $20/tCO₂e, or verified mitigation outcomes equal in volume to covered emissions.</p>
+        </div>
+        <div class="tier-card is-leadership">
+          <p class="tname">Leadership</p>
+          <p class="tcoverage">100%</p>
+          <p class="tcoverage-detail">of total ongoing emissions (Category A) — Category B may instead cover 10%, including 100% of scope 1 + 2 (C40.6)</p>
+          <p class="tprice">$80 / tCO₂e</p>
+          <p class="tapproach">Contribution budget of covered emissions × $80/tCO₂e <strong>and</strong> verified mitigation outcomes equal in volume to covered emissions.</p>
+        </div>
+      </div>
+
+      <div class="calc-box" data-reveal>
+        <p class="ptitle" style="margin: 0 0 10px;">Illustrative calculator — pick a company size</p>
+        <div class="calc-presets" role="group" aria-label="Choose a company profile">
+          <button class="toggle-btn" type="button" data-preset="mid-manufacturer">Mid-size manufacturer</button>
+          <button class="toggle-btn" type="button" data-preset="regional-retailer">Regional retail group</button>
+          <button class="toggle-btn" type="button" data-preset="global-industrial">Global industrial group</button>
+        </div>
+        <div class="calc-result" id="oerResult" aria-live="polite">
+          <p style="color:var(--muted); font-size:13.5px; margin:0;">Choose a profile to see what each OER tier could mean in tCO₂e and indicative annual contribution budget.</p>
+        </div>
+        <p style="font-size:12px; color:var(--hint); margin: 10px 0 0;">Figures are illustrative only — based on a 5-year average of "ongoing" emissions (the share not yet eliminated). They are not a quote and do not reflect your actual inventory.</p>
+      </div>
+
+      <p class="kicker" style="margin-top:28px;">CNZS-C45–C46 · 2035 AND BEYOND</p>
+      <div class="pull-quote" data-reveal>
+        From 2035, OER becomes <strong>mandatory for Category&nbsp;A companies</strong> — at minimum the Advanced tier, supporting eligible carbon removals at scale.
+        <cite>CNZS-C45</cite>
+      </div>
+      <p class="ptext">By 2050, your remaining emissions should be at residual levels — generally no more than around <strong>10%</strong> of your base-year footprint for most sectors — and you neutralize <strong>100% of those residuals</strong> every year with eligible carbon removals (C46). OER between now and then is the on-ramp: it builds the removals market and the internal muscle you'll need at the finish line.</p>
+
+      <div class="chapter-source" data-reveal>
+        Definitive requirements: <a href="https://sciencebasedtargets.org/net-zero" target="_blank" rel="noopener">the published Standard</a>, Chapter 6 (CNZS-C40, C45–C46) and Table 4.
       </div>
     </div>
   </section>
@@ -208,10 +615,10 @@
         Published June 2026, effective February 2027 — then the five-year cycle repeats,
         step by step, until residual emissions are all that remain.
       </p>
-      <!-- SONNET: chapter content — 2026→2050 horizontal timeline; dates pop on scroll.
-           Lands the old #timeline hash. -->
-      <div class="placeholder" data-reveal>
-        Placeholder · <code>#horizon</code> — 2026→2050 timeline. Lands old <code>#timeline</code> hash.
+      <div class="horizon-line" data-reveal-group id="horizonLine"></div>
+
+      <div class="chapter-source" data-reveal>
+        Definitive requirements: <a href="https://sciencebasedtargets.org/net-zero" target="_blank" rel="noopener">the published Standard</a> — Chapters 1–6, effective dates per the published transition timeline.
       </div>
     </div>
   </section>
@@ -225,9 +632,28 @@
         An independent walk-through by a practitioner, for practitioners — so the key
         changes land in minutes, not in a 105-page read.
       </p>
-      <!-- SONNET: chapter content — bio, Arcadia blurb, Arthur Beattie contact (merge about.html). -->
-      <div class="placeholder" data-reveal>
-        Placeholder · <code>#about</code> — bio + Arcadia + contact.
+      <div class="about-grid" data-reveal-group>
+        <div class="about-card">
+          <p class="alabel">The author</p>
+          <p class="awho">Thibault Guenat</p>
+          <p class="arole">Senior Carbon &amp; Energy Manager, Arcadia</p>
+          <p class="ptext">I help companies measure and reduce their emissions, and navigate the complexities of compliance and internal stakeholder engagement. My focus is turning carbon data into decisions teams can actually act on.</p>
+          <a class="about-link" href="https://uk.linkedin.com/in/thibaultguenat" target="_blank" rel="noopener">Connect on LinkedIn →</a>
+        </div>
+        <div class="about-card">
+          <p class="alabel">About Arcadia</p>
+          <p class="ptext">Arcadia is a climate-technology company that pairs energy and emissions data infrastructure with hands-on decarbonization consulting — bringing together the data platform with the advisory expertise of ENGIE Impact, now part of Arcadia.</p>
+          <p class="ptext" style="margin-bottom:0;">That combination helps the world's largest companies move from measurement to action: connecting utility, energy and emissions data at scale, then translating it into transition plans and targets that stand up to standards like the SBTi Corporate Net-Zero Standard. In short — the data to know where emissions are, and the consulting to actually reduce them.</p>
+        </div>
+      </div>
+
+      <div class="about-contact" data-reveal>
+        <p class="cname">Arthur Beattie</p>
+        <p class="ctitle">Sales Manager, Arcadia EMEA</p>
+        <div class="tag-row" style="margin-top:10px;">
+          <a class="about-link" href="mailto:arthur.beattie@arcadia.com">arthur.beattie@arcadia.com</a>
+          <a class="about-link" href="tel:0122627720">0122 627 720</a>
+        </div>
       </div>
     </div>
   </section>
@@ -242,6 +668,7 @@
 
 <!-- ============================ SCRIPTS ============================ -->
 <script type="module" src="assets/experience.js"></script>
+<script type="module" src="assets/chapters.js"></script>
 
 <!-- Vercel Speed Insights (static-site integration) -->
 <script>
