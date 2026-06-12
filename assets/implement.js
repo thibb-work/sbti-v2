@@ -114,7 +114,9 @@ let mode = null;
 const MOBILE = () => window.matchMedia('(max-width: 767px)').matches;
 
 function applyMode() {
-  const wantPinned = !REDUCED && !MOBILE();
+  // Pinned scrub retired — user testing found it confusing. The static ladder
+  // (all rungs visible, centred rung brightened) reads better at every size.
+  const wantPinned = false;
   const next = wantPinned ? 'pinned' : 'static';
   if (next === mode) return;
   // first build only — avoid tearing down a live pin mid-session for simplicity;

@@ -1292,30 +1292,42 @@ a:hover { text-decoration: underline; }
 
 /* cycle dial */
 .cycle-dial-wrap {
-  display: flex;
+  display: grid;
+  grid-template-columns: 210px minmax(0, 1fr);
+  gap: 16px 40px;
   align-items: center;
-  gap: 28px;
-  flex-wrap: wrap;
   margin: 24px 0 8px;
 }
-.cycle-dial { width: 200px; height: 200px; flex-shrink: 0; }
+@media (max-width: 600px) {
+  .cycle-dial-wrap { grid-template-columns: 1fr; justify-items: center; }
+  .cycle-dial-wrap .cycle-legend { justify-self: stretch; }
+}
+.cycle-dial { position: relative; width: 210px; height: 210px; }
+.cycle-dial svg { display: block; width: 100%; height: 100%; }
 .cycle-dial .ring { fill: none; stroke: var(--line); stroke-width: 2; }
 .cycle-dial .seg { fill: none; stroke-width: 10; stroke-linecap: round; }
 .cycle-dial .seg-annual { stroke: var(--teal); }
 .cycle-dial .seg-eoc { stroke: var(--amber); }
 .cycle-dial .center-label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
   font-family: var(--font-mono);
-  font-size: 9px;
-  letter-spacing: .08em;
+  font-size: 10px;
+  letter-spacing: .14em;
   text-transform: uppercase;
-  fill: var(--hint);
-  text-anchor: middle;
+  color: var(--hint);
+  pointer-events: none;
 }
 .cycle-dial .center-num {
   font-family: var(--font-display);
-  font-size: 28px;
-  fill: var(--ink);
-  text-anchor: middle;
+  font-size: 46px;
+  line-height: 1;
+  color: var(--ink);
 }
 .cycle-legend { font-size: 13.5px; color: var(--muted); line-height: 1.8; }
 .cycle-legend .lg-item { display: flex; align-items: baseline; gap: 8px; margin-bottom: 6px; }
@@ -1486,12 +1498,35 @@ a:hover { text-decoration: underline; }
   font-weight: 500;
   font-size: 14px;
 }
-.about-contact { display: flex; flex-wrap: wrap; gap: 14px 28px; margin-top: 12px; }
-.about-contact .crow { display: flex; align-items: center; gap: 9px; font-size: 14px; }
-.about-contact .crow a { color: var(--ink); border-bottom: 1px solid var(--line-strong); }
-.about-contact .crow a:hover { color: var(--teal); border-color: var(--teal); text-decoration: none; }
-.about-contact .cname { font-size: 16px; font-weight: 600; margin: 0; }
-.about-contact .ctitle { font-size: 13px; color: var(--muted); margin: 0 0 4px; }
+/* ---- "Work with Arcadia" contact card — the page's closing CTA ---- */
+.contact-card {
+  margin-top: 18px;
+  border: 1px solid color-mix(in srgb, var(--teal) 35%, var(--line));
+  border-radius: var(--radius-lg);
+  background: color-mix(in srgb, var(--teal-soft) 32%, var(--surface));
+  padding: 26px 28px;
+}
+.contact-card .alabel { color: var(--teal); }
+.contact-pitch {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--muted);
+  max-width: 56ch;
+  margin: 6px 0 20px;
+}
+.contact-pitch strong { color: var(--ink); }
+.contact-person {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px 24px;
+  border-top: 1px solid color-mix(in srgb, var(--teal) 20%, var(--line));
+  padding-top: 18px;
+}
+.contact-person .cname { font-size: 17px; font-weight: 600; margin: 0; }
+.contact-person .ctitle { font-size: 13px; color: var(--muted); margin: 2px 0 0; }
+.contact-actions { display: flex; flex-wrap: wrap; gap: 10px; }
 
 /* =========================================================================
    M4 · PERSONALIZATION ENGINE (#category)
