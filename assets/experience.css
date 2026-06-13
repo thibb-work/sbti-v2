@@ -1913,3 +1913,76 @@ a:hover { text-decoration: underline; }
 .u-mb12 { margin-bottom: 12px; }
 .u-mb14 { margin-bottom: 14px; }
 .u-mb18 { margin-bottom: 18px; }
+
+/* =========================================================================
+   READABILITY OVER THE LIVE FIELD — HERO + HORIZON ONLY
+   ---------------------------------------------------------------------------
+   Append this block to assets/experience.css (anywhere after the base
+   palette / :root tokens — it only references --bg).
+
+   The Three.js trajectory drifts behind the hero copy and trails, faintly,
+   behind the horizon timeline. Two protections keep type crisp:
+     (1) a diffused "cloud" of page colour pooled behind the reading column
+         (a blurred ::before, z-index:-1, sitting above the field but below
+         the text inside an isolated stacking context), and
+     (2) a soft halo — text-shadow in the page colour — on exposed type.
+   Both are built from --bg, so they adapt to the theme automatically
+   (light-on-light by day, dark-on-dark at night). Under reduced-motion the
+   static poster shows instead, so the cloud + halos are dropped.
+   ========================================================================= */
+
+/* ---------- HERO ---------- */
+.hero-inner { isolation: isolate; }
+.hero-inner::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: -16% -18% -22% -16%;
+  background: radial-gradient(58% 66% at 33% 47%,
+    color-mix(in srgb, var(--bg) 92%, transparent) 0%,
+    color-mix(in srgb, var(--bg) 70%, transparent) 42%,
+    color-mix(in srgb, var(--bg) 30%, transparent) 64%,
+    transparent 80%);
+  filter: blur(26px);
+  pointer-events: none;
+}
+.hero-headline   { text-shadow: 0 2px 30px var(--bg), 0 0 10px color-mix(in srgb, var(--bg) 85%, transparent); }
+.hero .kicker,
+.hero-sub        { text-shadow: 0 1px 18px var(--bg), 0 0 6px  color-mix(in srgb, var(--bg) 80%, transparent); }
+.hero-sub strong { text-shadow: inherit; }
+
+/* ---------- HORIZON ---------- */
+/* the horizon timeline is text on a bare track (no card backing), so the
+   whole section gets a tall diffused page-colour cloud pooled behind the
+   reading column — covering the heading and every dated entry. */
+#horizon .chapter-inner { position: relative; isolation: isolate; }
+#horizon .chapter-inner::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: -6% -8%;
+  background: radial-gradient(56% 92% at 30% 48%,
+    color-mix(in srgb, var(--bg) 90%, transparent) 0%,
+    color-mix(in srgb, var(--bg) 64%, transparent) 50%,
+    color-mix(in srgb, var(--bg) 24%, transparent) 70%,
+    transparent 84%);
+  filter: blur(32px);
+  pointer-events: none;
+}
+#horizon .kicker,
+#horizon .headline,
+#horizon .lede,
+.horizon-date,
+.horizon-title,
+.horizon-text {
+  text-shadow: 0 1px 14px var(--bg), 0 0 5px color-mix(in srgb, var(--bg) 80%, transparent);
+}
+
+/* ---------- reduced-motion: no field underneath, so drop cloud + halos ---- */
+@media (prefers-reduced-motion: reduce) {
+  .hero-inner::before,
+  #horizon .chapter-inner::before { display: none; }
+  .hero-headline, .hero .kicker, .hero-sub,
+  #horizon .kicker, #horizon .headline, #horizon .lede,
+  .horizon-date, .horizon-title, .horizon-text { text-shadow: none; }
+}
