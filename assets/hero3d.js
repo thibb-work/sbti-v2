@@ -97,9 +97,14 @@ export async function initHero3D({ gsap, ScrollTrigger }) {
     const target = new Float32Array(n * 3);
     const positions = new Float32Array(n * 3);
     const colors = new Float32Array(n * 3);
+    // per-bubble random seed → independent float frequency, phase & amplitude
+    // so the resolved trajectory keeps breathing as individual dots, never a
+    // frozen line.
+    const seed = new Float32Array(n);
 
     for (let i = 0; i < n; i++) {
       const i3 = i * 3;
+      seed[i] = Math.random();
       chaos[i3]     = (Math.random() - 0.5) * 26;
       chaos[i3 + 1] = (Math.random() - 0.5) * 16;
       chaos[i3 + 2] = (Math.random() - 0.5) * (16 + li * 4); // big bubbles roam deeper
@@ -114,7 +119,7 @@ export async function initHero3D({ gsap, ScrollTrigger }) {
       target[i3 + 1] = y + (Math.random() - 0.5) * spread;
       target[i3 + 2] = (Math.random() - 0.5) * spread;
 
-      const c = tealColor.clone().lerp(amberColor, Math.pow(t, 1.6) * 0.85);
+      const c = amberColor.clone().lerp(tealColor, Math.pow(t, 1.4) * 0.9);
       colors[i3] = c.r; colors[i3 + 1] = c.g; colors[i3 + 2] = c.b;
 
       positions[i3] = chaos[i3];
@@ -138,7 +143,7 @@ export async function initHero3D({ gsap, ScrollTrigger }) {
     });
     const points = new THREE.Points(geo, mat);
     group.add(points);
-    return { n, chaos, target, geo, mat, cfg, phase: li * 2.1 };
+    return { n, chaos, target, seed, geo, mat, cfg, phase: li * 2.1 };
   });
 
   // ---- the trajectory line that materializes as bubbles settle ------------
@@ -151,7 +156,7 @@ export async function initHero3D({ gsap, ScrollTrigger }) {
     linePos[i * 3]     = (t - 0.5) * SPAN_X;
     linePos[i * 3 + 1] = (DROP / 2) - ease * DROP;
     linePos[i * 3 + 2] = 0;
-    const c = tealColor.clone().lerp(amberColor, Math.pow(t, 1.6) * 0.85);
+    const c = amberColor.clone().lerp(tealColor, Math.pow(t, 1.4) * 0.9);
     lineCol[i * 3] = c.r; lineCol[i * 3 + 1] = c.g; lineCol[i * 3 + 2] = c.b;
   }
   const lineGeo = new THREE.BufferGeometry();
@@ -175,7 +180,7 @@ export async function initHero3D({ gsap, ScrollTrigger }) {
       const cols = L.geo.attributes.color.array;
       for (let i = 0; i < L.n; i++) {
         const t = i / Math.max(1, L.n - 1);
-        const c = tealColor.clone().lerp(amberColor, Math.pow(t, 1.6) * 0.85);
+        const c = amberColor.clone().lerp(tealColor, Math.pow(t, 1.4) * 0.9);
         cols[i * 3] = c.r; cols[i * 3 + 1] = c.g; cols[i * 3 + 2] = c.b;
       }
       L.geo.attributes.color.needsUpdate = true;
@@ -184,7 +189,7 @@ export async function initHero3D({ gsap, ScrollTrigger }) {
     });
     for (let i = 0; i < LINE_PTS; i++) {
       const t = i / (LINE_PTS - 1);
-      const c = tealColor.clone().lerp(amberColor, Math.pow(t, 1.6) * 0.85);
+      const c = amberColor.clone().lerp(tealColor, Math.pow(t, 1.4) * 0.9);
       lineCol[i * 3] = c.r; lineCol[i * 3 + 1] = c.g; lineCol[i * 3 + 2] = c.b;
     }
     lineGeo.attributes.color.needsUpdate = true;
@@ -216,24 +221,32 @@ export async function initHero3D({ gsap, ScrollTrigger }) {
 
     layers.forEach((L) => {
       const pos = L.geo.attributes.position.array;
+      // chaos shimmer (dies as the field resolves) + a persistent, gentle
+      // float that lives on at full resolve — bigger bubbles drift more.
+      const chaosAmp = 0.14 * wob;
+      const floatBase = 0.05 + L.cfg.size * 0.42;
       for (let i = 0; i < L.n; i++) {
         const i3 = i * 3;
-        // chaos shimmer fades as the field resolves; each layer drifts offset
-        const dx = Math.sin(drift + i + L.phase) * 0.14 * wob;
-        const dy = Math.cos(drift * 0.8 + i * 1.3 + L.phase) * 0.14 * wob;
+        const sd = L.seed[i];
+        const f = 0.45 + sd * 0.95;          // each bubble its own slow tempo
+        const ph = L.phase + sd * 6.2832;    // …and its own phase
+        const amp = chaosAmp + floatBase * s * (0.55 + sd * 0.9);
+        const dx = Math.sin(drift * f + ph) * amp;
+        const dy = Math.cos(drift * f * 0.82 + ph * 1.3) * amp;
+        const dz = Math.sin(drift * f * 0.6 + ph * 0.7) * amp * 1.25;
         pos[i3]     = L.chaos[i3]     + (L.target[i3]     - L.chaos[i3])     * s + dx;
         pos[i3 + 1] = L.chaos[i3 + 1] + (L.target[i3 + 1] - L.chaos[i3 + 1]) * s + dy;
-        pos[i3 + 2] = L.chaos[i3 + 2] + (L.target[i3 + 2] - L.chaos[i3 + 2]) * s;
+        pos[i3 + 2] = L.chaos[i3 + 2] + (L.target[i3 + 2] - L.chaos[i3 + 2]) * s + dz;
       }
       L.geo.attributes.position.needsUpdate = true;
-      // breathing: bubbles gently swell and shrink while in chaos
-      const breathe = 1 + Math.sin(drift * 0.9 + L.phase) * 0.06 * wob;
-      L.mat.size = L.cfg.size * (1 - s * 0.3) * breathe;
+      // breathing: bubbles gently swell and shrink (keeps a little life after resolve)
+      const breathe = 1 + Math.sin(drift * 0.9 + L.phase) * (0.06 * wob + 0.02 * s);
+      L.mat.size = L.cfg.size * (1 - s * 0.22) * breathe;
       L.mat.opacity = (dark ? L.cfg.opacityDark : L.cfg.opacityLight) * intro.t;
     });
 
-    // trajectory line fades in over the back half of the resolve
-    lineMat.opacity = Math.max(0, (s - 0.45) / 0.55) * (dark ? 0.9 : 0.7) * intro.t;
+    // trajectory: a FAINT guide only — the living dots are what draw the curve
+    lineMat.opacity = Math.max(0, (s - 0.5) / 0.5) * (dark ? 0.34 : 0.22) * intro.t;
 
     // cinematic camera: intro dolly 17→14, slight pull-back as the line lands,
     // pointer parallax eased on top
@@ -248,16 +261,15 @@ export async function initHero3D({ gsap, ScrollTrigger }) {
     group.rotation.z = wob * 0.05 * Math.sin(drift * 0.5);
 
     // ambient life after the resolve: the whole field breathes very slowly
-    group.position.y = Math.sin(drift * 0.35) * 0.18 * s;
+    group.position.y = Math.sin(drift * 0.35) * 0.16 * s;
 
-    // Linger as atmosphere, but clear the reading column quickly once the
-    // hero ends. The long tail remains visible at the page edges.
-    const heroExitFade = Math.max(0, Math.min(1, (s - 0.82) / 0.18));
-    group.position.x = Math.pow(linger, 0.55) * 10;
-    wrap.style.opacity = Math.min(
-      1 - heroExitFade * 0.72,
-      Math.pow(1 - linger, 1.35)
-    ).toFixed(3);
+    // Leaving the hero: NO lateral drift — the trajectory simply dissolves in
+    // place, gently, so the content below reads on clean paper. The dots keep
+    // floating individually right up until they fade out.
+    group.position.x = 0;
+    // a single smooth power curve: no abrupt step, fades quickest in the first
+    // half-screen (where text needs the room), then trails off softly to nothing
+    wrap.style.opacity = Math.pow(1 - linger, 2.8).toFixed(3);
   }
 
   // ---- scroll → progress over the hero ------------------------------------
@@ -292,7 +304,7 @@ export async function initHero3D({ gsap, ScrollTrigger }) {
     ScrollTrigger.create({
       trigger: hero,
       start: 'bottom top',
-      end: '+=250%',
+      end: '+=170%',
       scrub: 0.8,
       onUpdate: (self) => { linger = self.progress; },
       onLeave: () => pauseScene(),
