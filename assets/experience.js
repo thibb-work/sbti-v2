@@ -1,5 +1,5 @@
 /* =========================================================================
-   SBTi "Net-Zero Loop" — experience chassis (M1)
+   SBTi "Net-Zero Loop" — experience chassis
    ES module. GSAP core + ScrollTrigger via CDN (pinned gsap@3.12.5).
    Responsibilities:
      - scroll-reveal system driven by [data-reveal] / [data-reveal-group]
@@ -7,8 +7,8 @@
        mobile top progress bar
      - hash-redirect handling (old anchors → new chapters)
      - prefers-reduced-motion: disable animation, instant reveals, parity
-     - exposes window.NZ chassis API for downstream builders (M2/M4/Sonnet)
-   No Club GSAP plugins. Transforms/opacity only. No pinned sections in M1.
+     - exposes the window.NZ chassis API used by the other modules
+   No Club GSAP plugins. Transforms/opacity only. No pinned sections.
    ========================================================================= */
 
 import { gsap } from 'https://cdn.jsdelivr.net/npm/gsap@3.12.5/+esm';
@@ -42,9 +42,9 @@ const HASH_REDIRECTS = {
 };
 
 /* =========================================================================
-   Public chassis API (window.NZ) — lets M2 (hero), M4 (personalization)
-   and Sonnet's chapter scripts register reveals / read motion prefs
-   without re-implementing observers or re-importing GSAP.
+   Public chassis API (window.NZ) — lets the hero, personalization and
+   chapter scripts register reveals / read motion prefs without
+   re-implementing observers or re-importing GSAP.
    ========================================================================= */
 const listeners = [];
 const NZ = {
@@ -354,7 +354,7 @@ if (document.readyState === 'loading') {
   boot();
 }
 
-/* Expose a refresh hook so Sonnet can re-init reveals after injecting content */
+/* Expose a refresh hook so chapter scripts can re-init reveals after injecting content */
 NZ.refresh = function () {
   initReveals();
   ScrollTrigger.refresh();
