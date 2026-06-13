@@ -14,11 +14,7 @@
   --surface-2: #F1EFE8;
   --ink: #1E2B26;
   --muted: #5C6B64;
-<<<<<<< HEAD
   --hint: #606D66;
-=======
-  --hint: #6E7B74;
->>>>>>> origin/main
   --line: #E3E1D8;
   --line-strong: #C9C6BA;
   --teal: #0F6E56;
@@ -52,7 +48,6 @@
   --dur: 220ms;
 }
 
-<<<<<<< HEAD
 /* palette — dark. assets/boot.js resolves the OS preference (or the stored
    header-toggle choice) into <html data-theme="dark"> before first paint,
    so this single block serves both "system dark" and "toggled dark". */
@@ -77,27 +72,6 @@
   --amber-soft: #4A3514;
   --gray-soft: #2A332E;
   --gray-ink: #D3D1C7;
-=======
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #141917;
-    --surface: #1C2421;
-    --surface-2: #222B27;
-    --ink: #E8EDE9;
-    --muted: #A7B3AC;
-    --hint: #8FA098;
-    --line: #2E3833;
-    --line-strong: #3A453F;
-    --teal: #5DCAA5;
-    --teal-ink: #9FE1CB;
-    --teal-soft: #0B3D31;
-    --amber: #E2A04A;
-    --amber-ink: #FAC775;
-    --amber-soft: #4A3514;
-    --gray-soft: #2A332E;
-    --gray-ink: #D3D1C7;
-  }
->>>>>>> origin/main
 }
 
 /* ---- reset ---- */
@@ -192,11 +166,7 @@ a:hover { text-decoration: underline; }
 @media (min-width: 1180px) { .hd-nav { display: flex; } }
 .hd-nav a {
   font-family: var(--font-mono);
-<<<<<<< HEAD
   font-size: 12.5px;
-=======
-  font-size: 11.5px;
->>>>>>> origin/main
   letter-spacing: .1em;
   text-transform: uppercase;
   color: var(--muted);
@@ -218,11 +188,7 @@ a:hover { text-decoration: underline; }
   background: var(--surface);
   color: var(--ink);
   font-family: var(--font-mono);
-<<<<<<< HEAD
   font-size: 12.5px;
-=======
-  font-size: 11.5px;
->>>>>>> origin/main
   letter-spacing: .12em;
   text-transform: uppercase;
   padding: 7px 14px;
@@ -317,11 +283,7 @@ a:hover { text-decoration: underline; }
 .site-header .divider { width: 1px; height: 18px; background: var(--line-strong); }
 .site-header .ctx {
   font-family: var(--font-mono);
-<<<<<<< HEAD
   font-size: 12.5px;
-=======
-  font-size: 11.5px;
->>>>>>> origin/main
   letter-spacing: .12em;
   text-transform: uppercase;
   color: var(--hint);
@@ -413,11 +375,7 @@ a:hover { text-decoration: underline; }
     transform: translateY(-50%);
     white-space: nowrap;
     font-family: var(--font-mono);
-<<<<<<< HEAD
     font-size: 12.5px;
-=======
-    font-size: 11.5px;
->>>>>>> origin/main
     letter-spacing: .1em;
     text-transform: uppercase;
     color: var(--ink);
@@ -501,11 +459,7 @@ a:hover { text-decoration: underline; }
 
 .chapter-num {
   font-family: var(--font-mono);
-<<<<<<< HEAD
   font-size: 12.5px;
-=======
-  font-size: 11.5px;
->>>>>>> origin/main
   color: var(--hint);
   letter-spacing: .1em;
 }
@@ -609,11 +563,7 @@ a:hover { text-decoration: underline; }
   transform: translateX(-50%);
   z-index: 2;
   font-family: var(--font-mono);
-<<<<<<< HEAD
   font-size: 12.5px;
-=======
-  font-size: 11.5px;
->>>>>>> origin/main
   letter-spacing: .18em;
   text-transform: uppercase;
   color: var(--hint);
@@ -727,11 +677,7 @@ a:hover { text-decoration: underline; }
   display: inline-flex;
   align-items: center;
   font-family: var(--font-mono);
-<<<<<<< HEAD
   font-size: 12.5px;
-=======
-  font-size: 11.5px;
->>>>>>> origin/main
   letter-spacing: .08em;
   text-transform: uppercase;
   padding: 3px 10px;
@@ -852,11 +798,7 @@ a:hover { text-decoration: underline; }
   display: block;
   margin-top: 8px;
   font-family: var(--font-mono);
-<<<<<<< HEAD
   font-size: 12.5px;
-=======
-  font-size: 11.5px;
->>>>>>> origin/main
   font-style: normal;
   letter-spacing: .1em;
   text-transform: uppercase;
@@ -902,11 +844,7 @@ a:hover { text-decoration: underline; }
 .flip-face-back { transform: rotateY(180deg); background: var(--teal-soft); border-color: var(--teal); }
 .flip-face .ficon {
   font-family: var(--font-mono);
-<<<<<<< HEAD
   font-size: 12.5px;
-=======
-  font-size: 11.5px;
->>>>>>> origin/main
   letter-spacing: .12em;
   text-transform: uppercase;
   color: var(--teal);
@@ -924,11 +862,7 @@ a:hover { text-decoration: underline; }
 .flip-hint {
   margin-top: auto;
   font-family: var(--font-mono);
-<<<<<<< HEAD
   font-size: 12.5px;
-=======
-  font-size: 11.5px;
->>>>>>> origin/main
   letter-spacing: .1em;
   text-transform: uppercase;
   color: var(--hint);
@@ -1111,11 +1045,7 @@ a:hover { text-decoration: underline; }
 }
 .route-card-head .ricon {
   font-family: var(--font-mono);
-<<<<<<< HEAD
   font-size: 12.5px;
-=======
-  font-size: 11.5px;
->>>>>>> origin/main
   letter-spacing: .12em;
   text-transform: uppercase;
   color: var(--teal);
@@ -1173,11 +1103,7 @@ a:hover { text-decoration: underline; }
   transition: background var(--dur) var(--ease), color var(--dur) var(--ease), border-color var(--dur) var(--ease);
 }
 .toggle-btn:hover { border-color: var(--teal); color: var(--ink); }
-<<<<<<< HEAD
 .toggle-btn.is-active { background: var(--teal); border-color: var(--teal); color: var(--on-teal); }
-=======
-.toggle-btn.is-active { background: var(--teal); border-color: var(--teal); color: #fff; }
->>>>>>> origin/main
 
 .target-panel {
   display: none;
@@ -1274,11 +1200,7 @@ a:hover { text-decoration: underline; }
 .cat-explorer { margin-top: 8px; }
 .cat-group-label {
   font-family: var(--font-mono);
-<<<<<<< HEAD
   font-size: 12.5px;
-=======
-  font-size: 11.5px;
->>>>>>> origin/main
   letter-spacing: .12em;
   text-transform: uppercase;
   color: var(--hint);
@@ -1316,11 +1238,7 @@ a:hover { text-decoration: underline; }
 .cat-panel-head .cname { font-family: var(--font-display); font-size: 15px; font-weight: 500; }
 .cat-panel-head .cgroup {
   font-family: var(--font-mono);
-<<<<<<< HEAD
   font-size: 12.5px;
-=======
-  font-size: 11.5px;
->>>>>>> origin/main
   letter-spacing: .08em;
   text-transform: uppercase;
   padding: 3px 10px;
@@ -1357,11 +1275,7 @@ a:hover { text-decoration: underline; }
 }
 .matrix-table th {
   font-family: var(--font-mono);
-<<<<<<< HEAD
   font-size: 12.5px;
-=======
-  font-size: 11.5px;
->>>>>>> origin/main
   letter-spacing: .08em;
   text-transform: uppercase;
   color: var(--hint);
@@ -1394,11 +1308,7 @@ a:hover { text-decoration: underline; }
 }
 .claim-card .ckicker {
   font-family: var(--font-mono);
-<<<<<<< HEAD
   font-size: 12.5px;
-=======
-  font-size: 11.5px;
->>>>>>> origin/main
   letter-spacing: .1em;
   text-transform: uppercase;
   color: var(--teal);
@@ -1417,11 +1327,7 @@ a:hover { text-decoration: underline; }
 .claim-sample .slabel {
   display: block;
   font-family: var(--font-mono);
-<<<<<<< HEAD
   font-size: 12.5px;
-=======
-  font-size: 11.5px;
->>>>>>> origin/main
   font-style: normal;
   letter-spacing: .1em;
   text-transform: uppercase;
@@ -1456,15 +1362,7 @@ a:hover { text-decoration: underline; }
   justify-content: center;
   gap: 2px;
   font-family: var(--font-mono);
-<<<<<<< HEAD
   font-size: 12.5px;
-=======
-<<<<<<< HEAD
-  font-size: 11.5px;
-=======
-  font-size: 10px;
->>>>>>> origin/main
->>>>>>> origin/main
   letter-spacing: .14em;
   text-transform: uppercase;
   color: var(--hint);
@@ -1495,11 +1393,7 @@ a:hover { text-decoration: underline; }
 }
 .hy-tag {
   font-family: var(--font-mono);
-<<<<<<< HEAD
   font-size: 12.5px;
-=======
-  font-size: 11.5px;
->>>>>>> origin/main
   letter-spacing: .1em;
   text-transform: uppercase;
   color: var(--teal);
@@ -1620,11 +1514,7 @@ a:hover { text-decoration: underline; }
 .horizon-item.tone-gray::before { background: var(--hint); }
 .horizon-date {
   font-family: var(--font-mono);
-<<<<<<< HEAD
   font-size: 12.5px;
-=======
-  font-size: 11.5px;
->>>>>>> origin/main
   letter-spacing: .1em;
   text-transform: uppercase;
   color: var(--teal);
@@ -1655,11 +1545,7 @@ a:hover { text-decoration: underline; }
 }
 .about-card .alabel {
   font-family: var(--font-mono);
-<<<<<<< HEAD
   font-size: 12.5px;
-=======
-  font-size: 11.5px;
->>>>>>> origin/main
   letter-spacing: .12em;
   text-transform: uppercase;
   color: var(--teal);
@@ -1688,13 +1574,8 @@ a:hover { text-decoration: underline; }
 }
 .contact-card .alabel { color: var(--teal); }
 .contact-pitch {
-<<<<<<< HEAD
-  font-size: 14.5px;
-  line-height: 1.65;
-=======
   font-size: 15px;
   line-height: 1.7;
->>>>>>> origin/main
   color: var(--muted);
   max-width: 56ch;
   margin: 6px 0 20px;
@@ -1833,11 +1714,7 @@ a:hover { text-decoration: underline; }
 .cv-reset {
   margin-top: 12px;
   font-family: var(--font-mono);
-<<<<<<< HEAD
   font-size: 12.5px;
-=======
-  font-size: 11.5px;
->>>>>>> origin/main
   letter-spacing: .08em;
   text-transform: uppercase;
   color: var(--hint);
@@ -1959,11 +1836,7 @@ a:hover { text-decoration: underline; }
 
 .rung-tier {
   font-family: var(--font-mono);
-<<<<<<< HEAD
   font-size: 12.5px;
-=======
-  font-size: 11.5px;
->>>>>>> origin/main
   letter-spacing: .1em;
   text-transform: uppercase;
   color: var(--teal);
@@ -1989,11 +1862,7 @@ a:hover { text-decoration: underline; }
 }
 .claim-tag {
   font-family: var(--font-mono);
-<<<<<<< HEAD
   font-size: 12.5px;
-=======
-  font-size: 11.5px;
->>>>>>> origin/main
   letter-spacing: .1em;
   text-transform: uppercase;
   padding: 2px 8px;
