@@ -1,5 +1,5 @@
 /* =========================================================================
-   SBTi "Net-Zero Loop" experience — chassis stylesheet (M1)
+   SBTi "Net-Zero Loop" experience — chassis stylesheet
    Design tokens lifted from the prior index.html / scope-1.html so the
    editorial identity carries over: ivory #FBFAF7, deep teal #0F6E56,
    amber #BA7517, Georgia display, Avenir Next body, Courier kickers.
@@ -442,21 +442,6 @@ a:hover { text-decoration: underline; }
   margin: 0 0 28px;
 }
 
-/* placeholder block for Sonnet to fill (visible during M1, removed by Sonnet) */
-.placeholder {
-  border: 1px dashed var(--line-strong);
-  border-radius: var(--radius-lg);
-  padding: 22px 24px;
-  color: var(--hint);
-  font-size: 14px;
-  background: color-mix(in srgb, var(--surface) 60%, transparent);
-}
-.placeholder code {
-  font-family: var(--font-mono);
-  font-size: 12.5px;
-  color: var(--teal);
-}
-
 .chapter-num {
   font-family: var(--font-mono);
   font-size: 12.5px;
@@ -668,11 +653,11 @@ a:hover { text-decoration: underline; }
 
 /* =========================================================================
    ===========================================================================
-   CHAPTER COMPONENTS (M3) — shared primitives + per-chapter styles
+   CHAPTER COMPONENTS — shared primitives + per-chapter styles
    ===========================================================================
    ========================================================================= */
 
-/* ---- shared: req/opt badges (M4 populates data-req-a / data-req-b) ---- */
+/* ---- shared: req/opt badges (personalize.js populates data-req-a / data-req-b) ---- */
 .req-badge {
   display: inline-flex;
   align-items: center;
@@ -695,7 +680,7 @@ a:hover { text-decoration: underline; }
 /* CSS-only fallback (no-JS): show the Category A side as a sensible default */
 .req-badge::before { content: attr(data-req-a); }
 .req-badge[data-active="b"]::before { content: attr(data-req-b); }
-/* once M4's JS adopts a badge it injects .rb-text and we drop the ::before */
+/* once personalize.js adopts a badge it injects .rb-text and we drop the ::before */
 .req-badge.rb-js::before { content: none; }
 .req-badge .rb-text { display: inline-block; transition: transform var(--dur) var(--ease), opacity var(--dur) var(--ease); }
 
@@ -1595,7 +1580,7 @@ a:hover { text-decoration: underline; }
 .contact-actions { display: flex; flex-wrap: wrap; gap: 10px; }
 
 /* =========================================================================
-   M4 · PERSONALIZATION ENGINE (#category)
+   PERSONALIZATION ENGINE (#category)
    ========================================================================= */
 .cat-engine {
   display: grid;
@@ -1752,20 +1737,10 @@ a:hover { text-decoration: underline; }
 }
 
 /* =========================================================================
-   M5 · PINNED IMPLEMENTATION HIERARCHY (#implement)
+   IMPLEMENTATION-HIERARCHY LADDER (#implement)
+   Static 3-rung list with a teal spine — no scroll states, CSS only.
    ========================================================================= */
-.ladder-pin { position: relative; }
-.ladder-stage {
-  display: flex;
-  align-items: center;
-  min-height: 100svh;
-  padding: clamp(40px, 8vh, 96px) var(--gutter);
-}
-.ladder-pin.is-static .ladder-stage {
-  min-height: 0;
-  padding: 12px var(--gutter) 8px;
-  display: block;
-}
+.ladder-stage { padding: 12px var(--gutter) 8px; }
 
 .ladder {
   position: relative;
@@ -1774,39 +1749,21 @@ a:hover { text-decoration: underline; }
   padding: 0 0 0 34px;
   max-width: var(--measure);
   width: 100%;
-  counter-reset: rung;
 }
-.ladder-progress {
+/* teal spine threading the three rung marks */
+.ladder::before {
+  content: "";
   position: absolute;
   left: 11px;
   top: 8px;
   bottom: 8px;
   width: 2px;
-}
-.lp-track, .lp-fill {
-  position: absolute;
-  inset: 0;
-  width: 2px;
   border-radius: 2px;
-}
-.lp-track { background: var(--line); }
-.lp-fill {
   background: var(--teal);
-  transform-origin: top;
-  transform: scaleY(0);
-  transition: transform 120ms linear;
 }
 
-.rung {
-  position: relative;
-  padding: 14px 0 28px;
-  opacity: .42;
-  transform: translateY(6px);
-  transition: opacity 520ms var(--ease), transform 520ms var(--ease);
-}
+.rung { position: relative; padding: 14px 0 28px; }
 .rung:last-child { padding-bottom: 0; }
-.rung.is-active, .rung.is-past { opacity: 1; transform: none; }
-.rung.is-past { opacity: .6; }
 
 .rung-mark {
   position: absolute;
@@ -1815,24 +1772,18 @@ a:hover { text-decoration: underline; }
   width: 24px;
   height: 24px;
   border-radius: 999px;
-  background: var(--bg);
-  border: 2px solid var(--line-strong);
+  background: var(--teal);
+  border: 2px solid var(--teal);
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: border-color var(--dur) var(--ease), background var(--dur) var(--ease), transform var(--dur) var(--ease);
 }
 .rung-num {
   font-family: var(--font-mono);
   font-size: 12.5px;
   font-weight: 700;
-  color: var(--hint);
-  transition: color var(--dur) var(--ease);
+  color: var(--on-teal);
 }
-.rung.is-active .rung-mark { border-color: var(--teal); background: var(--teal); transform: scale(1.08); }
-.rung.is-active .rung-num { color: var(--on-teal); }
-.rung.is-past .rung-mark { border-color: var(--teal); }
-.rung.is-past .rung-num { color: var(--teal); }
 
 .rung-tier {
   font-family: var(--font-mono);
@@ -1882,11 +1833,8 @@ a:hover { text-decoration: underline; }
 }
 .rung-claim.claim-system .claim-tag { background: var(--amber-ink); color: var(--surface); }
 
-/* static-mode focus accent (reduced-motion brightens centred rung) */
-.ladder-pin.is-static .rung.is-focus .rung-mark { border-color: var(--teal); }
-
 /* =========================================================================
-   Hourly-matching bars (grow on reveal, non-pinned)
+   Hourly-matching bars (grow on reveal)
    ========================================================================= */
 .hourly {
   border: 1px solid var(--line);
@@ -1938,14 +1886,10 @@ a:hover { text-decoration: underline; }
 .hourly-note strong { color: var(--ink); }
 
 @media (max-width: 767px) {
-  /* mobile: ladder never pins — static stacked rungs (handled in JS too) */
-  .ladder-stage { min-height: 0; display: block; padding: 8px var(--gutter); }
-  .rung { opacity: 1; transform: none; }
+  .ladder-stage { padding: 8px var(--gutter); }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .rung { opacity: 1; transform: none; }
-  .ladder-stage { min-height: 0; display: block; }
   .hb-fill { transition: none; }
   .req-badge .rb-text { transition: none; }
 }

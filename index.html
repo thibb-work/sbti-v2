@@ -87,7 +87,7 @@
         Before anything else, V2.0 sorts companies into Category&nbsp;A or Category&nbsp;B.
         Answer three questions once, and every requirement on this page flips to match your company.
       </p>
-      <!-- M4 · Personalization engine — segmented controls drive window.NZ.category,
+      <!-- Personalization engine — segmented controls drive window.NZ.category,
            which flips every .req-badge on the page. Built in assets/personalize.js. -->
       <div class="cat-engine" data-reveal>
         <form class="cat-controls" id="catControls" aria-describedby="cat-controls-note">
@@ -520,63 +520,56 @@
       </p>
     </div>
 
-    <!-- ===== M5 · pinned 3-rung ladder ===== -->
-    <div class="ladder-pin" id="ladderPin">
-      <div class="ladder-stage" id="ladderStage">
-        <div class="ladder-progress" aria-hidden="true">
-          <span class="lp-track"></span>
-          <span class="lp-fill" id="ladderFill"></span>
-        </div>
-
-        <ol class="ladder" id="ladder" aria-label="Implementation hierarchy, top to bottom">
-          <li class="rung is-active" data-rung="0">
-            <div class="rung-mark"><span class="rung-num">1</span></div>
-            <div class="rung-body">
-              <p class="rung-tier">Activity level · CNZS-C21.1</p>
-              <h3 class="rung-title">Cut at source.</h3>
-              <p class="rung-text">Reduce emissions inside your own operations and value chain — efficiency, fuel switching, behind-the-meter generation, and engaging suppliers and customers to cut theirs.</p>
-              <div class="rung-actions">
-                <span class="chip chip-teal">Efficiency</span>
-                <span class="chip chip-teal">Fuel switching</span>
-                <span class="chip chip-teal">Behind-the-meter generation</span>
-                <span class="chip chip-teal">Supplier &amp; customer engagement</span>
-              </div>
-              <p class="rung-claim claim-company"><span class="claim-tag">Earns</span> Company-level claim — the reduction lands in your physical inventory.</p>
+    <!-- ===== 3-rung implementation-hierarchy ladder (static, CSS-only) ===== -->
+    <div class="ladder-stage">
+      <ol class="ladder" aria-label="Implementation hierarchy, top to bottom">
+        <li class="rung">
+          <div class="rung-mark"><span class="rung-num">1</span></div>
+          <div class="rung-body">
+            <p class="rung-tier">Activity level · CNZS-C21.1</p>
+            <h3 class="rung-title">Cut at source.</h3>
+            <p class="rung-text">Reduce emissions inside your own operations and value chain — efficiency, fuel switching, behind-the-meter generation, and engaging suppliers and customers to cut theirs.</p>
+            <div class="rung-actions">
+              <span class="chip chip-teal">Efficiency</span>
+              <span class="chip chip-teal">Fuel switching</span>
+              <span class="chip chip-teal">Behind-the-meter generation</span>
+              <span class="chip chip-teal">Supplier &amp; customer engagement</span>
             </div>
-          </li>
+            <p class="rung-claim claim-company"><span class="claim-tag">Earns</span> Company-level claim — the reduction lands in your physical inventory.</p>
+          </div>
+        </li>
 
-          <li class="rung" data-rung="1">
-            <div class="rung-mark"><span class="rung-num">2</span></div>
-            <div class="rung-body">
-              <p class="rung-tier">Activity pools · CNZS-C21.2 · C22</p>
-              <h3 class="rung-title">Act within shared systems.</h3>
-              <p class="rung-text">Where emissions sit in systems you share — grids, supply sheds, logistics networks — act within them, at the smallest reasonable boundary. Market instruments may convey the low-carbon attribute: PPAs and EACs, biomethane, mass-balance and book-and-claim for materials.</p>
-              <div class="rung-actions">
-                <span class="chip chip-teal">Grid &amp; supply-shed action</span>
-                <span class="chip chip-teal">PPAs &amp; EACs</span>
-                <span class="chip chip-teal">Mass balance</span>
-                <span class="chip chip-teal">Book &amp; claim</span>
-              </div>
-              <p class="rung-claim claim-system"><span class="claim-tag">Earns</span> System-contribution claim — separate from your inventory reduction (C24, C37.10.c).</p>
+        <li class="rung">
+          <div class="rung-mark"><span class="rung-num">2</span></div>
+          <div class="rung-body">
+            <p class="rung-tier">Activity pools · CNZS-C21.2 · C22</p>
+            <h3 class="rung-title">Act within shared systems.</h3>
+            <p class="rung-text">Where emissions sit in systems you share — grids, supply sheds, logistics networks — act within them, at the smallest reasonable boundary. Market instruments may convey the low-carbon attribute: PPAs and EACs, biomethane, mass-balance and book-and-claim for materials.</p>
+            <div class="rung-actions">
+              <span class="chip chip-teal">Grid &amp; supply-shed action</span>
+              <span class="chip chip-teal">PPAs &amp; EACs</span>
+              <span class="chip chip-teal">Mass balance</span>
+              <span class="chip chip-teal">Book &amp; claim</span>
             </div>
-          </li>
+            <p class="rung-claim claim-system"><span class="claim-tag">Earns</span> System-contribution claim — separate from your inventory reduction (C24, C37.10.c).</p>
+          </div>
+        </li>
 
-          <li class="rung" data-rung="2">
-            <div class="rung-mark"><span class="rung-num">3</span></div>
-            <div class="rung-body">
-              <p class="rung-tier">Sector level · CNZS-C23</p>
-              <h3 class="rung-title">Act at sector level — only while constrained.</h3>
-              <p class="rung-text">Reach here only by demonstrating a <strong>structural constraint</strong> — region- or site-specific infrastructure, regulatory, market-structure or supply limits that block action higher up within the target timeframe. Sector action must be the <em>same type of activity</em> in a relevant geographic or system context.</p>
-              <div class="rung-actions">
-                <span class="chip chip-amber">Documented structural constraint</span>
-                <span class="chip chip-teal">Same activity type</span>
-                <span class="chip chip-teal">Relevant geography</span>
-              </div>
-              <p class="rung-claim claim-system"><span class="claim-tag">Earns</span> System-contribution claim — never a substitute for activity-level cuts.</p>
+        <li class="rung">
+          <div class="rung-mark"><span class="rung-num">3</span></div>
+          <div class="rung-body">
+            <p class="rung-tier">Sector level · CNZS-C23</p>
+            <h3 class="rung-title">Act at sector level — only while constrained.</h3>
+            <p class="rung-text">Reach here only by demonstrating a <strong>structural constraint</strong> — region- or site-specific infrastructure, regulatory, market-structure or supply limits that block action higher up within the target timeframe. Sector action must be the <em>same type of activity</em> in a relevant geographic or system context.</p>
+            <div class="rung-actions">
+              <span class="chip chip-amber">Documented structural constraint</span>
+              <span class="chip chip-teal">Same activity type</span>
+              <span class="chip chip-teal">Relevant geography</span>
             </div>
-          </li>
-        </ol>
-      </div>
+            <p class="rung-claim claim-system"><span class="claim-tag">Earns</span> System-contribution claim — never a substitute for activity-level cuts.</p>
+          </div>
+        </li>
+      </ol>
     </div>
 
     <div class="chapter-inner">
@@ -585,7 +578,7 @@
         additionality, unique attribution, temporal alignment, no double counting (CNZS-C25–C26).
       </p>
 
-      <!-- ===== hourly matching (non-pinned, normal flow) ===== -->
+      <!-- ===== hourly-matching bars ===== -->
       <p class="kicker u-mt8">CNZS-C34.1 · SCOPE 2 HOURLY MATCHING</p>
       <p class="lede u-mb18" data-reveal>
         Optional recognition on the SBTi Dashboard rises over time — the bar for what counts as

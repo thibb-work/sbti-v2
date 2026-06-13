@@ -1,5 +1,5 @@
 /* =========================================================================
-   SBTi "Net-Zero Loop" — M4 · Personalization engine
+   SBTi "Net-Zero Loop" — Category A/B personalization engine
    "Which rules apply to you?" — three segmented controls (revenue / FTE /
    HQ income group, + optional medium-company emissions test) approximate
    Table 2 (p.19) and resolve a Category A | B verdict. The verdict:
