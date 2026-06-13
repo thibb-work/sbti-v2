@@ -1,6 +1,6 @@
 /* =========================================================================
-   SBTi "Net-Zero Loop" — shared content & data (M3)
-   Reusable data objects for chapters built by Sonnet: Scope 3 Table 3,
+   SBTi "Net-Zero Loop" — shared content & data
+   Reusable data objects for the chapter scripts: Scope 3 Table 3,
    horizon timeline entries, OER tiers, and OER calculator presets.
    Plain ES module — no imports, no side effects beyond named exports.
    ========================================================================= */

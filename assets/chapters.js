@@ -1,5 +1,5 @@
 /* =========================================================================
-   SBTi "Net-Zero Loop" — chapter interactivity (M3)
+   SBTi "Net-Zero Loop" — chapter interactivity
    Vanilla JS, keyboard-operable. Wires up:
      #govern   — flip-card flip on click/Enter/Space
      #baseline — V1↔V2 drag slider (pointer + arrow keys) + fineprint toggles
