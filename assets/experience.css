@@ -575,7 +575,7 @@ a:hover { text-decoration: underline; }
   z-index: 1;
   border-top: 1px solid var(--line);
   padding: 34px var(--gutter) 56px;
-  font-size: 13px;
+  font-size: 14.5px;
   color: var(--hint);
   line-height: 1.6;
   text-align: center;
@@ -957,43 +957,8 @@ a:hover { text-decoration: underline; }
 }
 
 /* =========================================================================
-   #targets — sub-tabbed triptych (S1 / S2 / S3)
+   SET TARGETS — Scope 1 / 2 / 3 (each now its own chapter)
    ========================================================================= */
-.tabs {
-  display: flex;
-  gap: 6px;
-  border-bottom: 1px solid var(--line);
-  margin-bottom: 22px;
-  flex-wrap: wrap;
-}
-.tab-btn {
-  font-family: var(--font-mono);
-  font-size: 12.5px;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  padding: 10px 16px;
-  border: none;
-  background: none;
-  color: var(--hint);
-  cursor: pointer;
-  position: relative;
-  transition: color var(--dur) var(--ease);
-}
-.tab-btn::after {
-  content: "";
-  position: absolute;
-  left: 0; right: 0; bottom: -1px;
-  height: 2px;
-  background: var(--teal);
-  transform: scaleX(0);
-  transition: transform var(--dur) var(--ease);
-}
-.tab-btn:hover { color: var(--ink); }
-.tab-btn.is-active { color: var(--teal); }
-.tab-btn.is-active::after { transform: scaleX(1); }
-.tab-panel { display: none; }
-.tab-panel.is-active { display: block; }
-
 /* S1 route cards (ported from scope-1.html) */
 .route-grid {
   display: grid;
@@ -1538,6 +1503,17 @@ a:hover { text-decoration: underline; }
 }
 .about-card .awho { font-size: 17px; font-weight: 600; margin: 0 0 2px; }
 .about-card .arole { font-size: 13px; color: var(--teal); font-weight: 500; margin: 0 0 12px; }
+/* name on the left, LinkedIn link on the right — mirrors the contact row */
+.about-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 10px 24px;
+  margin-bottom: 12px;
+}
+.about-head .arole { margin-bottom: 0; }
+.about-head .about-link { margin-top: 0; }
 .about-card p { margin: 0 0 12px; font-size: 14.5px; color: var(--muted); line-height: 1.65; }
 .about-card p:last-child { margin-bottom: 0; }
 .about-link {
@@ -1549,35 +1525,17 @@ a:hover { text-decoration: underline; }
   font-weight: 500;
   font-size: 14px;
 }
-/* ---- "Work with Arcadia" contact card — the page's closing CTA ---- */
-.contact-card {
+/* ---- "Work with Arcadia" — Arthur, folded into the Arcadia card so it
+   reads as part of the story, not a separate CTA. A quiet hairline sets it
+   apart; the name/links reuse the author row's treatment to blend in. ---- */
+.about-contact {
   margin-top: 18px;
-  border: 1px solid color-mix(in srgb, var(--teal) 35%, var(--line));
-  border-radius: var(--radius-lg);
-  background: color-mix(in srgb, var(--teal-soft) 32%, var(--surface));
-  padding: 26px 28px;
-}
-.contact-card .alabel { color: var(--teal); }
-.contact-pitch {
-  font-size: 15px;
-  line-height: 1.7;
-  color: var(--muted);
-  max-width: 56ch;
-  margin: 6px 0 20px;
-}
-.contact-pitch strong { color: var(--ink); }
-.contact-person {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px 24px;
-  border-top: 1px solid color-mix(in srgb, var(--teal) 20%, var(--line));
   padding-top: 18px;
+  border-top: 1px solid var(--line);
 }
-.contact-person .cname { font-size: 17px; font-weight: 600; margin: 0; }
-.contact-person .ctitle { font-size: 13px; color: var(--muted); margin: 2px 0 0; }
-.contact-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.about-contact strong { color: var(--ink); font-weight: 600; }
+.contact-actions { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
+.contact-actions .about-link { margin-top: 0; }
 
 /* =========================================================================
    PERSONALIZATION ENGINE (#category)
@@ -1978,11 +1936,60 @@ a:hover { text-decoration: underline; }
   text-shadow: 0 1px 14px var(--bg), 0 0 5px color-mix(in srgb, var(--bg) 80%, transparent);
 }
 
+/* ---------- ABOUT / CONTACT — net-zero reprise field behind the closing copy
+   The .about-card surfaces are opaque, so
+   only the section heading column sits over the returning field. A diffused
+   page-colour cloud pools behind it, with halos on the exposed type — same
+   recipe as hero/horizon, scoped here so the reprise never costs legibility. */
+#about .chapter-inner { position: relative; isolation: isolate; }
+#about .chapter-inner::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: -8% -8% auto -8%;
+  height: 62%;
+  background: radial-gradient(60% 74% at 32% 30%,
+    color-mix(in srgb, var(--bg) 90%, transparent) 0%,
+    color-mix(in srgb, var(--bg) 62%, transparent) 50%,
+    color-mix(in srgb, var(--bg) 24%, transparent) 70%,
+    transparent 82%);
+  filter: blur(30px);
+  pointer-events: none;
+}
+#about .kicker,
+#about .headline,
+#about .lede,
+.site-footer {
+  text-shadow: 0 1px 14px var(--bg), 0 0 5px color-mix(in srgb, var(--bg) 80%, transparent);
+}
+
+/* The foam band sits right behind the footer, so the closing credit gets the
+   same treatment as the hero copy: a diffused page-colour cloud pooled behind
+   the text (above the field, below the type via the footer's own stacking
+   context) plus the halo above — keeping the line highly visible over the dots. */
+.site-footer { isolation: isolate; }
+.site-footer::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: -40% -6%;
+  background: radial-gradient(72% 130% at 50% 50%,
+    color-mix(in srgb, var(--bg) 92%, transparent) 0%,
+    color-mix(in srgb, var(--bg) 66%, transparent) 44%,
+    color-mix(in srgb, var(--bg) 24%, transparent) 68%,
+    transparent 82%);
+  filter: blur(24px);
+  pointer-events: none;
+}
+
 /* ---------- reduced-motion: no field underneath, so drop cloud + halos ---- */
 @media (prefers-reduced-motion: reduce) {
   .hero-inner::before,
-  #horizon .chapter-inner::before { display: none; }
+  #horizon .chapter-inner::before,
+  #about .chapter-inner::before,
+  .site-footer::before { display: none; }
   .hero-headline, .hero .kicker, .hero-sub,
   #horizon .kicker, #horizon .headline, #horizon .lede,
-  .horizon-date, .horizon-title, .horizon-text { text-shadow: none; }
+  .horizon-date, .horizon-title, .horizon-text,
+  #about .kicker, #about .headline, #about .lede, .site-footer { text-shadow: none; }
 }

@@ -27,7 +27,9 @@ const CHAPTERS = [
   { id: 'horizon',   label: 'Horizon' },
   { id: 'govern',    label: 'Govern' },
   { id: 'baseline',  label: 'Baseline' },
-  { id: 'targets',   label: 'Targets' },
+  { id: 'scope-1',   label: 'Scope 1' },
+  { id: 'scope-2',   label: 'Scope 2' },
+  { id: 'scope-3',   label: 'Scope 3' },
   { id: 'implement', label: 'Implement' },
   { id: 'prove',     label: 'Prove' },
   { id: 'oer',       label: 'Responsibility' },
@@ -36,9 +38,7 @@ const CHAPTERS = [
 
 const HASH_REDIRECTS = {
   '#timeline': '#horizon',
-  '#scope-1':  '#targets',
-  '#scope-2':  '#targets',
-  '#scope-3':  '#targets'
+  '#targets':  '#scope-1'
 };
 
 /* =========================================================================

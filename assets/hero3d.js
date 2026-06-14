@@ -4,7 +4,9 @@
    depth layers that resolves into a single descending 2026→2050 trajectory
    as the visitor scrolls. Cinematic layer: GSAP camera dolly on entry,
    pointer parallax, atmospheric fog, and a drawn trajectory line that
-   materializes as the bubbles settle.
+   materializes as the bubbles settle. At the page's end the same dots
+   re-gather as a gentle band of green foam along the bottom edge — a
+   net-zero reprise that signals the foot of the page.
 
    Loaded lazily by experience.js (only when WebGL present & motion allowed).
    Owns: adaptive particle count, lazy init, full dispose past the hero,
@@ -88,6 +90,8 @@ export async function initHero3D({ gsap, ScrollTrigger }) {
 
   const SPAN_X = 22;   // 2026 (left) → 2050 (right)
   const DROP = 7.5;    // descent height
+  const FOAM_W = 30;   // net-zero foam band — wider than the view, edge to edge
+  const FOAM_Y = -6.8; // …resting low in frame: the foot of the page
   const group = new THREE.Group();
   scene.add(group);
 
@@ -101,6 +105,11 @@ export async function initHero3D({ gsap, ScrollTrigger }) {
     // so the resolved trajectory keeps breathing as individual dots, never a
     // frozen line.
     const seed = new Float32Array(n);
+    // foam-band rest position — where each dot settles during the net-zero
+    // reprise at the page's end: a wide tideline pooled low in the frame,
+    // clustered near the waterline with a few wisps lifting above, like
+    // sea-foam come to rest on sand.
+    const foam = new Float32Array(n * 3);
 
     for (let i = 0; i < n; i++) {
       const i3 = i * 3;
@@ -119,6 +128,10 @@ export async function initHero3D({ gsap, ScrollTrigger }) {
       target[i3 + 1] = y + (Math.random() - 0.5) * spread;
       target[i3 + 2] = (Math.random() - 0.5) * spread;
 
+      foam[i3]     = (Math.random() - 0.5) * FOAM_W;
+      foam[i3 + 1] = FOAM_Y + Math.pow(Math.random(), 2.2) * (2.2 + li * 0.9) - 0.4;
+      foam[i3 + 2] = (Math.random() - 0.5) * (2 + li * 1.6);
+
       const c = amberColor.clone().lerp(tealColor, Math.pow(t, 1.4) * 0.9);
       colors[i3] = c.r; colors[i3 + 1] = c.g; colors[i3 + 2] = c.b;
 
@@ -130,6 +143,9 @@ export async function initHero3D({ gsap, ScrollTrigger }) {
     const geo = new THREE.BufferGeometry();
     geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
     geo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+    // keep the untinted amber→teal ramp so the net-zero reprise can lerp the
+    // live colours toward teal and back without losing the original gradient
+    const baseCol = colors.slice();
 
     const mat = new THREE.PointsMaterial({
       size: cfg.size,
@@ -143,7 +159,7 @@ export async function initHero3D({ gsap, ScrollTrigger }) {
     });
     const points = new THREE.Points(geo, mat);
     group.add(points);
-    return { n, chaos, target, seed, geo, mat, cfg, phase: li * 2.1 };
+    return { n, chaos, target, foam, seed, baseCol, geo, mat, cfg, phase: li * 2.1 };
   });
 
   // ---- the trajectory line that materializes as bubbles settle ------------
@@ -166,6 +182,29 @@ export async function initHero3D({ gsap, ScrollTrigger }) {
   const trajectory = new THREE.Line(lineGeo, lineMat);
   group.add(trajectory);
 
+  // ---- net-zero reprise tint — lerp the live colours from the base ramp
+  // toward teal as the closing reprise reaches full, so the field reads as
+  // "everything has arrived at net zero". Driven from the reprise ScrollTrigger
+  // (scroll-rate, not per frame) and skipped unless it moved meaningfully.
+  let lastTint = -1;
+  function applyRepriseTint(rp) {
+    if (rp === lastTint) return;
+    if (rp > 0 && rp < 1 && Math.abs(rp - lastTint) < 0.02) return;
+    lastTint = rp;
+    const k = rp * 0.92;                 // how far toward teal at full reprise
+    const tr = tealColor.r, tg = tealColor.g, tb = tealColor.b;
+    layers.forEach((L) => {
+      const cols = L.geo.attributes.color.array;
+      const base = L.baseCol;
+      for (let i = 0; i < L.n * 3; i += 3) {
+        cols[i]     = base[i]     + (tr - base[i])     * k;
+        cols[i + 1] = base[i + 1] + (tg - base[i + 1]) * k;
+        cols[i + 2] = base[i + 2] + (tb - base[i + 2]) * k;
+      }
+      L.geo.attributes.color.needsUpdate = true;
+    });
+  }
+
   // ---- theme reactivity — re-tint everything when the header toggle flips --
   function applyTheme() {
     if (disposed) return;
@@ -177,16 +216,20 @@ export async function initHero3D({ gsap, ScrollTrigger }) {
     scene.fog.color.copy(bgColor);
 
     layers.forEach((L) => {
-      const cols = L.geo.attributes.color.array;
+      const base = L.baseCol;
       for (let i = 0; i < L.n; i++) {
         const t = i / Math.max(1, L.n - 1);
         const c = amberColor.clone().lerp(tealColor, Math.pow(t, 1.4) * 0.9);
-        cols[i * 3] = c.r; cols[i * 3 + 1] = c.g; cols[i * 3 + 2] = c.b;
+        base[i * 3] = c.r; base[i * 3 + 1] = c.g; base[i * 3 + 2] = c.b;
       }
+      L.geo.attributes.color.array.set(base);
       L.geo.attributes.color.needsUpdate = true;
       L.mat.blending = dark ? THREE.AdditiveBlending : THREE.NormalBlending;
       L.mat.needsUpdate = true;
     });
+    // re-apply the reprise tint over the refreshed ramp if it's active
+    lastTint = -1;
+    if (reprise > 0) applyRepriseTint(reprise);
     for (let i = 0; i < LINE_PTS; i++) {
       const t = i / (LINE_PTS - 1);
       const c = amberColor.clone().lerp(tealColor, Math.pow(t, 1.4) * 0.9);
@@ -218,6 +261,9 @@ export async function initHero3D({ gsap, ScrollTrigger }) {
     const p = smoothP;
     const s = p * p * p * (p * (p * 6 - 15) + 10); // smootherstep
     const wob = (1 - s);
+    // during the closing "net-zero arrival" reprise the whole field calms —
+    // the turbulence is over, the destination reached.
+    const calm = 1 - reprise * 0.5;
 
     layers.forEach((L) => {
       const pos = L.geo.attributes.position.array;
@@ -225,18 +271,32 @@ export async function initHero3D({ gsap, ScrollTrigger }) {
       // float that lives on at full resolve — bigger bubbles drift more.
       const chaosAmp = 0.14 * wob;
       const floatBase = 0.05 + L.cfg.size * 0.42;
+      const foamW = L.foam;
       for (let i = 0; i < L.n; i++) {
         const i3 = i * 3;
         const sd = L.seed[i];
         const f = 0.45 + sd * 0.95;          // each bubble its own slow tempo
         const ph = L.phase + sd * 6.2832;    // …and its own phase
-        const amp = chaosAmp + floatBase * s * (0.55 + sd * 0.9);
-        const dx = Math.sin(drift * f + ph) * amp;
-        const dy = Math.cos(drift * f * 0.82 + ph * 1.3) * amp;
-        const dz = Math.sin(drift * f * 0.6 + ph * 0.7) * amp * 1.25;
-        pos[i3]     = L.chaos[i3]     + (L.target[i3]     - L.chaos[i3])     * s + dx;
-        pos[i3 + 1] = L.chaos[i3 + 1] + (L.target[i3 + 1] - L.chaos[i3 + 1]) * s + dy;
-        pos[i3 + 2] = L.chaos[i3 + 2] + (L.target[i3 + 2] - L.chaos[i3 + 2]) * s + dz;
+        const amp = (chaosAmp + floatBase * s * (0.55 + sd * 0.9)) * calm;
+        let dx = Math.sin(drift * f + ph) * amp;
+        let dy = Math.cos(drift * f * 0.82 + ph * 1.3) * amp;
+        let dz = Math.sin(drift * f * 0.6 + ph * 0.7) * amp * 1.25;
+        // the resting target migrates from the trajectory to the foam band as
+        // the reprise rises — the curve recedes like a wave, leaving foam.
+        const tx = L.target[i3]     + (foamW[i3]     - L.target[i3])     * reprise;
+        const ty = L.target[i3 + 1] + (foamW[i3 + 1] - L.target[i3 + 1]) * reprise;
+        const tz = L.target[i3 + 2] + (foamW[i3 + 2] - L.target[i3 + 2]) * reprise;
+        if (reprise > 0) {
+          // gentle sea-foam motion: a slow swell travelling along the band,
+          // plus a soft per-bubble bob — heavier on the wisps that lift away.
+          const wph = drift * 0.7 + foamW[i3] * 0.45 + ph;
+          dx += Math.cos(drift * 0.32 + ph) * 0.14 * reprise;
+          dy += Math.sin(wph) * (0.14 + sd * 0.3) * reprise;
+          dz += Math.sin(wph * 0.7) * 0.1 * reprise;
+        }
+        pos[i3]     = L.chaos[i3]     + (tx - L.chaos[i3]) * s + dx;
+        pos[i3 + 1] = L.chaos[i3 + 1] + (ty - L.chaos[i3 + 1]) * s + dy;
+        pos[i3 + 2] = L.chaos[i3 + 2] + (tz - L.chaos[i3 + 2]) * s + dz;
       }
       L.geo.attributes.position.needsUpdate = true;
       // breathing: bubbles gently swell and shrink (keeps a little life after resolve)
@@ -245,8 +305,9 @@ export async function initHero3D({ gsap, ScrollTrigger }) {
       L.mat.opacity = (dark ? L.cfg.opacityDark : L.cfg.opacityLight) * intro.t;
     });
 
-    // trajectory: a FAINT guide only — the living dots are what draw the curve
-    lineMat.opacity = Math.max(0, (s - 0.5) / 0.5) * (dark ? 0.34 : 0.22) * intro.t;
+    // trajectory: a FAINT guide only — and it fades right out as the foam
+    // band forms, so the reprise reads purely as drifting dots, no stray line.
+    lineMat.opacity = Math.max(0, (s - 0.5) / 0.5) * (dark ? 0.34 : 0.22) * intro.t * (1 - reprise);
 
     // cinematic camera: intro dolly 17→14, slight pull-back as the line lands,
     // pointer parallax eased on top
@@ -260,16 +321,21 @@ export async function initHero3D({ gsap, ScrollTrigger }) {
     // whole field tilts almost imperceptibly while chaotic
     group.rotation.z = wob * 0.05 * Math.sin(drift * 0.5);
 
-    // ambient life after the resolve: the whole field breathes very slowly
+    // ambient life after the resolve: the whole field breathes very slowly.
+    // No lateral drift — leaving the hero the trajectory dissolves in place so
+    // content reads on clean paper; the net-zero reprise re-forms the dots as
+    // a foam band positioned low in world space (above), so the camera holds.
     group.position.y = Math.sin(drift * 0.35) * 0.16 * s;
-
-    // Leaving the hero: NO lateral drift — the trajectory simply dissolves in
-    // place, gently, so the content below reads on clean paper. The dots keep
-    // floating individually right up until they fade out.
     group.position.x = 0;
-    // a single smooth power curve: no abrupt step, fades quickest in the first
-    // half-screen (where text needs the room), then trails off softly to nothing
-    wrap.style.opacity = Math.pow(1 - linger, 2.8).toFixed(3);
+
+    // Two fades share the canvas, never overlapping: the hero linger dissolve
+    // (top of page) and the net-zero foam fade-in (page's end). Whichever wants
+    // the field more visible wins. The linger curve fades quickest in the first
+    // half-screen so content reads on clean paper; the foam tops out gently —
+    // a calm band along the foot of the page, never as bold as the hero.
+    const lingerOpacity = Math.pow(1 - linger, 2.8);
+    const repriseOpacity = reprise * (dark ? 0.58 : 0.5);
+    wrap.style.opacity = Math.max(lingerOpacity, repriseOpacity).toFixed(3);
   }
 
   // ---- scroll → progress over the hero ------------------------------------
@@ -288,6 +354,7 @@ export async function initHero3D({ gsap, ScrollTrigger }) {
   // Low-power devices and phones skip the linger: the scene pauses right at
   // the hero's edge. Cinematic where it's cheap, frugal where it isn't.
   let linger = 0;      // 0 at hero bottom → 1 fully faded out
+  let reprise = 0;     // 0 = off, 1 = full net-zero reprise behind page end
   let paused = false;
   let running = true;
   function pauseScene() { if (paused || disposed) return; paused = true; wrap.style.visibility = 'hidden'; }
@@ -320,6 +387,35 @@ export async function initHero3D({ gsap, ScrollTrigger }) {
     });
     requestAnimationFrame(syncStaticVisibility);
     window.addEventListener('load', syncStaticVisibility, { once: true });
+  }
+
+  // ---- net-zero reprise (desktop only) ------------------------------------
+  // At the page's end the dots re-gather as a gentle band of green foam along
+  // the bottom edge — net zero reached — as the reader arrives at the closing
+  // About / Arcadia / contact sections. It reuses THIS instance (no second
+  // WebGL context): resume the paused scene, scrub the foam in, re-pause when
+  // it's gone. Gated to PERSIST so phones/low-power devices stay frugal.
+  if (PERSIST) {
+    const closing = document.getElementById('about');
+    if (closing) {
+      // Scrub-driven (not edge callbacks): the reprise fades in as the closing
+      // region rises into view and holds at full past the end, so it stays a
+      // calm backdrop through the footer. onUpdate fires continuously while in
+      // range — robust even though this trigger is created post-layout, after
+      // the lazy import, when an onEnter edge can be silently mis-evaluated.
+      ScrollTrigger.create({
+        trigger: closing,
+        start: 'top 85%',
+        end: 'top 30%',
+        scrub: 0.6,
+        onUpdate: (self) => {
+          reprise = self.progress;
+          applyRepriseTint(reprise);             // cool the field toward teal
+          if (reprise > 0.001) resumeScene();    // idempotent: wakes the paused scene
+        },
+        onLeaveBack: () => { reprise = 0; applyRepriseTint(0); pauseScene(); } // dismiss
+      });
+    }
   }
 
   // ---- render loop (pause when tab hidden) ---------------------------------

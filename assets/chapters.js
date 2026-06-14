@@ -3,8 +3,8 @@
    Vanilla JS, keyboard-operable. Wires up:
      #govern   — flip-card flip on click/Enter/Space
      #baseline — V1↔V2 drag slider (pointer + arrow keys) + fineprint toggles
-     #targets  — tab triptych, S1 route-card expand, S2 LCE/Abs toggle,
-                  S3 5% boundary slider + Table 3 category explorer
+     #scope-1  — route-card expand · #scope-2 — LCE/Abs toggle
+     #scope-3  — 5% boundary slider + Table 3 category explorer
      #oer      — preset calculator
      #horizon  — timeline render from content.js
    Generic: any [data-fineprint] / .fineprint-toggle button toggles its
@@ -132,35 +132,10 @@ function initBaselineSlider() {
 }
 
 /* -------------------------------------------------------------------------
-   #targets — tab triptych (S1 / S2 / S3)
-   ------------------------------------------------------------------------- */
-function initTargetTabs() {
-  const tabs = document.querySelectorAll('#targets .tab-btn');
-  if (!tabs.length) return;
-
-  tabs.forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const target = btn.dataset.tab;
-      tabs.forEach((b) => {
-        const active = b === btn;
-        b.classList.toggle('is-active', active);
-        b.setAttribute('aria-selected', active ? 'true' : 'false');
-      });
-      document.querySelectorAll('#targets .tab-panel').forEach((panel) => {
-        const active = panel.id === 'panel-' + target;
-        panel.classList.toggle('is-active', active);
-        panel.hidden = !active;
-      });
-      NZ.refresh();
-    });
-  });
-}
-
-/* -------------------------------------------------------------------------
-   #targets — S1 route card expand/collapse
+   #scope-1 — route card expand/collapse
    ------------------------------------------------------------------------- */
 function initRouteCards() {
-  document.querySelectorAll('#targets .route-card-head').forEach((btn) => {
+  document.querySelectorAll('#scope-1 .route-card-head').forEach((btn) => {
     btn.addEventListener('click', () => {
       const card = btn.closest('.route-card');
       const open = card.classList.toggle('is-open');
@@ -171,10 +146,10 @@ function initRouteCards() {
 }
 
 /* -------------------------------------------------------------------------
-   #targets — S2 LCE-share vs Absolute toggle
+   #scope-2 — LCE-share vs Absolute toggle
    ------------------------------------------------------------------------- */
 function initScope2Toggle() {
-  const buttons = document.querySelectorAll('#panel-s2 [data-s2]');
+  const buttons = document.querySelectorAll('#scope-2 [data-s2]');
   if (!buttons.length) return;
   buttons.forEach((btn) => {
     btn.addEventListener('click', () => {
@@ -184,7 +159,7 @@ function initScope2Toggle() {
         b.classList.toggle('is-active', active);
         b.setAttribute('aria-selected', active ? 'true' : 'false');
       });
-      document.querySelectorAll('#panel-s2 .target-panel').forEach((panel) => {
+      document.querySelectorAll('#scope-2 .target-panel').forEach((panel) => {
         panel.classList.toggle('is-active', panel.dataset.s2Panel === target);
       });
     });
@@ -192,7 +167,7 @@ function initScope2Toggle() {
 }
 
 /* -------------------------------------------------------------------------
-   #targets — S3 5% boundary slider, live bars
+   #scope-3 — 5% boundary slider, live bars
    ------------------------------------------------------------------------- */
 function initBoundaryTool() {
   const slider = document.getElementById('boundarySlider');
@@ -237,7 +212,7 @@ function initBoundaryTool() {
 }
 
 /* -------------------------------------------------------------------------
-   #targets — Table 3 category explorer
+   #scope-3 — Table 3 category explorer
    ------------------------------------------------------------------------- */
 function initCategoryExplorer() {
   const rowUp = document.getElementById('catrowUp');
@@ -394,7 +369,6 @@ function boot() {
   initFineprint();
   initFlipCards();
   initBaselineSlider();
-  initTargetTabs();
   initRouteCards();
   initScope2Toggle();
   initBoundaryTool();
