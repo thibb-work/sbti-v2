@@ -16,10 +16,10 @@ One scrollytelling journey through the Standard's own loop:
 | Implement | `#implement` | Pinned scroll descent of the 3-rung implementation hierarchy; hourly-matching bars 50/75/90 |
 | Prove it | `#prove` | Claim-type cards (company-level vs system contribution) |
 | Stay responsible | `#oer` | OER tier cards (Engaged / Advanced / Leadership) + preset illustrations |
-| The horizon | `#horizon` | 2026→2050 key-dates timeline |
+| The timeline | `#timeline` | 2026→2050 key-dates timeline |
 | About | `#about` | Author, Arcadia, contact |
 
-Legacy hashes (`#timeline`, `#scope-1/2/3`) redirect to the matching chapters.
+Legacy hashes (`#horizon`, `#targets`) redirect to the matching chapters.
 
 ## Structure
 

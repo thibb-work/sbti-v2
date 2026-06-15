@@ -347,12 +347,12 @@ export async function initHero3D({ gsap, ScrollTrigger }) {
   // The field holds its chaotic hero scatter through the hero (the first
   // section), then the particles drift slowly into the descending 2026→2050
   // trajectory across the whole "Category A or B" section — fully resolved by
-  // the time that section ends, i.e. the start of the #horizon timeline, where
-  // the graph then holds. #horizon already carries a diffused page-colour scrim
+  // the time that section ends, i.e. the start of the #timeline section, where
+  // the graph then holds. #timeline already carries a diffused page-colour scrim
   // + type halos (experience.css) to keep its text legible over the field.
   // Falls back to the hero's own scroll if #category is ever absent.
   const aOrB = document.getElementById('category');     // "Category A or B"
-  const timeline = document.getElementById('horizon');  // the dated timeline
+  const timeline = document.getElementById('timeline'); // the dated timeline
   scrollTrigger = ScrollTrigger.create({
     trigger: aOrB || hero,
     start: aOrB ? 'top bottom' : 'top top',
@@ -363,11 +363,11 @@ export async function initHero3D({ gsap, ScrollTrigger }) {
 
   // ---- ambient persistence ------------------------------------------------
   // The field lives on as the graph backdrop all the way to the foot of the
-  // #horizon timeline, then fades out over its last stretch and pauses (RAF
+  // #timeline section, then fades out over its last stretch and pauses (RAF
   // stopped, canvas hidden) rather than disposing — so scrolling back up always
   // works. Low-power devices and phones skip the fade: the scene simply pauses
   // at the foot of the timeline. Cinematic where it's cheap, frugal where it
-  // isn't. (Falls back to the hero's edge if #horizon is absent.)
+  // isn't. (Falls back to the hero's edge if #timeline is absent.)
   let linger = 0;      // 0 through the timeline → 1 fully faded out at its foot
   let reprise = 0;     // 0 = off, 1 = full net-zero reprise behind page end
   let paused = false;
