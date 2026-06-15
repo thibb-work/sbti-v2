@@ -1,7 +1,7 @@
 /* =========================================================================
    SBTi "Net-Zero Loop" — shared content & data
    Reusable data objects for the chapter scripts: Scope 3 Table 3,
-   horizon timeline entries, OER tiers, and OER calculator presets.
+   timeline entries, OER tiers, and OER calculator presets.
    Plain ES module — no imports, no side effects beyond named exports.
    ========================================================================= */
 
@@ -39,13 +39,13 @@ export const SCOPE3_OPTION_LABELS = [
 ];
 
 /* -------------------------------------------------------------------------
-   Horizon — 2026→2050 timeline (#horizon), ported from timeline.html.
+   Timeline — 2026→2050 milestones (#timeline), ported from timeline.html.
    tone: 'teal' | 'gray' | 'amber' drives the dot/marker colour via CSS class.
    ------------------------------------------------------------------------- */
 /* Entries may carry per-category notes (a / b): rendered as a "for you" line
    that live-updates once the visitor sets their category in chapter 01.
    Only included where the Standard's A/B split is unambiguous. */
-export const HORIZON_TIMELINE = [
+export const TIMELINE_ENTRIES = [
   { date: "11 Jun 2026", tone: "teal", title: "V2.0 published", text: "Final standard released after two public consultations." },
   { date: "1 Feb 2027", tone: "teal", title: "V2.0 effective date", text: "Pre-existing power contracts grandfathered from this date.",
     a: "Transition plan due at Target Validation, with up to 15 months’ flexibility to disclose.",

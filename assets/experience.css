@@ -1297,7 +1297,7 @@ a:hover { text-decoration: underline; }
 .cycle-legend .lg-eoc { background: var(--amber); }
 .cycle-legend strong { color: var(--ink); }
 
-.horizon-you {
+.timeline-you {
   margin: 8px 0 0;
   padding: 9px 12px;
   border-left: 2px solid var(--teal);
@@ -1403,20 +1403,20 @@ a:hover { text-decoration: underline; }
 .calc-result .rcell.is-leadership .rnum { color: var(--amber-text); }
 
 /* =========================================================================
-   #horizon — 2026→2050 scroll-revealed timeline
+   #timeline — 2026→2050 scroll-revealed timeline
    ========================================================================= */
-.horizon-line {
+.timeline-line {
   position: relative;
   margin: 28px 0 8px;
   padding-left: 28px;
   border-left: 2px solid var(--line);
 }
-.horizon-item {
+.timeline-item {
   position: relative;
   padding: 0 0 30px 24px;
 }
-.horizon-item:last-child { padding-bottom: 4px; }
-.horizon-item::before {
+.timeline-item:last-child { padding-bottom: 4px; }
+.timeline-item::before {
   content: "";
   position: absolute;
   left: -33px; top: 4px;
@@ -1426,9 +1426,9 @@ a:hover { text-decoration: underline; }
   background: var(--teal);
   box-shadow: 0 0 0 2px var(--line);
 }
-.horizon-item.tone-amber::before { background: var(--amber); }
-.horizon-item.tone-gray::before { background: var(--hint); }
-.horizon-date {
+.timeline-item.tone-amber::before { background: var(--amber); }
+.timeline-item.tone-gray::before { background: var(--hint); }
+.timeline-date {
   font-family: var(--font-mono);
   font-size: 12.5px;
   letter-spacing: .1em;
@@ -1436,15 +1436,15 @@ a:hover { text-decoration: underline; }
   color: var(--teal);
   margin: 0 0 4px;
 }
-.horizon-item.tone-amber .horizon-date { color: var(--amber-text); }
-.horizon-item.tone-gray .horizon-date { color: var(--hint); }
-.horizon-title {
+.timeline-item.tone-amber .timeline-date { color: var(--amber-text); }
+.timeline-item.tone-gray .timeline-date { color: var(--hint); }
+.timeline-title {
   font-family: var(--font-display);
   font-size: 17px;
   font-weight: 500;
   margin: 0 0 4px;
 }
-.horizon-text { font-size: 13.5px; color: var(--muted); line-height: 1.6; margin: 0; }
+.timeline-text { font-size: 13.5px; color: var(--muted); line-height: 1.6; margin: 0; }
 
 /* =========================================================================
    #about — bio / Arcadia / contact
@@ -1834,13 +1834,13 @@ a:hover { text-decoration: underline; }
 .u-mb18 { margin-bottom: 18px; }
 
 /* =========================================================================
-   READABILITY OVER THE LIVE FIELD — HERO + HORIZON ONLY
+   READABILITY OVER THE LIVE FIELD — HERO + TIMELINE ONLY
    ---------------------------------------------------------------------------
    Append this block to assets/experience.css (anywhere after the base
    palette / :root tokens — it only references --bg).
 
    The Three.js trajectory drifts behind the hero copy and trails, faintly,
-   behind the horizon timeline. Two protections keep type crisp:
+   behind the timeline. Two protections keep type crisp:
      (1) a diffused "cloud" of page colour pooled behind the reading column
          (a blurred ::before, z-index:-1, sitting above the field but below
          the text inside an isolated stacking context), and
@@ -1870,12 +1870,12 @@ a:hover { text-decoration: underline; }
 .hero-sub        { text-shadow: 0 1px 18px var(--bg), 0 0 6px  color-mix(in srgb, var(--bg) 80%, transparent); }
 .hero-sub strong { text-shadow: inherit; }
 
-/* ---------- HORIZON ---------- */
-/* the horizon timeline is text on a bare track (no card backing), so the
+/* ---------- TIMELINE ---------- */
+/* the timeline is text on a bare track (no card backing), so the
    whole section gets a tall diffused page-colour cloud pooled behind the
    reading column — covering the heading and every dated entry. */
-#horizon .chapter-inner { position: relative; isolation: isolate; }
-#horizon .chapter-inner::before {
+#timeline .chapter-inner { position: relative; isolation: isolate; }
+#timeline .chapter-inner::before {
   content: "";
   position: absolute;
   z-index: -1;
@@ -1888,12 +1888,12 @@ a:hover { text-decoration: underline; }
   filter: blur(32px);
   pointer-events: none;
 }
-#horizon .kicker,
-#horizon .headline,
-#horizon .lede,
-.horizon-date,
-.horizon-title,
-.horizon-text {
+#timeline .kicker,
+#timeline .headline,
+#timeline .lede,
+.timeline-date,
+.timeline-title,
+.timeline-text {
   text-shadow: 0 1px 14px var(--bg), 0 0 5px color-mix(in srgb, var(--bg) 80%, transparent);
 }
 
@@ -1901,7 +1901,7 @@ a:hover { text-decoration: underline; }
    The .about-card surfaces are opaque, so
    only the section heading column sits over the returning field. A diffused
    page-colour cloud pools behind it, with halos on the exposed type — same
-   recipe as hero/horizon, scoped here so the reprise never costs legibility. */
+   recipe as hero/timeline, scoped here so the reprise never costs legibility. */
 #about .chapter-inner { position: relative; isolation: isolate; }
 #about .chapter-inner::before {
   content: "";

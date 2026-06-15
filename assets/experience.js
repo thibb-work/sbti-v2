@@ -30,7 +30,7 @@ const REDUCED = false;
 const CHAPTERS = [
   { id: 'top',       label: 'Hero' },
   { id: 'category',  label: 'A or B?' },
-  { id: 'horizon',   label: 'Horizon' },
+  { id: 'timeline',  label: 'Timeline' },
   { id: 'govern',    label: 'Govern' },
   { id: 'baseline',  label: 'Baseline' },
   { id: 'scope-1',   label: 'Scope 1' },
@@ -43,8 +43,8 @@ const CHAPTERS = [
 ];
 
 const HASH_REDIRECTS = {
-  '#timeline': '#horizon',
-  '#targets':  '#scope-1'
+  '#horizon': '#timeline',
+  '#targets': '#scope-1'
 };
 
 /* =========================================================================
