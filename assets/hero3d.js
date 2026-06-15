@@ -13,10 +13,10 @@
    poster fallback on failure. Three.js pinned r160, no build step.
    ========================================================================= */
 
-// jsdelivr's /+esm bundler endpoint (not the raw /build/*.min.js file): some
-// corporate proxies (e.g. Zscaler) block the raw build file but pass /+esm —
-// which is also how GSAP loads in experience.js.
-const THREE_URL = 'https://cdn.jsdelivr.net/npm/three@0.160.0/+esm';
+// Self-hosted Three.js r160 (assets/vendor/), loaded same-origin so corporate
+// proxies (e.g. Zscaler) that block jsdelivr can't strip the hero. Relative to
+// this module's URL (assets/hero3d.js) → assets/vendor/three.module.min.js.
+const THREE_URL = './vendor/three.module.min.js';
 
 let disposed = false;
 let scene, camera, renderer, scrollTrigger, rafId, ro;
