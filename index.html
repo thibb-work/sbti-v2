@@ -10,7 +10,6 @@
      Deliberately blocking so old anchors and the dark theme apply before first paint. -->
 <script src="assets/boot.js"></script>
 
-<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="assets/experience.css">
 </head>
 <body>
@@ -791,6 +790,9 @@
 </footer>
 
 <!-- ============================ SCRIPTS ============================ -->
+<!-- Self-hosted GSAP (UMD globals) — load before the modules that read them -->
+<script src="assets/vendor/gsap.min.js"></script>
+<script src="assets/vendor/ScrollTrigger.min.js"></script>
 <script type="module" src="assets/experience.js"></script>
 <script type="module" src="assets/theme.js"></script>
 <script type="module" src="assets/chapters.js"></script>

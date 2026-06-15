@@ -11,8 +11,10 @@
    No Club GSAP plugins. Transforms/opacity only. No pinned sections.
    ========================================================================= */
 
-import { gsap } from 'https://cdn.jsdelivr.net/npm/gsap@3.12.5/+esm';
-import { ScrollTrigger } from 'https://cdn.jsdelivr.net/npm/gsap@3.12.5/ScrollTrigger.js/+esm';
+// GSAP + ScrollTrigger are self-hosted UMD bundles (assets/vendor/), loaded as
+// classic scripts in index.html before this module so they're on window here.
+// Same-origin → corporate proxies that block jsdelivr can't strip them.
+const { gsap, ScrollTrigger } = window;
 
 gsap.registerPlugin(ScrollTrigger);
 
