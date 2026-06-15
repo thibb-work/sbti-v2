@@ -13,7 +13,10 @@
    poster fallback on failure. Three.js pinned r160, no build step.
    ========================================================================= */
 
-const THREE_URL = 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.min.js';
+// jsdelivr's /+esm bundler endpoint (not the raw /build/*.min.js file): some
+// corporate proxies (e.g. Zscaler) block the raw build file but pass /+esm —
+// which is also how GSAP loads in experience.js.
+const THREE_URL = 'https://cdn.jsdelivr.net/npm/three@0.160.0/+esm';
 
 let disposed = false;
 let scene, camera, renderer, scrollTrigger, rafId, ro;
