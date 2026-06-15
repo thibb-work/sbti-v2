@@ -6,7 +6,7 @@
      #scope-1  — route-card expand · #scope-2 — LCE/Abs toggle
      #scope-3  — 5% boundary slider + Table 3 category explorer
      #oer      — preset calculator
-     #horizon  — timeline render from content.js
+     #timeline  — timeline render from content.js
    Generic: any [data-fineprint] / .fineprint-toggle button toggles its
    parent .fineprint's [open] attribute.
    ========================================================================= */
@@ -14,7 +14,7 @@
 import {
   SCOPE3_TABLE3,
   SCOPE3_OPTION_LABELS,
-  HORIZON_TIMELINE,
+  TIMELINE_ENTRIES,
   OER_PRESETS
 } from './content.js';
 
@@ -313,24 +313,24 @@ function initOerCalculator() {
 }
 
 /* -------------------------------------------------------------------------
-   #horizon — render timeline from content.js
+   #timeline — render timeline from content.js
    ------------------------------------------------------------------------- */
-function initHorizonTimeline() {
-  const line = document.getElementById('horizonLine');
+function initTimeline() {
+  const line = document.getElementById('timelineLine');
   if (!line) return;
 
-  HORIZON_TIMELINE.forEach((entry) => {
+  TIMELINE_ENTRIES.forEach((entry) => {
     const item = document.createElement('div');
-    item.className = 'horizon-item tone-' + entry.tone;
+    item.className = 'timeline-item tone-' + entry.tone;
     item.setAttribute('data-reveal', 'fade');
     item.innerHTML = `
-      <p class="horizon-date">${entry.date}</p>
-      <h3 class="horizon-title">${entry.title}</h3>
-      <p class="horizon-text">${entry.text}</p>
+      <p class="timeline-date">${entry.date}</p>
+      <h3 class="timeline-title">${entry.title}</h3>
+      <p class="timeline-text">${entry.text}</p>
     `;
     if (entry.a || entry.b) {
       const you = document.createElement('p');
-      you.className = 'horizon-you';
+      you.className = 'timeline-you';
       you.dataset.a = entry.a || '';
       you.dataset.b = entry.b || '';
       item.appendChild(you);
@@ -341,7 +341,7 @@ function initHorizonTimeline() {
   // "For you" lines follow the category set in chapter 01 — both sides
   // shown until the visitor picks, then their side only.
   function updateYou(cat) {
-    document.querySelectorAll('.horizon-you').forEach((el) => {
+    document.querySelectorAll('.timeline-you').forEach((el) => {
       if (cat === 'A' || cat === 'B') {
         const note = cat === 'A' ? el.dataset.a : el.dataset.b;
         el.innerHTML = note
@@ -374,7 +374,7 @@ function boot() {
   initBoundaryTool();
   initCategoryExplorer();
   initOerCalculator();
-  initHorizonTimeline();
+  initTimeline();
 }
 
 if (document.readyState === 'loading') {
