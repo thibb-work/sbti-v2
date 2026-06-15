@@ -6,7 +6,7 @@
      - progress rail: desktop loop SVG fill + clickable chapter dots,
        mobile top progress bar
      - hash-redirect handling (old anchors → new chapters)
-     - prefers-reduced-motion: disable animation, instant reveals, parity
+     - motion forced on for all visitors (prefers-reduced-motion is ignored)
      - exposes the window.NZ chassis API used by the other modules
    No Club GSAP plugins. Transforms/opacity only. No pinned sections.
    ========================================================================= */
@@ -18,7 +18,11 @@ const { gsap, ScrollTrigger } = window;
 
 gsap.registerPlugin(ScrollTrigger);
 
-const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+// Motion is intentionally forced ON for every visitor — the hero field and all
+// reveals/transitions play regardless of the OS "reduce motion" / Low Power
+// setting. To restore prefers-reduced-motion behaviour, set this back to:
+//   window.matchMedia('(prefers-reduced-motion: reduce)').matches
+const REDUCED = false;
 
 /* -------------------------------------------------------------------------
    Chapter manifest — single source of truth for rail dots + hash redirects.

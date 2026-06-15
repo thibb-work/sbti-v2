@@ -7,11 +7,12 @@
 
    The only JS this chapter needs is growing the hourly-matching bars when
    they scroll into view: CSS owns the transition, we just add .is-grown.
-   Reduced-motion (or no IntersectionObserver): bars render grown at once.
+   No IntersectionObserver: bars render grown at once.
    ========================================================================= */
 
-const REDUCED = (window.NZ && window.NZ.reducedMotion) ||
-  window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+// Motion forced on for all visitors (see experience.js) — the bars animate
+// regardless of the OS "reduce motion" setting.
+const REDUCED = false;
 
 function initHourly() {
   const el = document.getElementById('hourly');
