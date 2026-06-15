@@ -77,9 +77,6 @@
 /* ---- reset ---- */
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-@media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-}
 html, body { margin: 0; padding: 0; }
 body {
   background: var(--bg);
@@ -272,11 +269,6 @@ a:hover { text-decoration: underline; }
   font-size: 12.5px;
   letter-spacing: .1em;
   color: var(--hint);
-}
-@media (prefers-reduced-motion: reduce) {
-  .menu-overlay, .menu-list a { transition: none; opacity: 1; transform: none; }
-  .menu-overlay { opacity: 1; }
-  .menu-overlay[hidden] { display: none; }
 }
 .site-header .logo { color: var(--ink); display: flex; align-items: center; }
 .site-header .logo svg { height: 22px; width: auto; }
@@ -596,10 +588,6 @@ a:hover { text-decoration: underline; }
   from { opacity: 0; transform: translateY(14px); }
   to   { opacity: 1; transform: none; }
 }
-@media (prefers-reduced-motion: reduce) {
-  .hero-enter { animation: none; }
-}
-
 /* =========================================================================
    REVEAL UTILITIES — driven by [data-reveal]; JS adds .is-in
    ========================================================================= */
@@ -634,23 +622,6 @@ a:hover { text-decoration: underline; }
 /* =========================================================================
    REDUCED MOTION — instant reveals, no animation, full content parity
    ========================================================================= */
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.001ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.001ms !important;
-    scroll-behavior: auto !important;
-  }
-  [data-reveal],
-  [data-reveal-group] > * {
-    opacity: 1 !important;
-    transform: none !important;
-  }
-  .hero-poster { opacity: 1; }
-  .scroll-cue .line { animation: none; }
-  .btn:hover { transform: none; }
-}
-
 /* =========================================================================
    ===========================================================================
    CHAPTER COMPONENTS — shared primitives + per-chapter styles
@@ -853,10 +824,6 @@ a:hover { text-decoration: underline; }
   color: var(--hint);
 }
 .flip-face-back .flip-hint { color: var(--teal); }
-@media (prefers-reduced-motion: reduce) {
-  .flip-card-inner { transition: none; }
-}
-
 /* =========================================================================
    #baseline — before/after drag slider + assurance chip
    ========================================================================= */
@@ -981,7 +948,6 @@ a:hover { text-decoration: underline; }
 .route-card { display: flex; flex-direction: column; }
 .route-card-head { flex: 1; display: flex; flex-direction: column; align-items: flex-start; }
 .route-card-head .chip { margin-top: auto; }
-@media (prefers-reduced-motion: reduce) { .route-card:hover { transform: none; } }
 .route-card-head {
   width: 100%;
   text-align: left;
@@ -1847,11 +1813,6 @@ a:hover { text-decoration: underline; }
   .ladder-stage { padding: 8px var(--gutter); }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .hb-fill { transition: none; }
-  .req-badge .rb-text { transition: none; }
-}
-
 /* =========================================================================
    SHARED TEXT STYLES & SPACING UTILITIES
    Extracted from former inline style="" attributes in index.html.
@@ -1980,16 +1941,4 @@ a:hover { text-decoration: underline; }
     transparent 82%);
   filter: blur(24px);
   pointer-events: none;
-}
-
-/* ---------- reduced-motion: no field underneath, so drop cloud + halos ---- */
-@media (prefers-reduced-motion: reduce) {
-  .hero-inner::before,
-  #horizon .chapter-inner::before,
-  #about .chapter-inner::before,
-  .site-footer::before { display: none; }
-  .hero-headline, .hero .kicker, .hero-sub,
-  #horizon .kicker, #horizon .headline, #horizon .lede,
-  .horizon-date, .horizon-title, .horizon-text,
-  #about .kicker, #about .headline, #about .lede, .site-footer { text-shadow: none; }
 }
