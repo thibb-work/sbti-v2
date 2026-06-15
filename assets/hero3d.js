@@ -338,23 +338,25 @@ export async function initHero3D({ gsap, ScrollTrigger }) {
     // the linger dissolve over the foot of the timeline and the net-zero foam
     // fade-in (page's end). Whichever wants the field more visible wins.
     const backdrop = 1 - s * 0.35;
-    const lingerOpacity = backdrop * Math.pow(1 - linger, 2.8);
+    const lingerOpacity = backdrop * Math.pow(1 - linger, 1.6);
     const repriseOpacity = reprise * (dark ? 0.58 : 0.5);
     wrap.style.opacity = Math.max(lingerOpacity, repriseOpacity).toFixed(3);
   }
 
-  // ---- scroll → progress: chaos through the hero, graph at the timeline ----
-  // The particle field stays in motion (chaos) through the hero — the first
-  // section — and only resolves into the descending 2026→2050 trajectory as the
-  // #horizon timeline rises into view, so the graph "appears" at the start of
-  // the timeline. #horizon already carries a diffused page-colour scrim + type
-  // halos (experience.css) built to keep its text legible over this field.
-  // Falls back to the hero's own scroll if #horizon is ever absent.
-  const timeline = document.getElementById('horizon');
+  // ---- scroll → progress: chaos in the hero, slow drift across "A or B" -----
+  // The field holds its chaotic hero scatter through the hero (the first
+  // section), then the particles drift slowly into the descending 2026→2050
+  // trajectory across the whole "Category A or B" section — fully resolved by
+  // the time that section ends, i.e. the start of the #horizon timeline, where
+  // the graph then holds. #horizon already carries a diffused page-colour scrim
+  // + type halos (experience.css) to keep its text legible over the field.
+  // Falls back to the hero's own scroll if #category is ever absent.
+  const aOrB = document.getElementById('category');     // "Category A or B"
+  const timeline = document.getElementById('horizon');  // the dated timeline
   scrollTrigger = ScrollTrigger.create({
-    trigger: timeline || hero,
-    start: timeline ? 'top bottom' : 'top top',
-    end: timeline ? 'top center' : 'bottom top',
+    trigger: aOrB || hero,
+    start: aOrB ? 'top bottom' : 'top top',
+    end: 'bottom top',
     scrub: 0.9,
     onUpdate: (self) => { progress = self.progress; }
   });
