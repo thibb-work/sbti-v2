@@ -331,32 +331,42 @@ export async function initHero3D({ gsap, ScrollTrigger }) {
     group.position.y = Math.sin(drift * 0.35) * 0.16 * s;
     group.position.x = 0;
 
-    // Two fades share the canvas, never overlapping: the hero linger dissolve
-    // (top of page) and the net-zero foam fade-in (page's end). Whichever wants
-    // the field more visible wins. The linger curve fades quickest in the first
-    // half-screen so content reads on clean paper; the foam tops out gently —
-    // a calm band along the foot of the page, never as bold as the hero.
-    const lingerOpacity = Math.pow(1 - linger, 2.8);
+    // The field is a bold presence behind the hero while it churns (chaos,
+    // s≈0) and settles to a calmer backdrop once it has resolved into the graph
+    // (s≈1), so the storm reads loudest and the graph reads as a quiet diagram
+    // behind the timeline. Two fades then share the canvas, never overlapping:
+    // the linger dissolve over the foot of the timeline and the net-zero foam
+    // fade-in (page's end). Whichever wants the field more visible wins.
+    const backdrop = 1 - s * 0.35;
+    const lingerOpacity = backdrop * Math.pow(1 - linger, 2.8);
     const repriseOpacity = reprise * (dark ? 0.58 : 0.5);
     wrap.style.opacity = Math.max(lingerOpacity, repriseOpacity).toFixed(3);
   }
 
-  // ---- scroll → progress over the hero ------------------------------------
+  // ---- scroll → progress: chaos through the hero, graph at the timeline ----
+  // The particle field stays in motion (chaos) through the hero — the first
+  // section — and only resolves into the descending 2026→2050 trajectory as the
+  // #horizon timeline rises into view, so the graph "appears" at the start of
+  // the timeline. #horizon already carries a diffused page-colour scrim + type
+  // halos (experience.css) built to keep its text legible over this field.
+  // Falls back to the hero's own scroll if #horizon is ever absent.
+  const timeline = document.getElementById('horizon');
   scrollTrigger = ScrollTrigger.create({
-    trigger: hero,
-    start: 'top top',
-    end: 'bottom top',
+    trigger: timeline || hero,
+    start: timeline ? 'top bottom' : 'top top',
+    end: timeline ? 'top center' : 'bottom top',
     scrub: 0.9,
     onUpdate: (self) => { progress = self.progress; }
   });
 
   // ---- ambient persistence ------------------------------------------------
-  // The field lingers as a quiet backdrop for ~2.5 screens past the hero,
-  // drifting aside and fading slowly, then pauses (RAF stopped, canvas
-  // hidden) rather than disposing — so scrolling back up always works.
-  // Low-power devices and phones skip the linger: the scene pauses right at
-  // the hero's edge. Cinematic where it's cheap, frugal where it isn't.
-  let linger = 0;      // 0 at hero bottom → 1 fully faded out
+  // The field lives on as the graph backdrop all the way to the foot of the
+  // #horizon timeline, then fades out over its last stretch and pauses (RAF
+  // stopped, canvas hidden) rather than disposing — so scrolling back up always
+  // works. Low-power devices and phones skip the fade: the scene simply pauses
+  // at the foot of the timeline. Cinematic where it's cheap, frugal where it
+  // isn't. (Falls back to the hero's edge if #horizon is absent.)
+  let linger = 0;      // 0 through the timeline → 1 fully faded out at its foot
   let reprise = 0;     // 0 = off, 1 = full net-zero reprise behind page end
   let paused = false;
   let running = true;
@@ -365,16 +375,17 @@ export async function initHero3D({ gsap, ScrollTrigger }) {
 
   const PERSIST = !lowPower && window.innerWidth >= 768;
   const CONTENT_TOP = 72;
+  const tail = timeline || hero;   // the field lives until the foot of the timeline
   function syncStaticVisibility() {
     if (PERSIST) return;
-    if (hero.getBoundingClientRect().bottom <= CONTENT_TOP) pauseScene();
+    if (tail.getBoundingClientRect().bottom <= CONTENT_TOP) pauseScene();
     else resumeScene();
   }
   if (PERSIST) {
     ScrollTrigger.create({
-      trigger: hero,
-      start: 'bottom top',
-      end: '+=170%',
+      trigger: tail,
+      start: timeline ? 'bottom 75%' : 'bottom top',
+      end: timeline ? 'bottom top' : '+=170%',
       scrub: 0.8,
       onUpdate: (self) => { linger = self.progress; },
       onLeave: () => pauseScene(),
@@ -382,7 +393,7 @@ export async function initHero3D({ gsap, ScrollTrigger }) {
     });
   } else {
     ScrollTrigger.create({
-      trigger: hero,
+      trigger: tail,
       start: `bottom ${CONTENT_TOP}px`,
       onEnter: () => pauseScene(),
       onLeaveBack: () => resumeScene(),
