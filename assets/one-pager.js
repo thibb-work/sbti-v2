@@ -243,7 +243,7 @@ const ROLES = [
         section('Four things that change the risk picture', `
           <div class="op-keypoints">
             <div class="op-kp"><h5>1 · The board is on the hook (C1)</h5><p>Accountability for the targets sits with the highest governing body — explicit governance, not delegated sign-off.</p></div>
-            <div class="op-kp"><h5>2 · The transition plan is a strategy document (C2.3)</h5><p>It must be aligned to — or built into — corporate strategy, board-approved, and reviewed at least every 5 years. Unabated-fossil revenue needs a phase-out commitment. Not a CSR appendix.</p></div>
+            <div class="op-kp"><h5>2 · The transition plan is a strategy document (C2.3)</h5><p>It must be aligned to — or built into — corporate strategy, board-approved, and reviewed at least every 5 years. Where you earn revenue from unabated fossil fuels, you must commit to phasing it out. Not a CSR appendix.</p></div>
             <div class="op-kp"><h5>3 · Delivery is earned, not bought (C21–C23)</h5><p>Cut at source first. Market instruments and sector-level action can help, but only within the hierarchy and with evidence of structural constraints where required.</p></div>
             <div class="op-kp"><h5>4 · Claims are evidence-bound (C37)</h5><p>Reduction claims come from physical inventory change. Activity-pool and sector actions are reported separately and support system-contribution claims, not inventory reduction claims.</p></div>
           </div>`),
