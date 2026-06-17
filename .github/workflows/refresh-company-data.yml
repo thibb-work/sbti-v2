@@ -1,0 +1,44 @@
+name: Refresh SBTi company data
+
+# The SBTi Target Dashboard refreshes every Thursday. We rebuild the static
+# search dataset the next morning and commit it — a changed file triggers the
+# normal Vercel git deploy. 06:00 UTC = 07:00 UK during BST (06:00 in GMT).
+on:
+  schedule:
+    - cron: '0 6 * * 5'   # Fridays, 07:00 UK (BST)
+  workflow_dispatch: {}    # allow manual runs from the Actions tab
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-company-data
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install openpyxl
+
+      - name: Rebuild company dataset
+        run: python3 scripts/build-company-data.py
+
+      - name: Commit if the data changed
+        run: |
+          if git diff --quiet -- assets/data/sbti-companies.json; then
+            echo "No change in SBTi company data — nothing to commit."
+            exit 0
+          fi
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/data/sbti-companies.json
+          git commit -m "Refresh SBTi company data ($(date -u +%Y-%m-%d))"
+          git push
