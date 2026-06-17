@@ -68,6 +68,12 @@
       <div class="cta-row hero-enter">
         <a class="btn btn-primary" href="#category" data-cta>Walk the cycle</a>
         <a class="btn btn-ghost" href="#category" data-cta>What applies to you?</a>
+        <button type="button" class="btn btn-ghost" id="targetLookupBtn" data-target-lookup>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+            <circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+          Find your company’s target
+        </button>
       </div>
     </div>
 
@@ -994,6 +1000,38 @@
 
 </main>
 
+<!-- ============ COMPANY TARGET LOOKUP ============
+     Search overlay wired by assets/target-lookup.js. The dataset
+     (assets/data/sbti-companies.json) is fetched lazily on first open. -->
+<div class="lookup-overlay" id="lookupOverlay" role="dialog" aria-modal="true" aria-labelledby="lookupTitle" hidden>
+  <div class="lookup-panel" role="document">
+    <button type="button" class="lookup-close" id="lookupClose" aria-label="Close company search">×</button>
+    <p class="kicker">SBTi Target Dashboard</p>
+    <h2 class="lookup-title" id="lookupTitle">Find your company’s target</h2>
+    <p class="lookup-intro">
+      Look up any company that has set or committed to science-based targets,
+      and see its current near-term, long-term, and net-zero status.
+      <span class="lookup-meta" id="lookupMeta"></span>
+    </p>
+    <div class="lookup-search">
+      <svg class="lookup-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+      </svg>
+      <input type="search" id="lookupInput" class="lookup-input"
+             placeholder="Start typing a company name…"
+             autocomplete="off" autocapitalize="off" spellcheck="false"
+             aria-label="Company name" aria-controls="lookupResults">
+    </div>
+    <p class="lookup-status" id="lookupStatus" role="status" aria-live="polite"></p>
+    <div class="lookup-results" id="lookupResults"></div>
+    <p class="lookup-foot">
+      Data from the
+      <a href="https://sciencebasedtargets.org/target-dashboard" target="_blank" rel="noopener">SBTi Target Dashboard</a>,
+      refreshed weekly. For validation details always confirm against the official source.
+    </p>
+  </div>
+</div>
+
 <!-- ============================ FOOTER ============================ -->
 <footer class="site-footer">
   Created by Thibault Guenat, Senior Carbon &amp; Energy Manager @Arcadia &mdash;
@@ -1009,6 +1047,7 @@
 <script type="module" src="assets/chapters.js"></script>
 <script type="module" src="assets/personalize.js"></script>
 <script type="module" src="assets/implement.js"></script>
+<script type="module" src="assets/target-lookup.js"></script>
 
 <!-- Vercel Speed Insights (queue shim lives in assets/boot.js) -->
 <script defer src="/_vercel/speed-insights/script.js"></script>
