@@ -163,7 +163,7 @@ function renderResults(query) {
 
   if (!query.trim()) {
     wrap.innerHTML = '';
-    status.textContent = `${DATA.count.toLocaleString('en-US')} companies ready to search.`;
+    status.textContent = `${DATA.count.toLocaleString('en-US')} companies ready to search`;
     return;
   }
   if (!hits.length) {

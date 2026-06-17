@@ -66,8 +66,12 @@
         V2.0 is built on what came next: <strong>commitment is not the hardest part&nbsp;— delivery is.</strong>
       </p>
       <div class="cta-row hero-enter">
-        <a class="btn btn-primary" href="#category" data-cta>Walk the cycle</a>
-        <a class="btn btn-ghost" href="#category" data-cta>What applies to you?</a>
+        <button type="button" class="btn btn-primary" id="onePagerBtn" data-one-pager>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/>
+          </svg>
+          I want a one-pager
+        </button>
         <button type="button" class="btn btn-ghost" id="targetLookupBtn" data-target-lookup>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
             <circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
@@ -1027,8 +1031,30 @@
     <p class="lookup-foot">
       Data from the
       <a href="https://sciencebasedtargets.org/target-dashboard" target="_blank" rel="noopener">SBTi Target Dashboard</a>,
-      refreshed weekly. For validation details always confirm against the official source.
+      refreshed weekly.
     </p>
+  </div>
+</div>
+
+<!-- ============ ROLE ONE-PAGER ============
+     A role-chooser ("What's your job?") that renders a tailored, printable
+     one-page brief on what CNZS V2.0 changes for that role. Built entirely
+     in assets/one-pager.js from content mined from the chapters above. -->
+<div class="lookup-overlay op-overlay" id="onePagerOverlay" role="dialog" aria-modal="true" aria-labelledby="opTitle" hidden>
+  <div class="lookup-panel op-panel" role="document">
+    <button type="button" class="lookup-close" id="onePagerClose" aria-label="Close one-pager">×</button>
+
+    <div class="op-chooser" id="opChooser">
+      <p class="kicker">SBTi Corporate Net-Zero Standard V2.0</p>
+      <h2 class="lookup-title" id="opTitle">What’s your job?</h2>
+      <p class="lookup-intro">
+        Pick your role and get a one-page brief on what V2.0 changes for you —
+        written from your seat, with the takeaways that matter to your week.
+      </p>
+      <div class="op-role-grid" id="opRoleGrid"></div>
+    </div>
+
+    <article class="op-sheet" id="opSheet" hidden></article>
   </div>
 </div>
 
@@ -1048,6 +1074,7 @@
 <script type="module" src="assets/personalize.js"></script>
 <script type="module" src="assets/implement.js"></script>
 <script type="module" src="assets/target-lookup.js"></script>
+<script type="module" src="assets/one-pager.js"></script>
 
 <!-- Vercel Speed Insights (queue shim lives in assets/boot.js) -->
 <script defer src="/_vercel/speed-insights/script.js"></script>
