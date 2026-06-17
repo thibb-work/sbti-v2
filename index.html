@@ -355,65 +355,276 @@
     <div class="chapter-inner">
       <p class="kicker" data-reveal="fade"><span class="chapter-num">06 / 11</span> &nbsp; CNZS-CH.3 · SET TARGETS · CNZS-C12 · SCOPE 2</p>
       <h2 class="headline" id="scope2-headline" data-reveal>Scope&nbsp;2: two ways to express the ambition.</h2>
-      <p class="lede" data-reveal>Near-term scope&nbsp;2 targets must cover 100% of your purchased electricity, heat, steam and cooling. Choose how you express the ambition.</p>
+      <p class="lede" data-reveal>Near-term scope&nbsp;2 targets must cover 100% of your purchased electricity, heat, steam and cooling. For electricity buyers, V2.0 is less about whether instruments exist and more about where they can credibly be claimed.</p>
 
+      <nav class="anchor-pills s2-nav" aria-label="Scope 2 procurement topics" data-reveal>
+        <a class="anchor-pill" href="#s2-target-options">Target options</a>
+        <a class="anchor-pill" href="#s2-activity-pools">Activity pools</a>
+        <a class="anchor-pill" href="#s2-eacs-gos">EACs and GOs</a>
+        <a class="anchor-pill" href="#s2-hourly-matching">Hourly matching</a>
+        <a class="anchor-pill" href="#s2-grandfathering">Grandfathering</a>
+        <a class="anchor-pill" href="#s2-claims">Claims</a>
+        <a class="anchor-pill" href="#s2-procurement-checklist">Procurement checklist</a>
+      </nav>
+
+      <div class="s2-callout" data-reveal>
+        <p class="callout-kicker">For energy procurement teams</p>
+        <h3 class="s2-callout-title">Treat Scope 2 as a procurement architecture problem.</h3>
+        <p>Map loads to deliverability regions, separate physical reductions from market-instrument implementation, and make sure every PPA, green tariff, EECS Guarantee of Origin or EAC can be allocated to the activity pool it is meant to cover.</p>
+        <div class="s2-claim-legend" aria-label="Claim types used in this section">
+          <span class="legend-chip legend-physical">Physical emissions reduction</span>
+          <span class="legend-chip legend-alignment">Low-carbon electricity alignment</span>
+          <span class="legend-chip legend-system">System contribution</span>
+        </div>
+      </div>
+
+      <section class="s2-block" id="s2-target-options" aria-labelledby="s2-target-options-title">
+        <p class="kicker">CNZS-C12 · TARGET OPTIONS</p>
+        <h3 class="sub-h3 u-mt0" id="s2-target-options-title">Choose the target expression, then design the contract stack.</h3>
         <div class="toggle-row" role="tablist" aria-label="Scope 2 target option">
           <button class="toggle-btn is-active" type="button" role="tab" aria-selected="true" data-s2="lce">LCE-share alignment</button>
           <button class="toggle-btn" type="button" role="tab" aria-selected="false" data-s2="abs">Absolute reduction</button>
         </div>
 
         <div class="target-panel is-active" data-s2-panel="lce">
-          <p class="ptitle">Low-carbon electricity (LCE) alignment target — <code>C12.2a</code></p>
-          <p class="ptext">Grow the share of low-carbon electricity you use, contract, or match on a linear path toward an eligible net-zero pathway. LCE now covers more than renewables: <strong>renewables, nuclear, and CCS-fitted generation</strong> all count. The long-term version of this target reaches <strong>100% LCE</strong> (C13.2a).</p>
-          <p class="ptext u-mb0">Category A companies also submit projected electricity consumption at validation — and if projected demand growth exceeds <strong>20%</strong> a year over the cycle, an emissions target becomes mandatory alongside (or instead of) the LCE target (C12.4).</p>
+          <p class="ptitle">Low-carbon electricity (LCE) alignment target <code>C12.2a</code></p>
+          <p class="ptext">Grow the share of low-carbon electricity you use, contract, or match on a linear path toward an eligible net-zero pathway. LCE now covers more than renewables: <strong>renewables, nuclear, and CCS-fitted generation</strong> all count. The long-term version reaches <strong>100% LCE</strong> (C13.2a).</p>
+          <p class="ptext u-mb0">Category A companies also submit projected electricity consumption at validation. If projected demand growth exceeds <strong>20%</strong> a year over the cycle, an emissions target becomes mandatory alongside or instead of the LCE target (C12.4).</p>
         </div>
         <div class="target-panel" data-s2-panel="abs">
-          <p class="ptitle">Absolute emissions reduction target — <code>C12.2b</code></p>
-          <p class="ptext">Cut scope&nbsp;2 absolute emissions on a linear trajectory to a defined residual level, consistent with an eligible net-zero pathway. The long-term version lands at residual levels by 2050 (C13.2b). Long-term targets stay optional on this route — but Category A still files electricity demand projections at validation.</p>
+          <p class="ptitle">Absolute emissions reduction target <code>C12.2b</code></p>
+          <p class="ptext">Cut scope&nbsp;2 absolute emissions on a linear trajectory to a defined residual level, consistent with an eligible net-zero pathway. The long-term version lands at residual levels by 2050 (C13.2b). Long-term targets stay optional on this route, but Category A still files electricity demand projections at validation.</p>
         </div>
+      </section>
 
-        <p class="kicker u-mt24">CNZS-C29–C31 · IMPLEMENTATION HIERARCHY FOR ELECTRICITY</p>
-        <p class="muted-note u-mb12">Activity-level actions come first: cut consumption, then add behind-the-meter generation, then contract for low-carbon electricity inside your <strong>deliverability region</strong>.</p>
-        <div class="tag-row u-mb14">
-          <span class="chip chip-teal">Physical PPAs</span>
-          <span class="chip chip-teal">Virtual PPAs</span>
-          <span class="chip chip-teal">Supplier LCE contracts</span>
-          <span class="chip chip-teal">Unbundled EACs</span>
-          <span class="chip chip-teal">Default-delivered LCE</span>
+      <section class="s2-block" id="s2-hierarchy" aria-labelledby="s2-hierarchy-title">
+        <p class="kicker">CNZS-C29-C31 · IMPLEMENTATION HIERARCHY FOR ELECTRICITY</p>
+        <h3 class="sub-h3 u-mt0" id="s2-hierarchy-title">The hierarchy changes the role of procurement instruments.</h3>
+        <p class="muted-note u-mb14">First reduce demand and secure physical low-carbon supply where possible. Then use deliverable market instruments such as PPAs, green tariffs and EACs. Do not treat generic certificate purchases as physical emissions reductions.</p>
+        <div class="s2-card-grid">
+          <article class="s2-mini-card claim-physical">
+            <p class="s2-card-kicker">Activity-level actions</p>
+            <h4>Change the physical activity.</h4>
+            <p>Reduce electricity consumption, improve energy efficiency, add behind-the-meter low-carbon generation, or use direct-line physical low-carbon supply where it is not embedded in the shared grid or activity pool.</p>
+          </article>
+          <article class="s2-mini-card claim-alignment">
+            <p class="s2-card-kicker">Activity-pool actions</p>
+            <h4>Use deliverable instruments.</h4>
+            <p>Grid-connected PPAs, virtual PPAs, supplier low-carbon electricity contracts, green tariffs, EECS Guarantees of Origin and other EACs sit here when tied to the relevant deliverability region or activity pool.</p>
+          </article>
+          <article class="s2-mini-card claim-system">
+            <p class="s2-card-kicker">Sector-level actions</p>
+            <h4>Fallback only.</h4>
+            <p>Use sector-level action only where activity-level and activity-pool options are structurally constrained. It is not a shortcut for cheaper procurement.</p>
+          </article>
         </div>
+      </section>
 
-        <div class="fineprint">
-          <button class="fineprint-toggle" type="button" aria-expanded="false">
-            <span>Instrument fine print — age cap, PPA flex, grandfathering</span>
-            <span class="chev" aria-hidden="true">⌄</span>
-          </button>
-          <div class="fineprint-body">
-            <p><code>C31.3</code> — <strong>15-year generator age cap</strong>: market instruments are limited to LCE generators commissioned or re-powered within the 15 years before the consumption period they're applied to.</p>
-            <p><code>C30.3.b</code> — <strong>36-month PPA flexibility</strong>: if your operations sit across two or more interconnected activity pools on the same synchronous grid, a PPA with an LCE project in any of those pools can cover the aggregate load — provided offtake begins within 36 months of the project's commissioning.</p>
-            <p><code>C30.5</code> — <strong>Grandfathering</strong>: market instruments from long-term contracts signed before V2.0's effective date (1 Feb 2027) keep the deliverability of the activity pools they were applied to before that date, allocated on a load-weighted basis. Renewing the contract does not extend this.</p>
-          </div>
+      <section class="s2-major-box" id="s2-eacs-gos" aria-labelledby="s2-eacs-title">
+        <p class="kicker">PROCUREMENT CLAIMS</p>
+        <h3 class="sub-h3 u-mt0" id="s2-eacs-title">EACs still count, but the claim changes.</h3>
+        <p>EACs, including EECS Guarantees of Origin, are still eligible market instruments under SBTi V2. The change is about what they can support. They can support low-carbon electricity alignment and system-contribution claims. They do not automatically support a physical emissions-reduction claim unless the physical GHG inventory changes.</p>
+        <div class="table-scroll" tabindex="0" aria-label="Scope 2 action and strongest claim table">
+          <table class="matrix-table s2-table">
+            <thead>
+              <tr><th>Action</th><th>Strongest claim</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Energy efficiency reducing electricity use</td><td><span class="claim-pill claim-pill-physical">Physical emissions reduction</span></td></tr>
+              <tr><td>On-site solar consumed on site</td><td><span class="claim-pill claim-pill-physical">Physical reduction and LCE alignment</span></td></tr>
+              <tr><td>Direct-line low-carbon electricity</td><td><span class="claim-pill claim-pill-alignment">Strong activity-level LCE alignment</span></td></tr>
+              <tr><td>Grid-connected PPA in relevant activity pool</td><td><span class="claim-pill claim-pill-alignment">LCE alignment / target implementation / possible system contribution</span></td></tr>
+              <tr><td>Unbundled EECS GO or EAC</td><td><span class="claim-pill claim-pill-alignment">LCE alignment / target implementation, if quality rules are met</span></td></tr>
+              <tr><td>Out-of-region certificates without deliverability evidence</td><td><span class="claim-pill claim-pill-warning">Weak claim; likely not robust for SBTi V2</span></td></tr>
+            </tbody>
+          </table>
         </div>
+        <p class="s2-warning"><strong>Claim warning:</strong> Do not say "we reduced emissions by buying EACs" unless the claim is explicitly backed by physical inventory changes. Safer wording is "we matched X% of electricity consumption with eligible low-carbon electricity instruments" or "we contributed to decarbonising the electricity system through eligible instruments".</p>
 
-        <div class="fineprint">
-          <button class="fineprint-toggle" type="button" aria-expanded="false">
-            <span>Hourly matching — the new transparency layer (C32–C34)</span>
-            <span class="chev" aria-hidden="true">⌄</span>
-          </button>
-          <div class="fineprint-body">
-            <!-- compact, always-grown variant of the .hourly-bars component used in #implement -->
-            <div class="hourly-bars hourly-mini" role="img" aria-label="Hourly-matching recognition thresholds: at least 50 percent until 2030, 75 percent until 2035, and 90 percent from 2035.">
-              <div class="hb" data-pct="50"><span class="hb-fill"><span class="hb-num">50%</span></span><span class="hb-label">until 2030</span></div>
-              <div class="hb" data-pct="75"><span class="hb-fill"><span class="hb-num">75%</span></span><span class="hb-label">until 2035</span></div>
-              <div class="hb is-peak" data-pct="90"><span class="hb-fill"><span class="hb-num">90%</span></span><span class="hb-label">from 2035</span></div>
-            </div>
-            <p>Recognition thresholds for hourly-matched low-carbon electricity rise from <strong>50%</strong> (until 2030) to <strong>75%</strong> (until 2035) to <strong>90%</strong> (from 2035) — meeting them earns optional recognition on the SBTi Dashboard.</p>
-            <p>Reporting the hourly-matching percentage is <strong>mandatory for Category A</strong> companies in any activity pool with annual electricity consumption of <strong>10 GWh or more</strong> (C32.1), with third-party assurance.</p>
-          </div>
+        <div class="s2-note-box">
+          <h4>EECS Guarantees of Origin: procurement hierarchy</h4>
+          <p>EECS GOs are EACs. They remain usable, but generic pan-European GO procurement is weaker under SBTi V2 unless certificates are mapped to the relevant activity pool and meet quality rules.</p>
+          <ol class="s2-ranked-list">
+            <li>Site-country or bidding-zone instruments where available.</li>
+            <li>Regional PPAs or green tariffs with clear deliverability logic.</li>
+            <li>Cross-border instruments only with documented deliverability.</li>
+            <li>Legacy contracts separately tagged under grandfathering.</li>
+            <li>Avoid generic, old, cheap, out-of-pool certificates as the core strategy.</li>
+          </ol>
         </div>
+      </section>
 
-        <div class="chapter-source" data-reveal>
-          Definitive requirements: <a href="https://files.sciencebasedtargets.org/production/files/Corporate-Net-Zero-Standard-version-2.pdf?dm=1781191781" target="_blank" rel="noopener">the published Standard</a>, Chapter&nbsp;3 (CNZS-C12) and Sections&nbsp;4.3–4.4 (CNZS-C29–C34).
+      <section class="s2-block" id="s2-activity-pools" aria-labelledby="s2-activity-pools-title">
+        <p class="kicker">CNZS-C30 · DELIVERABILITY REGIONS</p>
+        <h3 class="sub-h3 u-mt0" id="s2-activity-pools-title">Activity pools and deliverability: not always countries.</h3>
+        <p class="ptext">An activity pool is the electricity system that a company's load is connected to and can reasonably help decarbonise. For electricity, SBTi V2 points to deliverability regions, not simple political borders. A country can be a reasonable proxy in some cases, but not always.</p>
+        <div class="table-scroll" tabindex="0" aria-label="Examples where country is not enough">
+          <table class="matrix-table s2-table">
+            <thead>
+              <tr><th>Example</th><th>Why country is not enough</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Sweden SE1 vs SE4</td><td>Same country, different bidding zones and congestion.</td></tr>
+              <tr><td>Italy North vs Sicily/Sardinia</td><td>Same country, different grid constraints and island/interconnection issues.</td></tr>
+              <tr><td>Denmark DK1 vs DK2</td><td>Same country, separate electricity regions.</td></tr>
+              <tr><td>Great Britain vs Northern Ireland</td><td>Same UK, different electricity systems.</td></tr>
+              <tr><td>United States: ERCOT, PJM, CAISO, MISO</td><td>One country, multiple grid and market regions.</td></tr>
+              <tr><td>Germany/Luxembourg</td><td>Cross-border market logic can matter more than country border.</td></tr>
+              <tr><td>Generic "Europe-wide GO portfolio"</td><td>Too broad unless deliverability and allocation are documented.</td></tr>
+            </tbody>
+          </table>
         </div>
+        <p class="s2-rule"><strong>Practical rule:</strong> Build the data model with site, country, bidding zone/grid zone, annual MWh, hourly data availability, and instrument origin. Do not just tag everything as "Europe".</p>
+      </section>
+
+      <section class="s2-block" id="s2-imports" aria-labelledby="s2-imports-title">
+        <h3 class="sub-h3 u-mt0" id="s2-imports-title">Imports do not automatically validate neighbouring-country EACs.</h3>
+        <p class="ptext">Physical imports can matter for location-based grid factors. But a neighbouring-country EAC is not automatically valid for a consuming site just because electricity imports exist. For procurement claims, the instrument still needs to fit the relevant deliverability/activity-pool rules, or qualify under a specific flexibility.</p>
+        <div class="s2-example-grid">
+          <article class="s2-status-card is-good"><h4>German site + German GO</h4><p>Usually straightforward.</p></article>
+          <article class="s2-status-card is-watch"><h4>German site + French PPA</h4><p>Potentially valid if deliverability and activity-pool/PPA rules are satisfied.</p></article>
+          <article class="s2-status-card is-bad"><h4>German site + Norwegian hydro GO</h4><p>Not automatically robust just because Norway exports electricity into Europe.</p></article>
+          <article class="s2-status-card is-bad"><h4>German site + Brazilian EAC</h4><p>Not robust for Scope 2 electricity consumption in Germany.</p></article>
+        </div>
+      </section>
+
+      <section class="s2-block" id="s2-ppa-aggregation" aria-labelledby="s2-ppa-aggregation-title">
+        <p class="kicker">CNZS-C30.3.b · PPA FLEXIBILITY</p>
+        <h3 class="sub-h3 u-mt0" id="s2-ppa-aggregation-title">One PPA may cover multiple connected loads.</h3>
+        <p class="s2-rule">You can aggregate operations across interconnected activity pools in a wide-area synchronous grid if the aggregate load is covered by a PPA with a low-carbon electricity project in one of those pools, and offtake begins within 36 months of the project's commissioning.</p>
+        <p class="ptext">This means one new PPA may cover multiple connected loads, instead of requiring one PPA per site or country, but only where the electricity systems are meaningfully interconnected and the PPA is tied to a recent/new low-carbon project.</p>
+        <div class="s2-example-grid">
+          <article class="s2-status-card is-good"><h4>Valid-ish</h4><p>A company uses 5 GWh in Germany and 7 GWh in France. It signs a 12 GWh PPA with a new wind project in France. If the relevant regions are treated as interconnected and offtake begins within 36 months of commissioning, this may cover the aggregated load.</p></article>
+          <article class="s2-status-card is-bad"><h4>Not valid</h4><p>A German load is covered by a PPA in Brazil. Different grid, no deliverability.</p></article>
+          <article class="s2-status-card is-bad"><h4>Not valid</h4><p>A PPA starts offtake 5 years after project commissioning. This likely fails the 36-month condition.</p></article>
+        </div>
+      </section>
+
+      <section class="s2-block" id="s2-hourly-matching" aria-labelledby="s2-hourly-title">
+        <p class="kicker">CNZS-C32-C34 · HOURLY MATCHING</p>
+        <h3 class="sub-h3 u-mt0" id="s2-hourly-title">Hourly matching is a procurement matching metric.</h3>
+        <p class="ptext">Hourly matching in SBTi V2 is not a pure location-based hourly emissions calculation. It is a procurement/attribute matching metric: the percentage of electricity consumption in significant activity pools that is used, contracted, or matched with low-carbon electricity on an hourly basis.</p>
+        <p class="s2-rule"><strong>Threshold:</strong> The 10 GWh threshold applies per activity pool, not globally.</p>
+        <div class="table-scroll" tabindex="0" aria-label="Hourly matching threshold examples">
+          <table class="matrix-table s2-table s2-compact-table">
+            <thead>
+              <tr><th>Activity pool</th><th>Annual electricity use</th><th>Hourly matching reporting?</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>France</td><td>12 GWh</td><td>Yes</td></tr>
+              <tr><td>Italy</td><td>8 GWh</td><td>No, unless part of a larger relevant activity pool</td></tr>
+              <tr><td>Germany</td><td>50 GWh</td><td>Yes</td></tr>
+              <tr><td>Global total</td><td>70 GWh</td><td>Not the test by itself</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="hourly-bars hourly-mini s2-hourly-bars" role="img" aria-label="Hourly-matching recognition thresholds: at least 50 percent until 2030, 75 percent until 2035, and 90 percent from 2035.">
+          <div class="hb" data-pct="50"><span class="hb-fill"><span class="hb-num">50%</span></span><span class="hb-label">until 2030</span></div>
+          <div class="hb" data-pct="75"><span class="hb-fill"><span class="hb-num">75%</span></span><span class="hb-label">until 2035</span></div>
+          <div class="hb is-peak" data-pct="90"><span class="hb-fill"><span class="hb-num">90%</span></span><span class="hb-label">from 2035</span></div>
+        </div>
+        <p class="ptext u-mb0">Annual matching remains the core target implementation requirement. Hourly matching is mandatory to report for significant activity pools and optional for leadership recognition.</p>
+      </section>
+
+      <section class="s2-block" id="s2-grandfathering" aria-labelledby="s2-grandfathering-title">
+        <p class="kicker">CNZS-C30.5 · LEGACY CONTRACTS</p>
+        <h3 class="sub-h3 u-mt0" id="s2-grandfathering-title">Grandfathering: build a legacy contract register before 1 February 2027.</h3>
+        <p class="ptext">Existing long-term contracts signed before the V2 effective date may be grandfathered for the duration of the contract. But renewal does not extend the benefit. Companies should document exactly which loads and activity pools each legacy contract was applied to before the effective date.</p>
+        <p class="s2-checklist-title">For every PPA, VPPA, green tariff, GO/EAC arrangement, capture:</p>
+        <ul class="s2-checklist s2-checklist-columns">
+          <li>Contract signature date</li>
+          <li>Start date and end date</li>
+          <li>Renewal rights</li>
+          <li>Generator commissioning or repowering date</li>
+          <li>Technology</li>
+          <li>Country, bidding zone, grid region and registry</li>
+          <li>Annual MWh</li>
+          <li>Sites/activity pools covered</li>
+          <li>Load-weighted allocation method</li>
+          <li>Certificate serial numbers and cancellation evidence</li>
+          <li>Hourly generation data availability</li>
+          <li>Claim wording allowed under the contract</li>
+        </ul>
+      </section>
+
+      <section class="s2-block" id="s2-sector-fallback" aria-labelledby="s2-sector-title">
+        <p class="kicker">CNZS-C23 · C30.4</p>
+        <h3 class="sub-h3 u-mt0" id="s2-sector-title">Sector-level action is a fallback, not a cheap procurement route.</h3>
+        <p class="ptext">SBTi V2 allows sector-level action where local or activity-pool options are structurally constrained, for example because of regulation, infrastructure, market structure, immature certificate systems, or insufficient low-carbon electricity supply. Cost, internal preference, or weak procurement planning should not count.</p>
+        <div class="table-scroll" tabindex="0" aria-label="Structural constraint examples">
+          <table class="matrix-table s2-table">
+            <thead>
+              <tr><th>Likely hard to justify</th><th>More plausible</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Germany</td><td>Small island grid with limited LCE supply</td></tr>
+              <tr><td>France</td><td>Jurisdiction with no credible EAC registry</td></tr>
+              <tr><td>Spain</td><td>Market where corporate PPAs are blocked or impractical due to regulation</td></tr>
+              <tr><td>Netherlands</td><td>Activity pool with demonstrably insufficient LCE supply during the target period</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="s2-rule">Even where sector-level action is used, companies should show they are also trying to enable local or regional low-carbon electricity development.</p>
+      </section>
+
+      <section class="s2-block" id="s2-target-timing" aria-labelledby="s2-target-timing-title">
+        <h3 class="sub-h3 u-mt0" id="s2-target-timing-title">Target timing: do not reopen 2030 targets unless you have to.</h3>
+        <p class="ptext">If your 2030 Scope 1 and 2 targets are already validated, the default strategy is usually to deliver them, evidence the result, and prepare the 2030-2035 cycle. Do not reopen targets early unless required by recalculation, M&amp;A, non-conformance, or strategic reasons.</p>
+        <ol class="s2-timeline">
+          <li><strong>2026:</strong> map Scope 2 exposure, activity pools, legacy contracts.</li>
+          <li><strong>1 February 2027:</strong> V2 effective date.</li>
+          <li><strong>2027:</strong> dual window where V1.3.1 and V2 may both be relevant depending on SBTi transition rules.</li>
+          <li><strong>2028:</strong> start designing 2030-2035 targets if current target year is 2030.</li>
+          <li><strong>2030:</strong> deliver and claim current target if applicable.</li>
+          <li><strong>2030-2035:</strong> next target cycle under V2 logic.</li>
+        </ol>
+      </section>
+
+      <section class="s2-block" id="s2-claims" aria-labelledby="s2-claims-title">
+        <p class="kicker">CLAIMS</p>
+        <h3 class="sub-h3 u-mt0" id="s2-claims-title">Bad claim / better claim.</h3>
+        <div class="s2-claim-pairs">
+          <article class="s2-claim-pair">
+            <p class="claim-label bad">Bad</p>
+            <p>"We reduced our Scope 2 emissions by 100% through GOs."</p>
+            <p class="claim-label better">Better</p>
+            <p>"We matched 100% of our electricity consumption with eligible low-carbon electricity instruments, subject to SBTi V2 quality and deliverability criteria."</p>
+          </article>
+          <article class="s2-claim-pair">
+            <p class="claim-label bad">Bad</p>
+            <p>"Our European operations are renewable because we bought European GOs."</p>
+            <p class="claim-label better">Better</p>
+            <p>"We procured eligible low-carbon electricity instruments and allocated them to relevant activity pools based on deliverability and documented certificate evidence."</p>
+          </article>
+          <article class="s2-claim-pair">
+            <p class="claim-label bad">Bad</p>
+            <p>"Our certificates make our electricity zero-carbon."</p>
+            <p class="claim-label better">Better</p>
+            <p>"Our certificates support low-carbon electricity alignment. Physical emissions reductions are tracked separately through the location-based inventory."</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="s2-block s2-final-checklist" id="s2-procurement-checklist" aria-labelledby="s2-checklist-title">
+        <p class="kicker">ENERGY PROCUREMENT ACTION CHECKLIST</p>
+        <h3 class="sub-h3 u-mt0" id="s2-checklist-title">What to do next.</h3>
+        <ul class="s2-checklist">
+          <li>Map electricity by site, country, bidding zone/grid zone, supplier and annual MWh.</li>
+          <li>Identify activity pools above 10 GWh/year.</li>
+          <li>Separate physical reduction levers from EAC/PPA implementation levers.</li>
+          <li>Build a legacy contract register before 1 February 2027.</li>
+          <li>Check generator age and commissioning/repowering date.</li>
+          <li>Require certificate serial numbers and cancellation evidence.</li>
+          <li>Require hourly generation and consumption data where available.</li>
+          <li>Review claim wording with legal/comms.</li>
+          <li>Avoid generic pan-European claims unless deliverability is documented.</li>
+          <li>Prioritise demand reduction, on-site/direct-line supply, and deliverable PPAs over cheap unbundled certificates.</li>
+        </ul>
+      </section>
+
+      <div class="chapter-source" data-reveal>
+        Definitive requirements: <a href="https://files.sciencebasedtargets.org/production/files/Corporate-Net-Zero-Standard-version-2.pdf?dm=1781191781" target="_blank" rel="noopener">the published Standard</a>, Chapter&nbsp;3 (CNZS-C12) and Sections&nbsp;4.3–4.4 (CNZS-C29–C34).
+      </div>
     </div>
   </section>
 
