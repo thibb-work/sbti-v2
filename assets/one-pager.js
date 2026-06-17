@@ -208,7 +208,7 @@ const ROLES = [
         ])),
 
         section('Prove it — say only what you can show (C36–C37)', `
-          <p class="op-fine">Report progress annually, then complete an End-of-Cycle Assessment at the end of the five-year cycle. Three claim types, each with its own evidence bar:</p>
+          <p class="op-fine">Report progress annually, then complete an End-of-Cycle Assessment in year five. Three claim types, each with its own evidence bar:</p>
           ${table(
             ['Claim', 'Basis'],
             [
