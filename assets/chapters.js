@@ -167,6 +167,82 @@ function initScope2Toggle() {
 }
 
 /* -------------------------------------------------------------------------
+   #scope-2 — compact expandable procurement cards
+   ------------------------------------------------------------------------- */
+function initScope2Expanders() {
+  const cards = Array.from(document.querySelectorAll('#scope-2 .s2-block, #scope-2 .s2-major-box'));
+  if (!cards.length) return;
+
+  function setOpen(card, open) {
+    const toggle = card.querySelector('.s2-expander-toggle');
+    card.classList.toggle('is-open', open);
+    if (toggle) toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    NZ.refresh();
+  }
+
+  cards.forEach((card, i) => {
+    if (card.dataset.s2Expander === '1') return;
+    const heading = Array.from(card.children).find((el) => el.matches('h3'));
+    if (!heading) return;
+    const kicker = Array.from(card.children).find((el) => el.matches('.kicker'));
+    const bodyId = card.id ? card.id + '-body' : 's2-card-body-' + i;
+    const toggleId = card.id ? card.id + '-toggle' : 's2-card-toggle-' + i;
+    const hash = window.location.hash;
+    const shouldOpen = hash ? hash === '#' + card.id || (hash === '#scope-2' && i === 0) : i === 0;
+
+    const toggle = document.createElement('button');
+    toggle.type = 'button';
+    toggle.id = toggleId;
+    toggle.className = 's2-expander-toggle';
+    toggle.setAttribute('aria-expanded', shouldOpen ? 'true' : 'false');
+    toggle.setAttribute('aria-controls', bodyId);
+    toggle.innerHTML =
+      '<span class="s2-expander-copy">' +
+        '<span class="s2-expander-kicker">' + (kicker ? kicker.textContent : 'Scope 2') + '</span>' +
+        '<span class="s2-expander-title">' + heading.textContent + '</span>' +
+      '</span>' +
+      '<span class="s2-expander-icon" aria-hidden="true">⌄</span>';
+
+    const body = document.createElement('div');
+    body.id = bodyId;
+    body.className = 's2-expander-body';
+    body.setAttribute('aria-labelledby', toggleId);
+
+    Array.from(card.children).forEach((child) => {
+      if (child !== heading && child !== kicker) body.appendChild(child);
+    });
+    heading.remove();
+    if (kicker) kicker.remove();
+
+    card.prepend(body);
+    card.prepend(toggle);
+    card.dataset.s2Expander = '1';
+    card.setAttribute('aria-labelledby', toggleId);
+    card.classList.add('s2-expander-card');
+    if (shouldOpen) card.classList.add('is-open');
+
+    toggle.addEventListener('click', () => setOpen(card, !card.classList.contains('is-open')));
+  });
+
+  document.querySelectorAll('#scope-2 .anchor-pill[href^="#s2-"]').forEach((link) => {
+    link.addEventListener('click', (e) => {
+      const id = link.getAttribute('href').slice(1);
+      const target = document.getElementById(id);
+      if (!target) return;
+      e.preventDefault();
+      setOpen(target, true);
+      history.pushState(null, '', '#' + id);
+      target.scrollIntoView({ behavior: NZ.reducedMotion ? 'auto' : 'smooth', block: 'start' });
+    });
+  });
+
+  window.addEventListener('hashchange', () => {
+    const target = document.getElementById(window.location.hash.slice(1));
+    if (target && target.classList.contains('s2-expander-card')) setOpen(target, true);
+  });
+}
+
+/* -------------------------------------------------------------------------
    #scope-3 — 5% boundary slider, live bars
    ------------------------------------------------------------------------- */
 function initBoundaryTool() {
@@ -370,6 +446,7 @@ function boot() {
   initFlipCards();
   initBaselineSlider();
   initRouteCards();
+  initScope2Expanders();
   initScope2Toggle();
   initBoundaryTool();
   initCategoryExplorer();
