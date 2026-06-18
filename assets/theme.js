@@ -18,9 +18,17 @@ function isDark() {
 }
 
 function setTheme(dark) {
+  // Freeze transitions for the swap so the whole page jumps to the new
+  // palette in one repaint — see .theme-switching in experience.css. The
+  // class is set before the attribute flips (so the no-transition style is
+  // active when colors change) and cleared after the paint commits.
+  root.classList.add('theme-switching');
   root.dataset.theme = dark ? 'dark' : 'light';
   updateButton();
   window.NZ?.emit('theme:change', { dark });
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => root.classList.remove('theme-switching'));
+  });
 }
 
 function updateButton() {
