@@ -2,7 +2,6 @@
    SBTi "Net-Zero Loop" — chapter interactivity
    Vanilla JS, keyboard-operable. Wires up:
      #govern   — flip-card flip on click/Enter/Space
-     #baseline — V1↔V2 drag slider (pointer + arrow keys) + fineprint toggles
      #scope-1  — route-card expand · #scope-2 — LCE/Abs toggle
      #scope-3  — 5% boundary slider + Table 3 category explorer
      #oer      — preset calculator
@@ -57,77 +56,6 @@ function initFlipCards() {
         flip();
       }
     });
-  });
-}
-
-/* -------------------------------------------------------------------------
-   #baseline — V1 ↔ V2 drag slider
-   ------------------------------------------------------------------------- */
-function initBaselineSlider() {
-  const track = document.getElementById('baselineTrack');
-  const handle = document.getElementById('baselineHandle');
-  const caption = document.getElementById('baselineCaption');
-  if (!track || !handle || !caption) return;
-
-  const CAPTIONS = {
-    left: 'V1 — your base year is fixed at registration and drifts further from your current operations every cycle.',
-    mid: 'Drag the handle \u2014 or press \u2190 / \u2192 \u2014 to compare the two approaches.',
-    right: 'V2.0 — at the start of every cycle you reset to the most recent year with comprehensive data, so your starting point stays representative (CNZS-C4).'
-  };
-
-  function setPos(pct) {
-    pct = Math.max(0, Math.min(100, pct));
-    track.style.setProperty('--bs-pos', pct + '%');
-    handle.setAttribute('aria-valuenow', String(Math.round(pct)));
-    let label;
-    if (pct < 35) { label = 'Closer to V1'; caption.textContent = CAPTIONS.left; }
-    else if (pct > 65) { label = 'Closer to V2.0'; caption.textContent = CAPTIONS.right; }
-    else { label = 'Balanced view'; caption.textContent = CAPTIONS.mid; }
-    handle.setAttribute('aria-valuetext', label);
-  }
-
-  setPos(50);
-
-  let dragging = false;
-
-  function pctFromClientX(clientX) {
-    const rect = track.getBoundingClientRect();
-    return ((clientX - rect.left) / rect.width) * 100;
-  }
-
-  handle.addEventListener('pointerdown', (e) => {
-    dragging = true;
-    handle.setPointerCapture(e.pointerId);
-  });
-  handle.addEventListener('pointermove', (e) => {
-    if (!dragging) return;
-    setPos(pctFromClientX(e.clientX));
-  });
-  handle.addEventListener('pointerup', (e) => {
-    dragging = false;
-    handle.releasePointerCapture(e.pointerId);
-  });
-
-  track.addEventListener('pointerdown', (e) => {
-    if (e.target === handle) return;
-    setPos(pctFromClientX(e.clientX));
-  });
-
-  handle.addEventListener('keydown', (e) => {
-    const current = parseFloat(handle.getAttribute('aria-valuenow')) || 50;
-    if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') {
-      e.preventDefault();
-      setPos(current - 5);
-    } else if (e.key === 'ArrowRight' || e.key === 'ArrowUp') {
-      e.preventDefault();
-      setPos(current + 5);
-    } else if (e.key === 'Home') {
-      e.preventDefault();
-      setPos(0);
-    } else if (e.key === 'End') {
-      e.preventDefault();
-      setPos(100);
-    }
   });
 }
 
@@ -444,7 +372,6 @@ function initTimeline() {
 function boot() {
   initFineprint();
   initFlipCards();
-  initBaselineSlider();
   initRouteCards();
   initScope2Expanders();
   initScope2Toggle();
