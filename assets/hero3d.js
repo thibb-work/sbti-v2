@@ -31,10 +31,20 @@ export async function initHero3D({ gsap, ScrollTrigger }) {
   if (!wrap || !hero) return;
 
   // ---- adaptive sizing ---------------------------------------------------
-  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  // Phones flicker when treated like desktops: capable handsets report high
+  // core counts, so the old core-only tier handed them 3000+ particles at full
+  // DPR with antialiasing — CPU/GPU overload. Detect touch/small screens and
+  // lighten three ways the eye barely registers on a field of soft gradient
+  // bubbles: a lower pixel ratio (no visible sharpness loss), no antialiasing,
+  // and ~40% fewer particles. The ambient drift is also gentled (motionScale).
+  // Net: roughly half the per-frame work, while the look stays close to desktop.
+  const isMobile = window.matchMedia('(max-width: 767px)').matches
+                || window.matchMedia('(pointer: coarse)').matches;
+  const dpr = Math.min(window.devicePixelRatio || 1, isMobile ? 1.5 : 2);
   const cores = navigator.hardwareConcurrency || 4;
-  const lowPower = cores <= 4 || dpr < 1.5;
-  const COUNT = lowPower ? 1800 : (cores >= 8 ? 4200 : 3000);
+  const lowPower = isMobile || cores <= 4 || dpr < 1.5;
+  const COUNT = isMobile ? 1100 : (lowPower ? 1800 : (cores >= 8 ? 4200 : 3000));
+  const motionScale = isMobile ? 0.7 : 1;   // calmer float on phones
   // boot.js stamps <html data-theme>; theme.js keeps it current and emits
   // 'theme:change', which re-tints this scene below (mutable on purpose)
   let dark = document.documentElement.dataset.theme === 'dark';
@@ -280,7 +290,7 @@ export async function initHero3D({ gsap, ScrollTrigger }) {
         const sd = L.seed[i];
         const f = 0.45 + sd * 0.95;          // each bubble its own slow tempo
         const ph = L.phase + sd * 6.2832;    // …and its own phase
-        const amp = (chaosAmp + floatBase * s * (0.55 + sd * 0.9)) * calm;
+        const amp = (chaosAmp + floatBase * s * (0.55 + sd * 0.9)) * calm * motionScale;
         let dx = Math.sin(drift * f + ph) * amp;
         let dy = Math.cos(drift * f * 0.82 + ph * 1.3) * amp;
         let dz = Math.sin(drift * f * 0.6 + ph * 0.7) * amp * 1.25;
