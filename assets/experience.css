@@ -3114,3 +3114,34 @@ a:hover { text-decoration: underline; }
   .op-keypoints, .op-stats, .op-tiers, .op-dodont { break-inside: avoid; }
   .op-section { break-inside: avoid; }
 }
+
+/* =========================================================================
+   Ownership watermark — assets/index.html .watermark
+
+   A fixed, tiled, diagonal repeat of the author's name. It sits above the
+   whole page (header + modals) and never intercepts pointer events, so any
+   screenshot — desktop, mobile, or snipping tool — captures the credit.
+   Browsers expose no way to write into a user's actual screenshot file, so
+   this is the reliable equivalent: the mark is already in the frame.
+
+   Opacity is deliberately low so it reads as a faint ghost on screen but
+   survives the contrast crush of a screenshot. Two SVG tiles (light/dark)
+   keep it legible against either palette.
+   ========================================================================= */
+.watermark {
+  position: fixed;
+  inset: 0;
+  z-index: 250;            /* above header (200) and overlays (90) */
+  pointer-events: none;    /* never block clicks, scroll, or selection */
+  opacity: .05;
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='300'%20height='180'%3E%3Ctext%20x='18'%20y='115'%20transform='rotate(-28%20150%2090)'%20font-family='Georgia,%20serif'%20font-style='italic'%20font-size='20'%20fill='%231E2B26'%3EThibault%20Guenat%3C/text%3E%3C/svg%3E");
+  background-repeat: repeat;
+}
+:root[data-theme="dark"] .watermark {
+  opacity: .07;
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='300'%20height='180'%3E%3Ctext%20x='18'%20y='115'%20transform='rotate(-28%20150%2090)'%20font-family='Georgia,%20serif'%20font-style='italic'%20font-size='20'%20fill='%23E8EDE9'%3EThibault%20Guenat%3C/text%3E%3C/svg%3E");
+}
+@media print {
+  /* keep the credit on any printed / saved-as-PDF copy too */
+  .watermark { display: block !important; opacity: .08; }
+}
