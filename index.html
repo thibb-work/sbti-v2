@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>The Net-Zero Loop — SBTi Corporate Net-Zero Standard V2.0</title>
-<meta name="description" content="From ambition to action: an interactive walk through the SBTi Corporate Net-Zero Standard V2.0 — govern, baseline, set targets, implement, prove, and stay responsible, on a single five-year loop to 2050.">
+<title>The Net-Zero Loop — SBTi Corporate Net-Zero Standard V2</title>
+<meta name="description" content="From ambition to action: an interactive walk through the SBTi Corporate Net-Zero Standard V2 — govern, baseline, set targets, implement, prove, and stay responsible, on a single five-year loop to 2050.">
 
 <!-- Pre-paint boot: hash redirects + theme stamp + Speed Insights shim.
      Deliberately blocking so old anchors and the dark theme apply before first paint. -->
@@ -59,11 +59,11 @@
     <div class="hero-poster" id="heroPoster" aria-hidden="true"></div>
 
     <div class="hero-inner">
-      <p class="kicker hero-enter">SBTi Net-Zero Standard V2.0</p>
+      <p class="kicker hero-enter">SBTi Net-Zero Standard V2</p>
       <h1 class="hero-headline hero-enter" id="hero-headline">From ambition to action.</h1>
       <p class="hero-sub hero-enter">
         Across a decade, more than <strong>11,000 companies</strong> set validated targets.
-        V2.0 is built on what came next: <strong>commitment is not the hardest part&nbsp;— delivery is.</strong>
+        V2 is built on what came next: <strong>commitment is not the hardest part&nbsp;— delivery is.</strong>
       </p>
       <div class="cta-row hero-enter">
         <button type="button" class="btn btn-primary" id="onePagerBtn" data-one-pager>
@@ -93,7 +93,7 @@
       <p class="kicker" data-reveal="fade"><span class="chapter-num">01</span> · A or B?</p>
       <h2 class="headline" id="category-headline" data-reveal>Which rules apply to you?</h2>
       <p class="lede" data-reveal>
-        V2.0 sorts every company into Category&nbsp;A or Category&nbsp;B.
+        V2 sorts every company into Category&nbsp;A or Category&nbsp;B.
         Answer three quick questions, and every requirement on this page flips to match yours.
       </p>
       <!-- Personalization engine — segmented controls drive window.NZ.category,
@@ -245,7 +245,7 @@
       <p class="kicker" data-reveal="fade"><span class="chapter-num">04</span> · BASELINE</p>
       <h2 class="headline" id="baseline-headline" data-reveal>Measure from where you are now.</h2>
       <p class="lede" data-reveal>
-        V2.0 moves the base year to your latest data, asks for limited assurance, and
+        V2 moves the base year to your latest data, asks for limited assurance, and
         makes you name the emissions that actually move the needle.
       </p>
       <p class="lede" data-reveal>
@@ -346,7 +346,7 @@
               <span class="chev" aria-hidden="true">⌄</span>
             </button>
             <div class="route-detail"><div class="route-detail-inner">
-              <p><code>C10.2c</code> — New in V2.0. Instead of an emissions curve, you commit to a dated schedule to abate, retire or decommission specific emitting assets, set out in an Asset Decarbonization Plan with milestones and/or a carbon budget. Long-term target mandatory — designed for asset-heavy operators.</p>
+              <p><code>C10.2c</code> — New in V2. Instead of an emissions curve, you commit to a dated schedule to abate, retire or decommission specific emitting assets, set out in an Asset Decarbonization Plan with milestones and/or a carbon budget. Long-term target mandatory — designed for asset-heavy operators.</p>
             </div></div>
           </div>
         </div>
@@ -376,7 +376,7 @@
     <div class="chapter-inner">
       <p class="kicker" data-reveal="fade"><span class="chapter-num">06</span> · SCOPE 2</p>
       <h2 class="headline" id="scope2-headline" data-reveal>Scope&nbsp;2: two ways to express the ambition.</h2>
-      <p class="lede" data-reveal>Near-term scope&nbsp;2 targets must cover 100% of your purchased electricity, heat, steam and cooling. For electricity buyers, V2.0 is less about whether instruments exist and more about where they can credibly be claimed.</p>
+      <p class="lede" data-reveal>Near-term scope&nbsp;2 targets must cover 100% of your purchased electricity, heat, steam and cooling. For electricity buyers, V2 is less about whether instruments exist and more about where they can credibly be claimed.</p>
 
       <nav class="anchor-pills s2-nav" aria-label="Scope 2 procurement topics" data-reveal>
         <a class="anchor-pill" href="#s2-target-options">Target options</a>
@@ -655,12 +655,14 @@
     <div class="chapter-inner">
       <p class="kicker" data-reveal="fade"><span class="chapter-num">07</span> · SCOPE 3</p>
       <h2 class="headline" id="scope3-headline" data-reveal>Scope&nbsp;3 stops being a coverage rule. It becomes a decision system.</h2>
-      <p class="lede" data-reveal>V1 asked one question — did you cover two-thirds of your value chain? V2.0 asks two: which categories clear the 5% boundary, and what target option fits each one.</p>
+      <p class="lede" data-reveal>V1 asked one question — did you cover two-thirds of your value chain?<br>V2 asks two: which categories clear the 5% boundary, and what target option fits each one.</p>
 
         <h3 class="sub-h3 u-mt0">1 · The 5% boundary, live</h3>
-        <p class="ptext u-mb14">Every scope&nbsp;3 category that represents <strong>5% or more</strong> of your categories 1–14 emissions is in your near-term target boundary (C14.1). Drag the threshold and watch categories cross the line — these are illustrative shares for a representative company.</p>
+        <p class="ptext u-mb14">Every scope&nbsp;3 category that represents <strong>5% or more</strong> of your categories 1–14 emissions is in your near-term target boundary (C14.1). Pick a company type to load its typical category breakdown, then drag the threshold and watch categories cross the line. Shares are illustrative, drawn from the patterns companies report to CDP.</p>
 
         <div class="boundary-tool">
+          <div class="boundary-profiles" id="boundaryProfiles" role="group" aria-label="Company type"></div>
+          <p class="boundary-profile-note" id="boundaryProfileNote"></p>
           <div class="boundary-controls">
             <label for="boundarySlider">Boundary threshold</label>
             <input type="range" id="boundarySlider" min="1" max="25" step="0.5" value="5" aria-describedby="boundaryReadout">
@@ -703,7 +705,7 @@
           </div>
         </div>
 
-        <div class="fineprint">
+        <div class="fineprint" id="cat11Fineprint" hidden>
           <button class="fineprint-toggle" type="button" aria-expanded="false">
             <span>Category 11 — when none of the options fit</span>
             <span class="chev" aria-hidden="true">⌄</span>
@@ -749,7 +751,7 @@
       <p class="kicker" data-reveal="fade"><span class="chapter-num">08</span> · TARGET IMPLEMENTATION</p>
       <h2 class="headline" id="implement-headline" data-reveal>Delivery is now a hierarchy.</h2>
       <p class="lede" data-reveal>
-        V2.0 grades <em>how</em> you decarbonize, not just whether you do. Cut at source first.
+        V2 grades <em>how</em> you decarbonize, not just whether you do. Cut at source first.
         Every step down the ladder has to be earned by a demonstrated structural constraint —
         never preference, procurement choice, or cost alone.
       </p>
@@ -1052,17 +1054,17 @@
 
 <!-- ============ ROLE ONE-PAGER ============
      A role-chooser ("What's your job?") that renders a tailored, printable
-     one-page brief on what CNZS V2.0 changes for that role. Built entirely
+     one-page brief on what CNZS V2 changes for that role. Built entirely
      in assets/one-pager.js from content mined from the chapters above. -->
 <div class="lookup-overlay op-overlay" id="onePagerOverlay" role="dialog" aria-modal="true" aria-labelledby="opTitle" hidden>
   <div class="lookup-panel op-panel" role="document">
     <button type="button" class="lookup-close" id="onePagerClose" aria-label="Close one-pager">×</button>
 
     <div class="op-chooser" id="opChooser">
-      <p class="kicker">SBTi Net-Zero Standard V2.0</p>
+      <p class="kicker">SBTi Net-Zero Standard V2</p>
       <h2 class="lookup-title" id="opTitle">What’s your job?</h2>
       <p class="lookup-intro">
-        Pick your role and get a one-page brief on what V2.0 changes for you —
+        Pick your role and get a one-page brief on what V2 changes for you —
         written from your seat, with the takeaways that matter to your week.
       </p>
       <div class="op-role-grid" id="opRoleGrid"></div>
