@@ -1,6 +1,6 @@
 # sbti-v2 — The Net-Zero Loop
 
-An interactive, single-page experience for the **SBTi Corporate Net-Zero Standard V2** (June 2026), built for sustainability consultants, sustainability managers, and energy-procurement teams: walk the five-year target cycle and learn the key changes without reading the 105-page Standard.
+An interactive, single-page experience for the **SBTi Corporate Net-Zero Standard v2** (June 2026), built for sustainability consultants, sustainability managers, and energy-procurement teams: walk the five-year target cycle and learn the key changes without reading the 105-page Standard.
 
 ## The experience
 
@@ -11,7 +11,7 @@ One scrollytelling journey through the Standard's own loop:
 | Hero | `#top` | Three.js particle field resolving into the 2026→2050 trajectory |
 | Which rules apply to you? | `#category` | Category A/B selector (Table 2 logic) — flips every Required/Optional badge on the page, persists in `localStorage` |
 | Govern | `#govern` | Board sign-off + transition-plan flip cards |
-| Baseline | `#baseline` | V1 historical vs V2 latest-data base-year slider |
+| Baseline | `#baseline` | v1 historical vs v2 latest-data base-year slider |
 | Set targets | `#targets` | S1 routes, S2 options, S3 5% boundary slider + tappable Table 3 explorer |
 | Implement | `#implement` | Pinned scroll descent of the 3-rung implementation hierarchy; hourly-matching bars 50/75/90 |
 | Prove it | `#prove` | Claim-type cards (company-level vs system contribution) |
