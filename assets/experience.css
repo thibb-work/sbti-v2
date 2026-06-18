@@ -76,6 +76,17 @@
 
 /* ---- reset ---- */
 * { box-sizing: border-box; }
+
+/* While the theme toggle swaps light/dark, freeze every transition for a
+   frame so the page repaints in the new palette all at once. Otherwise the
+   many border-color / background transitions animate out of sync and flash
+   visible edges around cards and panels. theme.js adds/removes the class. */
+:root.theme-switching,
+:root.theme-switching *,
+:root.theme-switching *::before,
+:root.theme-switching *::after {
+  transition: none !important;
+}
 html { scroll-behavior: smooth; }
 html, body { margin: 0; padding: 0; }
 body {
@@ -1201,6 +1212,8 @@ a:hover { text-decoration: underline; }
   outline: 2.5px solid var(--teal);
   outline-offset: 3px;
 }
+/* tables sit flush inside the scroll frame — the wrapper owns the margin */
+.table-scroll > .matrix-table { margin: 0; }
 .matrix-table.s2-table {
   min-width: 580px;
   margin: 0;
@@ -2463,6 +2476,10 @@ a:hover { text-decoration: underline; }
 }
 
 .lk-item {
+  /* Keep natural height: in the flex-column results list, the default
+     flex-shrink would squash items to fit max-height instead of letting
+     the container scroll (most visible on phones, where max-height is low). */
+  flex: 0 0 auto;
   border: 1px solid var(--line);
   border-radius: var(--radius-md);
   background: var(--bg);
