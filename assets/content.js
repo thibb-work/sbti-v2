@@ -165,5 +165,5 @@ export const OER_TIERS = [
 export const OER_PRESETS = [
   { id: "mid-manufacturer", label: "Mid-size manufacturer", detail: "~45,000 tCO₂e/yr ongoing emissions", ongoing: 45000 },
   { id: "regional-retailer", label: "Regional retail group", detail: "~180,000 tCO₂e/yr ongoing emissions", ongoing: 180000 },
-  { id: "global-industrial", label: "Global industrial group", detail: "~2,100,000 tCO₂e/yr ongoing emissions", ongoing: 2100000 }
+  { id: "global-industrial", label: "Large tech company", detail: "~2,100,000 tCO₂e/yr ongoing emissions", ongoing: 2100000 }
 ];
