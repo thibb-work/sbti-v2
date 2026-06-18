@@ -970,6 +970,7 @@ a:hover { text-decoration: underline; }
   line-height: 1.6;
 }
 .route-detail code { font-family: var(--font-mono); font-size: 12.5px; color: var(--teal); }
+.route-bestfor strong { color: var(--ink); }
 
 /* S2 toggle + instrument chips */
 .toggle-row {
