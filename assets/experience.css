@@ -1796,6 +1796,7 @@ a:hover { text-decoration: underline; }
 .cycle-dial .seg { fill: none; stroke-width: 10; stroke-linecap: round; }
 .cycle-dial .seg-annual { stroke: var(--teal); }
 .cycle-dial .seg-eoc { stroke: var(--amber); }
+.cycle-dial .year-tick { stroke: var(--ink); stroke-width: 1.4; opacity: .5; }
 .cycle-dial .center-label {
   position: absolute;
   inset: 0;
