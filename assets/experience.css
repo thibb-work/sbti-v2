@@ -2354,6 +2354,8 @@ a:hover { text-decoration: underline; }
   justify-content: center;
   padding: clamp(16px, 6vh, 80px) var(--gutter) 40px;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
   background: color-mix(in srgb, var(--bg) 70%, transparent);
   backdrop-filter: saturate(140%) blur(14px);
   -webkit-backdrop-filter: saturate(140%) blur(14px);
@@ -2585,6 +2587,20 @@ a:hover { text-decoration: underline; }
    ========================================================================= */
 .op-panel { max-width: 800px; }
 .op-accent--teal   { --op-accent: var(--teal); --op-accent-soft: var(--teal-soft); --op-accent-ink: var(--teal-ink); }
+
+/* On phones the one-pager becomes a full-height scrolling sheet so the
+   chooser and long briefs always have room and scroll cleanly (iOS Safari
+   leaves a fixed overlay's bottom unreachable without a dynamic height). */
+@media (max-width: 600px) {
+  .op-overlay { height: 100dvh; padding: 0; }
+  .op-panel {
+    max-width: none;
+    min-height: 100dvh;
+    border: 0;
+    border-radius: 0;
+    padding: 24px 20px calc(28px + env(safe-area-inset-bottom));
+  }
+}
 .op-accent--amber  { --op-accent: var(--amber); --op-accent-soft: var(--amber-soft); --op-accent-ink: var(--amber-ink); }
 
 /* ---- chooser ---- */
