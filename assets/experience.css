@@ -2229,6 +2229,65 @@ a:hover { text-decoration: underline; }
 .hourly-note { font-size: 13px; color: var(--muted); line-height: 1.55; margin: 0; }
 .hourly-note strong { color: var(--ink); }
 
+/* scope-2 hourly bars: fixed-height track keeps 50/75/90 proportional
+   (labels no longer eat into the bar height), with a green scale where a
+   higher percentage reads as a deeper green */
+.s2-hourly-bars { height: auto; align-items: flex-end; }
+.s2-hourly-bars .hb { height: auto; }
+.s2-hourly-bars .hb-track {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  width: 100%;
+  height: 120px;
+}
+.s2-hourly-bars .hb-fill {
+  width: 100%;
+  height: var(--pct);
+  transition: none;
+  background: color-mix(in srgb, var(--teal) 22%, var(--surface));
+}
+.s2-hourly-bars .hb:nth-child(2) .hb-fill { background: color-mix(in srgb, var(--teal) 52%, var(--surface)); }
+.s2-hourly-bars .hb.is-peak .hb-fill { background: var(--teal); }
+.s2-hourly-bars .hb-num { color: var(--teal-ink); }
+.s2-hourly-bars .hb.is-peak .hb-num { color: var(--surface); }
+
+/* scope-2 "what to do next" — short numbered action list */
+.s2-next-actions {
+  list-style: none;
+  counter-reset: na;
+  padding: 0;
+  margin: 14px 0 0;
+}
+.s2-next-actions li {
+  counter-increment: na;
+  position: relative;
+  padding: 1px 0 0 34px;
+  margin-bottom: 12px;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--muted);
+}
+.s2-next-actions li:last-child { margin-bottom: 0; }
+.s2-next-actions li::before {
+  content: counter(na);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--teal-soft);
+  color: var(--teal-ink);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.s2-next-actions li strong { color: var(--ink); }
+
 /* hourly-matching: mandatory-vs-optional infographic above the bar chart */
 .hm-mandate {
   display: grid;
