@@ -1,6 +1,6 @@
 # sbti-v2 — The Net-Zero Loop
 
-An interactive, single-page experience for the **SBTi Corporate Net-Zero Standard V2.0** (June 2026), built for sustainability consultants, sustainability managers, and energy-procurement teams: walk the five-year target cycle and learn the key changes without reading the 105-page Standard.
+An interactive, single-page experience for the **SBTi Corporate Net-Zero Standard V2** (June 2026), built for sustainability consultants, sustainability managers, and energy-procurement teams: walk the five-year target cycle and learn the key changes without reading the 105-page Standard.
 
 ## The experience
 
