@@ -1454,6 +1454,31 @@ a:hover { text-decoration: underline; }
   padding: 18px 20px 22px;
   margin-bottom: 18px;
 }
+.boundary-profiles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.boundary-profile-btn {
+  font-family: var(--font-body);
+  font-size: 13px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--muted);
+  cursor: pointer;
+  transition: border-color var(--dur) var(--ease), color var(--dur) var(--ease), background var(--dur) var(--ease);
+}
+.boundary-profile-btn:hover { border-color: var(--teal); color: var(--ink); }
+.boundary-profile-btn.is-active { background: var(--teal); border-color: var(--teal); color: var(--on-teal); }
+.boundary-profile-note {
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--muted);
+  margin: 0 0 16px;
+}
 .boundary-controls {
   display: flex;
   align-items: center;

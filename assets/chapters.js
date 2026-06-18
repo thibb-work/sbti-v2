@@ -13,6 +13,8 @@
 import {
   SCOPE3_TABLE3,
   SCOPE3_OPTION_LABELS,
+  SCOPE3_CATEGORY_NAMES,
+  SCOPE3_PROFILES,
   TIMELINE_ENTRIES,
   OER_PRESETS
 } from './content.js';
@@ -178,24 +180,34 @@ function initBoundaryTool() {
   const valEl = document.getElementById('boundaryVal');
   const barsEl = document.getElementById('boundaryBars');
   const readout = document.getElementById('boundaryReadout');
+  const profilesEl = document.getElementById('boundaryProfiles');
+  const noteEl = document.getElementById('boundaryProfileNote');
   if (!slider || !barsEl) return;
 
-  // Build bars once, sorted by share descending for a clean staircase.
-  const entries = Object.entries(SCOPE3_TABLE3)
-    .map(([key, d]) => ({ key, ...d }))
-    .sort((a, b) => b.share - a.share);
+  const profiles = SCOPE3_PROFILES;
+  let barCount = 0;
 
-  const maxShare = Math.max(...entries.map((e) => e.share));
+  // Rebuild the bars for the chosen company profile, sorted by share
+  // descending for a clean staircase.
+  function buildBars(profile) {
+    const entries = Object.entries(profile.shares)
+      .map(([cat, share]) => ({ cat: Number(cat), share }))
+      .sort((a, b) => b.share - a.share);
+    const maxShare = Math.max(...entries.map((e) => e.share)) || 1;
 
-  entries.forEach((e) => {
-    const bar = document.createElement('div');
-    bar.className = 'boundary-bar';
-    bar.dataset.key = e.key;
-    bar.dataset.share = String(e.share * 100);
-    bar.style.height = ((e.share / maxShare) * 100).toFixed(1) + '%';
-    bar.title = e.n + ' — ' + (e.share * 100).toFixed(0) + '%';
-    barsEl.appendChild(bar);
-  });
+    barsEl.innerHTML = '';
+    entries.forEach((e) => {
+      const bar = document.createElement('div');
+      bar.className = 'boundary-bar';
+      bar.dataset.cat = String(e.cat);
+      bar.dataset.share = String(e.share);
+      bar.style.height = ((e.share / maxShare) * 100).toFixed(1) + '%';
+      bar.title = (SCOPE3_CATEGORY_NAMES[e.cat] || ('Cat ' + e.cat)) +
+        ' — ' + e.share + '%';
+      barsEl.appendChild(bar);
+    });
+    barCount = entries.length;
+  }
 
   function update() {
     const threshold = parseFloat(slider.value);
@@ -207,12 +219,40 @@ function initBoundaryTool() {
       bar.classList.toggle('in-boundary', inBoundary);
       if (inBoundary) inCount += 1;
     });
-    readout.innerHTML = '<strong>' + inCount + ' of ' + entries.length +
+    readout.innerHTML = '<strong>' + inCount + ' of ' + barCount +
       '</strong> scope 3 categories sit at or above this threshold — each one needs a category target under Table 3.';
   }
 
+  function selectProfile(id) {
+    const profile = profiles.find((p) => p.id === id) || profiles[0];
+    if (profilesEl) {
+      profilesEl.querySelectorAll('.boundary-profile-btn').forEach((b) => {
+        const active = b.dataset.id === profile.id;
+        b.classList.toggle('is-active', active);
+        b.setAttribute('aria-pressed', active ? 'true' : 'false');
+      });
+    }
+    if (noteEl) noteEl.textContent = profile.blurb;
+    buildBars(profile);
+    update();
+  }
+
+  // Profile selector buttons.
+  if (profilesEl) {
+    profiles.forEach((p) => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'boundary-profile-btn';
+      btn.dataset.id = p.id;
+      btn.textContent = p.label;
+      btn.setAttribute('aria-pressed', 'false');
+      btn.addEventListener('click', () => selectProfile(p.id));
+      profilesEl.appendChild(btn);
+    });
+  }
+
   slider.addEventListener('input', update);
-  update();
+  selectProfile(profiles[0].id);
 }
 
 /* -------------------------------------------------------------------------
@@ -229,6 +269,7 @@ function initCategoryExplorer() {
 
   const entries = Object.entries(SCOPE3_TABLE3);
   const buttons = {};
+  const cat11Fineprint = document.getElementById('cat11Fineprint');
 
   entries.forEach(([key, d]) => {
     const btn = document.createElement('button');
@@ -264,6 +305,16 @@ function initCategoryExplorer() {
       optsEl.appendChild(span);
     });
     noteEl.textContent = d.t;
+    // The category-11 escape-hatch note only applies to Cat 11 (use of sold products).
+    if (cat11Fineprint) {
+      const isCat11 = key === 'c11';
+      cat11Fineprint.hidden = !isCat11;
+      if (!isCat11) {
+        cat11Fineprint.removeAttribute('open');
+        const toggle = cat11Fineprint.querySelector('.fineprint-toggle');
+        if (toggle) toggle.setAttribute('aria-expanded', 'false');
+      }
+    }
     NZ.refresh();
   }
 

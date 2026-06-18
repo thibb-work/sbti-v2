@@ -1,7 +1,7 @@
 /* =========================================================================
    SBTi "Net-Zero Loop" — role one-pager
    The hero "I want a one-pager" button opens a chooser ("What's your job?")
-   and renders a tailored, printable brief on what CNZS V2.0 changes for that
+   and renders a tailored, printable brief on what CNZS V2 changes for that
    role. Content is authored from the chapters in index.html / content.js and
    the published Standard. Three roles, written from each seat:
      · Energy procurement manager  — Scope 2 as a procurement architecture
@@ -109,7 +109,7 @@ const ROLES = [
     accent: 'amber',
     build() {
       return [
-        `<p class="op-lede">For electricity, V2.0 is less about buying a certificate somewhere and more about proving the low-carbon supply is connected to the load you want to claim. Procurement now needs site-level data, contract evidence and careful claim wording.</p>`,
+        `<p class="op-lede">For electricity, V2 is less about buying a certificate somewhere and more about proving the low-carbon supply is connected to the load you want to claim. Procurement now needs site-level data, contract evidence and careful claim wording.</p>`,
 
         stats([
           { big: '100%', label: 'of Scope 2 emissions must be covered by near-term targets' },
@@ -173,7 +173,7 @@ const ROLES = [
     accent: 'teal',
     build() {
       return [
-        `<p class="op-lede">V2.0 turns a one-off submission into a <strong>governed five-year loop</strong>: govern → baseline → set targets → implement → prove, repeated to 2050. You're the integrator who makes every link hold.</p>`,
+        `<p class="op-lede">V2 turns a one-off submission into a <strong>governed five-year loop</strong>: govern → baseline → set targets → implement → prove, repeated to 2050. You're the integrator who makes every link hold.</p>`,
 
         stats([
           { big: '5%', label: 'Category A Scope 3 category / EIA significance trigger' },
@@ -232,7 +232,7 @@ const ROLES = [
     accent: 'teal',
     build() {
       return [
-        `<p class="op-lede">V2.0 moves net-zero from a sustainability commitment into a governed business cycle. The board owns accountability, the transition plan must connect to strategy, and public claims now need evidence from inventory data and implementation actions.</p>`,
+        `<p class="op-lede">V2 moves net-zero from a sustainability commitment into a governed business cycle. The board owns accountability, the transition plan must connect to strategy, and public claims now need evidence from inventory data and implementation actions.</p>`,
 
         stats([
           { big: 'Board', label: 'your highest governing body is now formally accountable (C1)' },
@@ -253,10 +253,10 @@ const ROLES = [
           <p class="op-fine">Voluntary recognition today. From 2035, Category A companies are expected to support eligible removals equal to 1% of ongoing emissions, rising linearly to 100% by the net-zero year and no later than 2050.</p>`),
 
         section('The clock to 2050', dates([
-          { when: '11 Jun 2026', what: 'V2.0 published', tone: 'teal' },
-          { when: '1 Feb 2027', what: 'V2.0 effective — existing long-term electricity contracts get limited grandfathering', tone: 'teal' },
+          { when: '11 Jun 2026', what: 'V2 published', tone: 'teal' },
+          { when: '1 Feb 2027', what: 'V2 effective — existing long-term electricity contracts get limited grandfathering', tone: 'teal' },
           { when: 'End 2027', what: 'V1 closes to new targets', tone: 'gray' },
-          { when: 'From 2028', what: 'First cohort renews — 2030–2035 targets set under V2.0', tone: 'teal' },
+          { when: 'From 2028', what: 'First cohort renews — 2030–2035 targets set under V2', tone: 'teal' },
           { when: '2035', what: 'Category A OER removals phase in; optional hourly-recognition threshold reaches 90%', tone: 'amber' },
           { when: 'By 2050', what: 'Net-zero: zero or residual emissions, with residuals neutralised using eligible removals', tone: 'amber' },
         ])),
@@ -303,7 +303,7 @@ function showRole(id) {
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${role.icon}</svg>
       </span>
       <div>
-        <p class="kicker">CNZS V2.0 · One-pager</p>
+        <p class="kicker">CNZS V2 · One-pager</p>
         <h2 class="op-sheet-title">${role.role}</h2>
         <p class="op-sheet-tag">${role.tag}</p>
       </div>
