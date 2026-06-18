@@ -2463,6 +2463,10 @@ a:hover { text-decoration: underline; }
 }
 
 .lk-item {
+  /* Keep natural height: in the flex-column results list, the default
+     flex-shrink would squash items to fit max-height instead of letting
+     the container scroll (most visible on phones, where max-height is low). */
+  flex: 0 0 auto;
   border: 1px solid var(--line);
   border-radius: var(--radius-md);
   background: var(--bg);
