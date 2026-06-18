@@ -773,13 +773,12 @@ a:hover { text-decoration: underline; }
 .eia-intro { font-size: 14px; padding: 0 14px; }
 .eia-list {
   font-size: 14px;
-  margin: 8px 0;
+  margin: 8px 0 14px;
   padding: 0 14px 0 32px;
   columns: 2;
   column-gap: 24px;
 }
 .eia-list li { margin: 0 0 5px; break-inside: avoid; }
-.eia-note { font-size: 13px; color: var(--hint); padding: 0 14px 12px; }
 @media (max-width: 520px) { .eia-list { columns: 1; } }
 
 /* ---- shared: source footer link ---- */
