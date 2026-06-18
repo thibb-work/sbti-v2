@@ -417,6 +417,49 @@ function initTimeline() {
   NZ.refresh();
 }
 
+/* -------------------------------------------------------------------------
+   #targets — Table 1 long-term labels. Each label in the "Long-term (to 2050)"
+   row toggles a detail panel inside #ltDetail. The box stays hidden until a
+   label is tapped; only one panel shows at a time; tapping the active label
+   (or the close button) collapses it again.
+   ------------------------------------------------------------------------- */
+function initLongTermLabels() {
+  const detail = document.getElementById('ltDetail');
+  if (!detail) return;
+  const labels = Array.from(document.querySelectorAll('.lt-label[data-lt]'));
+  const panels = Array.from(detail.querySelectorAll('.lt-panel'));
+  const closeBtn = detail.querySelector('.lt-detail-close');
+  if (!labels.length) return;
+
+  function collapse() {
+    detail.hidden = true;
+    panels.forEach((p) => { p.hidden = true; });
+    labels.forEach((l) => l.setAttribute('aria-expanded', 'false'));
+  }
+
+  function open(key) {
+    detail.hidden = false;
+    panels.forEach((p) => { p.hidden = p.dataset.ltPanel !== key; });
+    labels.forEach((l) => l.setAttribute('aria-expanded', l.dataset.lt === key ? 'true' : 'false'));
+    NZ.refresh();
+  }
+
+  labels.forEach((label) => {
+    label.addEventListener('click', () => {
+      const isOpen = label.getAttribute('aria-expanded') === 'true';
+      if (isOpen) { collapse(); } else { open(label.dataset.lt); }
+      NZ.refresh();
+    });
+  });
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', () => { collapse(); NZ.refresh(); });
+  }
+
+  // start hidden regardless of any stale markup state
+  collapse();
+}
+
 /* =========================================================================
    BOOT
    ========================================================================= */
@@ -430,6 +473,7 @@ function boot() {
   initCategoryExplorer();
   initOerCalculator();
   initTimeline();
+  initLongTermLabels();
 }
 
 if (document.readyState === 'loading') {
