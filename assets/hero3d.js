@@ -348,7 +348,11 @@ export async function initHero3D({ gsap, ScrollTrigger }) {
     // the linger dissolve over the foot of the timeline and the net-zero foam
     // fade-in (page's end). Whichever wants the field more visible wins.
     const backdrop = 1 - s * 0.35;
-    const lingerOpacity = backdrop * Math.pow(1 - linger, 1.6);
+    // Where the field doesn't persist as a backdrop (phones / low-power
+    // laptops) it's paused through the page and only the closing reprise shows
+    // it — drop the linger term there so the foam fades in cleanly from zero
+    // instead of popping straight to backdrop opacity.
+    const lingerOpacity = (!PERSIST && reprise > 0) ? 0 : backdrop * Math.pow(1 - linger, 1.6);
     const repriseOpacity = reprise * (dark ? 0.58 : 0.5);
     wrap.style.opacity = Math.max(lingerOpacity, repriseOpacity).toFixed(3);
   }
@@ -385,11 +389,17 @@ export async function initHero3D({ gsap, ScrollTrigger }) {
   function pauseScene() { if (paused || disposed) return; paused = true; wrap.style.visibility = 'hidden'; }
   function resumeScene() { if (!paused || disposed) return; paused = false; wrap.style.visibility = ''; loop(); }
 
-  const PERSIST = !lowPower && window.innerWidth >= 768;
+  // The field persists as a live backdrop across the whole page only on
+  // roomy, non-touch screens. Note this is decoupled from `lowPower`: a work
+  // laptop on a 1080p/non-retina monitor (dpr < 1.5) is not low-power, it just
+  // has chunky pixels — it should still get the persistent field and the
+  // closing reprise. Phones stay frugal (handled by the static path below).
+  const PERSIST = !isMobile && window.innerWidth >= 768;
   const CONTENT_TOP = 72;
   const tail = timeline || hero;   // the field lives until the foot of the timeline
   function syncStaticVisibility() {
     if (PERSIST) return;
+    if (reprise > 0) return;   // the closing reprise owns the scene at page end
     if (tail.getBoundingClientRect().bottom <= CONTENT_TOP) pauseScene();
     else resumeScene();
   }
@@ -415,13 +425,15 @@ export async function initHero3D({ gsap, ScrollTrigger }) {
     window.addEventListener('load', syncStaticVisibility, { once: true });
   }
 
-  // ---- net-zero reprise (desktop only) ------------------------------------
+  // ---- net-zero reprise (all devices) -------------------------------------
   // At the page's end the dots re-gather as a gentle band of green foam along
   // the bottom edge — net zero reached — as the reader arrives at the closing
   // About / Arcadia / contact sections. It reuses THIS instance (no second
-  // WebGL context): resume the paused scene, scrub the foam in, re-pause when
-  // it's gone. Gated to PERSIST so phones/low-power devices stay frugal.
-  if (PERSIST) {
+  // WebGL context): resume the (possibly paused) scene, scrub the foam in,
+  // re-pause when it's gone. Runs everywhere now — on phones / low-power
+  // laptops the scene is paused through the middle of the page and woken just
+  // for this closing beat, so the effect plays without whole-page render cost.
+  {
     const closing = document.getElementById('about');
     if (closing) {
       // Scrub-driven (not edge callbacks): the reprise fades in as the closing
