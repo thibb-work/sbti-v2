@@ -741,6 +741,47 @@ a:hover { text-decoration: underline; }
 .fineprint-body p { margin: 0 0 10px; }
 .fineprint-body p:last-child { margin-bottom: 0; }
 
+/* nested collapsible: "could this apply to my business?" EIA checklist —
+   a plain <details> box inside the fineprint, same body font size */
+.eia-check {
+  margin: 4px 0 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--bg);
+  overflow: hidden;
+}
+.eia-check > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  list-style: none;
+  cursor: pointer;
+  padding: 11px 14px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+}
+.eia-check > summary::-webkit-details-marker { display: none; }
+.eia-chev {
+  font-family: var(--font-mono);
+  color: var(--hint);
+  flex-shrink: 0;
+  transition: transform var(--dur) var(--ease);
+}
+.eia-check[open] .eia-chev { transform: rotate(180deg); }
+.eia-intro { font-size: 14px; padding: 0 14px; }
+.eia-list {
+  font-size: 14px;
+  margin: 8px 0;
+  padding: 0 14px 0 32px;
+  columns: 2;
+  column-gap: 24px;
+}
+.eia-list li { margin: 0 0 5px; break-inside: avoid; }
+.eia-note { font-size: 13px; color: var(--hint); padding: 0 14px 12px; }
+@media (max-width: 520px) { .eia-list { columns: 1; } }
+
 /* ---- shared: source footer link ---- */
 .chapter-source {
   margin-top: 36px;
@@ -836,85 +877,8 @@ a:hover { text-decoration: underline; }
 }
 .flip-face-back .flip-hint { color: var(--teal); }
 /* =========================================================================
-   #baseline — before/after drag slider + assurance chip
+   #baseline — assurance chip
    ========================================================================= */
-.baseline-slider {
-  position: relative;
-  border: 1px solid var(--line);
-  border-radius: var(--radius-lg);
-  background: var(--surface);
-  padding: 22px 20px 28px;
-  margin-bottom: 8px;
-  overflow: hidden;
-  -webkit-user-select: none;
-  user-select: none;
-}
-.bs-track {
-  position: relative;
-  height: 64px;
-  border-radius: var(--radius-md);
-  background: var(--gray-soft);
-  overflow: hidden;
-}
-.bs-side {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  padding: 0 50px 0 18px;
-  font-size: 13px;
-  font-weight: 600;
-}
-.bs-v1 {
-  background: var(--gray-soft);
-  color: var(--gray-ink);
-}
-.bs-v2 {
-  background: var(--teal-soft);
-  color: var(--teal-ink);
-  align-items: flex-end;
-  padding: 0 18px 0 50px;
-  text-align: right;
-  clip-path: inset(0 0 0 var(--bs-pos, 50%));
-}
-.bs-v1 small, .bs-v2 small { display: block; font-weight: 400; opacity: .8; font-size: 12.5px; margin-top: 2px; }
-.bs-handle {
-  position: absolute;
-  top: -8px; bottom: -8px;
-  left: var(--bs-pos, 50%);
-  width: 4px;
-  margin-left: -2px;
-  background: var(--teal);
-  border-radius: 2px;
-  cursor: grab;
-}
-.bs-handle:active { cursor: grabbing; }
-.bs-handle::after {
-  content: "⇔";
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  width: 30px; height: 30px;
-  border-radius: 50%;
-  background: var(--teal);
-  color: var(--on-teal);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
-  box-shadow: 0 2px 8px color-mix(in srgb, var(--teal) 35%, transparent);
-}
-.bs-handle:focus-visible::after { outline: 2.5px solid var(--ink); outline-offset: 2px; }
-.bs-caption {
-  margin-top: 14px;
-  font-size: 13.5px;
-  color: var(--muted);
-  min-height: 21px; /* one line — caption swaps text on drag without layout shift */
-}
-.bs-caption strong { color: var(--ink); }
-
 .assurance-row {
   display: flex;
   align-items: center;
