@@ -1,7 +1,7 @@
 /* =========================================================================
    SBTi "Net-Zero Loop" — role one-pager
    The hero "I want a one-pager" button opens a chooser ("What's your job?")
-   and renders a tailored, printable brief on what CNZS V2 changes for that
+   and renders a tailored, printable brief on what CNZS v2 changes for that
    role. Content is authored from the chapters in index.html / content.js and
    the published Standard. Three roles, written from each seat:
      · Energy procurement manager  — Scope 2 as a procurement architecture
@@ -109,18 +109,18 @@ const ROLES = [
     accent: 'amber',
     build() {
       return [
-        `<p class="op-lede">For electricity, V2 is less about buying a certificate somewhere and more about proving the low-carbon supply is connected to the load you want to claim. Procurement now needs site-level data, contract evidence and careful claim wording.</p>`,
+        `<p class="op-lede">For electricity, v2 is less about buying a certificate somewhere and more about proving the low-carbon supply is connected to the load you want to claim. Procurement now needs site-level data, contract evidence and careful claim wording.</p>`,
 
         stats([
           { big: '100%', label: 'of Scope 2 emissions must be covered by near-term targets' },
           { big: '10 GWh', label: 'Category A hourly-reporting trigger, per activity pool' },
-          { big: '1 Feb 2027', label: 'V2 effective date; legacy contract cut-off' },
+          { big: '1 Feb 2027', label: 'v2 effective date; legacy contract cut-off' },
         ]),
 
         section('The 5 shifts that reshape your week', `
           <div class="op-keypoints">
             <div class="op-kp"><h5>1 · Two ways to express the target (C12)</h5><p>Set an <strong>LCE-alignment</strong> target, an <strong>absolute Scope 2 emissions</strong> target, or both. Category A companies with projected average annual electricity growth above 20% over the cycle must set a Scope 2 emissions target.</p></div>
-            <div class="op-kp"><h5>2 · Market instruments can still help</h5><p>PPAs, supplier contracts, unbundled EACs and some default-delivered LCE can support implementation if they meet V2 integrity rules. On their own, they do <strong>not</strong> prove a physical emissions reduction.</p></div>
+            <div class="op-kp"><h5>2 · Market instruments can still help</h5><p>PPAs, supplier contracts, unbundled EACs and some default-delivered LCE can support implementation if they meet v2 integrity rules. On their own, they do <strong>not</strong> prove a physical emissions reduction.</p></div>
             <div class="op-kp"><h5>3 · Deliverability regions replace broad claims</h5><p>An activity pool is the smallest reasonable grid or system your load connects to. Broad national or regional portfolios need deliverability, interconnection or legacy-contract support.</p></div>
             <div class="op-kp"><h5>4 · One PPA can cover many loads (C30.3.b)</h5><p>Aggregate interconnected loads in a wide-area synchronous grid under one PPA if offtake begins within <strong>36 months</strong> of the project's commissioning.</p></div>
             <div class="op-kp"><h5>5 · Sector-level action needs evidence</h5><p>Use it only when structural constraints block activity or activity-pool action. Infrastructure, regulation or supply can count; internal preference or cost alone does not.</p></div>
@@ -132,8 +132,8 @@ const ROLES = [
             ['Energy efficiency cutting kWh', 'Physical emissions reduction'],
             ['On-site or direct-line LCE consumed by you', 'Activity-level reduction + LCE alignment'],
             ['Eligible PPA / EAC in the right pool', 'LCE alignment; system contribution if outside the physical inventory'],
-            ['Legacy long-term contract signed before V2', 'May remain deliverable in existing pools until renewal'],
-            ['Out-of-region certificate with no deliverability route', 'Not a robust V2 claim'],
+            ['Legacy long-term contract signed before v2', 'May remain deliverable in existing pools until renewal'],
+            ['Out-of-region certificate with no deliverability route', 'Not a robust v2 claim'],
           ])),
 
         section('Optional hourly recognition thresholds (C32–C34)', `
@@ -146,7 +146,7 @@ const ROLES = [
 
         section('Say it right', dodont([
           { tone: 'bad', h: 'Don\'t say', t: '"We reduced Scope 2 by 100% through GOs."' },
-          { tone: 'good', h: 'Do say', t: '"We matched 100% of consumption with eligible low-carbon electricity instruments, subject to V2 quality & deliverability."' },
+          { tone: 'good', h: 'Do say', t: '"We matched 100% of consumption with eligible low-carbon electricity instruments, subject to v2 quality & deliverability."' },
         ])),
 
         section('Your action list before 1 Feb 2027', checklist([
@@ -159,7 +159,7 @@ const ROLES = [
           'Prioritise demand reduction, on-site/direct-line supply and deliverable PPAs over cheap unbundled certificates.',
         ])),
 
-        callout('amber', 'Validated 2030 targets stay the near-term focus', 'If your 2030 Scope 1 & 2 targets are validated, keep delivering and evidencing them. Start designing the 2030–2035 cycle under V2 from 2028, unless a material change triggers recalculation or revalidation sooner.'),
+        callout('amber', 'Validated 2030 targets stay the near-term focus', 'If your 2030 Scope 1 & 2 targets are validated, keep delivering and evidencing them. Start designing the 2030–2035 cycle under v2 from 2028, unless a material change triggers recalculation or revalidation sooner.'),
       ].join('');
     },
   },
@@ -173,7 +173,7 @@ const ROLES = [
     accent: 'teal',
     build() {
       return [
-        `<p class="op-lede">V2 turns a one-off submission into a <strong>governed five-year loop</strong>: govern → baseline → set targets → implement → prove, repeated to 2050. You're the integrator who makes every link hold.</p>`,
+        `<p class="op-lede">v2 turns a one-off submission into a <strong>governed five-year loop</strong>: govern → baseline → set targets → implement → prove, repeated to 2050. You're the integrator who makes every link hold.</p>`,
 
         stats([
           { big: '5%', label: 'Category A Scope 3 category / EIA significance trigger' },
@@ -232,7 +232,7 @@ const ROLES = [
     accent: 'teal',
     build() {
       return [
-        `<p class="op-lede">V2 moves net-zero from a sustainability commitment into a governed business cycle. The board owns accountability, the transition plan must connect to strategy, and public claims now need evidence from inventory data and implementation actions.</p>`,
+        `<p class="op-lede">v2 moves net-zero from a sustainability commitment into a governed business cycle. The board owns accountability, the transition plan must connect to strategy, and public claims now need evidence from inventory data and implementation actions.</p>`,
 
         stats([
           { big: 'Board', label: 'your highest governing body is now formally accountable (C1)' },
@@ -253,10 +253,10 @@ const ROLES = [
           <p class="op-fine">Voluntary recognition today. From 2035, Category A companies are expected to support eligible removals equal to 1% of ongoing emissions, rising linearly to 100% by the net-zero year and no later than 2050.</p>`),
 
         section('The clock to 2050', dates([
-          { when: '11 Jun 2026', what: 'V2 published', tone: 'teal' },
-          { when: '1 Feb 2027', what: 'V2 effective — existing long-term electricity contracts get limited grandfathering', tone: 'teal' },
-          { when: 'End 2027', what: 'V1 closes to new targets', tone: 'gray' },
-          { when: 'From 2028', what: 'First cohort renews — 2030–2035 targets set under V2', tone: 'teal' },
+          { when: '11 Jun 2026', what: 'v2 published', tone: 'teal' },
+          { when: '1 Feb 2027', what: 'v2 effective — existing long-term electricity contracts get limited grandfathering', tone: 'teal' },
+          { when: 'End 2027', what: 'v1 closes to new targets', tone: 'gray' },
+          { when: 'From 2028', what: 'First cohort renews — 2030–2035 targets set under v2', tone: 'teal' },
           { when: '2035', what: 'Category A OER removals phase in; optional hourly-recognition threshold reaches 90%', tone: 'amber' },
           { when: 'By 2050', what: 'Net-zero: zero or residual emissions, with residuals neutralised using eligible removals', tone: 'amber' },
         ])),
@@ -303,7 +303,7 @@ function showRole(id) {
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${role.icon}</svg>
       </span>
       <div>
-        <p class="kicker">CNZS V2 · One-pager</p>
+        <p class="kicker">CNZS v2 · One-pager</p>
         <h2 class="op-sheet-title">${role.role}</h2>
         <p class="op-sheet-tag">${role.tag}</p>
       </div>

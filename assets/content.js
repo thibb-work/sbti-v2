@@ -110,12 +110,12 @@ export const SCOPE3_PROFILES = [
    that live-updates once the visitor sets their category in chapter 01.
    Only included where the Standard's A/B split is unambiguous. */
 export const TIMELINE_ENTRIES = [
-  { date: "11 Jun 2026", tone: "teal", title: "V2 published", text: "Final standard released after two public consultations." },
-  { date: "1 Feb 2027", tone: "teal", title: "V2 effective date", text: "Pre-existing power contracts grandfathered from this date.",
+  { date: "11 Jun 2026", tone: "teal", title: "v2 published", text: "Final standard released after two public consultations." },
+  { date: "1 Feb 2027", tone: "teal", title: "v2 effective date", text: "Pre-existing power contracts grandfathered from this date.",
     a: "Transition plan due at Target Validation, with up to 15 months’ flexibility to disclose.",
     b: "Same target routes, lighter burden — disclosing a transition plan is recommended, not required." },
-  { date: "End 2027", tone: "gray", title: "V1 closes to new targets", text: "Last window to submit new targets under Version 1." },
-  { date: "From 2028", tone: "teal", title: "Next-cycle target setting begins", text: "2030–2035 targets set under V2 as the first cohort renews.",
+  { date: "End 2027", tone: "gray", title: "v1 closes to new targets", text: "Last window to submit new targets under Version 1." },
+  { date: "From 2028", tone: "teal", title: "Next-cycle target setting begins", text: "2030–2035 targets set under v2 as the first cohort renews.",
     a: "Scope 1, scope 2 and scope 3 near-term targets, with limited assurance of your base-year inventory.",
     b: "Scope 1 and scope 2 near-term targets; scope 3 targets and base-year assurance are recommended, not required." },
   { date: "2030", tone: "amber", title: "Hourly matching step-up", text: "Scope 2 hourly-matching recognition threshold rises from 50% to 75%.",
