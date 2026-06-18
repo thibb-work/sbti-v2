@@ -1976,6 +1976,14 @@ a:hover { text-decoration: underline; }
   outline-offset: 2px;
 }
 
+/* On phones the toggle groups span the full column so every row lines up
+   edge-to-edge — otherwise the shorter groups sit left with a big right gap
+   and the form reads as off-centre against the (centred) verdict card. */
+@media (max-width: 600px) {
+  .seg { display: flex; flex-wrap: wrap; width: 100%; }
+  .seg-btn { flex: 1 1 auto; text-align: center; }
+}
+
 /* ---- verdict card ---- */
 .cat-verdict {
   display: flex;
