@@ -87,7 +87,7 @@
 :root.theme-switching *::after {
   transition: none !important;
 }
-html { scroll-behavior: smooth; overflow-x: clip; }
+html { scroll-behavior: smooth; }
 html, body { margin: 0; padding: 0; }
 body {
   background: var(--bg);
@@ -773,13 +773,12 @@ a:hover { text-decoration: underline; }
 .eia-intro { font-size: 14px; padding: 0 14px; }
 .eia-list {
   font-size: 14px;
-  margin: 8px 0;
+  margin: 8px 0 14px;
   padding: 0 14px 0 32px;
   columns: 2;
   column-gap: 24px;
 }
 .eia-list li { margin: 0 0 5px; break-inside: avoid; }
-.eia-note { font-size: 13px; color: var(--hint); padding: 0 14px 12px; }
 @media (max-width: 520px) { .eia-list { columns: 1; } }
 
 /* ---- shared: source footer link ---- */
@@ -2258,7 +2257,10 @@ a:hover { text-decoration: underline; }
 /* the timeline is text on a bare track (no card backing), so the
    whole section gets a tall diffused page-colour cloud pooled behind the
    reading column — covering the heading and every dated entry. */
-#timeline .chapter-inner { position: relative; isolation: isolate; }
+/* clip the decorative cloud's horizontal bleed (it's set with negative
+   side insets) so it can't push the page wider than the viewport; vertical
+   bleed stays visible so the cloud still pools above/below the section. */
+#timeline .chapter-inner { position: relative; isolation: isolate; overflow-x: clip; }
 #timeline .chapter-inner::before {
   content: "";
   position: absolute;
@@ -2286,7 +2288,7 @@ a:hover { text-decoration: underline; }
    only the section heading column sits over the returning field. A diffused
    page-colour cloud pools behind it, with halos on the exposed type — same
    recipe as hero/timeline, scoped here so the reprise never costs legibility. */
-#about .chapter-inner { position: relative; isolation: isolate; }
+#about .chapter-inner { position: relative; isolation: isolate; overflow-x: clip; }
 #about .chapter-inner::before {
   content: "";
   position: absolute;
@@ -2312,7 +2314,7 @@ a:hover { text-decoration: underline; }
    same treatment as the hero copy: a diffused page-colour cloud pooled behind
    the text (above the field, below the type via the footer's own stacking
    context) plus the halo above — keeping the line highly visible over the dots. */
-.site-footer { isolation: isolate; }
+.site-footer { isolation: isolate; overflow-x: clip; }
 .site-footer::before {
   content: "";
   position: absolute;
