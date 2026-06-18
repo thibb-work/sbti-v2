@@ -728,13 +728,36 @@
               </tr>
               <tr>
                 <td>Long-term (to 2050)</td>
-                <td>Depends on route chosen</td>
-                <td>Optional, all companies</td>
-                <td>Optional, all companies</td>
+                <td><button class="lt-label lt-depends" type="button" data-lt="s1" aria-expanded="false" aria-controls="ltDetail">Depends on route<span class="lt-tap" aria-hidden="true">＋</span></button></td>
+                <td><button class="lt-label lt-optional" type="button" data-lt="s2" aria-expanded="false" aria-controls="ltDetail">Optional<span class="lt-tap" aria-hidden="true">＋</span></button></td>
+                <td><button class="lt-label lt-optional" type="button" data-lt="s3" aria-expanded="false" aria-controls="ltDetail">Optional<span class="lt-tap" aria-hidden="true">＋</span></button></td>
               </tr>
             </tbody>
           </table>
         </div>
+
+        <!-- Tap any Long-term label above to reveal when a long-term target is required.
+             Hidden until a label is activated; one panel shown at a time. Wired in chapters.js. -->
+        <div class="lt-detail" id="ltDetail" hidden>
+          <button class="lt-detail-close" type="button" aria-label="Hide details">×</button>
+          <div class="lt-panel" data-lt-panel="s1" hidden>
+            <p class="lt-panel-head"><span class="lt-pill lt-pill-amber">Scope&nbsp;1 · Long-term</span> Depends on your near-term route (C10.2)</p>
+            <ul class="lt-list">
+              <li><strong>Route A · Absolute contraction (C10.2a)</strong> — <em>optional.</em> A straight line to residual emissions by 2050 satisfies the Standard on its own; no separate long-term target is needed.</li>
+              <li><strong>Route B · Sector pathway (C10.2b)</strong> — <em>required.</em> Aligning to a published sector pathway makes a long-term target mandatory, with the transition plan due at Target Validation — no grace period.</li>
+              <li><strong>Route C · Asset decarbonization (C10.2c)</strong> — <em>required.</em> The dated abate / retire / decommission schedule must run all the way to a long-term target.</li>
+            </ul>
+          </div>
+          <div class="lt-panel" data-lt-panel="s2" hidden>
+            <p class="lt-panel-head"><span class="lt-pill lt-pill-teal">Scope&nbsp;2 · Long-term</span> Optional for all companies (C13.2)</p>
+            <p>A long-term scope&nbsp;2 target is never mandatory. If you set one, the LCE route reaches <strong>100% low-carbon electricity</strong> and the absolute route lands at <strong>residual levels by 2050</strong>. Category&nbsp;A companies still file electricity-demand projections at validation either way.</p>
+          </div>
+          <div class="lt-panel" data-lt-panel="s3" hidden>
+            <p class="lt-panel-head"><span class="lt-pill lt-pill-teal">Scope&nbsp;3 · Long-term</span> Optional for all companies</p>
+            <p>Long-term scope&nbsp;3 targets are optional for everyone and, where set, reach residual levels by 2050. The one case that <em>forces</em> a long-term scope&nbsp;3 target is the category-11 escape hatch (C15.4): taking it commits you to a long-term category-11 target to residual levels by 2050 — see the fine print above.</p>
+          </div>
+        </div>
+
         <p class="micro-note u-mt0">Net-zero targets combine near- and long-term targets across all three scopes with neutralization of residuals at the target year — optional for everyone (C17).</p>
 
         <div class="chapter-source" data-reveal>
