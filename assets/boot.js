@@ -32,4 +32,7 @@
 
   // 3 · Vercel Speed Insights queue shim (static-site integration)
   window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+
+  // 4 · Vercel Web Analytics queue shim (static-site integration)
+  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
 })();
