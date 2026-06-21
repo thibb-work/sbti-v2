@@ -31,7 +31,7 @@ const CHAPTERS = [
   { id: 'top',       label: 'Hero' },
   { id: 'category',  label: 'A or B?' },
   { id: 'timeline',  label: 'Timeline' },
-  { id: 'govern',    label: 'Govern' },
+  { id: 'govern',    label: 'Governance' },
   { id: 'baseline',  label: 'Baseline' },
   { id: 'scope-1',   label: 'Scope 1' },
   { id: 'scope-2',   label: 'Scope 2' },
