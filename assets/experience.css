@@ -993,6 +993,7 @@ a:hover { text-decoration: underline; }
 .route-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  align-items: start;
   gap: 12px;
   margin-bottom: 8px;
 }
