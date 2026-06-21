@@ -65,11 +65,21 @@ function initFlipCards() {
    #scope-1 — route card expand/collapse
    ------------------------------------------------------------------------- */
 function initRouteCards() {
-  document.querySelectorAll('#scope-1 .route-card-head').forEach((btn) => {
+  const heads = document.querySelectorAll('#scope-1 .route-card-head');
+  heads.forEach((btn) => {
     btn.addEventListener('click', () => {
       const card = btn.closest('.route-card');
-      const open = card.classList.toggle('is-open');
-      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      const willOpen = !card.classList.contains('is-open');
+      // Accordion: collapse every card, then open only the clicked one.
+      heads.forEach((other) => {
+        const otherCard = other.closest('.route-card');
+        otherCard.classList.remove('is-open');
+        other.setAttribute('aria-expanded', 'false');
+      });
+      if (willOpen) {
+        card.classList.add('is-open');
+        btn.setAttribute('aria-expanded', 'true');
+      }
       NZ.refresh();
     });
   });
