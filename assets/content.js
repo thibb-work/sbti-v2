@@ -39,6 +39,70 @@ export const SCOPE3_OPTION_LABELS = [
 ];
 
 /* -------------------------------------------------------------------------
+   Scope 3 — sector profiles for the 5% boundary tool.
+   Each profile gives the share (% of categories 1–14 scope 3 emissions) for a
+   representative company in that sector. Shares are illustrative, rounded
+   patterns drawn from the typical category breakdowns companies disclose to
+   CDP — they show where each sector's value-chain emissions concentrate, not
+   any single company's exact footprint.
+   ------------------------------------------------------------------------- */
+export const SCOPE3_CATEGORY_NAMES = {
+  1:  "Cat 1 · Purchased goods & services",
+  2:  "Cat 2 · Capital goods",
+  3:  "Cat 3 · Fuel- & energy-related activities",
+  4:  "Cat 4 · Upstream transport & distribution",
+  5:  "Cat 5 · Waste generated in operations",
+  6:  "Cat 6 · Business travel",
+  7:  "Cat 7 · Employee commuting",
+  8:  "Cat 8 · Upstream leased assets",
+  9:  "Cat 9 · Downstream transport & distribution",
+  10: "Cat 10 · Processing of sold products",
+  11: "Cat 11 · Use of sold products",
+  12: "Cat 12 · End-of-life treatment of sold products",
+  13: "Cat 13 · Downstream leased assets",
+  14: "Cat 14 · Franchises"
+};
+
+export const SCOPE3_PROFILES = [
+  {
+    id: "representative",
+    label: "Representative",
+    blurb: "A balanced illustrative company with emissions spread across the value chain — useful as a neutral starting point.",
+    shares: { 1: 32, 2: 5, 3: 3, 4: 6, 5: 1, 6: 2, 7: 2, 8: 1, 9: 3, 10: 5, 11: 28, 12: 3, 13: 2, 14: 5 }
+  },
+  {
+    id: "automotive",
+    label: "Automotive OEM",
+    blurb: "Tailpipe emissions from vehicles in use dominate — category 11 typically dwarfs everything else, with purchased materials a distant second.",
+    shares: { 1: 14, 2: 2, 3: 1, 4: 3, 5: 1, 6: 1, 7: 1, 8: 0, 9: 2, 10: 1, 11: 70, 12: 2, 13: 0, 14: 0 }
+  },
+  {
+    id: "oilgas",
+    label: "Oil & gas",
+    blurb: "Combustion of sold fuels makes category 11 overwhelming — often ~85–90% of the whole value chain.",
+    shares: { 1: 5, 2: 1, 3: 2, 4: 1, 5: 0, 6: 0, 7: 0, 8: 0, 9: 1, 10: 0, 11: 88, 12: 1, 13: 0, 14: 0 }
+  },
+  {
+    id: "apparel",
+    label: "Apparel & retail",
+    blurb: "Purchased goods — fabrics, manufacturing, sourcing — dominate, with transport and end-of-life as secondary hotspots.",
+    shares: { 1: 64, 2: 3, 3: 2, 4: 8, 5: 1, 6: 2, 7: 2, 8: 0, 9: 4, 10: 2, 11: 5, 12: 6, 13: 0, 14: 1 }
+  },
+  {
+    id: "food",
+    label: "Food & beverage",
+    blurb: "Agricultural inputs and ingredients push category 1 to the great majority of emissions; transport and end-of-life follow.",
+    shares: { 1: 74, 2: 2, 3: 2, 4: 6, 5: 2, 6: 1, 7: 1, 8: 0, 9: 3, 10: 2, 11: 2, 12: 4, 13: 0, 14: 1 }
+  },
+  {
+    id: "technology",
+    label: "Technology & ICT",
+    blurb: "Split between manufacturing the hardware (category 1) and powering it in use (category 11) — both clear the boundary.",
+    shares: { 1: 45, 2: 6, 3: 2, 4: 4, 5: 1, 6: 3, 7: 2, 8: 0, 9: 2, 10: 1, 11: 30, 12: 3, 13: 0, 14: 0 }
+  }
+];
+
+/* -------------------------------------------------------------------------
    Timeline — 2026→2050 milestones (#timeline), ported from timeline.html.
    tone: 'teal' | 'gray' | 'amber' drives the dot/marker colour via CSS class.
    ------------------------------------------------------------------------- */
@@ -46,12 +110,12 @@ export const SCOPE3_OPTION_LABELS = [
    that live-updates once the visitor sets their category in chapter 01.
    Only included where the Standard's A/B split is unambiguous. */
 export const TIMELINE_ENTRIES = [
-  { date: "11 Jun 2026", tone: "teal", title: "V2.0 published", text: "Final standard released after two public consultations." },
-  { date: "1 Feb 2027", tone: "teal", title: "V2.0 effective date", text: "Pre-existing power contracts grandfathered from this date.",
+  { date: "11 Jun 2026", tone: "teal", title: "v2 published", text: "Final standard released after two public consultations." },
+  { date: "1 Feb 2027", tone: "teal", title: "v2 effective date", text: "Pre-existing power contracts grandfathered from this date.",
     a: "Transition plan due at Target Validation, with up to 15 months’ flexibility to disclose.",
     b: "Same target routes, lighter burden — disclosing a transition plan is recommended, not required." },
-  { date: "End 2027", tone: "gray", title: "V1 closes to new targets", text: "Last window to submit new targets under Version 1." },
-  { date: "From 2028", tone: "teal", title: "Next-cycle target setting begins", text: "2030–2035 targets set under V2.0 as the first cohort renews.",
+  { date: "End 2027", tone: "gray", title: "v1 closes to new targets", text: "Last window to submit new targets under Version 1." },
+  { date: "From 2028", tone: "teal", title: "Next-cycle target setting begins", text: "2030–2035 targets set under v2 as the first cohort renews.",
     a: "Scope 1, scope 2 and scope 3 near-term targets, with limited assurance of your base-year inventory.",
     b: "Scope 1 and scope 2 near-term targets; scope 3 targets and base-year assurance are recommended, not required." },
   { date: "2030", tone: "amber", title: "Hourly matching step-up", text: "Scope 2 hourly-matching recognition threshold rises from 50% to 75%.",
@@ -101,5 +165,5 @@ export const OER_TIERS = [
 export const OER_PRESETS = [
   { id: "mid-manufacturer", label: "Mid-size manufacturer", detail: "~45,000 tCO₂e/yr ongoing emissions", ongoing: 45000 },
   { id: "regional-retailer", label: "Regional retail group", detail: "~180,000 tCO₂e/yr ongoing emissions", ongoing: 180000 },
-  { id: "global-industrial", label: "Global industrial group", detail: "~2,100,000 tCO₂e/yr ongoing emissions", ongoing: 2100000 }
+  { id: "global-industrial", label: "Large tech company", detail: "~2,100,000 tCO₂e/yr ongoing emissions", ongoing: 2100000 }
 ];
