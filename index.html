@@ -435,7 +435,7 @@
       <section class="s2-major-box" id="s2-eacs-gos" aria-labelledby="s2-eacs-title">
         <p class="kicker">PROCUREMENT CLAIMS</p>
         <h3 class="sub-h3 u-mt0" id="s2-eacs-title">EACs still count, but the claim changes.</h3>
-        <p>EACs, including EECS Guarantees of Origin, are still eligible instruments under SBTi v2. What changes is the claim they back. They can back low-carbon electricity alignment and system-contribution claims — but not a physical emissions-reduction claim, unless your physical GHG inventory actually changes.</p>
+        <p>EACs, including EECS Guarantees of Origin, are still eligible instruments under SBTi v2. What changes is the claim they back. They can back low-carbon electricity alignment and system-contribution claims — but not a physical emissions-reduction claim, unless your physical GHG inventory actually changes. Vintage matters too: the certificate must come from a low-carbon electricity generator commissioned or repowered within the 15 years before the electricity-consumption period it is matched to.</p>
         <div class="table-scroll" tabindex="0" aria-label="Scope 2 action and strongest claim table">
           <table class="matrix-table s2-table">
             <thead>
@@ -465,29 +465,6 @@
           </div>
         </div>
 
-      </section>
-
-      <section class="s2-block" id="s2-activity-pools" aria-labelledby="s2-activity-pools-title">
-        <p class="kicker">DELIVERABILITY REGIONS · CNZS-C30</p>
-        <h3 class="sub-h3 u-mt0" id="s2-activity-pools-title">Activity pools and deliverability: not always countries.</h3>
-        <p class="ptext">An activity pool is the electricity system that a company's load is connected to and can reasonably help decarbonise. For electricity, SBTi v2 points to deliverability regions, not simple political borders. A country can sometimes be a reasonable proxy, but not always.</p>
-        <div class="table-scroll" tabindex="0" aria-label="Examples where country is not enough">
-          <table class="matrix-table s2-table">
-            <thead>
-              <tr><th>Example</th><th>Why country is not enough</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>Sweden SE1 vs SE4</td><td>Same country, different bidding zones and congestion.</td></tr>
-              <tr><td>Italy North vs Sicily/Sardinia</td><td>Same country, different grid constraints and island/interconnection issues.</td></tr>
-              <tr><td>Denmark DK1 vs DK2</td><td>Same country, separate electricity regions.</td></tr>
-              <tr><td>Great Britain vs Northern Ireland</td><td>Same UK, different electricity systems.</td></tr>
-              <tr><td>United States: ERCOT, PJM, CAISO, MISO</td><td>One country, multiple grid and market regions.</td></tr>
-              <tr><td>Germany/Luxembourg</td><td>Cross-border market logic can matter more than country border.</td></tr>
-              <tr><td>Generic "Europe-wide GO portfolio"</td><td>Too broad unless deliverability and allocation are documented.</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <p class="s2-rule"><strong>Practical rule:</strong> Build the data model with site, country, bidding zone/grid zone, annual MWh, hourly data availability, and instrument origin. Do not just tag everything as "Europe".</p>
       </section>
 
       <section class="s2-block" id="s2-imports" aria-labelledby="s2-imports-title">
@@ -616,6 +593,29 @@
               <li>Hourly generation data availability</li>
               <li>Claim wording allowed under the contract</li>
             </ul>
+          </section>
+
+          <section class="s2-deep-block" id="s2-activity-pools" aria-labelledby="s2-activity-pools-title">
+            <p class="kicker">DELIVERABILITY REGIONS · CNZS-C30</p>
+            <h3 class="sub-h3 u-mt0" id="s2-activity-pools-title">Activity pools and deliverability: not always countries.</h3>
+            <p class="ptext">An activity pool is the electricity system that a company's load is connected to and can reasonably help decarbonise. For electricity, SBTi v2 points to deliverability regions, not simple political borders. A country can sometimes be a reasonable proxy, but not always.</p>
+            <div class="table-scroll" tabindex="0" aria-label="Examples where country is not enough">
+              <table class="matrix-table s2-table">
+                <thead>
+                  <tr><th>Example</th><th>Why country is not enough</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Sweden SE1 vs SE4</td><td>Same country, different bidding zones and congestion.</td></tr>
+                  <tr><td>Italy North vs Sicily/Sardinia</td><td>Same country, different grid constraints and island/interconnection issues.</td></tr>
+                  <tr><td>Denmark DK1 vs DK2</td><td>Same country, separate electricity regions.</td></tr>
+                  <tr><td>Great Britain vs Northern Ireland</td><td>Same UK, different electricity systems.</td></tr>
+                  <tr><td>United States: ERCOT, PJM, CAISO, MISO</td><td>One country, multiple grid and market regions.</td></tr>
+                  <tr><td>Germany/Luxembourg</td><td>Cross-border market logic can matter more than country border.</td></tr>
+                  <tr><td>Generic "Europe-wide GO portfolio"</td><td>Too broad unless deliverability and allocation are documented.</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="s2-rule"><strong>Practical rule:</strong> Build the data model with site, country, bidding zone/grid zone, annual MWh, hourly data availability, and instrument origin. Do not just tag everything as "Europe".</p>
           </section>
 
           <section class="s2-deep-block" id="s2-sector-fallback" aria-labelledby="s2-sector-title">

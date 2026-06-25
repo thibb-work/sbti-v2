@@ -2459,7 +2459,7 @@ a:hover { text-decoration: underline; }
   color: var(--hint);
 }
 .hm-leader-q {
-  margin: 0 0 6px;
+  margin: 0 0 22px;
   font-size: 15px;
   text-align: center;
   color: var(--ink);
