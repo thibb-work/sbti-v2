@@ -15,7 +15,8 @@
   // 1 · hash redirects (old tab/page anchors → new chapters)
   var redirects = {
     '#horizon': '#timeline',
-    '#targets': '#scope-1'
+    '#targets': '#scope-1',
+    '#contact': '#about'
   };
   var hash = location.hash;
   if (redirects[hash]) {

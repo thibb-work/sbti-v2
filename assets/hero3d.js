@@ -428,7 +428,7 @@ export async function initHero3D({ gsap, ScrollTrigger }) {
   // ---- net-zero reprise (all devices) -------------------------------------
   // At the page's end the dots re-gather as a gentle band of green foam along
   // the bottom edge — net zero reached — as the reader arrives at the closing
-  // About / Arcadia / contact sections. It reuses THIS instance (no second
+  // About / contact sections. It reuses THIS instance (no second
   // WebGL context): resume the (possibly paused) scene, scrub the foam in,
   // re-pause when it's gone. Runs everywhere now — on phones / low-power
   // laptops the scene is paused through the middle of the page and woken just

@@ -281,19 +281,27 @@ a:hover { text-decoration: underline; }
   letter-spacing: .1em;
   color: var(--hint);
 }
-.site-header .logo { color: var(--ink); display: flex; align-items: center; }
-.site-header .logo svg { height: 22px; width: auto; }
-.site-header .divider { width: 1px; height: 18px; background: var(--line-strong); }
+/* site title — the sole header wordmark, so it reads in ink, not hint.
+   min-width/ellipsis let it yield to the menu + theme buttons rather than
+   push them off-screen on narrow viewports. */
 .site-header .ctx {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
   font-family: var(--font-mono);
   font-size: 12.5px;
   letter-spacing: .12em;
   text-transform: uppercase;
-  color: var(--hint);
+  color: var(--ink);
+  white-space: nowrap;
 }
-/* phones: the logo carries the brand — drop the wrapping context label */
+/* phones: tighten the title so it clears the menu + theme buttons */
 @media (max-width: 599px) {
-  .site-header .ctx, .site-header .divider { display: none; }
+  .site-header .ctx { font-size: 11px; letter-spacing: .08em; }
+}
+/* small phones: drop the tail — "Net-Zero Standard" carries the name */
+@media (max-width: 374px) {
+  .site-header .ctx-tail { display: none; }
 }
 
 /* =========================================================================
@@ -1975,7 +1983,7 @@ a:hover { text-decoration: underline; }
 .timeline-text { font-size: 13.5px; color: var(--muted); line-height: 1.6; margin: 0; }
 
 /* =========================================================================
-   #about — bio / Arcadia / contact
+   #about — bio / contact
    ========================================================================= */
 .about-grid {
   display: grid;
@@ -1997,7 +2005,7 @@ a:hover { text-decoration: underline; }
 }
 .about-card .awho { font-size: 17px; font-weight: 600; margin: 0 0 2px; }
 .about-card .arole { font-size: 13px; color: var(--teal); font-weight: 500; margin: 0 0 12px; }
-/* name on the left, LinkedIn link on the right — mirrors the contact row */
+/* name on the left, LinkedIn link on the right */
 .about-head {
   display: flex;
   flex-wrap: wrap;
@@ -2019,17 +2027,6 @@ a:hover { text-decoration: underline; }
   font-weight: 500;
   font-size: 14px;
 }
-/* ---- "Work with Arcadia" — Arthur, folded into the Arcadia card so it
-   reads as part of the story, not a separate CTA. A quiet hairline sets it
-   apart; the name/links reuse the author row's treatment to blend in. ---- */
-.about-contact {
-  margin-top: 18px;
-  padding-top: 18px;
-  border-top: 1px solid var(--line);
-}
-.about-contact strong { color: var(--ink); font-weight: 600; }
-.contact-actions { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
-.contact-actions .about-link { margin-top: 0; }
 
 /* =========================================================================
    PERSONALIZATION ENGINE (#category)
