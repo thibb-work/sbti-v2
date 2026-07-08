@@ -17,7 +17,7 @@ One scrollytelling journey through the Standard's own loop:
 | Prove it | `#prove` | Claim-type cards (company-level vs system contribution) |
 | Stay responsible | `#oer` | OER tier cards (Engaged / Advanced / Leadership) + preset illustrations |
 | The timeline | `#timeline` | 2026→2050 key-dates timeline |
-| About | `#about` | Author, Arcadia, contact |
+| About | `#about` | Author, contact |
 
 Legacy hashes (`#horizon`, `#targets`) redirect to the matching chapters.
 
