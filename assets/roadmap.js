@@ -422,6 +422,7 @@ export const ROADMAP_ROLE = {
   tag: '“How to set targets” — the Standard’s own flowchart, made interactive',
   icon: '<rect x="9" y="3" width="6" height="5" rx="1"/><rect x="3" y="16" width="6" height="5" rx="1"/><rect x="15" y="16" width="6" height="5" rx="1"/><path d="M12 8v4"/><path d="M12 12H6v4"/><path d="M12 12h6v4"/>',
   accent: 'teal',
+  go: 'Walk the roadmap →',
   build: renderRoadmap,
   enhance: enhanceRoadmap,
 };

@@ -272,8 +272,8 @@ const ROLES = [
   },
 ];
 
-/* The official SBTi flowchart, rendered by assets/roadmap.js */
-ROLES.push(ROADMAP_ROLE);
+/* The official SBTi flowchart, rendered by assets/roadmap.js — listed first */
+ROLES.unshift(ROADMAP_ROLE);
 
 /* ---- rendering ---- */
 
@@ -285,7 +285,7 @@ function renderChooser() {
       </span>
       <span class="op-role-name">${r.role}</span>
       <span class="op-role-tag">${r.tag}</span>
-      <span class="op-role-go">Read the brief →</span>
+      <span class="op-role-go">${r.go || 'Read the brief →'}</span>
     </button>`).join('');
 }
 
