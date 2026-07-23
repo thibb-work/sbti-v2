@@ -7,7 +7,12 @@
      · Energy procurement manager  — Scope 2 as a procurement architecture
      · ESG / sustainability manager — the whole cycle, submission to proof
      · Senior leadership            — accountability, strategy, cost, risk
+   Plus a 4th entry: SBTi's official "How to set targets" flowchart, rebuilt
+   as an interactive roadmap (assets/roadmap.js) whose nodes open context
+   bubbles that deep-link into the chapters on the page.
    ========================================================================= */
+
+import { ROADMAP_ROLE, dismissRoadmapPopover } from './roadmap.js';
 
 const PDF_URL = 'https://files.sciencebasedtargets.org/production/files/Corporate-Net-Zero-Standard-version-2.pdf?dm=1781191781';
 
@@ -267,6 +272,9 @@ const ROLES = [
   },
 ];
 
+/* The official SBTi flowchart, rendered by assets/roadmap.js */
+ROLES.push(ROADMAP_ROLE);
+
 /* ---- rendering ---- */
 
 function renderChooser() {
@@ -285,6 +293,7 @@ function showChooser() {
   $('opSheet').hidden = true;
   $('opSheet').innerHTML = '';
   $('opChooser').hidden = false;
+  document.querySelector('.op-panel')?.classList.remove('op-panel--wide');
   $('opTitle').focus?.();
 }
 
@@ -313,15 +322,66 @@ function showRole(id) {
       Summarised from the chapters on this page. Definitive requirements:
       <a href="${PDF_URL}" target="_blank" rel="noopener">the published Standard (PDF)</a>.
     </footer>`;
+  /* The flowchart needs more width than the briefs */
+  document.querySelector('.op-panel')?.classList.toggle('op-panel--wide', role.id === 'roadmap');
   sheet.hidden = false;
   sheet.scrollTop = 0;
+  /* Optional per-role hook: wires up interactivity after the HTML lands
+     (the roadmap uses it for its context bubbles). */
+  if (role.enhance) role.enhance(sheet, { onNavigate: leaveForAnchor });
   $('opBack').focus();
+}
+
+/* ---- roadmap deep links: leave the overlay for a chapter, offer a way back ---- */
+
+let roadmapScroll = 0;
+
+function leaveForAnchor(anchor) {
+  roadmapScroll = $('onePagerOverlay').scrollTop;
+  closeOverlay();
+  showReturnPill();
+  const target = document.getElementById(anchor.slice(1));
+  /* Setting the hash lets chapters.js auto-open Scope 2 expander cards on
+     hashchange; the explicit follow-up scroll mirrors the anchor-pill
+     pattern there and covers the same-hash case (no hashchange event).
+     The extra scroll margin makes the section land below the return pill
+     (which sits just under the fixed header). */
+  if (target) target.style.scrollMarginTop = '140px';
+  if (location.hash !== anchor) location.hash = anchor;
+  setTimeout(() => {
+    target?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    setTimeout(() => { if (target) target.style.scrollMarginTop = ''; }, 1500);
+  }, 80);
+}
+
+function showReturnPill() {
+  if ($('opReturnPill')) return;
+  const pill = document.createElement('button');
+  pill.type = 'button';
+  pill.id = 'opReturnPill';
+  pill.className = 'op-return-pill';
+  pill.innerHTML = '← Back to roadmap';
+  /* sit just below the fixed header, whatever its current height */
+  const header = document.querySelector('.site-header');
+  if (header) pill.style.top = Math.round(header.getBoundingClientRect().height + 10) + 'px';
+  pill.addEventListener('click', () => {
+    openOverlay();
+    showRole('roadmap');
+    requestAnimationFrame(() => { $('onePagerOverlay').scrollTop = roadmapScroll; });
+  });
+  document.body.appendChild(pill);
+  requestAnimationFrame(() => pill.classList.add('is-in'));
+}
+
+function hideReturnPill() {
+  $('opReturnPill')?.remove();
 }
 
 /* ---- open / close ---- */
 
 function openOverlay() {
   const overlay = $('onePagerOverlay');
+  hideReturnPill(); // any re-entry into the one-pager supersedes the pill
   lastFocus = document.activeElement;
   showChooser();
   overlay.hidden = false;
@@ -336,7 +396,11 @@ function closeOverlay() {
   const done = () => { overlay.hidden = true; overlay.removeEventListener('transitionend', done); };
   overlay.addEventListener('transitionend', done);
   setTimeout(() => { if (!overlay.classList.contains('is-open')) overlay.hidden = true; }, 360);
-  (lastFocus && lastFocus.focus) ? lastFocus.focus() : $('onePagerBtn')?.focus();
+  /* preventScroll: when leaving via a roadmap deep link, restoring focus to
+     the hero button must not scroll the page away from the target chapter */
+  (lastFocus && lastFocus.focus)
+    ? lastFocus.focus({ preventScroll: true })
+    : $('onePagerBtn')?.focus({ preventScroll: true });
 }
 
 /* ---- wiring ---- */
@@ -355,7 +419,8 @@ function init() {
   document.addEventListener('keydown', (e) => {
     if (overlay.hidden || e.key !== 'Escape') return;
     e.preventDefault();
-    // Esc steps back to the chooser first, then closes.
+    // Esc closes the roadmap bubble first, then steps back to the chooser, then closes.
+    if (dismissRoadmapPopover()) return;
     if ($('opSheet').hidden) closeOverlay();
     else showChooser();
   });

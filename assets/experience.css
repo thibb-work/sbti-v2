@@ -3201,6 +3201,320 @@ a:hover { text-decoration: underline; }
 .op-sheet-foot { font-size: 12.5px; color: var(--hint); line-height: 1.5; border-top: 1px solid var(--line); padding-top: 14px; margin-top: 6px; }
 .op-sheet-foot a { color: var(--teal); text-decoration: underline; text-underline-offset: 2px; }
 
+/* =========================================================================
+   OFFICIAL SBTi ROADMAP — interactive flowchart (assets/roadmap.js)
+   4th one-pager entry. Node key mirrors the PDF: teal fill = all companies,
+   amber fill = Cat A required / Cat B optional, dashed = optional, dark =
+   decision. Connectors are pure CSS so branches reflow on mobile for free.
+   ========================================================================= */
+.op-panel--wide { max-width: 940px; }
+.op-sheet { position: relative; } /* anchor context for the .op-pop bubble */
+
+/* the 4th chooser card spans the grid as an "or take the official route" row */
+@media (min-width: 680px) {
+  .op-role-card[data-role="roadmap"] {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-template-areas: "icon name go" "icon tag go";
+    align-items: center;
+    column-gap: 16px;
+    row-gap: 2px;
+    padding: 16px 18px;
+  }
+  .op-role-card[data-role="roadmap"] .op-role-icon { grid-area: icon; }
+  .op-role-card[data-role="roadmap"] .op-role-name { grid-area: name; }
+  .op-role-card[data-role="roadmap"] .op-role-tag  { grid-area: tag; }
+  .op-role-card[data-role="roadmap"] .op-role-go   { grid-area: go; margin: 0; }
+}
+
+/* ---- key / legend ---- */
+.op-key {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  margin: 0 0 10px;
+  padding: 12px 14px;
+  background: var(--surface-2);
+  border-radius: var(--radius-md);
+}
+.op-key-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  letter-spacing: .02em;
+  color: var(--muted);
+}
+.op-key-swatch { width: 14px; height: 14px; border-radius: 4px; flex: none; }
+.op-key-swatch--all  { background: var(--teal-soft); border: 1.5px solid var(--teal); }
+.op-key-swatch--cata { background: var(--amber-soft); border: 1.5px solid var(--amber); }
+.op-key-swatch--opt  { background: transparent; border: 1.5px dashed var(--line-strong); }
+
+/* ---- stages ---- */
+.op-stage {
+  display: grid;
+  grid-template-columns: 190px 1fr;
+  gap: 20px;
+  padding: 24px 0;
+  border-top: 1px solid var(--line);
+}
+.op-stage:first-child { border-top: 0; }
+.op-stage-name {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin: 0 0 10px;
+}
+.op-stage-intro { font-size: 12.5px; line-height: 1.55; color: var(--muted); margin: 0; }
+@media (max-width: 680px) {
+  .op-stage { grid-template-columns: 1fr; gap: 12px; padding: 20px 0; }
+}
+
+/* ---- nodes ---- */
+.op-node {
+  position: relative;
+  display: block;
+  width: 100%;
+  appearance: none;
+  text-align: left;
+  font-family: var(--font-body);
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--ink);
+  background: var(--bg);
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  margin: 0;
+}
+.op-node--all  { background: var(--teal-soft); border-color: color-mix(in srgb, var(--teal) 45%, transparent); }
+.op-node--cata { background: var(--amber-soft); border-color: color-mix(in srgb, var(--amber) 50%, transparent); }
+.op-node--opt  { background: transparent; border-style: dashed; border-color: var(--line-strong); color: var(--muted); }
+.op-node--q {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--bg);
+  font-weight: 600;
+  text-align: center;
+}
+button.op-node {
+  cursor: pointer;
+  padding-right: 30px;
+  transition: border-color var(--dur) var(--ease), transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+}
+button.op-node:hover, button.op-node[aria-expanded="true"] {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px -18px color-mix(in srgb, var(--ink) 60%, transparent);
+}
+button.op-node--all:hover,  button.op-node--all[aria-expanded="true"]  { border-color: var(--teal); }
+button.op-node--cata:hover, button.op-node--cata[aria-expanded="true"] { border-color: var(--amber); }
+button.op-node--opt:hover,  button.op-node--opt[aria-expanded="true"]  { border-color: var(--muted); }
+.op-node-go {
+  position: absolute;
+  top: 7px; right: 9px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1;
+  color: var(--teal);
+}
+.op-node--cata .op-node-go { color: var(--amber-text); }
+.op-node-go--inline {
+  position: static;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px; height: 16px;
+  border: 1px solid var(--line-strong);
+  border-radius: 4px;
+  vertical-align: -2px;
+}
+.op-node--method { width: auto; font-size: 12px; padding: 6px 10px; }
+button.op-node--method { padding-right: 24px; }
+.op-node--method .op-node-go { top: 5px; right: 7px; font-size: 12px; }
+
+/* ---- flow connectors (vertical line + arrowhead between rows) ---- */
+.op-flow-item { position: relative; }
+.op-stage-flow > .op-flow-item + .op-flow-item,
+.op-flow-col > .op-flow-item + .op-flow-item { margin-top: 24px; }
+.op-stage-flow > .op-flow-item + .op-flow-item::before,
+.op-flow-col > .op-flow-item + .op-flow-item::before {
+  content: "";
+  position: absolute;
+  left: 50%; top: -19px;
+  width: 2px; height: 10px;
+  background: var(--line-strong);
+  transform: translateX(-50%);
+}
+.op-stage-flow > .op-flow-item + .op-flow-item::after,
+.op-flow-col > .op-flow-item + .op-flow-item::after {
+  content: "";
+  position: absolute;
+  left: 50%; top: -9px;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top: 6px solid var(--line-strong);
+  border-bottom: 0;
+}
+/* bridges carry their own connector look — suppress the arrow */
+.op-flow-item--bridge::before, .op-flow-item--bridge::after { display: none !important; }
+.op-flow-bridge {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  letter-spacing: .05em;
+  color: var(--hint);
+  text-align: center;
+  margin: 0;
+  padding: 2px 0;
+}
+
+/* ---- branches (2/3-column splits under a decision) ---- */
+.op-flow-branch {
+  display: grid;
+  grid-template-columns: repeat(var(--cols, 2), 1fr);
+  gap: 0 14px;
+  padding-top: 16px;
+}
+.op-branch-bar {
+  /* horizontal bar spanning from first to last column midpoint. A real
+     element (not ::before) — the flow-connector rules own that pseudo. */
+  position: absolute;
+  top: 0;
+  left: calc(100% / (var(--cols, 2) * 2));
+  right: calc(100% / (var(--cols, 2) * 2));
+  border-top: 2px solid var(--line-strong);
+}
+.op-flow-col { position: relative; padding-top: 14px; }
+.op-flow-col::before {
+  /* vertical drop from the bar into each column */
+  content: "";
+  position: absolute;
+  left: 50%; top: -16px;
+  width: 2px; height: 30px;
+  background: var(--line-strong);
+  transform: translateX(-50%);
+}
+.op-flow-col-label {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--hint);
+  text-align: center;
+  background: var(--surface);
+  position: relative; /* sits on top of the column drop line */
+  margin: 0 0 10px;
+  padding: 2px 6px;
+}
+
+/* ---- chips + scope 3 method tree ---- */
+.op-chip-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.op-tree { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.op-tree-group {
+  background: var(--surface-2);
+  border-radius: var(--radius-md);
+  padding: 14px;
+}
+.op-tree-group > .op-flow-col-label { background: transparent; text-align: left; padding: 0; }
+.op-tree-sub { border-left: 2px solid var(--line-strong); padding-left: 12px; margin-top: 12px; }
+.op-tree-sub-label { font-size: 11.5px; font-weight: 600; color: var(--muted); margin: 0 0 8px; }
+
+/* ---- context bubble ---- */
+.op-pop {
+  position: absolute;
+  z-index: 5;
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-md);
+  box-shadow: 0 18px 50px -20px color-mix(in srgb, var(--ink) 55%, transparent);
+  padding: 14px 16px;
+}
+.op-pop-arrow {
+  position: absolute;
+  top: -6px;
+  width: 10px; height: 10px;
+  margin-left: -5px;
+  background: var(--surface);
+  border-left: 1px solid var(--line-strong);
+  border-top: 1px solid var(--line-strong);
+  transform: rotate(45deg);
+}
+.op-pop--above .op-pop-arrow {
+  top: auto; bottom: -6px;
+  border: 0;
+  border-right: 1px solid var(--line-strong);
+  border-bottom: 1px solid var(--line-strong);
+}
+.op-pop-text { font-size: 13px; line-height: 1.55; color: var(--ink); margin: 0 18px 0 0; }
+.op-pop-link {
+  display: inline-block;
+  margin-top: 10px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: .04em;
+  color: var(--teal);
+  text-decoration: none;
+}
+.op-pop-link:hover { text-decoration: underline; text-underline-offset: 2px; }
+.op-pop-close {
+  position: absolute;
+  top: 6px; right: 6px;
+  appearance: none;
+  width: 24px; height: 24px;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  border-radius: 50%;
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+}
+.op-pop-close:hover { color: var(--teal); }
+
+/* ---- "back to roadmap" pill (after leaving via a bubble deep link) ----
+   Sits centered just below the fixed .site-header; one-pager.js measures the
+   header and sets the exact inline top, this is only the fallback. */
+.op-return-pill {
+  position: fixed;
+  left: 50%;
+  top: 92px;
+  transform: translate(-50%, -8px);
+  z-index: 80; /* under the overlay (90) */
+  appearance: none;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  letter-spacing: .04em;
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: 1px solid var(--teal);
+  background: var(--teal);
+  color: var(--on-teal);
+  box-shadow: 0 14px 34px -16px color-mix(in srgb, var(--ink) 60%, transparent);
+  opacity: 0;
+  transition: opacity 260ms var(--ease), transform 260ms var(--ease), filter var(--dur) var(--ease);
+}
+.op-return-pill.is-in { opacity: 1; transform: translate(-50%, 0); }
+.op-return-pill:hover { filter: brightness(1.08); }
+
+/* ---- mobile: branches stack, grouping kept legible with a left rail ---- */
+@media (max-width: 600px) {
+  .op-flow-branch { grid-template-columns: 1fr; gap: 14px; }
+  .op-branch-bar, .op-flow-col::before { display: none; }
+  .op-flow-col { padding-top: 0; border-left: 2px solid var(--line); padding-left: 12px; }
+  .op-flow-col-label { text-align: left; background: transparent; padding: 0; }
+  .op-tree { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .op-return-pill, button.op-node { transition: none; }
+}
+
 /* ---- print: turn the open one-pager into an actual page ---- */
 @media print {
   body > *:not(#onePagerOverlay) { display: none !important; }
@@ -3225,4 +3539,14 @@ a:hover { text-decoration: underline; }
   .lookup-close, .op-sheet-bar, .op-role-go { display: none !important; }
   .op-keypoints, .op-stats, .op-tiers, .op-dodont { break-inside: avoid; }
   .op-section { break-inside: avoid; }
+  /* roadmap view */
+  .op-pop, .op-return-pill, .op-node-go { display: none !important; }
+  .op-node, .op-key-swatch {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  button.op-node { padding-right: 12px; }
+  .op-stage { break-inside: avoid; }
+  .op-stage--s3, .op-stage--oer, .op-stage--cycle { break-inside: auto; }
+  .op-flow-branch, .op-tree-group, .op-flow-item { break-inside: avoid; }
 }

@@ -1049,7 +1049,10 @@
 <!-- ============ ROLE ONE-PAGER ============
      A role-chooser ("What's your job?") that renders a tailored, printable
      one-page brief on what CNZS v2 changes for that role. Built entirely
-     in assets/one-pager.js from content mined from the chapters above. -->
+     in assets/one-pager.js from content mined from the chapters above.
+     A 4th entry (assets/roadmap.js) rebuilds SBTi's official "How to set
+     targets" flowchart as an interactive roadmap whose nodes open context
+     bubbles that deep-link into the chapters above. -->
 <div class="lookup-overlay op-overlay" id="onePagerOverlay" role="dialog" aria-modal="true" aria-labelledby="opTitle" hidden>
   <div class="lookup-panel op-panel" role="document">
     <button type="button" class="lookup-close" id="onePagerClose" aria-label="Close one-pager">×</button>
@@ -1060,6 +1063,8 @@
       <p class="lookup-intro">
         Pick your role and get a one-page brief on what v2 changes for you —
         written from your seat, with the takeaways that matter to your week.
+        Or walk the SBTi&rsquo;s official &ldquo;How to set targets&rdquo;
+        roadmap, step by step.
       </p>
       <div class="op-role-grid" id="opRoleGrid"></div>
     </div>
