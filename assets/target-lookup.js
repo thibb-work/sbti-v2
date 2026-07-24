@@ -163,12 +163,12 @@ function renderResults(query) {
 
   if (!query.trim()) {
     wrap.innerHTML = '';
-    status.textContent = `${DATA.count.toLocaleString('en-US')} companies ready to search`;
+    status.textContent = `${DATA.count.toLocaleString('en-US')} companies ready to search.`;
     return;
   }
   if (!hits.length) {
     wrap.innerHTML = '';
-    status.textContent = `No company matches “${query.trim()}”. Try a shorter or different spelling.`;
+    status.textContent = `No company matches “${query.trim()}”. Try a shorter search or a different spelling.`;
     return;
   }
 

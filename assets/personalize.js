@@ -186,11 +186,11 @@ function setVerdictCard(cat) {
   if (cat === 'A') {
     letter.textContent = 'A';
     headline.textContent = 'You are a Category A company.';
-    explain.innerHTML = 'The full Standard applies — assurance, the 15-month transition plan, mandatory hourly-matching reporting, and OER from 2035. Every badge below now reads for you.';
+    explain.innerHTML = 'The full Standard applies to you: assurance, the 15-month transition plan, mandatory hourly-matching reporting, and OER from 2035. Every badge below now reads for you.';
   } else if (cat === 'B') {
     letter.textContent = 'B';
     headline.textContent = 'You are a Category B company.';
-    explain.innerHTML = 'A lighter path — several requirements drop to recommended or optional. The badges below now show what is required of you specifically.';
+    explain.innerHTML = 'A lighter path: several requirements drop to recommended or optional. The badges below now show exactly what applies to you.';
   } else {
     letter.textContent = 'A/B';
     headline.textContent = 'Answer the three questions and we\u2019ll stamp your category.';

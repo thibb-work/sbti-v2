@@ -21,25 +21,25 @@ const STAGES = [
   {
     id: 'cycle',
     name: 'Target cycle',
-    intro: 'New companies register, optionally commit, and submit targets for validation. Companies with validated v1 targets re-register and renew under V2.0. Once validated: implement, report annually, then an end-of-cycle assessment — every five years.',
+    intro: 'New companies register, optionally commit, then submit targets for validation. Companies already holding validated v1 targets re-register and renew under V2.0. Once your targets are validated, you implement, report every year, and face an end-of-cycle assessment — a cycle that turns every five years.',
     rows: [
       { q: 'Where is your company in its science-based target journey?' },
       { branch: [
         { label: 'New company enters CNZS V2.0', rows: [
-          { node: N('cycle-register', 'Company registers to understand if classified as Category A or Category B', 'all',
-            'Category A or B is set by size and geography — large companies anywhere, plus medium-sized companies in high-income countries, are Category A. Category A means mandatory scope 3 near-term targets and third-party assurance; Category B gets a lighter regime.', '#category') },
-          { node: N('cycle-commitment', 'Company may publicly communicate its intent to set science-based targets at this stage', 'opt',
-            'A commitment is a formal, public expression of intent to submit targets for validation within 24 months, displayed on the SBTi Target Dashboard. Optional — but once made, the clock is real.', '#timeline') },
-          { node: N('cycle-sector', 'Identify whether any SBTi Sector Standard or guidance applies', 'all',
-            'Where an SBTi Sector Standard modifies or supersedes Corporate Net-Zero Standard requirements for certain activities, the Sector Standard governs those emissions sources. Check the sector list before designing targets.') },
-          { node: N('cycle-submit', 'Company submits targets for validation (ahead of the commitment deadline if a commitment was made)', 'all',
-            'V2 becomes effective 1 February 2027 and v1 closes to new targets at the end of 2027. If you made a commitment, submission is due before its 24-month deadline.', '#timeline') },
+          { node: N('cycle-register', 'Company registers to learn whether it lands in Category A or Category B', 'all',
+            'Size and geography set your category: large companies anywhere, plus medium-sized companies in high-income countries, land in Category A. Category A carries mandatory scope 3 near-term targets and third-party assurance; Category B carries a lighter regime.', '#category') },
+          { node: N('cycle-commitment', 'Company may publicly announce its intent to set science-based targets here', 'opt',
+            'A commitment formally and publicly pledges to submit targets for validation within 24 months, and it shows on the SBTi Target Dashboard. Optional — but once you make it, the clock is real.', '#timeline') },
+          { node: N('cycle-sector', 'Check whether any SBTi Sector Standard or guidance applies', 'all',
+            'Where an SBTi Sector Standard modifies or supersedes Corporate Net-Zero Standard requirements for certain activities, that Sector Standard governs those emissions sources. Check the sector list before you design targets.') },
+          { node: N('cycle-submit', 'Company submits targets for validation (before the commitment deadline, if one was made)', 'all',
+            'V2 takes effect on 1 February 2027, and v1 closes to new targets at the end of 2027. If you committed, you must submit before the 24-month deadline.', '#timeline') },
         ] },
         { label: 'Existing company with validated targets', rows: [
-          { node: N('cycle-reregister', 'Company re-registers to determine if classified as Category A or Category B', 'all',
-            'Transitioning companies re-run the categorization under V2.0 — size and geography decide Category A or B, and with it whether scope 3 targets and assurance become mandatory.', '#category') },
+          { node: N('cycle-reregister', 'Company re-registers to confirm whether it is Category A or Category B', 'all',
+            'Transitioning companies re-run the categorization under V2.0: size and geography decide Category A or B, and with it whether scope 3 targets and assurance turn mandatory.', '#category') },
           { node: N('cycle-resubmit', 'Company submits new targets under CNZS V2.0 — up to 24 months before, and no later than 12 months after, the end of the current target timeframe', 'all',
-            'Renewal has a window: −24 to +12 months around the end of your validated targets’ timeframe. The first big cohort renews from 2028, setting 2030–2035 targets under V2.', '#timeline') },
+            'Renewal opens a window: from 24 months before to 12 months after your validated targets’ timeframe ends. The first big cohort renews from 2028, setting 2030–2035 targets under V2.', '#timeline') },
         ] },
       ] },
     ],
@@ -48,39 +48,39 @@ const STAGES = [
   {
     id: 'found',
     name: 'Foundations',
-    intro: 'Before any target: pick the base year, fix the organizational boundary, and account the GHG inventory. Category A companies add third-party assurance.',
+    intro: 'Before any target, pick the base year, fix the organizational boundary, and account for the GHG inventory. Category A companies add third-party assurance.',
     rows: [
       { node: N('found-baseyear', 'Company selects the most recent year as its near-term target base year', 'all',
-        'The base year rolls: each cycle you pick the most recent year with comprehensive data — a continuation, not a reset. Near-term targets run five years; long-term and net-zero targets land by 2050 at the latest.', '#baseline') },
+        'The base year rolls forward: each cycle you pick the most recent year with comprehensive data — a continuation, not a reset. Near-term targets run five years; long-term and net-zero targets land by 2050 at the latest.', '#baseline') },
       { node: N('found-consolidation', 'Choose the consolidation approach for your organizational boundary, based on the GHG Protocol (equity, financial or operational control, or as required by regulation)', 'all',
-        'Your organizational boundary follows the GHG Protocol — equity share, financial control or operational control, or the boundary a regulation compels. It fixes which emissions are “yours” for the whole cycle.', '#baseline') },
+        'Your organizational boundary follows the GHG Protocol: equity share, financial control, operational control, or whatever a regulation compels. It fixes which emissions count as “yours” for the whole cycle.', '#baseline') },
       { node: N('found-inventory', 'Account and report your base year GHG inventory, together with the associated base year metrics', 'all',
-        'The inventory is drawn up in line with GHG Protocol standards, alongside the base-year metrics that targets are then built on.', '#baseline') },
+        'You draw up the inventory to GHG Protocol standards, alongside the base-year metrics your targets then build on.', '#baseline') },
       { node: N('found-assurance', 'Category A: obtain third-party assurance for the GHG inventory, low-carbon electricity calculations, scope 3 emissions from significant EIAs, and target-setting metrics', 'cata',
-        'Category A companies need limited third-party assurance over the base-year inventory, low-carbon electricity calculations, scope 3 emissions from significant emissions-intensive activities, and the metrics used for target setting.', '#baseline') },
+        'Category A companies must obtain limited third-party assurance over the base-year inventory, the low-carbon electricity calculations, scope 3 emissions from significant emissions-intensive activities, and the metrics behind target setting.', '#baseline') },
     ],
   },
 
   {
     id: 'select',
     name: 'Target selection',
-    intro: 'Net-zero targets are optional. Setting one commits you to near-term and long-term targets across all scopes; without one, scope 1 and 2 near-term targets are the universal minimum, and Category A adds scope 3.',
+    intro: 'A net-zero target is your choice. Choose one and you owe near-term and long-term targets across every scope; skip it and scope 1 and 2 near-term targets become the floor, with Category A adding scope 3.',
     rows: [
-      { q: 'Determine whether your company wants to set a net-zero target' },
+      { q: 'Decide whether your company will set a net-zero target' },
       { branch: [
         { label: 'Net-zero target is set', rows: [
           { node: N('sel-nz', 'Near-term and long-term targets are required over 100% of scope 1, 2 and 3 emissions, and residual emissions are neutralized', 'all',
-            'A net-zero target means reducing all scopes to residual levels by 2050 or sooner, then neutralizing what remains with eligible removals. It pulls near-term and long-term targets across scopes 1, 2 and 3 into scope.', '#category') },
+            'A net-zero target commits you to cut every scope to residual levels by 2050 or sooner, then neutralize what remains with eligible removals. It pulls near-term and long-term targets across scopes 1, 2 and 3 into scope.', '#category') },
         ] },
         { label: 'Net-zero target is not set', rows: [
           { node: N('sel-s12', 'All companies are required to set scope 1 and scope 2 near-term targets', 'all',
-            'Scope 1 and 2 near-term targets are the universal minimum — every company, both categories, every cycle.', '#category') },
+            'Every company sets scope 1 and 2 near-term targets — both categories, every cycle, no exceptions.', '#category') },
           { node: N('sel-s3', 'Category A companies are required to set scope 3 near-term targets', 'cata',
-            'Scope 3 near-term targets are mandatory for Category A. The boundary is decided by the 5% significance test, category by category.', '#scope-3') },
+            'Scope 3 near-term targets are mandatory for Category A. The 5% significance test then sets the boundary, category by category.', '#scope-3') },
           { node: N('sel-s1lt', 'Category A companies using the emissions intensity and/or asset transition methods are required to set scope 1 long-term targets', 'cata',
-            'The intensity and asset-transition routes buy flexibility now, at a cost: a long-term scope 1 target, and transition-plan publication at validation.', '#scope-1') },
+            'Pick the intensity or asset-transition route and you gain flexibility today, but you owe two things in return: a long-term scope 1 target, and a transition plan published at validation.', '#scope-1') },
           { node: N('sel-ltopt', 'Scope 2 and 3 long-term targets may be optionally set', 'opt',
-            'Without a net-zero target, long-term scope 2 and 3 targets stay optional — though many companies add them anyway to anchor the 2050 trajectory.', '#category') },
+            'Skip the net-zero target and long-term scope 2 and 3 targets remain yours to take or leave — yet many companies set them regardless, anchoring the trajectory to 2050.', '#category') },
         ] },
       ] },
     ],
@@ -89,17 +89,17 @@ const STAGES = [
   {
     id: 's1',
     name: 'Scope 1 target setting',
-    intro: 'Three routes, all converging on net-zero by 2050 at the latest: a straight-line absolute cut, sector-pathway intensity, or an asset-transition plan for lumpy capital stock.',
+    intro: 'Three routes lead to the same place — net-zero by 2050 at the latest: a straight-line absolute cut, an intensity target on a sector pathway, or an asset-transition plan for lumpy capital stock.',
     rows: [
       { node: N('s1-tool', 'Use the SBTi target-setting tool to enter target base year scope 1 emissions (total or broken down by activity)') },
       { q: 'Choose your scope 1 near-term target' },
       { branch: [
         { rows: [ { node: N('s1-absolute', 'Absolute emissions reduction — calculated from base year emissions along a linear trajectory to net-zero', 'all',
-          'A straight line from your base year to net-zero by 2050 at the latest, calculated in the SBTi tool. Simple to communicate, unforgiving to deliver.', '#scope-1') } ] },
+          'The SBTi tool draws a straight line from your base year down to net-zero by 2050 at the latest. Easy to explain, hard to hit.', '#scope-1') } ] },
         { rows: [ { node: N('s1-asset', 'Asset transition target — based on science-based milestones and/or a science-based carbon budget', 'all',
-          'For capital stock that doesn’t decarbonize linearly: phase-out milestones for assets and/or a science-based carbon budget. Comes with transition-plan publication at validation.', '#scope-1') } ] },
+          'When capital stock refuses to decarbonize in a straight line, you set asset phase-out milestones and/or a science-based carbon budget instead. The price of entry: a transition plan published at validation.', '#scope-1') } ] },
         { rows: [ { node: N('s1-intensity', 'Emissions intensity reduction — calculated via the SBTi tool from sector-specific pathways', 'all',
-          'Emissions per unit of output, following sector-specific decarbonization pathways. Category A companies choosing this route also owe a long-term scope 1 target.', '#scope-1') } ] },
+          'You target emissions per unit of output, tracking your sector’s decarbonization pathway. Choose this route as a Category A company and a long-term scope 1 target comes attached.', '#scope-1') } ] },
       ] },
     ],
   },
@@ -107,72 +107,72 @@ const STAGES = [
   {
     id: 's2',
     name: 'Scope 2 target setting',
-    intro: 'Two target forms — low-carbon electricity alignment and/or an absolute cut — plus an optional hourly-matching recognition program. Heat, steam and cooling always need an absolute target.',
+    intro: 'You have two target forms to combine — low-carbon electricity alignment and/or an absolute cut — with an optional hourly-matching recognition program on top. Whatever you choose, heat, steam and cooling always need an absolute target.',
     rows: [
       { node: N('s2-tool', 'Use the SBTi tool to enter base year scope 2 location-based emissions from electricity and heat, steam and cooling, together with the low-carbon share of electricity consumption') },
       { q: 'Choose your scope 2 near-term target(s)' },
       { node: N('s2-growth', 'Category A companies with high electricity demand growth are required to set an absolute emissions reduction target at a minimum', 'cata',
-        'If projected average annual electricity consumption growth exceeds 20% over the target cycle, an absolute scope 2 target is required — an LCE alignment target can only come on top.', '#s2-target-options') },
+        'When projected average annual electricity consumption grows more than 20% over the target cycle, an absolute scope 2 target becomes mandatory — an LCE alignment target can only sit on top.', '#s2-target-options') },
       { branch: [
         { rows: [ { node: N('s2-lce', 'Low-carbon electricity alignment — targeted low-carbon share calculated using the SBTi tool', 'all',
-          'An LCE target grows the share of low-carbon sourced and matched electricity, with the target share calculated by the SBTi tool. Instruments must meet V2 quality and deliverability rules.', '#s2-target-options') } ] },
+          'An LCE target grows the share of low-carbon electricity you source and match, and the SBTi tool sets the target share. Instruments must meet V2 quality and deliverability rules.', '#s2-target-options') } ] },
         { rows: [ { node: N('s2-abs', 'Absolute emissions reduction — calculated from base year emissions along a linear trajectory', 'all',
-          'A linear reduction of scope 2 emissions from the base year. Emissions from heat, steam and cooling must be covered by an absolute target either way.', '#s2-target-options') } ] },
+          'A straight-line cut of scope 2 emissions from the base year. Either way, heat, steam and cooling need coverage by an absolute target.', '#s2-target-options') } ] },
       ] },
       { node: N('s2-hourly', 'Optional scope 2 hourly matching recognition program', 'opt',
-        'Match consumption with low-carbon power hour by hour — 50% until 2030, 75% until 2035, 90% from 2035 — and earn recognition on the Target Dashboard. Category A companies must report hourly matching for electricity pools ≥10 GWh/year.', '#s2-hourly-matching') },
+        'Match your consumption to low-carbon power hour by hour — 50% until 2030, 75% until 2035, 90% from 2035 — and the Target Dashboard recognizes it. Category A companies must report hourly matching for any electricity pool ≥10 GWh/year.', '#s2-hourly-matching') },
     ],
   },
 
   {
     id: 's3',
     name: 'Scope 3 target setting',
-    intro: 'Categories individually ≥5% of scope 3 are “significant” and must be covered. Then pick your levers: an overarching absolute target, supplier/customer alignment, and/or category-specific methods that differ upstream vs downstream.',
+    intro: 'Any category worth ≥5% of scope 3 on its own counts as “significant” and has to be covered. From there you pick your levers: an overarching absolute target, supplier or customer alignment, and/or category-specific methods that split upstream from downstream.',
     rows: [
       { node: N('s3-tool', 'Use the SBTi tool to enter base year scope 3 emissions and identify significant categories — those individually representing 5% or more of total scope 3 (categories 1–14)', 'all',
-        'Any scope 3 category individually representing 5% or more of the total is “significant” and must sit inside the target boundary. This replaces v1’s two-thirds coverage rule.', '#scope-3') },
+        'A scope 3 category that reaches 5% or more of the total on its own is “significant,” and every significant category sits inside the target boundary. This rule replaces v1’s two-thirds coverage test.', '#scope-3') },
       { node: N('s3-exclusions', 'Optionally exclude eligible scope 3 activities from the target boundary, e.g. second-hand goods, employee commuting', 'opt',
-        'Certain activities can be excluded regardless of size — but each exclusion must be reported with its condition, its volume in absolute and percentage terms, and how you intend to mitigate those emissions anyway.', '#scope-3') },
+        'You may exclude certain activities regardless of size — but you must report each exclusion with its condition, its volume in absolute and percentage terms, and how you plan to mitigate those emissions anyway.', '#scope-3') },
       { q: 'Choose your scope 3 near-term target(s) — one or a combination of methods to cover significant categories' },
       { branch: [
         { rows: [ { node: N('s3-abs', 'Overarching scope 3 absolute emissions reduction target', 'all',
-          'One absolute reduction target across the whole scope 3 boundary — the bluntest instrument, and the easiest to explain.', '#scope-3') } ] },
+          'A single absolute reduction target spanning the entire scope 3 boundary — the bluntest lever on the board, and the one that needs no footnotes.', '#scope-3') } ] },
         { rows: [ { node: N('s3-align', 'Overarching supplier / customer alignment target', 'all',
-          'Commit a share of Tier 1 suppliers or customers to set science-based targets of their own. Alignment shifts the work into the value chain.', '#scope-3') } ] },
+          'You get a share of your Tier 1 suppliers or customers to set science-based targets of their own — pushing the real work out into the value chain.', '#scope-3') } ] },
         { rows: [ { node: N('s3-specific', 'Category- or activity-specific targets', 'all',
-          'Tailored methods per category or activity, with options differing upstream vs downstream and by whether sector pathways exist. Same-method targets can be aggregated.', '#scope-3') } ] },
+          'Tailored methods per category or activity, with the options differing upstream vs downstream and by whether a sector pathway exists. You can aggregate targets that share a method.', '#scope-3') } ] },
       ] },
       { tree: true },
       { node: N('s3-headline', 'Headline ambition — scope 3 targets may be aggregated into a single figure for communication purposes', 'opt',
-        'Multiple scope 3 targets may be rolled into one headline ambition figure — for communication only, not for assessment.', '#scope-3') },
+        'You can roll several scope 3 targets into a single headline ambition figure — a number for communication, never for assessment.', '#scope-3') },
     ],
   },
 
   {
     id: 'oer',
     name: 'Ongoing emissions responsibility',
-    intro: 'A voluntary recognition program for taking responsibility for the emissions you still cause on the way to net-zero — at Engaged, Advanced or Leadership level. Opting out requires a justification.',
+    intro: 'A voluntary recognition program that rewards you for owning the emissions you still cause on the way to net-zero — at Engaged, Advanced or Leadership level. Opting out requires a justification.',
     rows: [
       { bridge: 'Once targets are set…' },
       { q: 'Does the company take part in the optional Ongoing Emissions Responsibility program?' },
       { branch: [
         { label: 'Yes', rows: [
           { node: N('oer-calc', 'Calculate indicative emissions in MtCO₂ using the SBTi target tool, to inform level selection', 'opt',
-            'The tool estimates ongoing emissions over the target period from your base year and submitted pathways — indicative only; the OER assessment uses actual out-turn at the end of the timeframe.', '#oer') },
+            'From your base year and submitted pathways, the tool projects ongoing emissions across the target period — a guide only. The OER assessment later runs on actual out-turn at the end of the timeframe.', '#oer') },
           { node: N('oer-choose', 'Choose your ongoing emissions responsibility level for the next target timeframe') },
           { chips: [
-            N('oer-engaged', 'Engaged', 'opt', 'Cover at least 1% of ongoing scope 1, 2 and 3 emissions — the entry level, with no mandated carbon price.', '#oer'),
-            N('oer-advanced', 'Advanced', 'opt', 'Cover 100% of scope 1 + 2 and at least 10% of total ongoing emissions, with a $20/tCO₂e contribution-budget option.', '#oer'),
-            N('oer-leadership', 'Leadership', 'opt', 'Cover 100% of ongoing emissions, delivered through a contribution budget at $80/tCO₂e.', '#oer'),
+            N('oer-engaged', 'Engaged', 'opt', 'Take responsibility for at least 1% of ongoing scope 1, 2 and 3 emissions — the entry level, and no carbon price is mandated.', '#oer'),
+            N('oer-advanced', 'Advanced', 'opt', 'Cover 100% of scope 1 + 2 plus at least 10% of total ongoing emissions, with the option of a contribution budget at $20/tCO₂e.', '#oer'),
+            N('oer-leadership', 'Leadership', 'opt', 'Take responsibility for 100% of ongoing emissions, funded through a contribution budget at $80/tCO₂e.', '#oer'),
           ] },
           { node: N('oer-approach', 'Choose one approach for delivering climate contributions: support verified mitigation outcomes, or establish and use a contribution budget', 'opt',
-            'Two delivery routes: support verified mitigation outcomes equal in volume to the covered emissions, or establish a contribution budget priced at the relevant level. Leadership companies use the budget route.', '#oer') },
+            'You deliver one of two ways: buy verified mitigation outcomes matching the volume of covered emissions, or set up a contribution budget priced at your level. Leadership companies take the budget route.', '#oer') },
         ] },
         { label: 'No', rows: [
           { node: N('oer-justify', 'Provide justification for not taking part in the program', 'all',
-            'Opting out is allowed, but not silently — companies provide a justification for not taking part in the program.', '#oer') },
+            'You may opt out, but not silently — you must justify why you are not taking part.', '#oer') },
           { node: N('oer-2035', 'From 2035, Category A companies take responsibility for at least 1% of ongoing emissions, rising linearly to 100% by the net-zero year', 'cata',
-            'From 2035, Category A companies are expected to support eligible carbon removals covering at least 1% of ongoing emissions, rising linearly to 100% by the net-zero year and no later than 2050.', '#oer') },
+            'From 2035, Category A companies support eligible carbon removals for at least 1% of ongoing emissions, then scale that share linearly to 100% by their net-zero year — and no later than 2050.', '#oer') },
         ] },
       ] },
     ],
@@ -181,17 +181,17 @@ const STAGES = [
   {
     id: 'impl',
     name: 'Implementation hierarchy',
-    intro: 'Delivery is graded: cut at the source first, act within shared systems second, and reach for sector-level instruments only where a documented structural constraint blocks anything closer.',
+    intro: 'A hierarchy grades how you deliver: cut at the source first, act within shared systems next, and turn to sector-level instruments only when a documented structural constraint blocks everything closer.',
     rows: [
-      { bridge: 'Company then determines its target implementation actions, in line with the implementation hierarchy' },
+      { bridge: 'Company then chooses its implementation actions, following the implementation hierarchy' },
       { node: N('impl-activity', 'Activity level — prioritize action that directly targets the emissions sources in the inventory: reduced energy consumption, fuel switching, lower-carbon input materials', 'all',
-        'Cut at the source first: efficiency, fuel switching, lower-carbon inputs, supplier and customer engagement. Only activity-level action lands in your own inventory as a reduction.', '#implement') },
+        'Start at the source — efficiency, fuel switching, lower-carbon inputs, supplier and customer engagement. Activity-level action is the only kind that shows up in your own inventory as a reduction.', '#implement') },
       { bridge: 'Where emissions arise within an activity pool…' },
       { node: N('impl-pool', 'Activity pool level — act within the pool the activity arises from (electricity grids, supply sheds, logistics networks), e.g. commodity certificates from the pool, supply-shed measures', 'all',
-        'Where emissions arise in shared systems — grids, supply sheds, logistics networks — you may act within that pool: deliverable PPAs, EACs, supply-shed measures, all meeting integrity criteria. This earns a system-contribution claim, reported separately.', '#implement') },
+        'When emissions sit in shared systems — grids, supply sheds, logistics networks — you can act inside the pool itself: deliverable PPAs, EACs, supply-shed measures, each meeting the integrity criteria. The reward is a system-contribution claim, which you report separately.', '#implement') },
       { bridge: 'Where structural constraints prevent action at the activity or activity pool level…' },
       { node: N('impl-sector', 'Sector level — act at sector level and document constraints (early-stage technology, infrastructure, regulatory, supply), e.g. commodity certificates from the same system', 'all',
-        'Sector-level instruments are a last resort: a documented structural constraint is required, and the action must complement — never substitute for — more direct cuts.', '#implement') },
+        'Sector-level instruments are a last resort: you need a documented structural constraint, and the action must complement — never substitute for — more direct cuts.', '#implement') },
     ],
   },
 ];
@@ -203,13 +203,13 @@ const S3_TREE = {
       label: 'Upstream categories',
       subs: [
         { label: 'Covered by sector-specific pathways', chips: [
-          N('s3-up-red', 'Emissions reduction', 'all', 'An absolute or intensity reduction target following the commodity’s sector-specific pathway.', '#scope-3'),
-          N('s3-up-sup', 'Supplier alignment', 'all', 'A growing share of Tier 1 suppliers with science-based targets of their own.', '#scope-3'),
-          N('s3-up-vol', 'Volume alignment', 'all', 'Grow the share of low-carbon aligned purchased commodities or transport.', '#scope-3'),
+          N('s3-up-red', 'Emissions reduction', 'all', 'Set an absolute or intensity reduction target that follows the commodity’s sector-specific pathway.', '#scope-3'),
+          N('s3-up-sup', 'Supplier alignment', 'all', 'Grow the share of your Tier 1 suppliers that hold science-based targets of their own.', '#scope-3'),
+          N('s3-up-vol', 'Volume alignment', 'all', 'Raise the share of purchased commodities or transport that is low-carbon aligned.', '#scope-3'),
         ] },
         { label: 'Not covered by sector-specific pathways', chips: [
-          N('s3-upn-red', 'Emissions reduction', 'all', 'An emissions reduction target in absolute terms, where no sector-specific pathway exists.', '#scope-3'),
-          N('s3-upn-sup', 'Supplier alignment', 'all', 'Tier 1 supplier alignment — suppliers setting science-based targets of their own.', '#scope-3'),
+          N('s3-upn-red', 'Emissions reduction', 'all', 'Where no sector-specific pathway exists, set an emissions reduction target in absolute terms.', '#scope-3'),
+          N('s3-upn-sup', 'Supplier alignment', 'all', 'Align your Tier 1 suppliers by getting them to set science-based targets of their own.', '#scope-3'),
         ] },
       ],
     },
@@ -217,10 +217,10 @@ const S3_TREE = {
       label: 'Downstream categories',
       subs: [
         { label: 'Method options', chips: [
-          N('s3-dn-red', 'Emissions reduction', 'all', 'An emissions reduction target for downstream emissions, in absolute or intensity terms.', '#scope-3'),
-          N('s3-dn-cust', 'Customer alignment', 'all', 'A growing share of Tier 1 customers with science-based targets of their own.', '#scope-3'),
-          N('s3-dn-use', 'Product use alignment', 'all', 'Increase the share of low/zero-carbon aligned sold products (category 11). A narrow fallback exists if no downstream option can reasonably be applied.', '#scope-3'),
-          N('s3-dn-eol', 'Product end-of-life alignment', 'all', 'Increase the share of products designed with a circular end of life.', '#scope-3'),
+          N('s3-dn-red', 'Emissions reduction', 'all', 'Target downstream emissions with a reduction target, set in absolute or intensity terms.', '#scope-3'),
+          N('s3-dn-cust', 'Customer alignment', 'all', 'Grow the share of your Tier 1 customers that hold science-based targets of their own.', '#scope-3'),
+          N('s3-dn-use', 'Product use alignment', 'all', 'Raise the share of sold products that are low/zero-carbon aligned (category 11). A narrow fallback waits for cases where no downstream option reasonably applies.', '#scope-3'),
+          N('s3-dn-eol', 'Product end-of-life alignment', 'all', 'Raise the share of products you design for a circular end of life.', '#scope-3'),
         ] },
       ],
     },
@@ -287,7 +287,7 @@ function renderRoadmap() {
     <p class="op-lede">This is the SBTi’s own “How to set targets” roadmap (June 2026), rebuilt as an
       interactive map. Every stage mirrors the official flowchart — tap any step marked
       <span class="op-node-go op-node-go--inline" aria-hidden="true">+</span> for a plain-English note and a
-      shortcut to the chapter on this page that covers it in depth.</p>
+      shortcut straight to the chapter that covers it in depth.</p>
     <div class="op-key" role="note">
       <span class="op-key-item"><span class="op-key-swatch op-key-swatch--all"></span>Applies to all companies</span>
       <span class="op-key-item"><span class="op-key-swatch op-key-swatch--cata"></span>Required for Category A, optional for Category B</span>
