@@ -230,7 +230,7 @@ function initBoundaryTool() {
       if (inBoundary) inCount += 1;
     });
     readout.innerHTML = '<strong>' + inCount + ' of ' + barCount +
-      '</strong> scope 3 categories sit at or above this threshold — each one needs a category target under Table 3.';
+      '</strong> scope 3 categories sit at or above this threshold — each one needs its own category target under Table 3.';
   }
 
   function selectProfile(id) {
